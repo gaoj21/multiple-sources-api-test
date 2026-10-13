@@ -28,21 +28,21 @@
 
 ## 2. Quick reference
 
-| Source | Auth / cost | Keyword search | Date filter | Timestamp precision | Rate / quota | Suggested schedule |
-|---|---|---|---|---|---|---|
-| **USAspending** | No key, free | ✅ `keywords` | ✅ `time_period`, 4 date types | last-modified to the second | Unpublished; max 50k results per query | Daily |
-| **Grants.gov** | No key, free | ✅ `keyword` | ❌ none; sort then filter locally | list: date only; detail: to the second (with TZ) | Unpublished | Daily |
-| **GovInfo** | Free api.data.gov key | ✅ full text | ✅ publish-date range + ingest-time incremental | ingest time to the second | 36,000/hr | Daily |
-| **CourtListener** | Free token (search works anonymously) | ✅ boolean syntax | ✅ filed-date range + modified-time incremental | ingest time to the microsecond | **5/min, 50/hr, 125/day** | Every 1–2 h |
-| **SAM.gov** | Free SAM key | 🟡 title only | ✅ posted-date range (required, ≤ 1 yr) | date only | **10/day** | Daily |
-| **DOJ** | No key, free | 🟡 title match only | 🟡 single day only | created/changed to the second | ≤ 4 req/s | Every 2–4 h |
-| **api.ftc.gov** | Free api.data.gov key | ✅ field filters | ✅ field filters | to the second | 20,000/hr | Weekly |
-| FTC press releases | No API; RSS and web pages only | web page search only | RSS holds only the latest 10–30 items | `pubDate` with TZ | Site firewall blocks by IP | Daily (after an IP change) |
-| USPTO | Free key, but needs ID.me | ✅ | ✅ | ingest time to the second | 5M/week; no concurrency per key | — (dropped) |
-| D&B Direct+ | 💰 paid | ✅ `searchTerm` | ❌ (change-notification subscription only) | transaction timestamp | per contract | — |
-| Moody's Orbis | 💰 paid | name match / criteria | ❓ | must be requested in the query | per contract (🔶 typically 1–10 concurrent) | — |
-| Quartr | 💰 paid | ❌ filter by ticker etc. only | ✅ event date + updated-time incremental | ❓ | default 50 req/s | — |
-| LexisNexis | 💰 paid | ✅ boolean syntax | ✅ `Date ge/le` | publication date | per contract; ≤ 50 per page | — |
+| Source | Auth / cost | What you get | Keyword search | Date filter | Timestamp precision | Rate / quota | Suggested schedule |
+|---|---|---|---|---|---|---|---|
+| **USAspending** | Federal contracts/grants: IDs, recipient, amount, agency, industry codes, competition, performance period | No key, free | ✅ `keywords` | ✅ `time_period`, 4 date types | last-modified to the second | Unpublished; max 50k results per query | Daily |
+| **Grants.gov** | Grant opportunities: title, agency, funding amounts, eligibility, deadlines, contacts, attachments | No key, free | ✅ `keyword` | ❌ none; sort then filter locally | list: date only; detail: to the second (with TZ) | Unpublished | Daily |
+| **GovInfo** | Federal Register, regulations, bills, Congressional Record, court opinions, etc.: metadata + PDF/XML full text | Free api.data.gov key | ✅ full text | ✅ publish-date range + ingest-time incremental | ingest time to the second | 36,000/hr | Daily |
+| **CourtListener** | Court opinions (with full-text links), federal dockets, parties, attorneys, judges | Free token (search works anonymously) | ✅ boolean syntax | ✅ filed-date range + modified-time incremental | ingest time to the microsecond | **5/min, 50/hr, 125/day** | Every 1–2 h |
+| **SAM.gov** | Contract opportunities (incl. awards), vendor registrations, procurement exclusion list | Free SAM key | 🟡 title only | ✅ posted-date range (required, ≤ 1 yr) | date only | **10/day** | Daily |
+| **DOJ** | DOJ press releases: title, full HTML text, issuing office, topic | No key, free | 🟡 title match only | 🟡 single day only | created/changed to the second | ≤ 4 req/s | Every 2–4 h |
+| **api.ftc.gov** | HSR early terminations: acquirer, acquired party, transaction number, date | Free api.data.gov key | ✅ field filters | ✅ field filters | to the second | 20,000/hr | Weekly |
+| FTC press releases | Press-release title, link, summary, publish time (full text needs the web page) | No API; RSS and web pages only | web page search only | RSS holds only the latest 10–30 items | `pubDate` with TZ | Site firewall blocks by IP | Daily (after an IP change) |
+| USPTO | Patent applications: title, filing/grant dates, inventors, applicants, CPC, prosecution documents | Free key, but needs ID.me | ✅ | ✅ | ingest time to the second | 5M/week; no concurrency per key | — (dropped) |
+| D&B Direct+ | Company profiles: DUNS, address, industry, employees, financials, corporate linkage | 💰 paid | ✅ `searchTerm` | ❌ (change-notification subscription only) | transaction timestamp | per contract | — |
+| Moody's Orbis | Global companies: firmographics, financials (by year), employees, ownership | 💰 paid | name match / criteria | ❓ | must be requested in the query | per contract (🔶 typically 1–10 concurrent) | — |
+| Quartr | Listed-company earnings calls: events, transcripts, audio, slides, AI summaries | 💰 paid | ❌ filter by ticker etc. only | ✅ event date + updated-time incremental | ❓ | default 50 req/s | — |
+| LexisNexis | News and legal documents: title, date, source + full text | 💰 paid | ✅ boolean syntax | ✅ `Date ge/le` | publication date | per contract; ≤ 50 per page | — |
 
 ---
 
@@ -55,7 +55,16 @@
   - Detail: `GET /api/v2/awards/{generated_internal_id}/`
   - Last update date: `GET /api/v2/awards/last_updated/`
   - Bulk download: `POST /api/v2/bulk_download/awards/` (generates a zip asynchronously)
-- **What you get**: award ID, recipient, description, amount, awarding agency, start/end dates, last-modified time, etc. The detail endpoint has 167 fields.
+- **What you get** 🧪 (actual responses):
+  - **Search results** (13 fields each): `Award ID`, `Recipient Name`, `Description`, `Award Amount`, `Awarding Agency`, start/end dates, last-modified time, base obligation date, internal IDs.
+  - **Detail** (167 fields):
+    - Basics: PIID, type, `date_signed`, `total_obligation`, subaward count and amount, parent award.
+    - Solicitation and competition: solicitation ID, solicitation procedure, number of offers received, extent competed, small-business set-aside type.
+    - Classification: NAICS industry code, product/service code (PSC).
+    - Compliance attributes: commercial item, multi-year contract, labor standards, foreign funding, etc.
+    - Defense: DoD program codes.
+    - Funding: outlays and obligations broken down by Disaster Emergency Fund Code (DEFC).
+    - Performance period: start, end, potential end dates.
 - **Timestamps**:
   - Search results: `Start Date` / `End Date` (dates), `Last Modified Date` (to the second), `Base Obligation Date`.
   - Detail: `date_signed`, `period_of_performance.*`.
@@ -76,7 +85,15 @@
 - **How to call**:
   - Search: `POST https://api.grants.gov/v1/api/search2`
   - Detail: `POST /v1/api/fetchOpportunity {"opportunityId": ...}`
-- **What you get**: opportunity number, title, agency, open date, close date, status. The detail endpoint has 140 fields (funding, eligibility, revision history, etc.).
+- **What you get** 🧪 (actual responses):
+  - **Search results** (10 fields each): ID, opportunity number, title, agency code and name, open date, close date, status (forecasted/posted/closed/archived), document type, program numbers (CFDA/ALN).
+  - **Detail** (140 fields):
+    - Basics: title, number, revision, category, owning agency and parent agency.
+    - Funding: estimated total, award ceiling and floor, expected number of awards, cost-sharing requirement.
+    - Application: eligible applicant types, funding instruments (e.g. grant, cooperative agreement), funding activity categories.
+    - Contact: name, phone, email.
+    - Milestones: estimated posting, application due, award and project start dates.
+    - Attachments and history: attachment folders, document URLs, history of every revision.
 - **Timestamps**:
   - Search results: `openDate` / `closeDate` as `MM/DD/YYYY`, no time zone.
   - Detail: `postingDate`, `lastUpdatedDate`, etc., to the second with time zone (e.g. EDT) ✅.
@@ -93,7 +110,16 @@
   - Incremental by ingest time: `GET /collections/{code}/{lastModified start}`
   - By publish date: `GET /published/{date}`
   - Detail: `GET /packages/{id}/summary`, with PDF/XML/ZIP/MODS download links
-- **What you get**: 42 collections, e.g. FR (Federal Register), CFR, USCOURTS (court opinions), BILLS, CREC, PLAW.
+- **What you get** 🧪 (actual responses):
+  - **Coverage**: 42 collections, e.g. FR (Federal Register, 1M+ documents), CFR (federal regulations), USCOURTS (federal court opinions), BILLS (bills), CREC (Congressional Record), PLAW (public laws), BUDGET (budget).
+  - **Search results** (15 fields): title, package ID, granule ID, collection code, government author, issue date, ingest date, last-modified time, plus PDF / TXT / ZIP / MODS download links.
+  - **Incremental listing** (7 fields): package ID, title, document class, issue date, last-modified time, Congress number, detail link.
+  - **Detail** (28 fields):
+    - Publication info: volume, issue, page count, publisher, government authors, SuDoc class number.
+    - Other identifiers: ISSN, etc.
+    - Downloads: PDF / XML / ZIP / MODS / PREMIS links.
+    - Granules: link to the list of granules (e.g. individual notices).
+  - **Full text**: via the download links above (PDF / XML / TXT).
 - **Timestamps**: `dateIssued` (publish date), `lastModified` (GovInfo ingest/update time, ISO 8601 to the second ✅), `dateIngested`.
 - **Keyword** ✅: `{"query": "antitrust collection:(FR)"}`. 🧪 Federal Register total 1.027M → 14,650.
 - **Date** ✅: add `publishdate:range(2025-01-01,2025-03-31)` to the query. 🧪 14,650 → 101, and 10/10 sampled records fell in range.
@@ -109,7 +135,22 @@
 - **How to call**: REST v4.
   - Search: `/api/rest/v4/search/?type=o|r|rd|d|oa|p` (opinions / RECAP dockets / RECAP documents / dockets only / oral arguments / judges) ✅
   - Others: `/dockets/`, `/opinions/`, `/clusters/`
-- **What you get**: opinions (8.33M), RECAP dockets (PACER filings), judge data.
+- **What you get** 🧪 (actual responses):
+  - **Opinion search results** (47 fields):
+    - Case: case name (short/full), docket number, court and jurisdiction, decision date, argued date, status, nature of suit.
+    - Citations: citation, cite count, Lexis cite, neutral cite.
+    - People: judges, panel, attorneys.
+    - Content: procedural history, syllabus; per-opinion author, type, full-text download URL and matching snippet.
+  - **RECAP docket search results** (50 fields):
+    - Case: case name, docket number, court, date filed, date terminated, cause, jury demand, jurisdiction type.
+    - People: assigned and referred judges, parties, attorneys, law firms, bankruptcy trustee.
+    - Documents: per-document number, description, entry date filed, page count, availability, PACER document ID.
+  - **Docket detail (REST, token required)** (60 fields):
+    - Numbering: full docket number and its parsed components, PACER case ID.
+    - Dates: filed, terminated, last filing, cert granted/denied.
+    - Case info: nature of suit, appeal-from court, MDL status, bankruptcy info, linked opinions and oral-argument audio.
+    - Record times: created, modified.
+  - **Full text**: opinions have download URLs; RECAP documents have PDFs only if someone has purchased them.
 - **Timestamps**:
   - `dateFiled`: decision date, date only.
   - `meta.timestamp` / `date_created` / `date_modified`: ingest or modification time, **to the microsecond** ✅🧪.
@@ -131,10 +172,27 @@
   - Opportunities: `/opportunities/v2/search`
   - Entities: `/entity-information/v3/entities` (v4 also exists)
   - Exclusions: `/entity-information/v4/exclusions`
-- **What you get**:
-  - Opportunities: 41 fields (title, agency, NAICS, deadline, award info…). The `description` field is only a link that you must request again with your api_key ✅.
-  - Entities: 132 fields.
-  - Exclusions: people or companies barred from federal procurement.
+- **What you get** 🧪 (actual responses):
+  - **Opportunities** (41 fields):
+    - Basics: title, notice ID, solicitation number, type (solicitation, award, presolicitation, etc.), active flag.
+    - Agency: full agency hierarchy, office address.
+    - Classification: NAICS industry code, product classification code, small-business set-aside type.
+    - Dates: posted, response deadline, archive date.
+    - Award: award date, contract number, amount, awardee name and location.
+    - Contacts: name, email, phone, fax.
+    - Links: SAM web link, attachment links. `description` is only a link; you must request it again with your api_key to get the text ✅.
+  - **Entities** (132 fields):
+    - Identity: UEI, CAGE code, legal business name, DBA name.
+    - Registration: status, registration date, expiration date, last-update date, exclusion flag.
+    - Addresses: physical address, mailing address, congressional district.
+    - Organization: entity type, profit structure, state or country of incorporation, start date, fiscal-year end.
+    - Capabilities: business types and SBA certifications, primary NAICS and all NAICS/PSC codes, credit-card acceptance.
+    - Contacts: government business POC and electronic business POC.
+  - **Exclusions** (46 fields):
+    - Exclusion details: classification, exclusion type, excluding agency, exclusion program.
+    - Excluded party: person or company name, UEI, CAGE, NPI (healthcare provider number), address.
+    - Action history: create, update, activate and termination dates, termination type.
+    - Other: additional comments, investigation status, other locations; for vessels, call sign, tonnage, flag and owner.
 - **Timestamps**:
   - Opportunities: `postedDate`, `responseDeadLine`, `archiveDate`, `award.date`, date only.
   - Entities: `registrationDate`, `lastUpdateDate`, `registrationExpirationDate`.
@@ -154,7 +212,11 @@
 
 ### 3.6 DOJ News
 - **How to call**: `GET https://www.justice.gov/api/v1/press_releases.json`; there is also `blog_entries.json` ✅. `speeches` and `videos` don't exist (404 in testing 🧪). Fallback: RSS `/news/rss?type=press_release` 🧪.
-- **What you get**: press-release title, body (HTML), teaser, component (issuing office), topic, number, URL. 270k+ records since 2009 🧪.
+- **What you get** 🧪 (actual responses, 19 fields each):
+  - `title`, press-release `number` (e.g. 26-1168), `body` (full HTML), `teaser` (HTML), `url`, `uuid`.
+  - `component` (issuing office, e.g. Criminal Division, Antitrust Division), `topic` (e.g. Homeland Security Task Force), images and attachments.
+  - Times: `date` / `created` / `changed`.
+  - 270k+ records since 2009. `blog_entries` (blog posts, 3,342) is also available.
 - **Timestamps**:
   - `date`: Unix seconds; observed as 12:00 UTC on the publish day, so date precision only 🧪.
   - `created` / `changed`: Unix seconds wrapped in an HTML `<time datetime="...">` tag, to the second ✅.
@@ -169,6 +231,12 @@
 - **Sources**: justice.gov/developer/api-documentation/api_v1 (updated 2025-12-18), justice.gov/developer, justice.gov/legalpolicies. Official confidence: **high**.
 
 ### 3.7 FTC (Federal Trade Commission)
+- **What you get**:
+  - **Press-release RSS** (standard RSS 2.0 fields, seen from another host): title, link, summary, `pubDate` with time zone (e.g. `Thu, 08 Oct 2026 08:00:00 -0400`). The full text requires fetching the web page.
+  - **HSR early-termination notices** (api.ftc.gov, 🧪 actual response, 8 fields):
+    - Transaction: `transaction-number`, `title`.
+    - Parties: `acquiring-party`, `acquired-party`, and the specific `acquired-entities`.
+    - Times: early-termination `date`, record `created` / `updated` times.
 - **Press releases**: no API ✅; RSS and web pages only.
   - RSS URLs: `/feeds/press-release.xml`, `-competition.xml`, `-consumer-protection.xml` ✅. Confirmed live from another host.
   - The web list supports keyword search via `?search_api_fulltext=` 🧪.
@@ -184,6 +252,10 @@
 - **Sources**: ftc.gov/developer, ftc.gov/developer/api/v0/endpoints/hsr-early-termination-notices, ftc.gov/news-events/stay-connected/ftc-rss-feeds. Official confidence: **high**.
 
 ### 3.8 USPTO (dropped)
+- **What you could get** (✅ per official docs, not tested):
+  - Patent applications: application number, invention title, filing date, grant date, patent number, publication date, application status, inventors, applicants, CPC classification, ingest time.
+  - Other: prosecution documents (`/documents` per application), plus sub-resources such as assignments and continuity.
+  - Trademarks (TSDR): status and prosecution documents, looked up by case number.
 - The patent API (Open Data Portal) requires `X-API-KEY`. Getting a key needs a USPTO.gov account + MFA + **ID.me identity verification (requires a US ID)**; the key page is data.uspto.gov/apikey ✅. The trademark API (TSDR) needs a separate key ✅. The bulk-data API also needs a key 🧪.
 - What the API can do (✅ checked against official docs):
   - Search: `q`, OpenSearch syntax.
@@ -199,6 +271,7 @@
 | | D&B Direct+ | Moody's Orbis | Quartr | LexisNexis |
 |---|---|---|---|---|
 | **Auth** | OAuth2: Basic(key:secret) → `POST /v3/token` (form-encoded) → Bearer, 24 h ✅ | `ApiToken` header 🔶 | `x-api-key` header ✅ | OAuth2: `auth-api.lexisnexis.com/oauth/v2/token` → Bearer, 24 h ✅ |
+| **What you get** (per docs/specs, not tested) | DUNS number, company name and trade-style names, address, phone, website, registration numbers, industry codes, employee counts, financials, legal entity type, control status, corporate linkage (parent/subsidiaries) ✅; more depends on which Data Blocks you buy | BvD ID, name, country, NACE industry, operating revenue (`OPRE`, per year), employees (`EMPL`); the partner code lists 496+ selectable fields, including ownership 🔶 | Companies (name, tickers, ISIN, CIK, country), events such as earnings calls (title, date, fiscal year, fiscal period, type), file URLs for transcripts / audio / slides / reports, live transcripts, AI summaries ✅ | News: ResultId, title, date, source, location/jurisdiction, similar documents; `$expand=Document` returns the full text (raw XML) in the same call ✅ |
 | **Main endpoints** | `cleanseMatch` (name → DUNS number), `search/criteria`, `data/duns/{duns}?blockIDs=` ✅ | `Companies/match`, `Companies/data` (WHERE + SELECT) 🔶 | `/public/v3/companies`, `/events`, `/documents/transcripts`, etc. ✅ | `services-api.lexisnexis.com/v1/News` (OData) ✅ |
 | **Keyword** | ✅ `searchTerm` | name match 🔶 | ❌ ticker/ISIN/CIK only | ✅ `$search` (boolean search) |
 | **Date** | ❌ Monitoring change notifications only | ❓ | ✅ `startDate/endDate`; `updatedAfter` for incremental | ✅ `$filter=Date ge ... and Date le ...` |
