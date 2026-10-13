@@ -1,0 +1,737 @@
+{
+  "totalRecords": 15236,
+  "limit": 10,
+  "offset": 0,
+  "opportunitiesData": [
+    {
+      "active": "Yes",
+      "additionalInfoLink": null,
+      "archiveDate": "2026-10-15",
+      "archiveType": "auto15",
+      "award": {
+        "date": "2026-09-30",
+        "number": "FA821326C0004",
+        "amount": "1711588.00",
+        "awardee": {
+          "name": "Pacific Scientific Energetic Materials Company (California LLC)",
+          "location": {
+            "city": {
+              "code": "34120",
+              "name": "Hollister"
+            },
+            "state": {
+              "code": "CA",
+              "name": "California"
+            },
+            "zip": "95023",
+            "country": {
+              "code": "USA",
+              "name": "UNITED STATES"
+            }
+          }
+        }
+      },
+      "baseType": "Solicitation",
+      "classificationCode": "1377",
+      "description": "https://api.sam.gov/prod/opportunities/v1/noticedesc?noticeid=ffeccc1d6ac94137b15e87671a2a0b27",
+      "fullParentPathCode": "057.5700.AFMC.AFLCMC.PEO-WEAPONS.FA8213",
+      "fullParentPathName": "DEPT OF DEFENSE.DEPT OF THE AIR FORCE.AIR FORCE MATERIEL COMMAND.AIR FORCE LIFE CYCLE MANAGEMENT CENTER.WEAPONS.FA8213  AFLCMC EBHK",
+      "links": [
+        {
+          "rel": "self",
+          "href": "https://api.sam.gov/prod/opportunities/v2/search?noticeid=ffeccc1d6ac94137b15e87671a2a0b27&limit=1"
+        }
+      ],
+      "naicsCode": "325920",
+      "naicsCodes": [
+        "325920"
+      ],
+      "noticeId": "ffeccc1d6ac94137b15e87671a2a0b27",
+      "officeAddress": {
+        "zipcode": "84056-5820",
+        "city": "HILL AFB",
+        "countryCode": "USA",
+        "state": "UT"
+      },
+      "organizationType": "OFFICE",
+      "placeOfPerformance": {},
+      "pointOfContact": [
+        {
+          "fax": "",
+          "type": "secondary",
+          "email": "darin.barnes@us.af.mil",
+          "phone": "",
+          "fullName": "Darin Barnes"
+        }
+      ],
+      "postedDate": "2026-09-30",
+      "resourceLinks": null,
+      "responseDeadLine": null,
+      "solicitationNumber": "FA821326C0004",
+      "title": "SMDC lines for the USAF and FMS F-15 Program.",
+      "type": "Award Notice",
+      "typeOfSetAside": null,
+      "typeOfSetAsideDescription": null,
+      "uiLink": "https://sam.gov/workspace/contract/opp/ffeccc1d6ac94137b15e87671a2a0b27/view"
+    },
+    {
+      "active": "Yes",
+      "additionalInfoLink": null,
+      "archiveDate": "2027-09-30",
+      "archiveType": "autocustom",
+      "award": {
+        "date": "2026-09-30",
+        "number": "W519TC25DA044",
+        "amount": "455430",
+        "awardee": {
+          "name": "GOVSMART, INC.",
+          "location": {
+            "streetAddress": "715 CHARLTON AVE STE 100",
+            "city": {
+              "code": "14968",
+              "name": "Charlottesville"
+            },
+            "state": {
+              "code": "VA",
+              "name": "Virginia"
+            },
+            "zip": "22903",
+            "country": {
+              "code": "USA",
+              "name": "UNITED STATES"
+            }
+          }
+        }
+      },
+      "baseType": "Award Notice",
+      "classificationCode": "7E21",
+      "description": "https://api.sam.gov/prod/opportunities/v1/noticedesc?noticeid=ffdfb56467d54b488ed92c72072e4d11",
+      "fullParentPathCode": "021.2100.NGB.JFHQ USPFO OR.USPFO OR PROC.W912JV",
+      "fullParentPathName": "DEPT OF DEFENSE.DEPT OF THE ARMY.NATIONAL GUARD BUREAU.JFHQ USPFO OR.USPFO OR PROCUREMENT.W7NW USPFO ACTIVITY OR ARNG",
+      "links": [
+        {
+          "rel": "self",
+          "href": "https://api.sam.gov/prod/opportunities/v2/search?noticeid=ffdfb56467d54b488ed92c72072e4d11&limit=1"
+        }
+      ],
+      "naicsCode": "334111",
+      "naicsCodes": [
+        "334111"
+      ],
+      "noticeId": "ffdfb56467d54b488ed92c72072e4d11",
+      "officeAddress": {
+        "zipcode": "97303-0000",
+        "city": "KEIZER",
+        "countryCode": "USA",
+        "state": "OR"
+      },
+      "organizationType": "OFFICE",
+      "placeOfPerformance": {
+        "streetAddress": "",
+        "zip": "97307"
+      },
+      "pointOfContact": [
+        {
+          "fax": "",
+          "type": "primary",
+          "email": "richard.a.harvey5.civ@army.mil",
+          "phone": "971-355-4217",
+          "fullName": "Richard Harvey"
+        }
+      ],
+      "postedDate": "2026-09-30",
+      "resourceLinks": null,
+      "responseDeadLine": null,
+      "solicitationNumber": "W912JV26FA018",
+      "title": "Commercial Solutions for Classified Solutions (CSfC) Equipment",
+      "type": "Award Notice",
+      "typeOfSetAside": null,
+      "typeOfSetAsideDescription": null,
+      "uiLink": "https://sam.gov/workspace/contract/opp/ffdfb56467d54b488ed92c72072e4d11/view"
+    },
+    {
+      "active": "Yes",
+      "additionalInfoLink": null,
+      "archiveDate": "2026-10-31",
+      "archiveType": "auto15",
+      "award": null,
+      "baseType": "Sources Sought",
+      "classificationCode": "1940",
+      "description": "https://api.sam.gov/prod/opportunities/v1/noticedesc?noticeid=ff50794d3f4c4a64ba1dd28b29b6f3f3",
+      "fullParentPathCode": "017.1700.NAVSEA.NAVSEA HQ.N00024",
+      "fullParentPathName": "DEPT OF DEFENSE.DEPT OF THE NAVY.NAVSEA.NAVSEA HQ.NAVSEA HQ",
+      "links": [
+        {
+          "rel": "self",
+          "href": "https://api.sam.gov/prod/opportunities/v2/search?noticeid=ff50794d3f4c4a64ba1dd28b29b6f3f3&limit=1"
+        }
+      ],
+      "naicsCode": "336612",
+      "naicsCodes": [
+        "336612"
+      ],
+      "noticeId": "ff50794d3f4c4a64ba1dd28b29b6f3f3",
+      "officeAddress": {
+        "zipcode": "20376-5000",
+        "city": "WASHINGTON NAVY YARD",
+        "countryCode": "USA",
+        "state": "DC"
+      },
+      "organizationType": "OFFICE",
+      "placeOfPerformance": null,
+      "pointOfContact": [
+        {
+          "fax": "",
+          "type": "primary",
+          "email": "kirby.e.tucker.civ@us.navy.mil",
+          "phone": "",
+          "fullName": "Kirby Tucker"
+        },
+        {
+          "fax": "",
+          "type": "secondary",
+          "email": "jennifer.a.ede.civ@us.navy.mil",
+          "phone": "",
+          "fullName": "Jennifer Ede"
+        }
+      ],
+      "postedDate": "2026-09-30",
+      "resourceLinks": null,
+      "responseDeadLine": "2026-10-16T15:00:00-04:00",
+      "solicitationNumber": "N00024-26-R-2234",
+      "title": "PMS 300 Naval Surface Warfare Center - Carderock (NSWCCD) Acoustic Research Detachment (ARD) Research Vessel (R/V)",
+      "type": "Sources Sought",
+      "typeOfSetAside": "NONE",
+      "typeOfSetAsideDescription": "No Set aside used",
+      "uiLink": "https://sam.gov/workspace/contract/opp/ff50794d3f4c4a64ba1dd28b29b6f3f3/view"
+    },
+    {
+      "active": "Yes",
+      "additionalInfoLink": null,
+      "archiveDate": "2026-10-15",
+      "archiveType": "auto15",
+      "award": {
+        "date": "2026-09-30",
+        "number": "GS27F001CA",
+        "amount": "51801.00",
+        "awardee": {
+          "name": "OFFICE LEADER CORP",
+          "location": {
+            "city": {
+              "code": "10011",
+              "name": "Brooklyn"
+            },
+            "state": {
+              "code": "NY",
+              "name": "New York"
+            },
+            "zip": "11211",
+            "country": {
+              "code": "USA",
+              "name": "UNITED STATES"
+            }
+          }
+        }
+      },
+      "baseType": "Award Notice",
+      "classificationCode": null,
+      "description": "https://api.sam.gov/prod/opportunities/v1/noticedesc?noticeid=ff5008e1e9ff4d04b62ee6b5c47c878d",
+      "fullParentPathCode": "057.5700.ACC.FA4801",
+      "fullParentPathName": "DEPT OF DEFENSE.DEPT OF THE AIR FORCE.AIR COMBAT COMMAND.FA4801 49 CONS PK",
+      "links": [
+        {
+          "rel": "self",
+          "href": "https://api.sam.gov/prod/opportunities/v2/search?noticeid=ff5008e1e9ff4d04b62ee6b5c47c878d&limit=1"
+        }
+      ],
+      "naicsCode": null,
+      "naicsCodes": [],
+      "noticeId": "ff5008e1e9ff4d04b62ee6b5c47c878d",
+      "officeAddress": {
+        "zipcode": "88330-8225",
+        "city": "HOLLOMAN AFB",
+        "countryCode": "USA",
+        "state": "NM"
+      },
+      "organizationType": "OFFICE",
+      "placeOfPerformance": {
+        "city": {
+          "code": "32940",
+          "name": "Holloman Air Force Base"
+        },
+        "state": {
+          "code": "NM",
+          "name": "New Mexico"
+        },
+        "zip": "88330",
+        "country": {
+          "code": "USA",
+          "name": "UNITED STATES"
+        }
+      },
+      "pointOfContact": [
+        {
+          "fax": "",
+          "type": "primary",
+          "email": "alison.fisher@us.af.mil",
+          "phone": "5755724869",
+          "fullName": "Alison Fisher"
+        },
+        {
+          "fax": "",
+          "type": "secondary",
+          "email": "brett.moore.6@us.af.mil",
+          "phone": "5755723040",
+          "fullName": "Brett Moore"
+        }
+      ],
+      "postedDate": "2026-09-30",
+      "resourceLinks": null,
+      "responseDeadLine": null,
+      "solicitationNumber": "FA480126F0154",
+      "title": "6ATKS Workstations",
+      "type": "Award Notice",
+      "typeOfSetAside": null,
+      "typeOfSetAsideDescription": null,
+      "uiLink": "https://sam.gov/workspace/contract/opp/ff5008e1e9ff4d04b62ee6b5c47c878d/view"
+    },
+    {
+      "active": "Yes",
+      "additionalInfoLink": null,
+      "archiveDate": "2051-09-30",
+      "archiveType": "autocustom",
+      "award": null,
+      "baseType": "Combined Synopsis/Solicitation",
+      "classificationCode": "U006",
+      "description": "https://api.sam.gov/prod/opportunities/v1/noticedesc?noticeid=ff401217ef1249d8a981c73b50442231",
+      "fullParentPathCode": "021.2100.AMC.ACC.ACC-CTRS.ACC RSA.W31P4Q",
+      "fullParentPathName": "DEPT OF DEFENSE.DEPT OF THE ARMY.AMC.ACC.ACC-CTRS.ACC RSA.W6QK ACC-RSA",
+      "links": [
+        {
+          "rel": "self",
+          "href": "https://api.sam.gov/prod/opportunities/v2/search?noticeid=ff401217ef1249d8a981c73b50442231&limit=1"
+        }
+      ],
+      "naicsCode": "611512",
+      "naicsCodes": [
+        "611512"
+      ],
+      "noticeId": "ff401217ef1249d8a981c73b50442231",
+      "officeAddress": {
+        "zipcode": "35898-5090",
+        "city": "REDSTONE ARSENAL",
+        "countryCode": "USA",
+        "state": "AL"
+      },
+      "organizationType": "OFFICE",
+      "placeOfPerformance": {
+        "city": {
+          "code": "37000",
+          "name": "Huntsville"
+        },
+        "state": {
+          "code": "AL",
+          "name": "Alabama"
+        },
+        "country": {
+          "code": "USA",
+          "name": "UNITED STATES"
+        }
+      },
+      "pointOfContact": [
+        {
+          "fax": "",
+          "type": "primary",
+          "email": "susan.e.ruzicka2.civ@army.mil",
+          "phone": "520-674-8460",
+          "fullName": "Susan Ruzicka"
+        },
+        {
+          "type": "secondary",
+          "email": "anna.e.echols.civ@army.mil",
+          "fullName": "Anna Echols"
+        }
+      ],
+      "postedDate": "2026-09-30",
+      "resourceLinks": [
+        "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/01af30767fea413f9ee5f6b4635623e5/download",
+        "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/04083e47aa914ce5a606ec0a2d048db9/download",
+        "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/1c9100e60726483a821979f9dfc83c6a/download",
+        "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/510884d51a2047e6b747f53029b6acb2/download",
+        "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/566069dd8e594f3aa16ea0eeceedd759/download",
+        "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/a421a7dfcc16413eb987f8da04f421f2/download",
+        "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/c93ba81c6801461f8cec2997f20d2c5b/download"
+      ],
+      "responseDeadLine": "2030-09-30T12:00:00-05:00",
+      "solicitationNumber": "W9113M-25-S-C006",
+      "title": "CSO - U.S. Army Aviation Training",
+      "type": "Combined Synopsis/Solicitation",
+      "typeOfSetAside": "NONE",
+      "typeOfSetAsideDescription": "No Set aside used",
+      "uiLink": "https://sam.gov/workspace/contract/opp/ff401217ef1249d8a981c73b50442231/view"
+    },
+    {
+      "active": "Yes",
+      "additionalInfoLink": null,
+      "archiveDate": "2026-10-15",
+      "archiveType": "auto15",
+      "award": {
+        "date": "2026-09-30",
+        "number": "W50S8A26CA002",
+        "amount": "487000.00",
+        "awardee": {
+          "name": "KOVILIC CONSTRUCTION CO INC",
+          "location": {
+            "city": {
+              "code": "27702",
+              "name": "Franklin Park"
+            },
+            "state": {
+              "code": "IL",
+              "name": "Illinois"
+            },
+            "zip": "60131",
+            "country": {
+              "code": "USA",
+              "name": "UNITED STATES"
+            }
+          }
+        }
+      },
+      "baseType": "Solicitation",
+      "classificationCode": "Z2LB",
+      "description": "https://api.sam.gov/prod/opportunities/v1/noticedesc?noticeid=ff38afd351304c198c70e7e9a024979e",
+      "fullParentPathCode": "021.2100.NGB.JFHQ USPFO NH.USPFO NH PROC.W50S8A",
+      "fullParentPathName": "DEPT OF DEFENSE.DEPT OF THE ARMY.NATIONAL GUARD BUREAU.JFHQ USPFO NH.USPFO NH PROCUREMENT.W7NN USPFO ACTIVITY NHANG 157",
+      "links": [
+        {
+          "rel": "self",
+          "href": "https://api.sam.gov/prod/opportunities/v2/search?noticeid=ff38afd351304c198c70e7e9a024979e&limit=1"
+        }
+      ],
+      "naicsCode": "237310",
+      "naicsCodes": [
+        "237310"
+      ],
+      "noticeId": "ff38afd351304c198c70e7e9a024979e",
+      "officeAddress": {
+        "zipcode": "03801-2886",
+        "city": "PORTSMOUTH",
+        "countryCode": "USA",
+        "state": "NH"
+      },
+      "organizationType": "OFFICE",
+      "placeOfPerformance": {
+        "state": {
+          "code": "NH",
+          "name": "New Hampshire"
+        },
+        "zip": "03839",
+        "country": {
+          "code": "USA",
+          "name": "UNITED STATES"
+        }
+      },
+      "pointOfContact": [
+        {
+          "fax": "",
+          "type": "primary",
+          "email": "casey.a.pridham.mil@army.mil",
+          "phone": "6037153668",
+          "fullName": "Casey Pridham"
+        },
+        {
+          "fax": "",
+          "type": "secondary",
+          "email": "matthew.r.lapointe.civ@army.mil",
+          "phone": "6032271445",
+          "fullName": "Matthew Lapointe"
+        }
+      ],
+      "postedDate": "2026-09-30",
+      "resourceLinks": null,
+      "responseDeadLine": null,
+      "solicitationNumber": "W50S8A26CA002",
+      "title": "Repair Taxiway Shoulders",
+      "type": "Award Notice",
+      "typeOfSetAside": "SBA",
+      "typeOfSetAsideDescription": "Small Business Set Aside - Total",
+      "uiLink": "https://sam.gov/workspace/contract/opp/ff38afd351304c198c70e7e9a024979e/view"
+    },
+    {
+      "active": "Yes",
+      "additionalInfoLink": null,
+      "archiveDate": "2026-12-07",
+      "archiveType": "autocustom",
+      "award": {
+        "awardee": {}
+      },
+      "baseType": "Sources Sought",
+      "classificationCode": "6515",
+      "description": "https://api.sam.gov/prod/opportunities/v1/noticedesc?noticeid=fe96c3993e514a43aa90d7bf32375df2",
+      "fullParentPathCode": "036.3600.36C250",
+      "fullParentPathName": "VETERANS AFFAIRS, DEPARTMENT OF.VETERANS AFFAIRS, DEPARTMENT OF.250-NETWORK CONTRACT OFFICE 10 (36C250)",
+      "links": [
+        {
+          "rel": "self",
+          "href": "https://api.sam.gov/prod/opportunities/v2/search?noticeid=fe96c3993e514a43aa90d7bf32375df2&limit=1"
+        }
+      ],
+      "naicsCode": "334510",
+      "naicsCodes": [
+        "334510"
+      ],
+      "noticeId": "fe96c3993e514a43aa90d7bf32375df2",
+      "officeAddress": {
+        "zipcode": "45428",
+        "city": "DAYTON",
+        "countryCode": "USA",
+        "state": "OH"
+      },
+      "organizationType": "OFFICE",
+      "placeOfPerformance": {
+        "streetAddress": "Department of Veterans Affairs East Indianapolis VA Clinic",
+        "streetAddress2": " 9402 East 21st Street",
+        "city": {
+          "name": "Indianapolis"
+        },
+        "state": {
+          "name": "IN"
+        },
+        "zip": "46229",
+        "country": {
+          "name": "U.S.A."
+        }
+      },
+      "pointOfContact": [
+        {
+          "fax": "",
+          "type": "primary",
+          "email": "jeffrey.rozema@va.gov",
+          "phone": "269-966-5600",
+          "title": "Contracting Officer",
+          "fullName": "Jeffrey Rozema"
+        }
+      ],
+      "postedDate": "2026-09-30",
+      "resourceLinks": [
+        "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/917bb7c998d44c20962a18e715972aef/download",
+        "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/d5f5f0fd43844618aeec3dd2dab871b4/download"
+      ],
+      "responseDeadLine": "2026-10-08T17:00:00-04:00",
+      "solicitationNumber": "36C25026Q1079",
+      "title": "6515--East Indianapolis VA Clinic Audiology Equipment",
+      "type": "Sources Sought",
+      "typeOfSetAside": "",
+      "typeOfSetAsideDescription": null,
+      "uiLink": "https://sam.gov/workspace/contract/opp/fe96c3993e514a43aa90d7bf32375df2/view"
+    },
+    {
+      "active": "Yes",
+      "additionalInfoLink": null,
+      "archiveDate": "2027-09-30",
+      "archiveType": "autocustom",
+      "award": null,
+      "baseType": "Combined Synopsis/Solicitation",
+      "classificationCode": "5510",
+      "description": "https://api.sam.gov/prod/opportunities/v1/noticedesc?noticeid=fe7bde5d8bda492d87676ade7f0aaa50",
+      "fullParentPathCode": "021.2100.AMC.ACC.MICC.419TH CSB.W911S2",
+      "fullParentPathName": "DEPT OF DEFENSE.DEPT OF THE ARMY.AMC.ACC.MISSION INSTALLATION CONTRACTING COMMAND.419TH CSB.W6QM MICC-FT DRUM",
+      "links": [
+        {
+          "rel": "self",
+          "href": "https://api.sam.gov/prod/opportunities/v2/search?noticeid=fe7bde5d8bda492d87676ade7f0aaa50&limit=1"
+        }
+      ],
+      "naicsCode": "321999",
+      "naicsCodes": [
+        "321999"
+      ],
+      "noticeId": "fe7bde5d8bda492d87676ade7f0aaa50",
+      "officeAddress": {
+        "zipcode": "13602-5220",
+        "city": "FORT DRUM",
+        "countryCode": "USA",
+        "state": "NY"
+      },
+      "organizationType": "OFFICE",
+      "placeOfPerformance": {
+        "streetAddress": "FORT RILEY, KS, 66442",
+        "zip": "66442"
+      },
+      "pointOfContact": [
+        {
+          "fax": "",
+          "type": "primary",
+          "email": "jevon.k.schroeder2.civ@army.mil",
+          "phone": "520-945-4524",
+          "fullName": "Jevon Schroeder"
+        }
+      ],
+      "postedDate": "2026-09-30",
+      "resourceLinks": null,
+      "responseDeadLine": "2026-10-08T11:00:00-06:00",
+      "solicitationNumber": "W911S226U4563",
+      "title": "LUMBER REQUEST - FT RILEY DPTMS ",
+      "type": "Combined Synopsis/Solicitation",
+      "typeOfSetAside": "SBA",
+      "typeOfSetAsideDescription": "Small Business Set Aside - Total",
+      "uiLink": "https://sam.gov/workspace/contract/opp/fe7bde5d8bda492d87676ade7f0aaa50/view"
+    },
+    {
+      "active": "Yes",
+      "additionalInfoLink": null,
+      "archiveDate": "2026-10-20",
+      "archiveType": "autocustom",
+      "award": {
+        "awardee": {}
+      },
+      "baseType": "Presolicitation",
+      "classificationCode": "S207",
+      "description": "https://api.sam.gov/prod/opportunities/v1/noticedesc?noticeid=fe04e8ac9b4a43c08b2356cebffe97fa",
+      "fullParentPathCode": "036.3600.36C252",
+      "fullParentPathName": "VETERANS AFFAIRS, DEPARTMENT OF.VETERANS AFFAIRS, DEPARTMENT OF.252-NETWORK CONTRACT OFFICE 12 (36C252)",
+      "links": [
+        {
+          "rel": "self",
+          "href": "https://api.sam.gov/prod/opportunities/v2/search?noticeid=fe04e8ac9b4a43c08b2356cebffe97fa&limit=1"
+        }
+      ],
+      "naicsCode": "561710",
+      "naicsCodes": [
+        "561710"
+      ],
+      "noticeId": "fe04e8ac9b4a43c08b2356cebffe97fa",
+      "officeAddress": {
+        "zipcode": "53214",
+        "city": "MILWAUKEE",
+        "countryCode": "USA",
+        "state": "WI"
+      },
+      "organizationType": "OFFICE",
+      "placeOfPerformance": {
+        "streetAddress": "Adam Benjamin, Jr. VA Outpatient Clinic 9301 Madison Street",
+        "streetAddress2": "",
+        "city": {
+          "name": "Crown Point"
+        },
+        "state": {
+          "name": "Indiana"
+        },
+        "zip": "46307-7745",
+        "country": {}
+      },
+      "pointOfContact": [
+        {
+          "fax": "",
+          "type": "primary",
+          "email": "Dayanna.Wallace@va.gov",
+          "phone": "414-844-4800",
+          "title": "Contract Specialist",
+          "fullName": "Dayanna Wallace"
+        }
+      ],
+      "postedDate": "2026-09-30",
+      "resourceLinks": [
+        "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/bb101cd9a9564e70ad5449342892b44e/download"
+      ],
+      "responseDeadLine": "2026-10-05T10:00:00-05:00",
+      "solicitationNumber": "36C25227Q0038",
+      "title": "S207--On-call Pest Mitigation Services â€“ Primarily for Bed Bugs  for the Adam Benjamin Jr., VA Outpatient Clinic  Crown Point, Indiana",
+      "type": "Presolicitation",
+      "typeOfSetAside": "SDVOSBC",
+      "typeOfSetAsideDescription": "Service-Disabled Veteran-Owned Small Business (SDVOSB) Set-Aside (FAR 19.14)",
+      "uiLink": "https://sam.gov/workspace/contract/opp/fe04e8ac9b4a43c08b2356cebffe97fa/view"
+    },
+    {
+      "active": "Yes",
+      "additionalInfoLink": null,
+      "archiveDate": "2026-10-15",
+      "archiveType": "auto15",
+      "award": {
+        "date": "2026-09-30",
+        "number": "W50S9G26CA012",
+        "amount": "734836.00",
+        "awardee": {
+          "name": "KOALA ROOFING LLC",
+          "location": {
+            "city": {
+              "code": "20120",
+              "name": "Edenton"
+            },
+            "state": {
+              "code": "NC",
+              "name": "North Carolina"
+            },
+            "zip": "27932",
+            "country": {
+              "code": "USA",
+              "name": "UNITED STATES"
+            }
+          }
+        }
+      },
+      "baseType": "Combined Synopsis/Solicitation",
+      "classificationCode": "Z2JZ",
+      "description": "https://api.sam.gov/prod/opportunities/v1/noticedesc?noticeid=fdd9301ad7b848b892016f8a7a240e17",
+      "fullParentPathCode": "021.2100.NGB.JFHQ USPFO WI.USPFO WI PROC.W50S9G",
+      "fullParentPathName": "DEPT OF DEFENSE.DEPT OF THE ARMY.NATIONAL GUARD BUREAU.JFHQ USPFO WI.USPFO WI PROCUREMENT.W7N8 USPFO ACTIVITY WIANG 128",
+      "links": [
+        {
+          "rel": "self",
+          "href": "https://api.sam.gov/prod/opportunities/v2/search?noticeid=fdd9301ad7b848b892016f8a7a240e17&limit=1"
+        }
+      ],
+      "naicsCode": "238160",
+      "naicsCodes": [
+        "238160"
+      ],
+      "noticeId": "fdd9301ad7b848b892016f8a7a240e17",
+      "officeAddress": {
+        "zipcode": "53207-6104",
+        "city": "MILWAUKEE",
+        "countryCode": "USA",
+        "state": "WI"
+      },
+      "organizationType": "OFFICE",
+      "placeOfPerformance": {
+        "state": {
+          "code": "WI",
+          "name": "Wisconsin"
+        },
+        "zip": "53207",
+        "country": {
+          "code": "USA",
+          "name": "UNITED STATES"
+        }
+      },
+      "pointOfContact": [
+        {
+          "type": "primary",
+          "email": "katherine.fox@us.af.mil",
+          "fullName": "Katherine Fox"
+        },
+        {
+          "type": "secondary",
+          "email": "dionne.holloway.2@us.af.mil",
+          "fullName": "Dionne Holloway"
+        }
+      ],
+      "postedDate": "2026-09-30",
+      "resourceLinks": null,
+      "responseDeadLine": null,
+      "solicitationNumber": "W50S9G26CA012",
+      "title": "Repair by Replace Roof, B512",
+      "type": "Award Notice",
+      "typeOfSetAside": "SBA",
+      "typeOfSetAsideDescription": "Small Business Set Aside - Total",
+      "uiLink": "https://sam.gov/workspace/contract/opp/fdd9301ad7b848b892016f8a7a240e17/view"
+    }
+  ],
+  "links": [
+    {
+      "rel": "self",
+      "href": "https://api.sam.gov/prod/opportunities/v2/search?limit=10&postedFrom=09%2F01%2F2026&postedTo=09%2F30%2F2026"
+    }
+  ]
+}

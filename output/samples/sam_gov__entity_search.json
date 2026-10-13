@@ -1,0 +1,2343 @@
+{
+  "totalRecords": 163,
+  "entityData": [
+    {
+      "entityRegistration": {
+        "samRegistered": "Yes",
+        "ueiSAM": "GAJLZSULKMS5",
+        "entityEFTIndicator": null,
+        "cageCode": "3ENJ8",
+        "dodaac": null,
+        "legalBusinessName": "LOCKHEED MARTIN CORPORATION",
+        "dbaName": "Lockheed Martin",
+        "purposeOfRegistrationCode": "Z2",
+        "purposeOfRegistrationDesc": "All Awards",
+        "registrationStatus": "Inactive",
+        "evsSource": "D&B",
+        "registrationDate": "2003-04-04",
+        "lastUpdateDate": "2022-03-28",
+        "registrationExpirationDate": "2018-06-06",
+        "activationDate": "2017-06-06",
+        "ueiStatus": "Active",
+        "ueiExpirationDate": null,
+        "ueiCreationDate": "2020-06-21",
+        "publicDisplayFlag": "Y",
+        "exclusionStatusFlag": "N",
+        "exclusionURL": null,
+        "dnbOpenData": "Y"
+      },
+      "coreData": {
+        "entityInformation": {
+          "entityURL": "http://www.lockheedmartin.com/",
+          "entityDivisionName": null,
+          "entityDivisionNumber": null,
+          "entityStartDate": "1994-08-29",
+          "fiscalYearEndCloseDate": "12/31",
+          "submissionDate": "2017-06-06"
+        },
+        "physicalAddress": {
+          "addressLine1": "2780 Loker Ave W",
+          "addressLine2": null,
+          "city": "Carlsbad",
+          "stateOrProvinceCode": "CA",
+          "zipCode": "92008",
+          "zipCodePlus4": "6611",
+          "countryCode": "USA"
+        },
+        "mailingAddress": {
+          "addressLine1": "2780 LOKER AVE W",
+          "addressLine2": null,
+          "city": "CARLSBAD",
+          "stateOrProvinceCode": "CA",
+          "zipCode": "92008",
+          "zipCodePlus4": null,
+          "countryCode": "USA"
+        },
+        "congressionalDistrict": "49",
+        "generalInformation": {
+          "entityStructureCode": "2L",
+          "entityStructureDesc": "Corporate Entity (Not Tax Exempt)",
+          "entityTypeCode": "F",
+          "entityTypeDesc": "Business or Organization",
+          "profitStructureCode": "2X",
+          "profitStructureDesc": "For Profit Organization",
+          "organizationStructureCode": null,
+          "organizationStructureDesc": null,
+          "stateOfIncorporationCode": "MD",
+          "stateOfIncorporationDesc": "MARYLAND",
+          "countryOfIncorporationCode": "USA",
+          "countryOfIncorporationDesc": "UNITED STATES"
+        },
+        "businessTypes": {
+          "businessTypeList": [
+            {
+              "businessTypeCode": "2X",
+              "businessTypeDesc": "For Profit Organization"
+            },
+            {
+              "businessTypeCode": "F",
+              "businessTypeDesc": "Business or Organization"
+            }
+          ],
+          "sbaBusinessTypeList": [
+            {
+              "sbaBusinessTypeCode": null,
+              "sbaBusinessTypeDesc": null,
+              "certificationEntryDate": null,
+              "certificationExitDate": null
+            }
+          ]
+        },
+        "financialInformation": {
+          "creditCardUsage": "Y",
+          "debtSubjectToOffset": "N"
+        }
+      },
+      "assertions": {
+        "goodsAndServices": {
+          "primaryNaics": "334511",
+          "naicsList": [
+            {
+              "naicsCode": "334511",
+              "naicsDescription": "SEARCH, DETECTION, NAVIGATION, GUIDANCE, AERONAUTICAL, AND NAUTICAL SYSTEM AND INSTRUMENT MANUFACTURING",
+              "sbaSmallBusiness": "N",
+              "naicsException": null
+            },
+            {
+              "naicsCode": "336413",
+              "naicsDescription": "OTHER AIRCRAFT PARTS AND AUXILIARY EQUIPMENT MANUFACTURING",
+              "sbaSmallBusiness": "N",
+              "naicsException": null
+            },
+            {
+              "naicsCode": "336414",
+              "naicsDescription": "GUIDED MISSILE AND SPACE VEHICLE MANUFACTURING",
+              "sbaSmallBusiness": "N",
+              "naicsException": null
+            },
+            {
+              "naicsCode": "336415",
+              "naicsDescription": "GUIDED MISSILE AND SPACE VEHICLE PROPULSION UNIT AND PROPULSION UNIT PARTS MANUFACTURING",
+              "sbaSmallBusiness": "N",
+              "naicsException": null
+            }
+          ],
+          "pscList": [
+            {
+              "pscCode": null,
+              "pscDescription": null
+            }
+          ]
+        },
+        "disasterReliefData": {
+          "disasterRegistryFlag": "NO",
+          "bondingFlag": "NO",
+          "geographicalAreaServed": [
+            {
+              "geographicalAreaServedStateCode": null,
+              "geographicalAreaServedStateName": null,
+              "geographicalAreaServedCountyCode": null,
+              "geographicalAreaServedCountyName": null,
+              "geographicalAreaServedmetropolitanStatisticalAreaCode": null,
+              "geographicalAreaServedmetropolitanStatisticalAreaName": null
+            }
+          ]
+        },
+        "ediInformation": {
+          "ediInformationFlag": "N"
+        }
+      },
+      "pointsOfContact": {
+        "governmentBusinessPOC": {
+          "firstName": "Lauren",
+          "middleInitial": null,
+          "lastName": "Douglass",
+          "title": null,
+          "addressLine1": "LOCKHEED MARTIN CORPORATION",
+          "addressLine2": "5600 SAND LAKE RD.",
+          "city": "ORLANDO",
+          "stateOrProvinceCode": "FL",
+          "zipCode": "32819",
+          "zipCodePlus4": "8907",
+          "countryCode": "USA"
+        },
+        "electronicBusinessPOC": {
+          "firstName": "David",
+          "middleInitial": null,
+          "lastName": "Leckie",
+          "title": null,
+          "addressLine1": "LOCKHEED MARTIN CORPORATION",
+          "addressLine2": "5600 SAND LAKE RD.",
+          "city": "ORLANDO",
+          "stateOrProvinceCode": "FL",
+          "zipCode": "32819",
+          "zipCodePlus4": "8907",
+          "countryCode": "USA"
+        },
+        "governmentBusinessAlternatePOC": {
+          "firstName": "David",
+          "middleInitial": null,
+          "lastName": "Leckie",
+          "title": null,
+          "addressLine1": "LOCKHEED MARTIN CORPORATION",
+          "addressLine2": "5600 SAND LAKE RD.",
+          "city": "ORLANDO",
+          "stateOrProvinceCode": "FL",
+          "zipCode": "32819",
+          "zipCodePlus4": "8907",
+          "countryCode": "USA"
+        },
+        "electronicBusinessAlternatePOC": {
+          "firstName": "Lauren",
+          "middleInitial": null,
+          "lastName": "Douglass",
+          "title": null,
+          "addressLine1": "LOCKHEED MARTIN CORPORATION",
+          "addressLine2": "5600 SAND LAKE RD.",
+          "city": "ORLANDO",
+          "stateOrProvinceCode": "FL",
+          "zipCode": "32819",
+          "zipCodePlus4": "8907",
+          "countryCode": "USA"
+        },
+        "pastPerformancePOC": {
+          "firstName": "Lauren",
+          "middleInitial": null,
+          "lastName": "Douglass",
+          "title": null,
+          "addressLine1": "LOCKHEED MARTIN CORPORATION",
+          "addressLine2": "5600 SAND LAKE RD.",
+          "city": "ORLANDO",
+          "stateOrProvinceCode": "FL",
+          "zipCode": "32819",
+          "zipCodePlus4": "8907",
+          "countryCode": "USA"
+        },
+        "pastPerformanceAlternatePOC": {
+          "firstName": "Blake",
+          "middleInitial": "J",
+          "lastName": "Burnette",
+          "title": null,
+          "addressLine1": "Lockheed Martin Corporation",
+          "addressLine2": "5600 W Sandlake Rd",
+          "city": "Orlando",
+          "stateOrProvinceCode": "FL",
+          "zipCode": "32819",
+          "zipCodePlus4": null,
+          "countryCode": "USA"
+        }
+      }
+    },
+    {
+      "entityRegistration": {
+        "samRegistered": "Yes",
+        "ueiSAM": "NNE6LLK9PBJ1",
+        "entityEFTIndicator": null,
+        "cageCode": "9B500",
+        "dodaac": null,
+        "legalBusinessName": "LOCKHEED MARTIN CORPORATION",
+        "dbaName": "LOCKHEED MARTIN SPACE SYSTEMS CO.",
+        "purposeOfRegistrationCode": "Z2",
+        "purposeOfRegistrationDesc": "All Awards",
+        "registrationStatus": "Inactive",
+        "evsSource": "D&B",
+        "registrationDate": "2004-02-20",
+        "lastUpdateDate": "2022-03-28",
+        "registrationExpirationDate": "2016-07-21",
+        "activationDate": "2015-07-22",
+        "ueiStatus": "Not Active",
+        "ueiExpirationDate": null,
+        "ueiCreationDate": "2020-06-21",
+        "publicDisplayFlag": "Y",
+        "exclusionStatusFlag": "N",
+        "exclusionURL": null,
+        "dnbOpenData": "Y"
+      },
+      "coreData": {
+        "entityInformation": {
+          "entityURL": "http://www.lockheedmartin.com",
+          "entityDivisionName": null,
+          "entityDivisionNumber": null,
+          "entityStartDate": "1994-08-29",
+          "fiscalYearEndCloseDate": "12/31",
+          "submissionDate": "2015-07-22"
+        },
+        "physicalAddress": {
+          "addressLine1": "3251 HANOVER ST, LOCATION C",
+          "addressLine2": null,
+          "city": "PALO ALTO",
+          "stateOrProvinceCode": "CA",
+          "zipCode": "94304",
+          "zipCodePlus4": "1121",
+          "countryCode": "USA"
+        },
+        "mailingAddress": {
+          "addressLine1": "P. O. BOX 179",
+          "addressLine2": "MAIL STOP 2400",
+          "city": "DENVER",
+          "stateOrProvinceCode": "CO",
+          "zipCode": "80201",
+          "zipCodePlus4": "0179",
+          "countryCode": "USA"
+        },
+        "congressionalDistrict": "18",
+        "generalInformation": {
+          "entityStructureCode": "2L",
+          "entityStructureDesc": "Corporate Entity (Not Tax Exempt)",
+          "entityTypeCode": "F",
+          "entityTypeDesc": "Business or Organization",
+          "profitStructureCode": "2X",
+          "profitStructureDesc": "For Profit Organization",
+          "organizationStructureCode": null,
+          "organizationStructureDesc": null,
+          "stateOfIncorporationCode": "MD",
+          "stateOfIncorporationDesc": "MARYLAND",
+          "countryOfIncorporationCode": "USA",
+          "countryOfIncorporationDesc": "UNITED STATES"
+        },
+        "businessTypes": {
+          "businessTypeList": [
+            {
+              "businessTypeCode": "2X",
+              "businessTypeDesc": "For Profit Organization"
+            },
+            {
+              "businessTypeCode": "F",
+              "businessTypeDesc": "Business or Organization"
+            }
+          ],
+          "sbaBusinessTypeList": [
+            {
+              "sbaBusinessTypeCode": null,
+              "sbaBusinessTypeDesc": null,
+              "certificationEntryDate": null,
+              "certificationExitDate": null
+            }
+          ]
+        },
+        "financialInformation": {
+          "creditCardUsage": "N",
+          "debtSubjectToOffset": "N"
+        }
+      },
+      "assertions": {
+        "goodsAndServices": {
+          "primaryNaics": "336414",
+          "naicsList": [
+            {
+              "naicsCode": "336414",
+              "naicsDescription": "GUIDED MISSILE AND SPACE VEHICLE MANUFACTURING",
+              "sbaSmallBusiness": "N",
+              "naicsException": null
+            }
+          ],
+          "pscList": [
+            {
+              "pscCode": null,
+              "pscDescription": null
+            }
+          ]
+        },
+        "disasterReliefData": {
+          "disasterRegistryFlag": "NO",
+          "bondingFlag": "NO",
+          "geographicalAreaServed": [
+            {
+              "geographicalAreaServedStateCode": null,
+              "geographicalAreaServedStateName": null,
+              "geographicalAreaServedCountyCode": null,
+              "geographicalAreaServedCountyName": null,
+              "geographicalAreaServedmetropolitanStatisticalAreaCode": null,
+              "geographicalAreaServedmetropolitanStatisticalAreaName": null
+            }
+          ]
+        },
+        "ediInformation": {
+          "ediInformationFlag": "Y"
+        }
+      },
+      "pointsOfContact": {
+        "governmentBusinessPOC": {
+          "firstName": "Theo-Alice",
+          "middleInitial": null,
+          "lastName": "Pierce",
+          "title": null,
+          "addressLine1": "1111 Lockheed Martin Way",
+          "addressLine2": "B157",
+          "city": "Sunnyvale",
+          "stateOrProvinceCode": "CA",
+          "zipCode": "94089",
+          "zipCodePlus4": "1212",
+          "countryCode": "USA"
+        },
+        "electronicBusinessPOC": {
+          "firstName": "Pamela",
+          "middleInitial": "G",
+          "lastName": "Maxwell",
+          "title": null,
+          "addressLine1": "1111 LOCKHEED MARTIN WAY",
+          "addressLine2": "B157",
+          "city": "SUNNYVALE",
+          "stateOrProvinceCode": "CA",
+          "zipCode": "94089",
+          "zipCodePlus4": "1212",
+          "countryCode": "USA"
+        },
+        "governmentBusinessAlternatePOC": {
+          "firstName": "Patrick",
+          "middleInitial": "J",
+          "lastName": "Holden",
+          "title": null,
+          "addressLine1": "1111 LOCKHEED MARTIN WAY",
+          "addressLine2": "B157",
+          "city": "SUNNYVALE",
+          "stateOrProvinceCode": "CA",
+          "zipCode": "94089",
+          "zipCodePlus4": "1212",
+          "countryCode": "USA"
+        },
+        "electronicBusinessAlternatePOC": {
+          "firstName": "Sandra",
+          "middleInitial": "A",
+          "lastName": "Hutches",
+          "title": null,
+          "addressLine1": "179 EAST PINE STREET",
+          "addressLine2": null,
+          "city": "PONCHATOULA",
+          "stateOrProvinceCode": "LA",
+          "zipCode": "70454",
+          "zipCodePlus4": "2501",
+          "countryCode": "USA"
+        },
+        "pastPerformancePOC": {
+          "firstName": "Lynn",
+          "middleInitial": "S",
+          "lastName": "Brown",
+          "title": null,
+          "addressLine1": "1111 LOCKHEED MARTIN WAY",
+          "addressLine2": "B153",
+          "city": "SUNNYVALE",
+          "stateOrProvinceCode": "CA",
+          "zipCode": "94089",
+          "zipCodePlus4": "1212",
+          "countryCode": "USA"
+        },
+        "pastPerformanceAlternatePOC": {
+          "firstName": "Vickie",
+          "middleInitial": null,
+          "lastName": "Gardner",
+          "title": null,
+          "addressLine1": "12257 S. Wadsworth Blvd.",
+          "addressLine2": null,
+          "city": "Littleton",
+          "stateOrProvinceCode": "CO",
+          "zipCode": "80125",
+          "zipCodePlus4": "8504",
+          "countryCode": "USA"
+        }
+      }
+    },
+    {
+      "entityRegistration": {
+        "samRegistered": "Yes",
+        "ueiSAM": "ETY7ZJMPASC5",
+        "entityEFTIndicator": null,
+        "cageCode": "3XKS7",
+        "dodaac": null,
+        "legalBusinessName": "Lockheed Martin Corporation",
+        "dbaName": null,
+        "purposeOfRegistrationCode": "Z2",
+        "purposeOfRegistrationDesc": "All Awards",
+        "registrationStatus": "Inactive",
+        "evsSource": "D&B",
+        "registrationDate": "2004-06-29",
+        "lastUpdateDate": "2022-03-28",
+        "registrationExpirationDate": "2014-10-09",
+        "activationDate": "2013-10-11",
+        "ueiStatus": "Active",
+        "ueiExpirationDate": null,
+        "ueiCreationDate": "2020-06-21",
+        "publicDisplayFlag": "Y",
+        "exclusionStatusFlag": "N",
+        "exclusionURL": null,
+        "dnbOpenData": "Y"
+      },
+      "coreData": {
+        "entityInformation": {
+          "entityURL": "www.lockheedmartin.com",
+          "entityDivisionName": null,
+          "entityDivisionNumber": null,
+          "entityStartDate": "1994-08-29",
+          "fiscalYearEndCloseDate": "12/31",
+          "submissionDate": null
+        },
+        "physicalAddress": {
+          "addressLine1": "4502 Maass Rd Ste 268 ",
+          "addressLine2": null,
+          "city": "Papillion",
+          "stateOrProvinceCode": "NE",
+          "zipCode": "68133",
+          "zipCodePlus4": "2779",
+          "countryCode": "USA"
+        },
+        "mailingAddress": {
+          "addressLine1": "4502 Maass Rd Ste 268",
+          "addressLine2": null,
+          "city": "Papillion",
+          "stateOrProvinceCode": "NE",
+          "zipCode": "68133",
+          "zipCodePlus4": "2779",
+          "countryCode": "USA"
+        },
+        "congressionalDistrict": "02",
+        "generalInformation": {
+          "entityStructureCode": "2L",
+          "entityStructureDesc": "Corporate Entity (Not Tax Exempt)",
+          "entityTypeCode": "F",
+          "entityTypeDesc": "Business or Organization",
+          "profitStructureCode": "2X",
+          "profitStructureDesc": "For Profit Organization",
+          "organizationStructureCode": null,
+          "organizationStructureDesc": null,
+          "stateOfIncorporationCode": "MD",
+          "stateOfIncorporationDesc": "MARYLAND",
+          "countryOfIncorporationCode": "USA",
+          "countryOfIncorporationDesc": "UNITED STATES"
+        },
+        "businessTypes": {
+          "businessTypeList": [
+            {
+              "businessTypeCode": "2X",
+              "businessTypeDesc": "For Profit Organization"
+            },
+            {
+              "businessTypeCode": "F",
+              "businessTypeDesc": "Business or Organization"
+            }
+          ],
+          "sbaBusinessTypeList": [
+            {
+              "sbaBusinessTypeCode": null,
+              "sbaBusinessTypeDesc": null,
+              "certificationEntryDate": null,
+              "certificationExitDate": null
+            }
+          ]
+        },
+        "financialInformation": {
+          "creditCardUsage": "N",
+          "debtSubjectToOffset": "N"
+        }
+      },
+      "assertions": {
+        "goodsAndServices": {
+          "primaryNaics": "541512",
+          "naicsList": [
+            {
+              "naicsCode": "334220",
+              "naicsDescription": "RADIO AND TELEVISION BROADCASTING AND WIRELESS COMMUNICATIONS EQUIPMENT MANUFACTURING",
+              "sbaSmallBusiness": "N",
+              "naicsException": null
+            },
+            {
+              "naicsCode": "334511",
+              "naicsDescription": "SEARCH, DETECTION, NAVIGATION, GUIDANCE, AERONAUTICAL, AND NAUTICAL SYSTEM AND INSTRUMENT MANUFACTURING",
+              "sbaSmallBusiness": "N",
+              "naicsException": null
+            },
+            {
+              "naicsCode": "336414",
+              "naicsDescription": "GUIDED MISSILE AND SPACE VEHICLE MANUFACTURING",
+              "sbaSmallBusiness": "N",
+              "naicsException": null
+            },
+            {
+              "naicsCode": "517410",
+              "naicsDescription": "SATELLITE TELECOMMUNICATIONS",
+              "sbaSmallBusiness": "N",
+              "naicsException": null
+            },
+            {
+              "naicsCode": "541512",
+              "naicsDescription": "COMPUTER SYSTEMS DESIGN SERVICES",
+              "sbaSmallBusiness": "N",
+              "naicsException": null
+            },
+            {
+              "naicsCode": "541690",
+              "naicsDescription": "OTHER SCIENTIFIC AND TECHNICAL CONSULTING SERVICES",
+              "sbaSmallBusiness": "N",
+              "naicsException": null
+            },
+            {
+              "naicsCode": "541712",
+              "naicsDescription": "RESEARCH AND DEVELOPMENT IN THE PHYSICAL, ENGINEERING, AND LIFE SCIENCES (EXCEPT BIOTECHNOLOGY)",
+              "sbaSmallBusiness": "E",
+              "naicsException": "NNNN"
+            }
+          ],
+          "pscList": [
+            {
+              "pscCode": null,
+              "pscDescription": null
+            }
+          ]
+        },
+        "disasterReliefData": {
+          "disasterRegistryFlag": "NO",
+          "bondingFlag": "NO",
+          "geographicalAreaServed": [
+            {
+              "geographicalAreaServedStateCode": null,
+              "geographicalAreaServedStateName": null,
+              "geographicalAreaServedCountyCode": null,
+              "geographicalAreaServedCountyName": null,
+              "geographicalAreaServedmetropolitanStatisticalAreaCode": null,
+              "geographicalAreaServedmetropolitanStatisticalAreaName": null
+            }
+          ]
+        },
+        "ediInformation": {
+          "ediInformationFlag": "Y"
+        }
+      },
+      "pointsOfContact": {
+        "governmentBusinessPOC": {
+          "firstName": "Ricky",
+          "middleInitial": null,
+          "lastName": "Ensslen",
+          "title": null,
+          "addressLine1": "230 Mall Blvd",
+          "addressLine2": "Building 100, Room L1341",
+          "city": "King of Prussia",
+          "stateOrProvinceCode": "PA",
+          "zipCode": "19406",
+          "zipCodePlus4": null,
+          "countryCode": "USA"
+        },
+        "electronicBusinessPOC": {
+          "firstName": "SANDRA",
+          "middleInitial": null,
+          "lastName": "Hutches",
+          "title": null,
+          "addressLine1": "179 EAST PINE ST.",
+          "addressLine2": null,
+          "city": "PONCHATOULA",
+          "stateOrProvinceCode": "LA",
+          "zipCode": "70454",
+          "zipCodePlus4": null,
+          "countryCode": "USA"
+        },
+        "governmentBusinessAlternatePOC": {
+          "firstName": "Melissa",
+          "middleInitial": null,
+          "lastName": "Clymer",
+          "title": null,
+          "addressLine1": "700 N Frederick Ave",
+          "addressLine2": null,
+          "city": "Gaithersburg",
+          "stateOrProvinceCode": "MD",
+          "zipCode": "20879",
+          "zipCodePlus4": null,
+          "countryCode": "USA"
+        },
+        "electronicBusinessAlternatePOC": {
+          "firstName": "BRANDI",
+          "middleInitial": null,
+          "lastName": "Crouch",
+          "title": null,
+          "addressLine1": "2780 AIRPORT DRIVE",
+          "addressLine2": null,
+          "city": "COLUMBUS",
+          "stateOrProvinceCode": "OH",
+          "zipCode": "43219",
+          "zipCodePlus4": null,
+          "countryCode": "USA"
+        },
+        "pastPerformancePOC": {
+          "firstName": "KATHLEEN",
+          "middleInitial": null,
+          "lastName": "Strauss",
+          "title": null,
+          "addressLine1": "230 Mall Blvd",
+          "addressLine2": "Building 100, Room L1341",
+          "city": "King of Prussia",
+          "stateOrProvinceCode": "PA",
+          "zipCode": "19406",
+          "zipCodePlus4": null,
+          "countryCode": "USA"
+        },
+        "pastPerformanceAlternatePOC": {
+          "firstName": "MAGDA",
+          "middleInitial": null,
+          "lastName": "Clyne",
+          "title": null,
+          "addressLine1": "700 NORTH FREDERICK AVENUE",
+          "addressLine2": null,
+          "city": "GAITHERSBURG",
+          "stateOrProvinceCode": "MD",
+          "zipCode": "20879",
+          "zipCodePlus4": "3328",
+          "countryCode": "USA"
+        }
+      }
+    },
+    {
+      "entityRegistration": {
+        "samRegistered": "Yes",
+        "ueiSAM": "MASYFFKL3U25",
+        "entityEFTIndicator": null,
+        "cageCode": "3YXM9",
+        "dodaac": null,
+        "legalBusinessName": "LOCKHEED MARTIN CORPORATION",
+        "dbaName": null,
+        "purposeOfRegistrationCode": "Z2",
+        "purposeOfRegistrationDesc": "All Awards",
+        "registrationStatus": "Inactive",
+        "evsSource": "D&B",
+        "registrationDate": "2004-07-30",
+        "lastUpdateDate": "2022-03-28",
+        "registrationExpirationDate": "2017-10-22",
+        "activationDate": "2016-09-22",
+        "ueiStatus": "Active",
+        "ueiExpirationDate": null,
+        "ueiCreationDate": "2020-06-20",
+        "publicDisplayFlag": "Y",
+        "exclusionStatusFlag": "N",
+        "exclusionURL": null,
+        "dnbOpenData": "Y"
+      },
+      "coreData": {
+        "entityInformation": {
+          "entityURL": "www.lockheedmartin.com",
+          "entityDivisionName": "ROTARY AND MISSION SYSTEMS",
+          "entityDivisionNumber": null,
+          "entityStartDate": "1994-08-29",
+          "fiscalYearEndCloseDate": "12/31",
+          "submissionDate": "2016-09-22"
+        },
+        "physicalAddress": {
+          "addressLine1": "6210 Guardian Gateway Ste 225 ",
+          "addressLine2": null,
+          "city": "Aberdeen Proving Ground",
+          "stateOrProvinceCode": "MD",
+          "zipCode": "21005",
+          "zipCodePlus4": "1329",
+          "countryCode": "USA"
+        },
+        "mailingAddress": {
+          "addressLine1": "6210 Guardian Gateway Ste 225 ",
+          "addressLine2": null,
+          "city": "Aberdeen Proving Ground",
+          "stateOrProvinceCode": "MD",
+          "zipCode": "21005",
+          "zipCodePlus4": "1329",
+          "countryCode": "USA"
+        },
+        "congressionalDistrict": "02",
+        "generalInformation": {
+          "entityStructureCode": "2L",
+          "entityStructureDesc": "Corporate Entity (Not Tax Exempt)",
+          "entityTypeCode": "F",
+          "entityTypeDesc": "Business or Organization",
+          "profitStructureCode": "2X",
+          "profitStructureDesc": "For Profit Organization",
+          "organizationStructureCode": null,
+          "organizationStructureDesc": null,
+          "stateOfIncorporationCode": "MD",
+          "stateOfIncorporationDesc": "MARYLAND",
+          "countryOfIncorporationCode": "USA",
+          "countryOfIncorporationDesc": "UNITED STATES"
+        },
+        "businessTypes": {
+          "businessTypeList": [
+            {
+              "businessTypeCode": "2X",
+              "businessTypeDesc": "For Profit Organization"
+            },
+            {
+              "businessTypeCode": "F",
+              "businessTypeDesc": "Business or Organization"
+            }
+          ],
+          "sbaBusinessTypeList": [
+            {
+              "sbaBusinessTypeCode": null,
+              "sbaBusinessTypeDesc": null,
+              "certificationEntryDate": null,
+              "certificationExitDate": null
+            }
+          ]
+        },
+        "financialInformation": {
+          "creditCardUsage": "Y",
+          "debtSubjectToOffset": "N"
+        }
+      },
+      "assertions": {
+        "goodsAndServices": {
+          "primaryNaics": "541512",
+          "naicsList": [
+            {
+              "naicsCode": "334220",
+              "naicsDescription": "RADIO AND TELEVISION BROADCASTING AND WIRELESS COMMUNICATIONS EQUIPMENT MANUFACTURING",
+              "sbaSmallBusiness": "N",
+              "naicsException": null
+            },
+            {
+              "naicsCode": "334511",
+              "naicsDescription": "SEARCH, DETECTION, NAVIGATION, GUIDANCE, AERONAUTICAL, AND NAUTICAL SYSTEM AND INSTRUMENT MANUFACTURING",
+              "sbaSmallBusiness": "N",
+              "naicsException": null
+            },
+            {
+              "naicsCode": "336414",
+              "naicsDescription": "GUIDED MISSILE AND SPACE VEHICLE MANUFACTURING",
+              "sbaSmallBusiness": "N",
+              "naicsException": null
+            },
+            {
+              "naicsCode": "517410",
+              "naicsDescription": "SATELLITE TELECOMMUNICATIONS",
+              "sbaSmallBusiness": "N",
+              "naicsException": null
+            },
+            {
+              "naicsCode": "541512",
+              "naicsDescription": "COMPUTER SYSTEMS DESIGN SERVICES",
+              "sbaSmallBusiness": "N",
+              "naicsException": null
+            },
+            {
+              "naicsCode": "541690",
+              "naicsDescription": "OTHER SCIENTIFIC AND TECHNICAL CONSULTING SERVICES",
+              "sbaSmallBusiness": "N",
+              "naicsException": null
+            },
+            {
+              "naicsCode": "541712",
+              "naicsDescription": "RESEARCH AND DEVELOPMENT IN THE PHYSICAL, ENGINEERING, AND LIFE SCIENCES (EXCEPT BIOTECHNOLOGY)",
+              "sbaSmallBusiness": "E",
+              "naicsException": "NNNN"
+            }
+          ],
+          "pscList": [
+            {
+              "pscCode": null,
+              "pscDescription": null
+            }
+          ]
+        },
+        "disasterReliefData": {
+          "disasterRegistryFlag": "YES",
+          "bondingFlag": "NO",
+          "geographicalAreaServed": [
+            {
+              "geographicalAreaServedStateCode": "Any",
+              "geographicalAreaServedStateName": null,
+              "geographicalAreaServedCountyCode": null,
+              "geographicalAreaServedCountyName": null,
+              "geographicalAreaServedmetropolitanStatisticalAreaCode": null,
+              "geographicalAreaServedmetropolitanStatisticalAreaName": null
+            }
+          ]
+        },
+        "ediInformation": {
+          "ediInformationFlag": "N"
+        }
+      },
+      "pointsOfContact": {
+        "governmentBusinessPOC": {
+          "firstName": "Kevin",
+          "middleInitial": null,
+          "lastName": "Organ",
+          "title": null,
+          "addressLine1": "100 Global Innovation Circle",
+          "addressLine2": null,
+          "city": "Orlando",
+          "stateOrProvinceCode": "FL",
+          "zipCode": "32825",
+          "zipCodePlus4": "5002",
+          "countryCode": "USA"
+        },
+        "electronicBusinessPOC": {
+          "firstName": "Sandra",
+          "middleInitial": null,
+          "lastName": "Hutches",
+          "title": null,
+          "addressLine1": "179 EAST PINE ST.",
+          "addressLine2": null,
+          "city": "PONCHATOULA",
+          "stateOrProvinceCode": "LA",
+          "zipCode": "70454",
+          "zipCodePlus4": null,
+          "countryCode": "USA"
+        },
+        "governmentBusinessAlternatePOC": {
+          "firstName": null,
+          "middleInitial": null,
+          "lastName": null,
+          "title": null,
+          "addressLine1": null,
+          "addressLine2": null,
+          "city": null,
+          "stateOrProvinceCode": null,
+          "zipCode": null,
+          "zipCodePlus4": null,
+          "countryCode": null
+        },
+        "electronicBusinessAlternatePOC": {
+          "firstName": null,
+          "middleInitial": null,
+          "lastName": null,
+          "title": null,
+          "addressLine1": null,
+          "addressLine2": null,
+          "city": null,
+          "stateOrProvinceCode": null,
+          "zipCode": null,
+          "zipCodePlus4": null,
+          "countryCode": null
+        },
+        "pastPerformancePOC": {
+          "firstName": null,
+          "middleInitial": null,
+          "lastName": null,
+          "title": null,
+          "addressLine1": null,
+          "addressLine2": null,
+          "city": null,
+          "stateOrProvinceCode": null,
+          "zipCode": null,
+          "zipCodePlus4": null,
+          "countryCode": null
+        },
+        "pastPerformanceAlternatePOC": {
+          "firstName": null,
+          "middleInitial": null,
+          "lastName": null,
+          "title": null,
+          "addressLine1": null,
+          "addressLine2": null,
+          "city": null,
+          "stateOrProvinceCode": null,
+          "zipCode": null,
+          "zipCodePlus4": null,
+          "countryCode": null
+        }
+      }
+    },
+    {
+      "entityRegistration": {
+        "samRegistered": "Yes",
+        "ueiSAM": "GXHAMX7MMCM8",
+        "entityEFTIndicator": null,
+        "cageCode": "67314",
+        "dodaac": null,
+        "legalBusinessName": "MARTIN LOCKHEED CORPORATION",
+        "dbaName": "LOCKHEED MARTIN",
+        "purposeOfRegistrationCode": "Z2",
+        "purposeOfRegistrationDesc": "All Awards",
+        "registrationStatus": "Inactive",
+        "evsSource": "D&B",
+        "registrationDate": "2001-10-11",
+        "lastUpdateDate": "2018-06-05",
+        "registrationExpirationDate": "2018-06-05",
+        "activationDate": "2017-06-05",
+        "ueiStatus": "Active",
+        "ueiExpirationDate": null,
+        "ueiCreationDate": "2020-06-19",
+        "publicDisplayFlag": "Y",
+        "exclusionStatusFlag": "N",
+        "exclusionURL": null,
+        "dnbOpenData": "Y"
+      },
+      "coreData": {
+        "entityInformation": {
+          "entityURL": "http://www.lockheedmartin.com/",
+          "entityDivisionName": null,
+          "entityDivisionNumber": null,
+          "entityStartDate": "1994-08-29",
+          "fiscalYearEndCloseDate": "12/31",
+          "submissionDate": "2017-06-05"
+        },
+        "physicalAddress": {
+          "addressLine1": "9500 GODWIN DR BLDG 400",
+          "addressLine2": null,
+          "city": "MANASSAS",
+          "stateOrProvinceCode": "VA",
+          "zipCode": "20110",
+          "zipCodePlus4": "4166",
+          "countryCode": "USA"
+        },
+        "mailingAddress": {
+          "addressLine1": "9500 GODWIN DRIVE BLDG 400 3RD FLOOR",
+          "addressLine2": "P.O. BOX 1339",
+          "city": "MANASSAS",
+          "stateOrProvinceCode": "VA",
+          "zipCode": "20108",
+          "zipCodePlus4": "1339",
+          "countryCode": "USA"
+        },
+        "congressionalDistrict": "10",
+        "generalInformation": {
+          "entityStructureCode": "2L",
+          "entityStructureDesc": "Corporate Entity (Not Tax Exempt)",
+          "entityTypeCode": "F",
+          "entityTypeDesc": "Business or Organization",
+          "profitStructureCode": "2X",
+          "profitStructureDesc": "For Profit Organization",
+          "organizationStructureCode": null,
+          "organizationStructureDesc": null,
+          "stateOfIncorporationCode": "MD",
+          "stateOfIncorporationDesc": "MARYLAND",
+          "countryOfIncorporationCode": "USA",
+          "countryOfIncorporationDesc": "UNITED STATES"
+        },
+        "businessTypes": {
+          "businessTypeList": [
+            {
+              "businessTypeCode": "2X",
+              "businessTypeDesc": "For Profit Organization"
+            },
+            {
+              "businessTypeCode": "F",
+              "businessTypeDesc": "Business or Organization"
+            }
+          ],
+          "sbaBusinessTypeList": [
+            {
+              "sbaBusinessTypeCode": null,
+              "sbaBusinessTypeDesc": null,
+              "certificationEntryDate": null,
+              "certificationExitDate": null
+            }
+          ]
+        },
+        "financialInformation": {
+          "creditCardUsage": "N",
+          "debtSubjectToOffset": "N"
+        }
+      },
+      "assertions": {
+        "goodsAndServices": {
+          "primaryNaics": "334511",
+          "naicsList": [
+            {
+              "naicsCode": "334511",
+              "naicsDescription": "SEARCH, DETECTION, NAVIGATION, GUIDANCE, AERONAUTICAL, AND NAUTICAL SYSTEM AND INSTRUMENT MANUFACTURING",
+              "sbaSmallBusiness": "N",
+              "naicsException": null
+            }
+          ],
+          "pscList": [
+            {
+              "pscCode": null,
+              "pscDescription": null
+            }
+          ]
+        },
+        "disasterReliefData": {
+          "disasterRegistryFlag": "NO",
+          "bondingFlag": "NO",
+          "geographicalAreaServed": [
+            {
+              "geographicalAreaServedStateCode": null,
+              "geographicalAreaServedStateName": null,
+              "geographicalAreaServedCountyCode": null,
+              "geographicalAreaServedCountyName": null,
+              "geographicalAreaServedmetropolitanStatisticalAreaCode": null,
+              "geographicalAreaServedmetropolitanStatisticalAreaName": null
+            }
+          ]
+        },
+        "ediInformation": {
+          "ediInformationFlag": "N"
+        }
+      },
+      "pointsOfContact": {
+        "governmentBusinessPOC": {
+          "firstName": "MFC",
+          "middleInitial": null,
+          "lastName": "Contracts",
+          "title": null,
+          "addressLine1": "LOCKHEED MARTIN CORPORATION",
+          "addressLine2": "5600 SAND LAKE RD.",
+          "city": "ORLANDO",
+          "stateOrProvinceCode": "FL",
+          "zipCode": "32819",
+          "zipCodePlus4": "8907",
+          "countryCode": "USA"
+        },
+        "electronicBusinessPOC": {
+          "firstName": "David",
+          "middleInitial": null,
+          "lastName": "Leckie",
+          "title": null,
+          "addressLine1": "5600 SAND LAKE RD.",
+          "addressLine2": null,
+          "city": "ORLANDO",
+          "stateOrProvinceCode": "FL",
+          "zipCode": "32819",
+          "zipCodePlus4": null,
+          "countryCode": "USA"
+        },
+        "governmentBusinessAlternatePOC": {
+          "firstName": "Lauren",
+          "middleInitial": null,
+          "lastName": "Douglass",
+          "title": null,
+          "addressLine1": "5600 Sand Lake Road",
+          "addressLine2": null,
+          "city": "Orlando",
+          "stateOrProvinceCode": "FL",
+          "zipCode": "32819",
+          "zipCodePlus4": null,
+          "countryCode": "USA"
+        },
+        "electronicBusinessAlternatePOC": {
+          "firstName": "Lauren",
+          "middleInitial": null,
+          "lastName": "Douglass",
+          "title": null,
+          "addressLine1": "5600 Sand Lake Road",
+          "addressLine2": null,
+          "city": "Orlando",
+          "stateOrProvinceCode": "FL",
+          "zipCode": "32819",
+          "zipCodePlus4": null,
+          "countryCode": "USA"
+        },
+        "pastPerformancePOC": {
+          "firstName": null,
+          "middleInitial": null,
+          "lastName": null,
+          "title": null,
+          "addressLine1": null,
+          "addressLine2": null,
+          "city": null,
+          "stateOrProvinceCode": null,
+          "zipCode": null,
+          "zipCodePlus4": null,
+          "countryCode": null
+        },
+        "pastPerformanceAlternatePOC": {
+          "firstName": null,
+          "middleInitial": null,
+          "lastName": null,
+          "title": null,
+          "addressLine1": null,
+          "addressLine2": null,
+          "city": null,
+          "stateOrProvinceCode": null,
+          "zipCode": null,
+          "zipCodePlus4": null,
+          "countryCode": null
+        }
+      }
+    },
+    {
+      "entityRegistration": {
+        "samRegistered": "Yes",
+        "ueiSAM": "WNZ4JFXK4WR7",
+        "entityEFTIndicator": null,
+        "cageCode": "8Y381",
+        "dodaac": null,
+        "legalBusinessName": "LOCKHEED MARTIN TRAINING SOLUTIONS, INC.",
+        "dbaName": null,
+        "purposeOfRegistrationCode": "Z2",
+        "purposeOfRegistrationDesc": "All Awards",
+        "registrationStatus": "Inactive",
+        "evsSource": "D&B",
+        "registrationDate": "2001-12-21",
+        "lastUpdateDate": "2022-03-28",
+        "registrationExpirationDate": "2014-08-30",
+        "activationDate": "2013-08-30",
+        "ueiStatus": "Active",
+        "ueiExpirationDate": null,
+        "ueiCreationDate": "2020-06-19",
+        "publicDisplayFlag": "Y",
+        "exclusionStatusFlag": "N",
+        "exclusionURL": null,
+        "dnbOpenData": "Y"
+      },
+      "coreData": {
+        "entityInformation": {
+          "entityURL": "http://www.lockheedmartin.com",
+          "entityDivisionName": null,
+          "entityDivisionNumber": null,
+          "entityStartDate": "1984-03-01",
+          "fiscalYearEndCloseDate": "12/31",
+          "submissionDate": null
+        },
+        "physicalAddress": {
+          "addressLine1": "100 GLOBAL INNOVATION CIR",
+          "addressLine2": null,
+          "city": "ORLANDO",
+          "stateOrProvinceCode": "FL",
+          "zipCode": "32825",
+          "zipCodePlus4": "5002",
+          "countryCode": "USA"
+        },
+        "mailingAddress": {
+          "addressLine1": "100 GLOBAL INNOVATION CIRCLE",
+          "addressLine2": null,
+          "city": "ORLANDO",
+          "stateOrProvinceCode": "FL",
+          "zipCode": "32825",
+          "zipCodePlus4": "5002",
+          "countryCode": "USA"
+        },
+        "congressionalDistrict": "09",
+        "generalInformation": {
+          "entityStructureCode": "2L",
+          "entityStructureDesc": "Corporate Entity (Not Tax Exempt)",
+          "entityTypeCode": "F",
+          "entityTypeDesc": "Business or Organization",
+          "profitStructureCode": "2X",
+          "profitStructureDesc": "For Profit Organization",
+          "organizationStructureCode": null,
+          "organizationStructureDesc": null,
+          "stateOfIncorporationCode": "FL",
+          "stateOfIncorporationDesc": "FLORIDA",
+          "countryOfIncorporationCode": "USA",
+          "countryOfIncorporationDesc": "UNITED STATES"
+        },
+        "businessTypes": {
+          "businessTypeList": [
+            {
+              "businessTypeCode": "2X",
+              "businessTypeDesc": "For Profit Organization"
+            },
+            {
+              "businessTypeCode": "F",
+              "businessTypeDesc": "Business or Organization"
+            }
+          ],
+          "sbaBusinessTypeList": [
+            {
+              "sbaBusinessTypeCode": null,
+              "sbaBusinessTypeDesc": null,
+              "certificationEntryDate": null,
+              "certificationExitDate": null
+            }
+          ]
+        },
+        "financialInformation": {
+          "creditCardUsage": "N",
+          "debtSubjectToOffset": "N"
+        }
+      },
+      "assertions": {
+        "goodsAndServices": {
+          "primaryNaics": "488119",
+          "naicsList": [
+            {
+              "naicsCode": "488119",
+              "naicsDescription": "OTHER AIRPORT OPERATIONS",
+              "sbaSmallBusiness": "N",
+              "naicsException": null
+            }
+          ],
+          "pscList": [
+            {
+              "pscCode": null,
+              "pscDescription": null
+            }
+          ]
+        },
+        "disasterReliefData": {
+          "disasterRegistryFlag": "NO",
+          "bondingFlag": "NO",
+          "geographicalAreaServed": [
+            {
+              "geographicalAreaServedStateCode": null,
+              "geographicalAreaServedStateName": null,
+              "geographicalAreaServedCountyCode": null,
+              "geographicalAreaServedCountyName": null,
+              "geographicalAreaServedmetropolitanStatisticalAreaCode": null,
+              "geographicalAreaServedmetropolitanStatisticalAreaName": null
+            }
+          ]
+        },
+        "ediInformation": {
+          "ediInformationFlag": "N"
+        }
+      },
+      "pointsOfContact": {
+        "governmentBusinessPOC": {
+          "firstName": "KEVIN",
+          "middleInitial": "E",
+          "lastName": "ORGAN",
+          "title": null,
+          "addressLine1": "100 GLOBAL INNOVATION CIRCLE",
+          "addressLine2": "MP 813",
+          "city": "ORLANDO",
+          "stateOrProvinceCode": "FL",
+          "zipCode": "32825",
+          "zipCodePlus4": "5002",
+          "countryCode": "USA"
+        },
+        "electronicBusinessPOC": {
+          "firstName": "KEVIN",
+          "middleInitial": "E",
+          "lastName": "ORGAN",
+          "title": null,
+          "addressLine1": "100 GLOBAL INNOVATION CIRCLE",
+          "addressLine2": "MP 813",
+          "city": "ORLANDO",
+          "stateOrProvinceCode": "FL",
+          "zipCode": "32825",
+          "zipCodePlus4": "5002",
+          "countryCode": "USA"
+        },
+        "governmentBusinessAlternatePOC": {
+          "firstName": null,
+          "middleInitial": null,
+          "lastName": null,
+          "title": null,
+          "addressLine1": null,
+          "addressLine2": null,
+          "city": null,
+          "stateOrProvinceCode": null,
+          "zipCode": null,
+          "zipCodePlus4": null,
+          "countryCode": null
+        },
+        "electronicBusinessAlternatePOC": {
+          "firstName": "SANDRA",
+          "middleInitial": null,
+          "lastName": "PERRIN",
+          "title": null,
+          "addressLine1": "LOCKHEED MARTIN CORPORATION",
+          "addressLine2": "179 EAST PINE STREET",
+          "city": "PONCHATOULA",
+          "stateOrProvinceCode": "LA",
+          "zipCode": "70454",
+          "zipCodePlus4": null,
+          "countryCode": "USA"
+        },
+        "pastPerformancePOC": {
+          "firstName": "KEVIN",
+          "middleInitial": "E.",
+          "lastName": "ORGAN",
+          "title": null,
+          "addressLine1": "100 GLOBAL INNOVATION CIRCLE",
+          "addressLine2": null,
+          "city": "ORLANDO",
+          "stateOrProvinceCode": "FL",
+          "zipCode": "32825",
+          "zipCodePlus4": "5002",
+          "countryCode": "USA"
+        },
+        "pastPerformanceAlternatePOC": {
+          "firstName": null,
+          "middleInitial": null,
+          "lastName": null,
+          "title": null,
+          "addressLine1": null,
+          "addressLine2": null,
+          "city": null,
+          "stateOrProvinceCode": null,
+          "zipCode": null,
+          "zipCodePlus4": null,
+          "countryCode": null
+        }
+      }
+    },
+    {
+      "entityRegistration": {
+        "samRegistered": "Yes",
+        "ueiSAM": "YEQBKGK23MH7",
+        "entityEFTIndicator": null,
+        "cageCode": "0M0D5",
+        "dodaac": null,
+        "legalBusinessName": "LOCKHEED MARTIN CORPORATION",
+        "dbaName": "LOCKHEED MARTIN",
+        "purposeOfRegistrationCode": "Z2",
+        "purposeOfRegistrationDesc": "All Awards",
+        "registrationStatus": "Inactive",
+        "evsSource": "D&B",
+        "registrationDate": "2002-02-21",
+        "lastUpdateDate": "2022-03-28",
+        "registrationExpirationDate": "2017-06-29",
+        "activationDate": "2016-06-29",
+        "ueiStatus": "Active",
+        "ueiExpirationDate": null,
+        "ueiCreationDate": "2020-06-19",
+        "publicDisplayFlag": "Y",
+        "exclusionStatusFlag": "N",
+        "exclusionURL": null,
+        "dnbOpenData": "Y"
+      },
+      "coreData": {
+        "entityInformation": {
+          "entityURL": null,
+          "entityDivisionName": "MISSION SYSTEMS AND TRAINING",
+          "entityDivisionNumber": null,
+          "entityStartDate": "1994-08-29",
+          "fiscalYearEndCloseDate": "12/31",
+          "submissionDate": "2016-06-29"
+        },
+        "physicalAddress": {
+          "addressLine1": "5860 TRINITY PARKWAY, STE 100",
+          "addressLine2": null,
+          "city": "CENTREVILLE",
+          "stateOrProvinceCode": "VA",
+          "zipCode": "20120",
+          "zipCodePlus4": "1970",
+          "countryCode": "USA"
+        },
+        "mailingAddress": {
+          "addressLine1": "5860 TRINITY PARKWAY, SUITE 100",
+          "addressLine2": null,
+          "city": "CENTREVILLE",
+          "stateOrProvinceCode": "VA",
+          "zipCode": "20120",
+          "zipCodePlus4": "1970",
+          "countryCode": "USA"
+        },
+        "congressionalDistrict": "11",
+        "generalInformation": {
+          "entityStructureCode": "2L",
+          "entityStructureDesc": "Corporate Entity (Not Tax Exempt)",
+          "entityTypeCode": "F",
+          "entityTypeDesc": "Business or Organization",
+          "profitStructureCode": "2X",
+          "profitStructureDesc": "For Profit Organization",
+          "organizationStructureCode": "MF",
+          "organizationStructureDesc": "Manufacturer of Goods",
+          "stateOfIncorporationCode": "MD",
+          "stateOfIncorporationDesc": "MARYLAND",
+          "countryOfIncorporationCode": "USA",
+          "countryOfIncorporationDesc": "UNITED STATES"
+        },
+        "businessTypes": {
+          "businessTypeList": [
+            {
+              "businessTypeCode": "2X",
+              "businessTypeDesc": "For Profit Organization"
+            },
+            {
+              "businessTypeCode": "F",
+              "businessTypeDesc": "Business or Organization"
+            },
+            {
+              "businessTypeCode": "MF",
+              "businessTypeDesc": "Manufacturer of Goods"
+            }
+          ],
+          "sbaBusinessTypeList": [
+            {
+              "sbaBusinessTypeCode": null,
+              "sbaBusinessTypeDesc": null,
+              "certificationEntryDate": null,
+              "certificationExitDate": null
+            }
+          ]
+        },
+        "financialInformation": {
+          "creditCardUsage": "Y",
+          "debtSubjectToOffset": "N"
+        }
+      },
+      "assertions": {
+        "goodsAndServices": {
+          "primaryNaics": "541519",
+          "naicsList": [
+            {
+              "naicsCode": "332999",
+              "naicsDescription": "ALL OTHER MISCELLANEOUS FABRICATED METAL PRODUCT MANUFACTURING",
+              "sbaSmallBusiness": "N",
+              "naicsException": null
+            },
+            {
+              "naicsCode": "334220",
+              "naicsDescription": "RADIO AND TELEVISION BROADCASTING AND WIRELESS COMMUNICATIONS EQUIPMENT MANUFACTURING",
+              "sbaSmallBusiness": "N",
+              "naicsException": null
+            },
+            {
+              "naicsCode": "334290",
+              "naicsDescription": "OTHER COMMUNICATIONS EQUIPMENT MANUFACTURING",
+              "sbaSmallBusiness": "N",
+              "naicsException": null
+            },
+            {
+              "naicsCode": "334419",
+              "naicsDescription": "OTHER ELECTRONIC COMPONENT MANUFACTURING",
+              "sbaSmallBusiness": "N",
+              "naicsException": null
+            },
+            {
+              "naicsCode": "334511",
+              "naicsDescription": "SEARCH, DETECTION, NAVIGATION, GUIDANCE, AERONAUTICAL, AND NAUTICAL SYSTEM AND INSTRUMENT MANUFACTURING",
+              "sbaSmallBusiness": "N",
+              "naicsException": null
+            },
+            {
+              "naicsCode": "334519",
+              "naicsDescription": "OTHER MEASURING AND CONTROLLING DEVICE MANUFACTURING",
+              "sbaSmallBusiness": "N",
+              "naicsException": null
+            },
+            {
+              "naicsCode": "339999",
+              "naicsDescription": "ALL OTHER MISCELLANEOUS MANUFACTURING",
+              "sbaSmallBusiness": "N",
+              "naicsException": null
+            },
+            {
+              "naicsCode": "517919",
+              "naicsDescription": "ALL OTHER TELECOMMUNICATIONS",
+              "sbaSmallBusiness": "N",
+              "naicsException": null
+            },
+            {
+              "naicsCode": "541330",
+              "naicsDescription": "ENGINEERING SERVICES",
+              "sbaSmallBusiness": "E",
+              "naicsException": "NNNN"
+            },
+            {
+              "naicsCode": "541519",
+              "naicsDescription": "OTHER COMPUTER RELATED SERVICES",
+              "sbaSmallBusiness": "E",
+              "naicsException": "NN"
+            },
+            {
+              "naicsCode": "541618",
+              "naicsDescription": "OTHER MANAGEMENT CONSULTING SERVICES",
+              "sbaSmallBusiness": "N",
+              "naicsException": null
+            },
+            {
+              "naicsCode": "541690",
+              "naicsDescription": "OTHER SCIENTIFIC AND TECHNICAL CONSULTING SERVICES",
+              "sbaSmallBusiness": "N",
+              "naicsException": null
+            },
+            {
+              "naicsCode": "541712",
+              "naicsDescription": "RESEARCH AND DEVELOPMENT IN THE PHYSICAL, ENGINEERING, AND LIFE SCIENCES (EXCEPT BIOTECHNOLOGY)",
+              "sbaSmallBusiness": "E",
+              "naicsException": "NNNN"
+            },
+            {
+              "naicsCode": "611420",
+              "naicsDescription": "COMPUTER TRAINING",
+              "sbaSmallBusiness": "N",
+              "naicsException": null
+            },
+            {
+              "naicsCode": "611430",
+              "naicsDescription": "PROFESSIONAL AND MANAGEMENT DEVELOPMENT TRAINING",
+              "sbaSmallBusiness": "N",
+              "naicsException": null
+            },
+            {
+              "naicsCode": "611699",
+              "naicsDescription": "ALL OTHER MISCELLANEOUS SCHOOLS AND INSTRUCTION",
+              "sbaSmallBusiness": "N",
+              "naicsException": null
+            },
+            {
+              "naicsCode": "611710",
+              "naicsDescription": "EDUCATIONAL SUPPORT SERVICES",
+              "sbaSmallBusiness": "N",
+              "naicsException": null
+            }
+          ],
+          "pscList": [
+            {
+              "pscCode": null,
+              "pscDescription": null
+            }
+          ]
+        },
+        "disasterReliefData": {
+          "disasterRegistryFlag": "NO",
+          "bondingFlag": "NO",
+          "geographicalAreaServed": [
+            {
+              "geographicalAreaServedStateCode": null,
+              "geographicalAreaServedStateName": null,
+              "geographicalAreaServedCountyCode": null,
+              "geographicalAreaServedCountyName": null,
+              "geographicalAreaServedmetropolitanStatisticalAreaCode": null,
+              "geographicalAreaServedmetropolitanStatisticalAreaName": null
+            }
+          ]
+        },
+        "ediInformation": {
+          "ediInformationFlag": "N"
+        }
+      },
+      "pointsOfContact": {
+        "governmentBusinessPOC": {
+          "firstName": "LAUREN",
+          "middleInitial": "A",
+          "lastName": "DOUGLASS",
+          "title": null,
+          "addressLine1": "5600 SAND LAKE ROAD",
+          "addressLine2": null,
+          "city": "ORLANDO",
+          "stateOrProvinceCode": "FL",
+          "zipCode": "32819",
+          "zipCodePlus4": null,
+          "countryCode": "USA"
+        },
+        "electronicBusinessPOC": {
+          "firstName": "JAMES",
+          "middleInitial": "M",
+          "lastName": "SHARP",
+          "title": null,
+          "addressLine1": "5600 SAND LAKE ROAD",
+          "addressLine2": null,
+          "city": "ORLANDO",
+          "stateOrProvinceCode": "FL",
+          "zipCode": "32819",
+          "zipCodePlus4": null,
+          "countryCode": "USA"
+        },
+        "governmentBusinessAlternatePOC": {
+          "firstName": "THOMAS",
+          "middleInitial": null,
+          "lastName": "LOOSE",
+          "title": null,
+          "addressLine1": "5860 TRINITY PARKWAY",
+          "addressLine2": "SUITE 100",
+          "city": "CENTREVILLE",
+          "stateOrProvinceCode": "VA",
+          "zipCode": "20120",
+          "zipCodePlus4": null,
+          "countryCode": "USA"
+        },
+        "electronicBusinessAlternatePOC": {
+          "firstName": "Lauren",
+          "middleInitial": null,
+          "lastName": "Douglass",
+          "title": null,
+          "addressLine1": "5600 Sand Lake Road",
+          "addressLine2": null,
+          "city": "Orlando",
+          "stateOrProvinceCode": "FL",
+          "zipCode": "32819",
+          "zipCodePlus4": null,
+          "countryCode": "USA"
+        },
+        "pastPerformancePOC": {
+          "firstName": "THOMAS",
+          "middleInitial": null,
+          "lastName": "LOOSE",
+          "title": null,
+          "addressLine1": "5860 TRINITY PARKWAY",
+          "addressLine2": "SUITE 100",
+          "city": "CENTREVILLE",
+          "stateOrProvinceCode": "VA",
+          "zipCode": "20120",
+          "zipCodePlus4": null,
+          "countryCode": "USA"
+        },
+        "pastPerformanceAlternatePOC": {
+          "firstName": "CRYSTAL",
+          "middleInitial": null,
+          "lastName": "RILEY",
+          "title": null,
+          "addressLine1": "5860 TRINITY PARKWAY",
+          "addressLine2": "SUITE 100",
+          "city": "CENTREVILLE",
+          "stateOrProvinceCode": "VA",
+          "zipCode": "20120",
+          "zipCodePlus4": null,
+          "countryCode": "USA"
+        }
+      }
+    },
+    {
+      "entityRegistration": {
+        "samRegistered": "Yes",
+        "ueiSAM": "EMLFG1JALM66",
+        "entityEFTIndicator": null,
+        "cageCode": "0BEE0",
+        "dodaac": null,
+        "legalBusinessName": "LOCKHEED MARTIN CORPORATION",
+        "dbaName": "LOCKHEED MARTIN",
+        "purposeOfRegistrationCode": "Z2",
+        "purposeOfRegistrationDesc": "All Awards",
+        "registrationStatus": "Inactive",
+        "evsSource": "D&B",
+        "registrationDate": "2003-07-16",
+        "lastUpdateDate": "2016-07-09",
+        "registrationExpirationDate": "2016-07-09",
+        "activationDate": "2015-07-10",
+        "ueiStatus": "Not Active",
+        "ueiExpirationDate": null,
+        "ueiCreationDate": "2020-06-20",
+        "publicDisplayFlag": "Y",
+        "exclusionStatusFlag": "N",
+        "exclusionURL": null,
+        "dnbOpenData": "Y"
+      },
+      "coreData": {
+        "entityInformation": {
+          "entityURL": null,
+          "entityDivisionName": null,
+          "entityDivisionNumber": null,
+          "entityStartDate": "1994-08-29",
+          "fiscalYearEndCloseDate": "12/31",
+          "submissionDate": "2015-07-10"
+        },
+        "physicalAddress": {
+          "addressLine1": "4601 JACOBS LN",
+          "addressLine2": null,
+          "city": "KILLEEN",
+          "stateOrProvinceCode": "TX",
+          "zipCode": "76543",
+          "zipCodePlus4": "4255",
+          "countryCode": "USA"
+        },
+        "mailingAddress": {
+          "addressLine1": "4601 JACOBS LN",
+          "addressLine2": null,
+          "city": "KILLEEN",
+          "stateOrProvinceCode": "TX",
+          "zipCode": "76543",
+          "zipCodePlus4": "4255",
+          "countryCode": "USA"
+        },
+        "congressionalDistrict": "31",
+        "generalInformation": {
+          "entityStructureCode": "2L",
+          "entityStructureDesc": "Corporate Entity (Not Tax Exempt)",
+          "entityTypeCode": "F",
+          "entityTypeDesc": "Business or Organization",
+          "profitStructureCode": "2X",
+          "profitStructureDesc": "For Profit Organization",
+          "organizationStructureCode": "MF",
+          "organizationStructureDesc": "Manufacturer of Goods",
+          "stateOfIncorporationCode": "MD",
+          "stateOfIncorporationDesc": "MARYLAND",
+          "countryOfIncorporationCode": "USA",
+          "countryOfIncorporationDesc": "UNITED STATES"
+        },
+        "businessTypes": {
+          "businessTypeList": [
+            {
+              "businessTypeCode": "2X",
+              "businessTypeDesc": "For Profit Organization"
+            },
+            {
+              "businessTypeCode": "F",
+              "businessTypeDesc": "Business or Organization"
+            },
+            {
+              "businessTypeCode": "MF",
+              "businessTypeDesc": "Manufacturer of Goods"
+            }
+          ],
+          "sbaBusinessTypeList": [
+            {
+              "sbaBusinessTypeCode": null,
+              "sbaBusinessTypeDesc": null,
+              "certificationEntryDate": null,
+              "certificationExitDate": null
+            }
+          ]
+        },
+        "financialInformation": {
+          "creditCardUsage": "Y",
+          "debtSubjectToOffset": "N"
+        }
+      },
+      "assertions": {
+        "goodsAndServices": {
+          "primaryNaics": "334511",
+          "naicsList": [
+            {
+              "naicsCode": "334511",
+              "naicsDescription": "SEARCH, DETECTION, NAVIGATION, GUIDANCE, AERONAUTICAL, AND NAUTICAL SYSTEM AND INSTRUMENT MANUFACTURING",
+              "sbaSmallBusiness": "N",
+              "naicsException": null
+            },
+            {
+              "naicsCode": "336413",
+              "naicsDescription": "OTHER AIRCRAFT PARTS AND AUXILIARY EQUIPMENT MANUFACTURING",
+              "sbaSmallBusiness": "N",
+              "naicsException": null
+            },
+            {
+              "naicsCode": "336414",
+              "naicsDescription": "GUIDED MISSILE AND SPACE VEHICLE MANUFACTURING",
+              "sbaSmallBusiness": "N",
+              "naicsException": null
+            },
+            {
+              "naicsCode": "336415",
+              "naicsDescription": "GUIDED MISSILE AND SPACE VEHICLE PROPULSION UNIT AND PROPULSION UNIT PARTS MANUFACTURING",
+              "sbaSmallBusiness": "N",
+              "naicsException": null
+            }
+          ],
+          "pscList": [
+            {
+              "pscCode": null,
+              "pscDescription": null
+            }
+          ]
+        },
+        "disasterReliefData": {
+          "disasterRegistryFlag": "NO",
+          "bondingFlag": "NO",
+          "geographicalAreaServed": [
+            {
+              "geographicalAreaServedStateCode": null,
+              "geographicalAreaServedStateName": null,
+              "geographicalAreaServedCountyCode": null,
+              "geographicalAreaServedCountyName": null,
+              "geographicalAreaServedmetropolitanStatisticalAreaCode": null,
+              "geographicalAreaServedmetropolitanStatisticalAreaName": null
+            }
+          ]
+        },
+        "ediInformation": {
+          "ediInformationFlag": "N"
+        }
+      },
+      "pointsOfContact": {
+        "governmentBusinessPOC": {
+          "firstName": "Lauren",
+          "middleInitial": "A",
+          "lastName": "Douglass",
+          "title": null,
+          "addressLine1": "LOCKHEED MARTIN CORPORATION",
+          "addressLine2": "5600 SAND LAKE RD.",
+          "city": "ORLANDO",
+          "stateOrProvinceCode": "FL",
+          "zipCode": "32819",
+          "zipCodePlus4": "8907",
+          "countryCode": "USA"
+        },
+        "electronicBusinessPOC": {
+          "firstName": "JAMES M. SHARP",
+          "middleInitial": null,
+          "lastName": "Sharp",
+          "title": null,
+          "addressLine1": "5600 SAND LAKE ROAD",
+          "addressLine2": null,
+          "city": "ORLANDO",
+          "stateOrProvinceCode": "FL",
+          "zipCode": "32819",
+          "zipCodePlus4": "8907",
+          "countryCode": "USA"
+        },
+        "governmentBusinessAlternatePOC": {
+          "firstName": "JAMES M. SHARP",
+          "middleInitial": null,
+          "lastName": "Sharp",
+          "title": null,
+          "addressLine1": "LOCKHEED MARTIN CORPORATION",
+          "addressLine2": "5600 SAND LAKE RD.",
+          "city": "ORLANDO",
+          "stateOrProvinceCode": "FL",
+          "zipCode": "32819",
+          "zipCodePlus4": "8907",
+          "countryCode": "USA"
+        },
+        "electronicBusinessAlternatePOC": {
+          "firstName": "Lauren",
+          "middleInitial": null,
+          "lastName": "Douglass",
+          "title": null,
+          "addressLine1": "5600 Sand Lake Road",
+          "addressLine2": null,
+          "city": "Orlando",
+          "stateOrProvinceCode": "FL",
+          "zipCode": "32819",
+          "zipCodePlus4": null,
+          "countryCode": "USA"
+        },
+        "pastPerformancePOC": {
+          "firstName": "JAMES M. SHARP",
+          "middleInitial": null,
+          "lastName": "Sharp",
+          "title": null,
+          "addressLine1": "5600 SAND LAKE ROAD",
+          "addressLine2": null,
+          "city": "ORLANDO",
+          "stateOrProvinceCode": "FL",
+          "zipCode": "32819",
+          "zipCodePlus4": "8907",
+          "countryCode": "USA"
+        },
+        "pastPerformanceAlternatePOC": {
+          "firstName": "JAMES M. SHARP",
+          "middleInitial": null,
+          "lastName": "Sharp",
+          "title": null,
+          "addressLine1": "5600 SAND LAKE ROAD",
+          "addressLine2": null,
+          "city": "ORLANDO",
+          "stateOrProvinceCode": "FL",
+          "zipCode": "32819",
+          "zipCodePlus4": "8907",
+          "countryCode": "USA"
+        }
+      }
+    },
+    {
+      "entityRegistration": {
+        "samRegistered": "Yes",
+        "ueiSAM": "JXMYEM6CMRU6",
+        "entityEFTIndicator": null,
+        "cageCode": "0PV88",
+        "dodaac": null,
+        "legalBusinessName": "Lockheed Martin Unmanned Integrated Systems, Inc.",
+        "dbaName": null,
+        "purposeOfRegistrationCode": "Z2",
+        "purposeOfRegistrationDesc": "All Awards",
+        "registrationStatus": "Inactive",
+        "evsSource": "D&B",
+        "registrationDate": "2002-04-09",
+        "lastUpdateDate": "2022-03-28",
+        "registrationExpirationDate": "2018-09-28",
+        "activationDate": "2017-09-28",
+        "ueiStatus": "Active",
+        "ueiExpirationDate": null,
+        "ueiCreationDate": "2020-06-20",
+        "publicDisplayFlag": "Y",
+        "exclusionStatusFlag": "N",
+        "exclusionURL": null,
+        "dnbOpenData": "Y"
+      },
+      "coreData": {
+        "entityInformation": {
+          "entityURL": "http://www.lockheedmartin.com",
+          "entityDivisionName": null,
+          "entityDivisionNumber": null,
+          "entityStartDate": "1990-01-01",
+          "fiscalYearEndCloseDate": "12/31",
+          "submissionDate": "2017-09-28"
+        },
+        "physicalAddress": {
+          "addressLine1": "133 W Park Loop N W ",
+          "addressLine2": null,
+          "city": "Huntsville",
+          "stateOrProvinceCode": "AL",
+          "zipCode": "35806",
+          "zipCodePlus4": "1745",
+          "countryCode": "USA"
+        },
+        "mailingAddress": {
+          "addressLine1": "133 WEST PARK LOOP NW",
+          "addressLine2": null,
+          "city": "HUNTSVILLE",
+          "stateOrProvinceCode": "AL",
+          "zipCode": "35806",
+          "zipCodePlus4": "1745",
+          "countryCode": "USA"
+        },
+        "congressionalDistrict": "05",
+        "generalInformation": {
+          "entityStructureCode": "2L",
+          "entityStructureDesc": "Corporate Entity (Not Tax Exempt)",
+          "entityTypeCode": "F",
+          "entityTypeDesc": "Business or Organization",
+          "profitStructureCode": "2X",
+          "profitStructureDesc": "For Profit Organization",
+          "organizationStructureCode": "MF",
+          "organizationStructureDesc": "Manufacturer of Goods",
+          "stateOfIncorporationCode": "DE",
+          "stateOfIncorporationDesc": "DELAWARE",
+          "countryOfIncorporationCode": "USA",
+          "countryOfIncorporationDesc": "UNITED STATES"
+        },
+        "businessTypes": {
+          "businessTypeList": [
+            {
+              "businessTypeCode": "2X",
+              "businessTypeDesc": "For Profit Organization"
+            },
+            {
+              "businessTypeCode": "F",
+              "businessTypeDesc": "Business or Organization"
+            },
+            {
+              "businessTypeCode": "MF",
+              "businessTypeDesc": "Manufacturer of Goods"
+            }
+          ],
+          "sbaBusinessTypeList": [
+            {
+              "sbaBusinessTypeCode": null,
+              "sbaBusinessTypeDesc": null,
+              "certificationEntryDate": null,
+              "certificationExitDate": null
+            }
+          ]
+        },
+        "financialInformation": {
+          "creditCardUsage": "Y",
+          "debtSubjectToOffset": "N"
+        }
+      },
+      "assertions": {
+        "goodsAndServices": {
+          "primaryNaics": "336413",
+          "naicsList": [
+            {
+              "naicsCode": "334111",
+              "naicsDescription": "ELECTRONIC COMPUTER MANUFACTURING",
+              "sbaSmallBusiness": "N",
+              "naicsException": null
+            },
+            {
+              "naicsCode": "334511",
+              "naicsDescription": "SEARCH, DETECTION, NAVIGATION, GUIDANCE, AERONAUTICAL, AND NAUTICAL SYSTEM AND INSTRUMENT MANUFACTURING",
+              "sbaSmallBusiness": "N",
+              "naicsException": null
+            },
+            {
+              "naicsCode": "336411",
+              "naicsDescription": "AIRCRAFT MANUFACTURING",
+              "sbaSmallBusiness": "N",
+              "naicsException": null
+            },
+            {
+              "naicsCode": "336413",
+              "naicsDescription": "OTHER AIRCRAFT PARTS AND AUXILIARY EQUIPMENT MANUFACTURING",
+              "sbaSmallBusiness": "N",
+              "naicsException": null
+            },
+            {
+              "naicsCode": "541330",
+              "naicsDescription": "ENGINEERING SERVICES",
+              "sbaSmallBusiness": "E",
+              "naicsException": "NNNN"
+            }
+          ],
+          "pscList": [
+            {
+              "pscCode": "1550",
+              "pscDescription": "UNMANNED AIRCRAFT"
+            }
+          ]
+        },
+        "disasterReliefData": {
+          "disasterRegistryFlag": "NO",
+          "bondingFlag": "NO",
+          "geographicalAreaServed": [
+            {
+              "geographicalAreaServedStateCode": null,
+              "geographicalAreaServedStateName": null,
+              "geographicalAreaServedCountyCode": null,
+              "geographicalAreaServedCountyName": null,
+              "geographicalAreaServedmetropolitanStatisticalAreaCode": null,
+              "geographicalAreaServedmetropolitanStatisticalAreaName": null
+            }
+          ]
+        },
+        "ediInformation": {
+          "ediInformationFlag": "N"
+        }
+      },
+      "pointsOfContact": {
+        "governmentBusinessPOC": {
+          "firstName": "Barbara",
+          "middleInitial": "J",
+          "lastName": "Richardson",
+          "title": null,
+          "addressLine1": "133 WEST PARK LOOP",
+          "addressLine2": null,
+          "city": "HUNTSVILLE",
+          "stateOrProvinceCode": "AL",
+          "zipCode": "35806",
+          "zipCodePlus4": null,
+          "countryCode": "USA"
+        },
+        "electronicBusinessPOC": {
+          "firstName": "Todd",
+          "middleInitial": "D.",
+          "lastName": "White",
+          "title": null,
+          "addressLine1": "133 WEST PARK LOOP",
+          "addressLine2": null,
+          "city": "HUNTSVILLE",
+          "stateOrProvinceCode": "AL",
+          "zipCode": "35806",
+          "zipCodePlus4": null,
+          "countryCode": "USA"
+        },
+        "governmentBusinessAlternatePOC": {
+          "firstName": null,
+          "middleInitial": null,
+          "lastName": null,
+          "title": null,
+          "addressLine1": null,
+          "addressLine2": null,
+          "city": null,
+          "stateOrProvinceCode": null,
+          "zipCode": null,
+          "zipCodePlus4": null,
+          "countryCode": null
+        },
+        "electronicBusinessAlternatePOC": {
+          "firstName": null,
+          "middleInitial": null,
+          "lastName": null,
+          "title": null,
+          "addressLine1": null,
+          "addressLine2": null,
+          "city": null,
+          "stateOrProvinceCode": null,
+          "zipCode": null,
+          "zipCodePlus4": null,
+          "countryCode": null
+        },
+        "pastPerformancePOC": {
+          "firstName": "Barbara",
+          "middleInitial": null,
+          "lastName": "Richardson",
+          "title": null,
+          "addressLine1": "133 WEST PARK LOOP",
+          "addressLine2": null,
+          "city": "HUNTSVILLE",
+          "stateOrProvinceCode": "AL",
+          "zipCode": "35806",
+          "zipCodePlus4": null,
+          "countryCode": "USA"
+        },
+        "pastPerformanceAlternatePOC": {
+          "firstName": null,
+          "middleInitial": null,
+          "lastName": null,
+          "title": null,
+          "addressLine1": null,
+          "addressLine2": null,
+          "city": null,
+          "stateOrProvinceCode": null,
+          "zipCode": null,
+          "zipCodePlus4": null,
+          "countryCode": null
+        }
+      }
+    },
+    {
+      "entityRegistration": {
+        "samRegistered": "Yes",
+        "ueiSAM": "J7BZDGQG87E6",
+        "entityEFTIndicator": null,
+        "cageCode": "9EW51",
+        "dodaac": null,
+        "legalBusinessName": "LOCKHEED MARTIN CORP",
+        "dbaName": "LOCKHEED MARTIN AEROSTRUCTURES",
+        "purposeOfRegistrationCode": "Z2",
+        "purposeOfRegistrationDesc": "All Awards",
+        "registrationStatus": "Inactive",
+        "evsSource": "E&Y",
+        "registrationDate": "2022-09-15",
+        "lastUpdateDate": "2025-10-21",
+        "registrationExpirationDate": "2025-10-21",
+        "activationDate": "2024-10-23",
+        "ueiStatus": "Active",
+        "ueiExpirationDate": null,
+        "ueiCreationDate": "2022-09-15",
+        "publicDisplayFlag": "Y",
+        "exclusionStatusFlag": "N",
+        "exclusionURL": null,
+        "dnbOpenData": null
+      },
+      "coreData": {
+        "entityInformation": {
+          "entityURL": "www.lockheedmartin.com",
+          "entityDivisionName": null,
+          "entityDivisionNumber": null,
+          "entityStartDate": "1994-08-29",
+          "fiscalYearEndCloseDate": "12/31",
+          "submissionDate": "2024-10-21"
+        },
+        "physicalAddress": {
+          "addressLine1": "1721 BOXELDER ST",
+          "addressLine2": "STE 106 & 107",
+          "city": "LOUISVILLE",
+          "stateOrProvinceCode": "CO",
+          "zipCode": "80027",
+          "zipCodePlus4": "3062",
+          "countryCode": "USA"
+        },
+        "mailingAddress": {
+          "addressLine1": "1721 BOXELDER ST",
+          "addressLine2": "STE 107",
+          "city": "LOUISVILLE",
+          "stateOrProvinceCode": "CO",
+          "zipCode": "80027",
+          "zipCodePlus4": null,
+          "countryCode": "USA"
+        },
+        "congressionalDistrict": "02",
+        "generalInformation": {
+          "entityStructureCode": "2L",
+          "entityStructureDesc": "Corporate Entity (Not Tax Exempt)",
+          "entityTypeCode": "F",
+          "entityTypeDesc": "Business or Organization",
+          "profitStructureCode": "2X",
+          "profitStructureDesc": "For Profit Organization",
+          "organizationStructureCode": "MF",
+          "organizationStructureDesc": "Manufacturer of Goods",
+          "stateOfIncorporationCode": "MD",
+          "stateOfIncorporationDesc": "MARYLAND",
+          "countryOfIncorporationCode": "USA",
+          "countryOfIncorporationDesc": "UNITED STATES"
+        },
+        "businessTypes": {
+          "businessTypeList": [
+            {
+              "businessTypeCode": "2X",
+              "businessTypeDesc": "For Profit Organization"
+            },
+            {
+              "businessTypeCode": "F",
+              "businessTypeDesc": "Business or Organization"
+            },
+            {
+              "businessTypeCode": "MF",
+              "businessTypeDesc": "Manufacturer of Goods"
+            }
+          ],
+          "sbaBusinessTypeList": [
+            {
+              "sbaBusinessTypeCode": null,
+              "sbaBusinessTypeDesc": null,
+              "certificationEntryDate": null,
+              "certificationExitDate": null
+            }
+          ]
+        },
+        "financialInformation": {
+          "creditCardUsage": "Y",
+          "debtSubjectToOffset": "N"
+        }
+      },
+      "assertions": {
+        "goodsAndServices": {
+          "primaryNaics": "541330",
+          "naicsList": [
+            {
+              "naicsCode": "541330",
+              "naicsDescription": "Engineering Services",
+              "sbaSmallBusiness": "E",
+              "naicsException": "NNNN"
+            }
+          ],
+          "pscList": [
+            {
+              "pscCode": null,
+              "pscDescription": null
+            }
+          ]
+        },
+        "disasterReliefData": {
+          "disasterRegistryFlag": "NO",
+          "bondingFlag": "NO",
+          "geographicalAreaServed": [
+            {
+              "geographicalAreaServedStateCode": null,
+              "geographicalAreaServedStateName": null,
+              "geographicalAreaServedCountyCode": null,
+              "geographicalAreaServedCountyName": null,
+              "geographicalAreaServedmetropolitanStatisticalAreaCode": null,
+              "geographicalAreaServedmetropolitanStatisticalAreaName": null
+            }
+          ]
+        },
+        "ediInformation": {
+          "ediInformationFlag": "N"
+        }
+      },
+      "pointsOfContact": {
+        "governmentBusinessPOC": {
+          "firstName": "Jennifer",
+          "middleInitial": null,
+          "lastName": "Thomas",
+          "title": null,
+          "addressLine1": "86 South Cobb Drive",
+          "addressLine2": "Maildrop: F86M 0242",
+          "city": "Marietta",
+          "stateOrProvinceCode": "GA",
+          "zipCode": "30063",
+          "zipCodePlus4": null,
+          "countryCode": "USA"
+        },
+        "electronicBusinessPOC": {
+          "firstName": "Sandra",
+          "middleInitial": null,
+          "lastName": "Hutches",
+          "title": null,
+          "addressLine1": "179 East Pine St.",
+          "addressLine2": null,
+          "city": "Ponchatoula",
+          "stateOrProvinceCode": "LA",
+          "zipCode": "70454",
+          "zipCodePlus4": null,
+          "countryCode": "USA"
+        },
+        "governmentBusinessAlternatePOC": {
+          "firstName": "Wynter",
+          "middleInitial": null,
+          "lastName": "Bradshaw",
+          "title": null,
+          "addressLine1": "1 Lockheed Blvd",
+          "addressLine2": null,
+          "city": "Fort Worth",
+          "stateOrProvinceCode": "TX",
+          "zipCode": "76108",
+          "zipCodePlus4": null,
+          "countryCode": "USA"
+        },
+        "electronicBusinessAlternatePOC": {
+          "firstName": null,
+          "middleInitial": null,
+          "lastName": null,
+          "title": null,
+          "addressLine1": null,
+          "addressLine2": null,
+          "city": null,
+          "stateOrProvinceCode": null,
+          "zipCode": null,
+          "zipCodePlus4": null,
+          "countryCode": null
+        },
+        "pastPerformancePOC": {
+          "firstName": null,
+          "middleInitial": null,
+          "lastName": null,
+          "title": null,
+          "addressLine1": null,
+          "addressLine2": null,
+          "city": null,
+          "stateOrProvinceCode": null,
+          "zipCode": null,
+          "zipCodePlus4": null,
+          "countryCode": null
+        },
+        "pastPerformanceAlternatePOC": {
+          "firstName": null,
+          "middleInitial": null,
+          "lastName": null,
+          "title": null,
+          "addressLine1": null,
+          "addressLine2": null,
+          "city": null,
+          "stateOrProvinceCode": null,
+          "zipCode": null,
+          "zipCodePlus4": null,
+          "countryCode": null
+        }
+      }
+    }
+  ],
+  "links": {
+    "selfLink": "https://api.sam.gov/entity-information/v3/entities?api_key=REPLACE_WITH_API_KEY&legalBusinessName=Lockheed%2BMartin&page=0&size=10",
+    "nextLink": "https://api.sam.gov/entity-information/v3/entities?api_key=REPLACE_WITH_API_KEY&legalBusinessName=Lockheed%2BMartin&page=1&size=10"
+  }
+}

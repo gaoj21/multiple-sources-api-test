@@ -1,0 +1,38 @@
+{
+  "dateIssued": "2026-10-13",
+  "issue": "196",
+  "documentType": "FR",
+  "packageId": "FR-2026-10-13",
+  "collectionCode": "FR",
+  "detailsLink": "https://www.govinfo.gov/app/details/FR-2026-10-13",
+  "title": "Federal Register Volume 91 Issue 196 (October 13, 2026)",
+  "branch": "executive",
+  "collectionName": "Federal Register",
+  "volume": "91",
+  "download": {
+    "premisLink": "https://api.govinfo.gov/packages/FR-2026-10-13/premis",
+    "xmlLink": "https://api.govinfo.gov/packages/FR-2026-10-13/xml",
+    "zipLink": "https://api.govinfo.gov/packages/FR-2026-10-13/zip",
+    "modsLink": "https://api.govinfo.gov/packages/FR-2026-10-13/mods",
+    "pdfLink": "https://api.govinfo.gov/packages/FR-2026-10-13/pdf"
+  },
+  "pages": "334",
+  "governmentAuthor2": "Office of the Federal Register",
+  "governmentAuthor1": "National Archives and Records Administration",
+  "publisher": "Office of the Federal Register, National Archives and Records Administration",
+  "suDocClassNumber": "AE 2.7:, GS 4.107:, AE 2.106:",
+  "docClass": "FR",
+  "lastModified": "2026-10-10T07:43:47Z",
+  "category": "Regulatory Information",
+  "otherIdentifier": {
+    "issn": [
+      "0097-6326",
+      "0042-1219",
+      "0364-1406"
+    ],
+    "migrated-doc-id": "f:fr13oc26",
+    "ils-system-id": "000582072",
+    "stock-number": "769-004-00000-9"
+  },
+  "granulesLink": "https://api.govinfo.gov/packages/FR-2026-10-13/granules?offsetMark=*&pageSize=100"
+}

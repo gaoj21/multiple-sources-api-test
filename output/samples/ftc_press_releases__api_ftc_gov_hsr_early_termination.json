@@ -1,0 +1,257 @@
+{
+  "jsonapi": {
+    "version": "1.0",
+    "meta": {
+      "links": {
+        "self": {
+          "href": "http://jsonapi.org/format/1.0/"
+        }
+      }
+    }
+  },
+  "data": [
+    {
+      "type": "early_termination_notice",
+      "id": "736d72b8-104f-4e11-a1c3-91c98c73e5aa",
+      "links": {
+        "self": {
+          "href": "https://www.ftc.gov/v0/hsr-early-termination-notices/736d72b8-104f-4e11-a1c3-91c98c73e5aa?resourceVersion=id%3A444036"
+        },
+        "working-copy": {
+          "href": "https://www.ftc.gov/v0/hsr-early-termination-notices/736d72b8-104f-4e11-a1c3-91c98c73e5aa?resourceVersion=rel%3Aworking-copy"
+        }
+      },
+      "attributes": {
+        "title": "20262351: Diversified Energy Company; Elliott International Limited",
+        "created": "2026-10-07T13:22:14+00:00",
+        "updated": "2026-10-07T13:22:14+00:00",
+        "acquired-party": "Elliott International Limited",
+        "acquiring-party": "Diversified Energy Company",
+        "date": "2026-10-05",
+        "acquired-entities": [
+          "Birch Permian Holdings, Inc.",
+          "Milkwater, LLC",
+          "Birch II EOC, LLC",
+          "Birch Permian, LLC"
+        ],
+        "transaction-number": "20262351"
+      },
+      "relationships": {
+        "node_type": {
+          "data": null,
+          "links": {
+            "self": {
+              "href": "https://www.ftc.gov/v0/hsr-early-termination-notices/736d72b8-104f-4e11-a1c3-91c98c73e5aa/relationships/node_type?resourceVersion=id%3A444036"
+            }
+          }
+        },
+        "feeds_item": {
+          "data": [],
+          "links": {
+            "related": {
+              "href": "https://www.ftc.gov/v0/hsr-early-termination-notices/736d72b8-104f-4e11-a1c3-91c98c73e5aa/feeds_item?resourceVersion=id%3A444036"
+            },
+            "self": {
+              "href": "https://www.ftc.gov/v0/hsr-early-termination-notices/736d72b8-104f-4e11-a1c3-91c98c73e5aa/relationships/feeds_item?resourceVersion=id%3A444036"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "early_termination_notice",
+      "id": "5eafb3af-45af-4793-831c-7100b26864ba",
+      "links": {
+        "self": {
+          "href": "https://www.ftc.gov/v0/hsr-early-termination-notices/5eafb3af-45af-4793-831c-7100b26864ba?resourceVersion=id%3A444037"
+        },
+        "working-copy": {
+          "href": "https://www.ftc.gov/v0/hsr-early-termination-notices/5eafb3af-45af-4793-831c-7100b26864ba?resourceVersion=rel%3Aworking-copy"
+        }
+      },
+      "attributes": {
+        "title": "20262359: Anderson Automotive Enterprises, LLC; Group 1 Automotive, Inc.",
+        "created": "2026-10-07T13:22:14+00:00",
+        "updated": "2026-10-07T13:22:14+00:00",
+        "acquired-party": "Group 1 Automotive, Inc.",
+        "acquiring-party": "Anderson Automotive Enterprises, LLC",
+        "date": "2026-10-05",
+        "acquired-entities": [
+          "GPI FL-LX, LLC",
+          "GPI FL-HA, LLC"
+        ],
+        "transaction-number": "20262359"
+      },
+      "relationships": {
+        "node_type": {
+          "data": null,
+          "links": {
+            "self": {
+              "href": "https://www.ftc.gov/v0/hsr-early-termination-notices/5eafb3af-45af-4793-831c-7100b26864ba/relationships/node_type?resourceVersion=id%3A444037"
+            }
+          }
+        },
+        "feeds_item": {
+          "data": [],
+          "links": {
+            "related": {
+              "href": "https://www.ftc.gov/v0/hsr-early-termination-notices/5eafb3af-45af-4793-831c-7100b26864ba/feeds_item?resourceVersion=id%3A444037"
+            },
+            "self": {
+              "href": "https://www.ftc.gov/v0/hsr-early-termination-notices/5eafb3af-45af-4793-831c-7100b26864ba/relationships/feeds_item?resourceVersion=id%3A444037"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "early_termination_notice",
+      "id": "3721783b-f081-4cac-b466-ad642187740e",
+      "links": {
+        "self": {
+          "href": "https://www.ftc.gov/v0/hsr-early-termination-notices/3721783b-f081-4cac-b466-ad642187740e?resourceVersion=id%3A444035"
+        },
+        "working-copy": {
+          "href": "https://www.ftc.gov/v0/hsr-early-termination-notices/3721783b-f081-4cac-b466-ad642187740e?resourceVersion=rel%3Aworking-copy"
+        }
+      },
+      "attributes": {
+        "title": "20262337: ABB Ltd; Rotork plc",
+        "created": "2026-10-07T13:22:12+00:00",
+        "updated": "2026-10-07T13:22:12+00:00",
+        "acquired-party": "Rotork plc",
+        "acquiring-party": "ABB Ltd",
+        "date": "2026-10-05",
+        "acquired-entities": [
+          "Rotork plc"
+        ],
+        "transaction-number": "20262337"
+      },
+      "relationships": {
+        "node_type": {
+          "data": null,
+          "links": {
+            "self": {
+              "href": "https://www.ftc.gov/v0/hsr-early-termination-notices/3721783b-f081-4cac-b466-ad642187740e/relationships/node_type?resourceVersion=id%3A444035"
+            }
+          }
+        },
+        "feeds_item": {
+          "data": [],
+          "links": {
+            "related": {
+              "href": "https://www.ftc.gov/v0/hsr-early-termination-notices/3721783b-f081-4cac-b466-ad642187740e/feeds_item?resourceVersion=id%3A444035"
+            },
+            "self": {
+              "href": "https://www.ftc.gov/v0/hsr-early-termination-notices/3721783b-f081-4cac-b466-ad642187740e/relationships/feeds_item?resourceVersion=id%3A444035"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "early_termination_notice",
+      "id": "4064548f-2bd5-46a9-8c32-dff1b4df368b",
+      "links": {
+        "self": {
+          "href": "https://www.ftc.gov/v0/hsr-early-termination-notices/4064548f-2bd5-46a9-8c32-dff1b4df368b?resourceVersion=id%3A444031"
+        },
+        "working-copy": {
+          "href": "https://www.ftc.gov/v0/hsr-early-termination-notices/4064548f-2bd5-46a9-8c32-dff1b4df368b?resourceVersion=rel%3Aworking-copy"
+        }
+      },
+      "attributes": {
+        "title": "20262332: Crane Company; FR Industrials Opportunities Fund, L.P.",
+        "created": "2026-10-07T13:22:12+00:00",
+        "updated": "2026-10-07T13:22:12+00:00",
+        "acquired-party": "FR Industrials Opportunities Fund, L.P.",
+        "acquiring-party": "Crane Company",
+        "date": "2026-10-05",
+        "acquired-entities": [
+          "FR Flow Control Pumps US Bidco, Inc."
+        ],
+        "transaction-number": "20262332"
+      },
+      "relationships": {
+        "node_type": {
+          "data": null,
+          "links": {
+            "self": {
+              "href": "https://www.ftc.gov/v0/hsr-early-termination-notices/4064548f-2bd5-46a9-8c32-dff1b4df368b/relationships/node_type?resourceVersion=id%3A444031"
+            }
+          }
+        },
+        "feeds_item": {
+          "data": [],
+          "links": {
+            "related": {
+              "href": "https://www.ftc.gov/v0/hsr-early-termination-notices/4064548f-2bd5-46a9-8c32-dff1b4df368b/feeds_item?resourceVersion=id%3A444031"
+            },
+            "self": {
+              "href": "https://www.ftc.gov/v0/hsr-early-termination-notices/4064548f-2bd5-46a9-8c32-dff1b4df368b/relationships/feeds_item?resourceVersion=id%3A444031"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "early_termination_notice",
+      "id": "9fb182bc-4804-4a10-821e-55dc8b7143f5",
+      "links": {
+        "self": {
+          "href": "https://www.ftc.gov/v0/hsr-early-termination-notices/9fb182bc-4804-4a10-821e-55dc8b7143f5?resourceVersion=id%3A444032"
+        },
+        "working-copy": {
+          "href": "https://www.ftc.gov/v0/hsr-early-termination-notices/9fb182bc-4804-4a10-821e-55dc8b7143f5?resourceVersion=rel%3Aworking-copy"
+        }
+      },
+      "attributes": {
+        "title": "20262333: KKR Core II Holding Company AIV LLC; A1 Garage Equity, LLC",
+        "created": "2026-10-07T13:22:12+00:00",
+        "updated": "2026-10-07T13:22:12+00:00",
+        "acquired-party": "A1 Garage Equity, LLC",
+        "acquiring-party": "KKR Core II Holding Company AIV LLC",
+        "date": "2026-10-05",
+        "acquired-entities": [
+          "A1 Garage Acquisition, LLC"
+        ],
+        "transaction-number": "20262333"
+      },
+      "relationships": {
+        "node_type": {
+          "data": null,
+          "links": {
+            "self": {
+              "href": "https://www.ftc.gov/v0/hsr-early-termination-notices/9fb182bc-4804-4a10-821e-55dc8b7143f5/relationships/node_type?resourceVersion=id%3A444032"
+            }
+          }
+        },
+        "feeds_item": {
+          "data": [],
+          "links": {
+            "related": {
+              "href": "https://www.ftc.gov/v0/hsr-early-termination-notices/9fb182bc-4804-4a10-821e-55dc8b7143f5/feeds_item?resourceVersion=id%3A444032"
+            },
+            "self": {
+              "href": "https://www.ftc.gov/v0/hsr-early-termination-notices/9fb182bc-4804-4a10-821e-55dc8b7143f5/relationships/feeds_item?resourceVersion=id%3A444032"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "meta": {
+    "count": 28158
+  },
+  "links": {
+    "last": {
+      "href": "https://www.ftc.gov/v0/hsr-early-termination-notices?page%5Boffset%5D=28155&page%5Blimit%5D=5&sort%5Bsort-created%5D%5Bpath%5D=created&sort%5Bsort-created%5D%5Bdirection%5D=DESC&sort%5Bc%5D%5Bdirection%5D=DESC&sort%5Bc%5D%5Blangcode%5D&sort%5Bc%5D%5Bpath%5D=created"
+    },
+    "next": {
+      "href": "https://www.ftc.gov/v0/hsr-early-termination-notices?page%5Boffset%5D=5&page%5Blimit%5D=5&sort%5Bsort-created%5D%5Bpath%5D=created&sort%5Bsort-created%5D%5Bdirection%5D=DESC&sort%5Bc%5D%5Bdirection%5D=DESC&sort%5Bc%5D%5Blangcode%5D&sort%5Bc%5D%5Bpath%5D=created"
+    },
+    "self": {
+      "href": "https://www.ftc.gov/v0/hsr-early-termination-notices?page%5Blimit%5D=5&sort%5Bc%5D%5Bdirection%5D=DESC&sort%5Bc%5D%5Bpath%5D=created"
+    }
+  }
+}

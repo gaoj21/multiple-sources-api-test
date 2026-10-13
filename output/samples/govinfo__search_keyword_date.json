@@ -1,0 +1,226 @@
+{
+  "count": 101,
+  "offsetMark": "AoJwoLqOxZUDOEZSLTIwMjUtMDMtMTItMjAyNS0wMzkzMQ==",
+  "results": [
+    {
+      "title": "Petition of EnCap Investments L.P., et al., To Reopen and Modify Order",
+      "packageId": "FR-2025-03-31",
+      "granuleId": "2025-05498",
+      "lastModified": "2025-09-22T21:42:27Z",
+      "governmentAuthor": [
+        "National Archives and Records Administration",
+        "Office of the Federal Register"
+      ],
+      "dateIssued": "2025-03-31",
+      "collectionCode": "FR",
+      "dateIngested": "2025-03-29",
+      "download": {
+        "premisLink": "https://api.govinfo.gov/packages/FR-2025-03-31/premis",
+        "txtLink": "https://api.govinfo.gov/packages/FR-2025-03-31/granules/2025-05498/htm",
+        "zipLink": "https://api.govinfo.gov/packages/FR-2025-03-31/zip",
+        "modsLink": "https://api.govinfo.gov/packages/FR-2025-03-31/granules/2025-05498/mods",
+        "pdfLink": "https://api.govinfo.gov/packages/FR-2025-03-31/granules/2025-05498/pdf"
+      },
+      "relatedLink": "https://api.govinfo.gov/related/2025-05498",
+      "resultLink": "https://api.govinfo.gov/packages/FR-2025-03-31/granules/2025-05498/summary"
+    },
+    {
+      "title": "Notice Pursuant to the National Cooperative Research and Production Act of 1993-MLCommons Association",
+      "packageId": "FR-2025-03-18",
+      "granuleId": "2025-04432",
+      "lastModified": "2025-09-23T02:53:27Z",
+      "governmentAuthor": [
+        "National Archives and Records Administration",
+        "Office of the Federal Register"
+      ],
+      "dateIssued": "2025-03-18",
+      "collectionCode": "FR",
+      "dateIngested": "2025-03-18",
+      "download": {
+        "premisLink": "https://api.govinfo.gov/packages/FR-2025-03-18/premis",
+        "txtLink": "https://api.govinfo.gov/packages/FR-2025-03-18/granules/2025-04432/htm",
+        "zipLink": "https://api.govinfo.gov/packages/FR-2025-03-18/zip",
+        "modsLink": "https://api.govinfo.gov/packages/FR-2025-03-18/granules/2025-04432/mods",
+        "pdfLink": "https://api.govinfo.gov/packages/FR-2025-03-18/granules/2025-04432/pdf"
+      },
+      "relatedLink": "https://api.govinfo.gov/related/2025-04432",
+      "resultLink": "https://api.govinfo.gov/packages/FR-2025-03-18/granules/2025-04432/summary"
+    },
+    {
+      "title": "Norfolk Southern Corporation and Norfolk Southern Railway Company-Acquisition of Control-Norfolk & Portsmouth Belt Line Railroad Company",
+      "packageId": "FR-2025-03-17",
+      "granuleId": "2025-04131",
+      "lastModified": "2025-09-23T02:53:25Z",
+      "governmentAuthor": [
+        "National Archives and Records Administration",
+        "Office of the Federal Register"
+      ],
+      "dateIssued": "2025-03-17",
+      "collectionCode": "FR",
+      "dateIngested": "2025-03-15",
+      "download": {
+        "premisLink": "https://api.govinfo.gov/packages/FR-2025-03-17/premis",
+        "txtLink": "https://api.govinfo.gov/packages/FR-2025-03-17/granules/2025-04131/htm",
+        "zipLink": "https://api.govinfo.gov/packages/FR-2025-03-17/zip",
+        "modsLink": "https://api.govinfo.gov/packages/FR-2025-03-17/granules/2025-04131/mods",
+        "pdfLink": "https://api.govinfo.gov/packages/FR-2025-03-17/granules/2025-04131/pdf"
+      },
+      "relatedLink": "https://api.govinfo.gov/related/2025-04131",
+      "resultLink": "https://api.govinfo.gov/packages/FR-2025-03-17/granules/2025-04131/summary"
+    },
+    {
+      "title": "Notice Pursuant to the National Cooperative Research and Production Act of 1993-National Spectrum Consortium, Inc.",
+      "packageId": "FR-2025-03-14",
+      "granuleId": "2025-04068",
+      "lastModified": "2025-09-23T02:53:13Z",
+      "governmentAuthor": [
+        "National Archives and Records Administration",
+        "Office of the Federal Register"
+      ],
+      "dateIssued": "2025-03-14",
+      "collectionCode": "FR",
+      "dateIngested": "2025-03-14",
+      "download": {
+        "premisLink": "https://api.govinfo.gov/packages/FR-2025-03-14/premis",
+        "txtLink": "https://api.govinfo.gov/packages/FR-2025-03-14/granules/2025-04068/htm",
+        "zipLink": "https://api.govinfo.gov/packages/FR-2025-03-14/zip",
+        "modsLink": "https://api.govinfo.gov/packages/FR-2025-03-14/granules/2025-04068/mods",
+        "pdfLink": "https://api.govinfo.gov/packages/FR-2025-03-14/granules/2025-04068/pdf"
+      },
+      "relatedLink": "https://api.govinfo.gov/related/2025-04068",
+      "resultLink": "https://api.govinfo.gov/packages/FR-2025-03-14/granules/2025-04068/summary"
+    },
+    {
+      "title": "Notice Pursuant to the National Cooperative Research and Production Act of 1993-UHD Alliance, Inc.",
+      "packageId": "FR-2025-03-14",
+      "granuleId": "2025-04067",
+      "lastModified": "2025-09-23T02:53:13Z",
+      "governmentAuthor": [
+        "National Archives and Records Administration",
+        "Office of the Federal Register"
+      ],
+      "dateIssued": "2025-03-14",
+      "collectionCode": "FR",
+      "dateIngested": "2025-03-14",
+      "download": {
+        "premisLink": "https://api.govinfo.gov/packages/FR-2025-03-14/premis",
+        "txtLink": "https://api.govinfo.gov/packages/FR-2025-03-14/granules/2025-04067/htm",
+        "zipLink": "https://api.govinfo.gov/packages/FR-2025-03-14/zip",
+        "modsLink": "https://api.govinfo.gov/packages/FR-2025-03-14/granules/2025-04067/mods",
+        "pdfLink": "https://api.govinfo.gov/packages/FR-2025-03-14/granules/2025-04067/pdf"
+      },
+      "relatedLink": "https://api.govinfo.gov/related/2025-04067",
+      "resultLink": "https://api.govinfo.gov/packages/FR-2025-03-14/granules/2025-04067/summary"
+    },
+    {
+      "title": "Notice Pursuant to the National Cooperative Research and Production Act of 1993-Undersea Technology Innovation Consortium",
+      "packageId": "FR-2025-03-14",
+      "granuleId": "2025-04065",
+      "lastModified": "2025-09-23T02:53:13Z",
+      "governmentAuthor": [
+        "National Archives and Records Administration",
+        "Office of the Federal Register"
+      ],
+      "dateIssued": "2025-03-14",
+      "collectionCode": "FR",
+      "dateIngested": "2025-03-14",
+      "download": {
+        "premisLink": "https://api.govinfo.gov/packages/FR-2025-03-14/premis",
+        "txtLink": "https://api.govinfo.gov/packages/FR-2025-03-14/granules/2025-04065/htm",
+        "zipLink": "https://api.govinfo.gov/packages/FR-2025-03-14/zip",
+        "modsLink": "https://api.govinfo.gov/packages/FR-2025-03-14/granules/2025-04065/mods",
+        "pdfLink": "https://api.govinfo.gov/packages/FR-2025-03-14/granules/2025-04065/pdf"
+      },
+      "relatedLink": "https://api.govinfo.gov/related/2025-04065",
+      "resultLink": "https://api.govinfo.gov/packages/FR-2025-03-14/granules/2025-04065/summary"
+    },
+    {
+      "title": "Notice Pursuant to the National Cooperative Research and Production Act of 1993-Cooperative Research Group Advanced Fluids for Electrified Vehicles 2",
+      "packageId": "FR-2025-03-14",
+      "granuleId": "2025-04063",
+      "lastModified": "2025-09-23T02:53:13Z",
+      "governmentAuthor": [
+        "National Archives and Records Administration",
+        "Office of the Federal Register"
+      ],
+      "dateIssued": "2025-03-14",
+      "collectionCode": "FR",
+      "dateIngested": "2025-03-14",
+      "download": {
+        "premisLink": "https://api.govinfo.gov/packages/FR-2025-03-14/premis",
+        "txtLink": "https://api.govinfo.gov/packages/FR-2025-03-14/granules/2025-04063/htm",
+        "zipLink": "https://api.govinfo.gov/packages/FR-2025-03-14/zip",
+        "modsLink": "https://api.govinfo.gov/packages/FR-2025-03-14/granules/2025-04063/mods",
+        "pdfLink": "https://api.govinfo.gov/packages/FR-2025-03-14/granules/2025-04063/pdf"
+      },
+      "relatedLink": "https://api.govinfo.gov/related/2025-04063",
+      "resultLink": "https://api.govinfo.gov/packages/FR-2025-03-14/granules/2025-04063/summary"
+    },
+    {
+      "title": "Submission for OMB Review; Certain Federal Acquisition Regulation Part 9 Requirements",
+      "packageId": "FR-2025-03-13",
+      "granuleId": "2025-04004",
+      "lastModified": "2025-09-23T02:53:08Z",
+      "governmentAuthor": [
+        "National Archives and Records Administration",
+        "Office of the Federal Register"
+      ],
+      "dateIssued": "2025-03-13",
+      "collectionCode": "FR",
+      "dateIngested": "2025-03-13",
+      "download": {
+        "premisLink": "https://api.govinfo.gov/packages/FR-2025-03-13/premis",
+        "txtLink": "https://api.govinfo.gov/packages/FR-2025-03-13/granules/2025-04004/htm",
+        "zipLink": "https://api.govinfo.gov/packages/FR-2025-03-13/zip",
+        "modsLink": "https://api.govinfo.gov/packages/FR-2025-03-13/granules/2025-04004/mods",
+        "pdfLink": "https://api.govinfo.gov/packages/FR-2025-03-13/granules/2025-04004/pdf"
+      },
+      "relatedLink": "https://api.govinfo.gov/related/2025-04004",
+      "resultLink": "https://api.govinfo.gov/packages/FR-2025-03-13/granules/2025-04004/summary"
+    },
+    {
+      "title": "Review of Submarine Cable Landing License Rules and Procedures To Assess Evolving National Security, Law Enforcement, Foreign Policy, and Trade Policy Risks; Schedule of Application Fees",
+      "packageId": "FR-2025-03-13",
+      "granuleId": "2025-03718",
+      "lastModified": "2025-09-23T02:53:08Z",
+      "governmentAuthor": [
+        "National Archives and Records Administration",
+        "Office of the Federal Register"
+      ],
+      "dateIssued": "2025-03-13",
+      "collectionCode": "FR",
+      "dateIngested": "2025-03-13",
+      "download": {
+        "premisLink": "https://api.govinfo.gov/packages/FR-2025-03-13/premis",
+        "txtLink": "https://api.govinfo.gov/packages/FR-2025-03-13/granules/2025-03718/htm",
+        "zipLink": "https://api.govinfo.gov/packages/FR-2025-03-13/zip",
+        "modsLink": "https://api.govinfo.gov/packages/FR-2025-03-13/granules/2025-03718/mods",
+        "pdfLink": "https://api.govinfo.gov/packages/FR-2025-03-13/granules/2025-03718/pdf"
+      },
+      "relatedLink": "https://api.govinfo.gov/related/2025-03718",
+      "resultLink": "https://api.govinfo.gov/packages/FR-2025-03-13/granules/2025-03718/summary"
+    },
+    {
+      "title": "Jefferson Partners, L.P. dba Jefferson Lines-Acquisition of Control-Karst Stage, Inc.",
+      "packageId": "FR-2025-03-12",
+      "granuleId": "2025-03931",
+      "lastModified": "2025-09-23T02:53:05Z",
+      "governmentAuthor": [
+        "National Archives and Records Administration",
+        "Office of the Federal Register"
+      ],
+      "dateIssued": "2025-03-12",
+      "collectionCode": "FR",
+      "dateIngested": "2025-03-12",
+      "download": {
+        "premisLink": "https://api.govinfo.gov/packages/FR-2025-03-12/premis",
+        "txtLink": "https://api.govinfo.gov/packages/FR-2025-03-12/granules/2025-03931/htm",
+        "zipLink": "https://api.govinfo.gov/packages/FR-2025-03-12/zip",
+        "modsLink": "https://api.govinfo.gov/packages/FR-2025-03-12/granules/2025-03931/mods",
+        "pdfLink": "https://api.govinfo.gov/packages/FR-2025-03-12/granules/2025-03931/pdf"
+      },
+      "relatedLink": "https://api.govinfo.gov/related/2025-03931",
+      "resultLink": "https://api.govinfo.gov/packages/FR-2025-03-12/granules/2025-03931/summary"
+    }
+  ]
+}

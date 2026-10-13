@@ -1,0 +1,256 @@
+{
+  "collections": [
+    {
+      "collectionCode": "ANNUALREP",
+      "collectionName": "Annual Reports",
+      "packageCount": 3686,
+      "granuleCount": 2
+    },
+    {
+      "collectionCode": "BILLS",
+      "collectionName": "Congressional Bills",
+      "packageCount": 291730,
+      "granuleCount": null
+    },
+    {
+      "collectionCode": "BILLSTATUS",
+      "collectionName": "Congressional Bill Status",
+      "packageCount": 173374,
+      "granuleCount": null
+    },
+    {
+      "collectionCode": "BILLSUM",
+      "collectionName": "Congressional Bill Summaries",
+      "packageCount": 9716,
+      "granuleCount": null
+    },
+    {
+      "collectionCode": "BUDGET",
+      "collectionName": "United States Budget",
+      "packageCount": 459,
+      "granuleCount": 7172
+    },
+    {
+      "collectionCode": "CCAL",
+      "collectionName": "Congressional Calendars",
+      "packageCount": 6443,
+      "granuleCount": 101443
+    },
+    {
+      "collectionCode": "CDIR",
+      "collectionName": "Congressional Directory",
+      "packageCount": 239,
+      "granuleCount": 15024
+    },
+    {
+      "collectionCode": "CDOC",
+      "collectionName": "Congressional Documents",
+      "packageCount": 82392,
+      "granuleCount": 10068
+    },
+    {
+      "collectionCode": "CFR",
+      "collectionName": "Code of Federal Regulations",
+      "packageCount": 6668,
+      "granuleCount": 7850335
+    },
+    {
+      "collectionCode": "CHRG",
+      "collectionName": "Congressional Hearings",
+      "packageCount": 47877,
+      "granuleCount": 366
+    },
+    {
+      "collectionCode": "CMR",
+      "collectionName": "Congressionally Mandated Reports",
+      "packageCount": 1208,
+      "granuleCount": null
+    },
+    {
+      "collectionCode": "COMPS",
+      "collectionName": "Statutes Compilations",
+      "packageCount": 2708,
+      "granuleCount": null
+    },
+    {
+      "collectionCode": "CPD",
+      "collectionName": "Compilation of Presidential Documents",
+      "packageCount": 18616,
+      "granuleCount": 23012
+    },
+    {
+      "collectionCode": "CPRT",
+      "collectionName": "Congressional Committee Prints",
+      "packageCount": 7786,
+      "granuleCount": 1854
+    },
+    {
+      "collectionCode": "CREC",
+      "collectionName": "Congressional Record",
+      "packageCount": 6032,
+      "granuleCount": 914434
+    },
+    {
+      "collectionCode": "CRECB",
+      "collectionName": "Congressional Record (Bound Edition)",
+      "packageCount": 2421,
+      "granuleCount": 486157
+    },
+    {
+      "collectionCode": "CRI",
+      "collectionName": "Congressional Record Index",
+      "packageCount": 44,
+      "granuleCount": 643161
+    },
+    {
+      "collectionCode": "CRPT",
+      "collectionName": "Congressional Reports",
+      "packageCount": 162799,
+      "granuleCount": 589
+    },
+    {
+      "collectionCode": "CZIC",
+      "collectionName": "Coastal Zone Information Center",
+      "packageCount": 4887,
+      "granuleCount": null
+    },
+    {
+      "collectionCode": "ECFR",
+      "collectionName": "Electronic Code of Federal Regulations",
+      "packageCount": 49,
+      "granuleCount": null
+    },
+    {
+      "collectionCode": "ECONI",
+      "collectionName": "Economic Indicators",
+      "packageCount": 377,
+      "granuleCount": 18092
+    },
+    {
+      "collectionCode": "ERIC",
+      "collectionName": "Education Reports from ERIC",
+      "packageCount": 573,
+      "granuleCount": null
+    },
+    {
+      "collectionCode": "ERP",
+      "collectionName": "Economic Report of the President",
+      "packageCount": 80,
+      "granuleCount": 3040
+    },
+    {
+      "collectionCode": "FR",
+      "collectionName": "Federal Register",
+      "packageCount": 22823,
+      "granuleCount": 1012666
+    },
+    {
+      "collectionCode": "GAOREPORTS",
+      "collectionName": "Government Accountability Office Reports and Comptroller General Decisions",
+      "packageCount": 16569,
+      "granuleCount": null
+    },
+    {
+      "collectionCode": "GOVMAN",
+      "collectionName": "United States Government Manual",
+      "packageCount": 98,
+      "granuleCount": 5370
+    },
+    {
+      "collectionCode": "GOVPUB",
+      "collectionName": "Bulk Submission",
+      "packageCount": 138812,
+      "granuleCount": 325
+    },
+    {
+      "collectionCode": "GPO",
+      "collectionName": "Additional Government Publications",
+      "packageCount": 4347,
+      "granuleCount": 80562
+    },
+    {
+      "collectionCode": "HJOURNAL",
+      "collectionName": "Journal of the House of Representatives",
+      "packageCount": 155,
+      "granuleCount": 33948
+    },
+    {
+      "collectionCode": "HMAN",
+      "collectionName": "House Rules and Manual",
+      "packageCount": 25,
+      "granuleCount": 2282
+    },
+    {
+      "collectionCode": "HOB",
+      "collectionName": "History of Bills",
+      "packageCount": 44,
+      "granuleCount": 328390
+    },
+    {
+      "collectionCode": "LSA",
+      "collectionName": "List of CFR Sections Affected",
+      "packageCount": 360,
+      "granuleCount": 18658
+    },
+    {
+      "collectionCode": "PAI",
+      "collectionName": "Privacy Act Issuances",
+      "packageCount": 1686,
+      "granuleCount": null
+    },
+    {
+      "collectionCode": "PLAW",
+      "collectionName": "Public and Private Laws",
+      "packageCount": 6015,
+      "granuleCount": null
+    },
+    {
+      "collectionCode": "PPP",
+      "collectionName": "Public Papers of the Presidents of the United States",
+      "packageCount": 180,
+      "granuleCount": 24847
+    },
+    {
+      "collectionCode": "SERIALSET",
+      "collectionName": "Congressional Serial Set",
+      "packageCount": 233921,
+      "granuleCount": null
+    },
+    {
+      "collectionCode": "SJOURNAL",
+      "collectionName": "Journal of the Senate",
+      "packageCount": 178,
+      "granuleCount": null
+    },
+    {
+      "collectionCode": "SMAN",
+      "collectionName": "Senate Manual",
+      "packageCount": 23,
+      "granuleCount": 1386
+    },
+    {
+      "collectionCode": "STATUTE",
+      "collectionName": "Statutes at Large",
+      "packageCount": 138,
+      "granuleCount": 117217
+    },
+    {
+      "collectionCode": "USCODE",
+      "collectionName": "United States Code",
+      "packageCount": 1552,
+      "granuleCount": 2027914
+    },
+    {
+      "collectionCode": "USCOURTS",
+      "collectionName": "United States Courts Opinions",
+      "packageCount": 2176840,
+      "granuleCount": 4644964
+    },
+    {
+      "collectionCode": "USREPORTS",
+      "collectionName": "United States Reports",
+      "packageCount": 585,
+      "granuleCount": 37051
+    }
+  ]
+}

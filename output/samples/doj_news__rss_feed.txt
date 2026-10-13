@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0" xml:base="https://www.justice.gov/">
+  <channel>
+    <title>Justice News</title>
+    <link>https://www.justice.gov/</link>
+    <description/>
+    <language>en</language>
+    
+    <item>
+  <title>Justice Department Announces Charges Involving 16 Individuals for Election Crimes</title>
+  <link>https://www.justice.gov/opa/pr/justice-department-announces-charges-involving-16-individuals-election-crimes</link>
+  <description>Today the Justice Department announced charges involving 16 individuals, including an illegal alien, in connection with illegal voting, fraudulent voter registration, and related election crimes across the country. The cases include voting by aliens in federal elections, false claims of U.S. citizenship in order to register to vote or to vote, voting on behalf the deceased, voting multiple times in the same election, false statements on citizenship applications, and unlawful procurement of citizenship.</description>
+  <pubDate>Mon, 12 Oct 2026 12:00:00 +0000</pubDate>
+    <dc:creator/>
+    <guid isPermaLink="true">https://www.justice.gov/opa/pr/justice-department-announces-charges-involving-16-individuals-election-crimes</guid>
+    </item>
+<item>
+  <title>Homeland Security Task Force Arrests Alvaro Pulido Vargas to Face Charges in Multibillion-Dollar Venezuelan Money Laundering and Bribery Schemes</title>
+  <link>https://www.justice.gov/opa/pr/homeland-security-task-force-arrests-alvaro-pulido-vargas-face-charges-multibillion-dollar</link>
+  <description>A Colombian national charged in two separate federal indictments involving the alleged laundering of more than $2 billion in connection with Venezuelan government bribery schemes will make his initial appearance on the afternoon of Tuesday, October 13, in the Southern District of Florida to face federal prosecution.</description>
+  <pubDate>Sun, 11 Oct 2026 12:00:00 +0000</pubDate>
+    <dc:creator/>
+    <guid isPermaLink="true">https://www.justice.gov/opa/pr/homeland-security-task-force-arrests-alvaro-pulido-vargas-face-charges-multibillion-dollar</guid>
+    </item>
+<item>
+  <title>Homeland Security Task Force Arrests Alvaro Pulido Vargas to Face Charges in Multibillion-Dollar Venezuelan Money Laundering and Bribery Schemes</title>
+  <link>https://www.justice.gov/usao-sdfl/pr/homeland-security-task-force-arrests-alvaro-pulido-vargas-face-charges-multibillion</link>
+  <description>A Colombian national charged in two separate federal indictments involving the alleged laundering of more than $2 billion in connection with Venezuelan government bribery schemes will make his initial appearance on Tuesday, Oct. 13, in the Southern District of Florida to face federal prosecution.</description>
+  <pubDate>Sun, 11 Oct 2026 12:00:00 +0000</pubDate>
+    <dc:creator/>
+    <guid isPermaLink="true">https://www.justice.gov/usao-sdfl/pr/homeland-security-task-force-arrests-alvaro-pulido-vargas-face-charges-multibillion</guid>
+    </item>
+<item>
+  <title>Menands Man Sentenced to Nine Years’ Imprisonment for Child Pornography Offenses  </title>
+  <link>https://www.justice.gov/usao-ndny/pr/menands-man-sentenced-nine-years-imprisonment-child-pornography-offenses</link>
+  <description>Jonathan MacDonald, 33, of Menands, New York, was sentenced on October 2, 2026 by United States District Judge Anne M. Nardacci to 9 years’ imprisonment, followed by 15 years’ supervised release, for child pornography offenses.&amp;nbsp; First Assistant United States Attorney John A. Sarcone III and Craig L. Tremaroli, Special Agent in Charge of the Albany Field Office of the Federal Bureau of Investigation (FBI), made the announcement.</description>
+  <pubDate>Fri, 09 Oct 2026 12:00:00 +0000</pubDate>
+    <dc:creator/>
+    <guid isPermaLink="true">https://www.justice.gov/usao-ndny/pr/menands-man-sentenced-nine-years-imprisonment-child-pornography-offenses</guid>
+    </item>
+<item>
+  <title>Schoharie County Woman Sentenced for $200,000 Fraud</title>
+  <link>https://www.justice.gov/usao-ndny/pr/schoharie-county-woman-sentenced-200000-fraud</link>
+  <description>Sarah Blood, 44, of Richmondville, New York, was sentenced on September 29, 2026 by United States District Judge Anne M. Nardacci to 5 years’ probation, including 8 months’ home detention, for stealing over $200,000 from the State Agricultural and Rural Leaders, Inc. (SARL) between 2020 and 2023.&amp;nbsp; First Assistant United States Attorney John A. Sarcone III and Craig L. Tremaroli, Special Agent in Charge of the Albany Field Office of the Federal Bureau of Investigation (FBI), made the announcement.</description>
+  <pubDate>Fri, 09 Oct 2026 12:00:00 +0000</pubDate>
+    <dc:creator/>
+    <guid isPermaLink="true">https://www.justice.gov/usao-ndny/pr/schoharie-county-woman-sentenced-200000-fraud</guid>
+    </item>
+<item>
+  <title>North Hollywood Man Sentenced to Over 5 Years in Federal Prison for COVID-19 Fraud</title>
+  <link>https://www.justice.gov/usao-cdca/pr/north-hollywood-man-sentenced-over-5-years-federal-prison-covid-19-fraud</link>
+  <description>A North Hollywood man was sentenced today to 70 months in federal prison for his role in a series of fraud schemes that caused nearly $5 million in losses to federal COVID 19 relief and small business lending programs.</description>
+  <pubDate>Fri, 09 Oct 2026 12:00:00 +0000</pubDate>
+    <dc:creator/>
+    <guid isPermaLink="true">https://www.justice.gov/usao-cdca/pr/north-hollywood-man-sentenced-over-5-years-federal-prison-covid-19-fraud</guid>
+    </item>
+<item>
+  <title>Mexican National Arrested for Harboring Illegal Aliens</title>
+  <link>https://www.justice.gov/usao-az/pr/mexican-national-arrested-harboring-illegal-aliens</link>
+  <description>PHOENIX, Ariz. – Hector Ambrosio Ruiz, age 30, of Mexico, was arrested yesterday and charged by criminal complaint for Harboring Illegal Aliens.&amp;nbsp;</description>
+  <pubDate>Fri, 09 Oct 2026 12:00:00 +0000</pubDate>
+    <dc:creator/>
+    <guid isPermaLink="true">https://www.justice.gov/usao-az/pr/mexican-national-arrested-harboring-illegal-aliens</guid>
+    </item>
+<item>
+  <title>Santa Clarita Man Charged with Federal Arson Offense Alleging He Set Wildfire that Burned Over 1,000 Acres of National Forest Land</title>
+  <link>https://www.justice.gov/usao-cdca/pr/santa-clarita-man-charged-federal-arson-offense-alleging-he-set-wildfire-burned-over</link>
+  <description>A Santa Clarita man was charged today in a federal criminal complaint alleging he intentionally set a wildfire in the Angeles National Forest that burned more than 1,000 acres of federally owned land, the Justice Department announced.</description>
+  <pubDate>Fri, 09 Oct 2026 12:00:00 +0000</pubDate>
+    <dc:creator/>
+    <guid isPermaLink="true">https://www.justice.gov/usao-cdca/pr/santa-clarita-man-charged-federal-arson-offense-alleging-he-set-wildfire-burned-over</guid>
+    </item>
+<item>
+  <title>Tioga County Man Sentenced to 15 Years in Federal Prison for Sexual Exploitation of a Child and Transportation of Child Pornography</title>
+  <link>https://www.justice.gov/usao-ndny/pr/tioga-county-man-sentenced-15-years-federal-prison-sexual-exploitation-child-and</link>
+  <description>Tristan Kovacs, age 23, of Waverly, New York, was sentenced today to 15 years in federal prison for sexual exploitation a child and transportation of child pornography announced First Assistant United States Attorney John A. Sarcone III and Craig L. Tremaroli, Special Agent in Charge of the Albany Field Office of the Federal Bureau of Investigation (FBI). In addition to the term of imprisonment imposed, U.S. District Judge, Anthony J. Brindisi, also imposed a 15-year term of supervision which will begin after Kovacs is released from prison at which time Kovacs will also be required to register as a sex offender.&amp;nbsp;</description>
+  <pubDate>Fri, 09 Oct 2026 12:00:00 +0000</pubDate>
+    <dc:creator/>
+    <guid isPermaLink="true">https://www.justice.gov/usao-ndny/pr/tioga-county-man-sentenced-15-years-federal-prison-sexual-exploitation-child-and</guid>
+    </item>
+<item>
+  <title>Oneida County Man Sentenced for Possessing Child Pornography</title>
+  <link>https://www.justice.gov/usao-ndny/pr/oneida-county-man-sentenced-possessing-child-pornography-1</link>
+  <description>James Winston III, age 28, of Utica, New York, was sentenced yesterday to 60 months in federal prison for possession of child pornography announced First Assistant United States Attorney John A. Sarcone III and Craig L. Tremaroli, Special Agent in Charge of the Albany Field Office of the Federal Bureau of Investigation (FBI).</description>
+  <pubDate>Fri, 09 Oct 2026 12:00:00 +0000</pubDate>
+    <dc:creator/>
+    <guid isPermaLink="true">https://www.justice.gov/usao-ndny/pr/oneida-county-man-sentenced-possessing-child-pornography-1</guid>
+    </item>
+<item>
+  <title>Polish National Charged with Unlawfully Voting as an Alien</title>
+  <link>https://www.justice.gov/usao-hi/pr/polish-national-charged-unlawfully-voting-alien</link>
+  <description>HONOLULU – United States Attorney Ken Sorenson announced that Polish national Dawid Nalepa, 45, was charged yesterday by Information with unlawfully voting as an alien.</description>
+  <pubDate>Fri, 09 Oct 2026 12:00:00 +0000</pubDate>
+    <dc:creator/>
+    <guid isPermaLink="true">https://www.justice.gov/usao-hi/pr/polish-national-charged-unlawfully-voting-alien</guid>
+    </item>
+<item>
+  <title>Homeland Security Task Force Investigation Leads To Conviction of Albany Man For Crack Cocaine Sales</title>
+  <link>https://www.justice.gov/usao-ndny/pr/homeland-security-task-force-investigation-leads-conviction-albany-man-crack-cocaine</link>
+  <description>Kymere Thomas, 28, of Albany, New York, pled guilty before U.S. District Judge Anthony Brindisi on October 5, 2026, to distributing crack cocaine.&amp;nbsp; First Assistant United States Attorney John A. Sarcone III and Craig L. Tremaroli, Special Agent in Charge of the Albany Field Office of the Federal Bureau of Investigation (FBI), made the announcement.</description>
+  <pubDate>Fri, 09 Oct 2026 12:00:00 +0000</pubDate>
+    <dc:creator/>
+    <guid isPermaLink="true">https://www.justice.gov/usao-ndny/pr/homeland-security-task-force-investigation-leads-conviction-albany-man-crack-cocaine</guid>
+    </item>
+<item>
+  <title>Jefferson County Man Charged With Threatening FBI Agents When Agents Attempted to Interview Him About Disturbing Calls Made to a Jewish Charity Threatening to “…Put All the Jews in a Gas Chamber and Kill Them”</title>
+  <link>https://www.justice.gov/usao-ndny/pr/jefferson-county-man-charged-threatening-fbi-agents-when-agents-attempted-interview</link>
+  <description>Dylan Daniell, age 33, of La Fargeville, NY, was arraigned today October 9, 2026, at the federal courthouse in Syracuse, New York, before United States Magistrate Judge Mitchell J. Katz, after being charged by criminal complaint with threatening a federal law enforcement officer. He was ordered held in custody pending a detention hearing, which is scheduled for October 15, 2026. First Assistant United States Attorney John A. Sarcone III and Craig L. Tremaroli, Special Agent in Charge of the Albany Field Office of the Federal Bureau of Investigation (FBI) made the announcement.</description>
+  <pubDate>Fri, 09 Oct 2026 12:00:00 +0000</pubDate>
+    <dc:creator/>
+    <guid isPermaLink="true">https://www.justice.gov/usao-ndny/pr/jefferson-county-man-charged-threatening-fbi-agents-when-agents-attempted-interview</guid>
+    </item>
+<item>
+  <title>Wales murder investigation remains active some 25 years after fatal shooting</title>
+  <link>https://www.justice.gov/usao-wdwa/pr/wales-murder-investigation-remains-active-some-25-years-after-fatal-shooting</link>
+  <description>Seattle – Just days before the 25th anniversary of the unsolved murder of Assistant U.S. Attorney Thomas C. Wales, law enforcement leaders again urge members of the public to come forward if they have information that could help solve the case.&amp;nbsp;</description>
+  <pubDate>Fri, 09 Oct 2026 12:00:00 +0000</pubDate>
+    <dc:creator/>
+    <guid isPermaLink="true">https://www.justice.gov/usao-wdwa/pr/wales-murder-investigation-remains-active-some-25-years-after-fatal-shooting</guid>
+    </item>
+<item>
+  <title>Minnesota Man Sentenced to More Than 8 Years for Travelling to Engage in Sex With a Minor</title>
+  <link>https://www.justice.gov/usao-wdwi/pr/minnesota-man-sentenced-more-8-years-travelling-engage-sex-minor</link>
+  <description/>
+  <pubDate>Fri, 09 Oct 2026 12:00:00 +0000</pubDate>
+    <dc:creator/>
+    <guid isPermaLink="true">https://www.justice.gov/usao-wdwi/pr/minnesota-man-sentenced-more-8-years-travelling-engage-sex-minor</guid>
+    </item>
+<item>
+  <title>Previously Removed Illegal Alien Sentenced to 10 Years in Federal Prison for Methamphetamine Trafficking and Ammunition Offense</title>
+  <link>https://www.justice.gov/usao-cdca/pr/previously-removed-illegal-alien-sentenced-10-years-federal-prison-methamphetamine</link>
+  <description>A previously removed illegal alien was sentenced to 120 months in federal prison for possessing with intent to distribute methamphetamine, unlawfully possessing ammunition as a felon, and illegally reentering the United States after prior deportations.&amp;nbsp;</description>
+  <pubDate>Fri, 09 Oct 2026 12:00:00 +0000</pubDate>
+    <dc:creator/>
+    <guid isPermaLink="true">https://www.justice.gov/usao-cdca/pr/previously-removed-illegal-alien-sentenced-10-years-federal-prison-methamphetamine</guid>
+    </item>
+<item>
+  <title>Syracuse Man Charged With Receiving Child Pornography</title>
+  <link>https://www.justice.gov/usao-ndny/pr/syracuse-man-charged-receiving-child-pornography</link>
+  <description/>
+  <pubDate>Fri, 09 Oct 2026 12:00:00 +0000</pubDate>
+    <dc:creator/>
+    <guid isPermaLink="true">https://www.justice.gov/usao-ndny/pr/syracuse-man-charged-receiving-child-pornography</guid>
+    </item>
+<item>
+  <title>U.S. Attorney’s Office Filed 99 Border-Related Cases This Week</title>
+  <link>https://www.justice.gov/usao-sdca/pr/us-attorneys-office-filed-99-border-related-cases-week</link>
+  <description>SAN DIEGO - Federal prosecutors in the Southern District of California filed 99 border-related cases this week, including charges of bringing in aliens for financial gain, reentering the U.S. after deportation, and importation of controlled substances.</description>
+  <pubDate>Fri, 09 Oct 2026 12:00:00 +0000</pubDate>
+    <dc:creator/>
+    <guid isPermaLink="true">https://www.justice.gov/usao-sdca/pr/us-attorneys-office-filed-99-border-related-cases-week</guid>
+    </item>
+<item>
+  <title>Department of Justice Announces Federal Grants For Ulster and Clinton Counties</title>
+  <link>https://www.justice.gov/usao-ndny/pr/department-justice-announces-federal-grants-ulster-and-clinton-counties</link>
+  <description>On September 30, 2026, the counties of Ulster and Clinton received over $1 million in federal grants as part of the Byrne Discretionary Community Project Grants designed to improve the functioning of the criminal justice system announced First Assistant United States Attorney John A. Sarcone III, Ulster County Sheriff Juan Figueroa, and Clinton County Sheriff David Favro.</description>
+  <pubDate>Fri, 09 Oct 2026 12:00:00 +0000</pubDate>
+    <dc:creator/>
+    <guid isPermaLink="true">https://www.justice.gov/usao-ndny/pr/department-justice-announces-federal-grants-ulster-and-clinton-counties</guid>
+    </item>
+<item>
+  <title>Total of Four Defendants Plead Guilty in Connection with Widespread  Child Exploitation Conspiracy  </title>
+  <link>https://www.justice.gov/usao-ndny/pr/total-four-defendants-plead-guilty-connection-widespread-child-exploitation-conspiracy</link>
+  <description>Four defendants have now pled guilty in connection with a multi-jurisdictional child exploitation conspiracy that included the trafficking of child pornography produced during the conspiracy. First Assistant United States Attorney John A. Sarcone III, Homeland Security Investigations (HSI) Buffalo Acting Special Agent in Charge Anthony Patrone, and New York State Police (NYSP) Superintendent Steven G. James made the announcement.</description>
+  <pubDate>Fri, 09 Oct 2026 12:00:00 +0000</pubDate>
+    <dc:creator/>
+    <guid isPermaLink="true">https://www.justice.gov/usao-ndny/pr/total-four-defendants-plead-guilty-connection-widespread-child-exploitation-conspiracy</guid>
+    </item>
+<item>
+  <title>Former National Guard task force member sentenced for illegal firearm possession offenses that came to light during an investigation into leaks of sensitive operational information</title>
+  <link>https://www.justice.gov/usao-edca/pr/former-national-guard-task-force-member-sentenced-illegal-firearm-possession-offenses</link>
+  <description/>
+  <pubDate>Fri, 09 Oct 2026 12:00:00 +0000</pubDate>
+    <dc:creator/>
+    <guid isPermaLink="true">https://www.justice.gov/usao-edca/pr/former-national-guard-task-force-member-sentenced-illegal-firearm-possession-offenses</guid>
+    </item>
+<item>
+  <title>Jacksonville Man Sentenced to 12 Years in Prison for Distribution, Receipt, and Possession of Child Pornography </title>
+  <link>https://www.justice.gov/usao-cdil/pr/jacksonville-man-sentenced-12-years-prison-distribution-receipt-and-possession-child</link>
+  <description>A Jacksonville, Illinois, man, Daniel Brannan, 48, was sentenced last week to 12 years in prison, to be followed by a 10-year term of supervised release, for distribution, receipt, and possession of child pornography.&amp;nbsp;&amp;nbsp;</description>
+  <pubDate>Fri, 09 Oct 2026 12:00:00 +0000</pubDate>
+    <dc:creator/>
+    <guid isPermaLink="true">https://www.justice.gov/usao-cdil/pr/jacksonville-man-sentenced-12-years-prison-distribution-receipt-and-possession-child</guid>
+    </item>
+<item>
+  <title>Four Additional Defendants Plead Guilty in Gun Trafficking Conspiracy</title>
+  <link>https://www.justice.gov/usao-nh/pr/four-additional-defendants-plead-guilty-gun-trafficking-conspiracy</link>
+  <description/>
+  <pubDate>Fri, 09 Oct 2026 12:00:00 +0000</pubDate>
+    <dc:creator/>
+    <guid isPermaLink="true">https://www.justice.gov/usao-nh/pr/four-additional-defendants-plead-guilty-gun-trafficking-conspiracy</guid>
+    </item>
+<item>
+  <title>District of Arizona Charges 345 Individuals for Immigration-Related Criminal Conduct this Week</title>
+  <link>https://www.justice.gov/usao-az/pr/district-arizona-charges-345-individuals-immigration-related-criminal-conduct-week</link>
+  <description>PHOENIX, Ariz. – During the week of enforcement operations from Oct. 3 through Oct. 9, 2026, the U.S. Attorney’s Office for the District of Arizona brought immigration-related criminal charges against 345 individuals.&amp;nbsp;</description>
+  <pubDate>Fri, 09 Oct 2026 12:00:00 +0000</pubDate>
+    <dc:creator/>
+    <guid isPermaLink="true">https://www.justice.gov/usao-az/pr/district-arizona-charges-345-individuals-immigration-related-criminal-conduct-week</guid>
+    </item>
+<item>
+  <title>Shelbyville Man Pleads Guilty to Receipt of Child Sexual Abuse Material and Other Charges</title>
+  <link>https://www.justice.gov/usao-edky/pr/shelbyville-man-pleads-guilty-receipt-child-sexual-abuse-material-and-other-charges</link>
+  <description/>
+  <pubDate>Fri, 09 Oct 2026 12:00:00 +0000</pubDate>
+    <dc:creator/>
+    <guid isPermaLink="true">https://www.justice.gov/usao-edky/pr/shelbyville-man-pleads-guilty-receipt-child-sexual-abuse-material-and-other-charges</guid>
+    </item>
+
+  </channel>
+</rss>

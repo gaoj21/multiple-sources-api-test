@@ -1,0 +1,284 @@
+{
+  "totalRecords": 4,
+  "limit": 10,
+  "offset": 0,
+  "opportunitiesData": [
+    {
+      "active": "Yes",
+      "additionalInfoLink": null,
+      "archiveDate": "2026-10-30",
+      "archiveType": "auto30",
+      "award": {
+        "date": "2026-09-30",
+        "number": "NNG15SD74B"
+      },
+      "baseType": "Justification",
+      "classificationCode": "DJ10",
+      "description": "https://api.sam.gov/prod/opportunities/v1/noticedesc?noticeid=9e82b958b14348de96dd28419b096057",
+      "fullParentPathCode": "097.97F1.HQ0516",
+      "fullParentPathName": "DEPT OF DEFENSE.DEFENSE MEDIA ACTIVITY (DMA).HQ DEFENSE MEDIA ACTIVITY",
+      "links": [
+        {
+          "rel": "self",
+          "href": "https://api.sam.gov/prod/opportunities/v2/search?noticeid=9e82b958b14348de96dd28419b096057&limit=1"
+        }
+      ],
+      "naicsCode": "541519",
+      "naicsCodes": [
+        "541519"
+      ],
+      "noticeId": "9e82b958b14348de96dd28419b096057",
+      "officeAddress": {
+        "zipcode": "20755",
+        "city": "FORT MEADE",
+        "countryCode": "USA",
+        "state": "MD"
+      },
+      "organizationType": "OFFICE",
+      "placeOfPerformance": {
+        "city": {
+          "code": "0",
+          "name": "0"
+        },
+        "state": {
+          "code": "MD",
+          "name": "Maryland"
+        },
+        "zip": "20755",
+        "country": {
+          "code": "USA",
+          "name": "UNITED STATES"
+        }
+      },
+      "pointOfContact": [
+        {
+          "fax": "",
+          "type": "primary",
+          "email": "shawnte.l.miles.civ@mail.mil",
+          "phone": "4434220679",
+          "fullName": "Shawnte L. Miles (Contract Specialist)"
+        }
+      ],
+      "postedDate": "2026-09-30",
+      "resourceLinks": [
+        "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/dff8ebc0004b4148aef11ebbac90b5ee/download"
+      ],
+      "responseDeadLine": null,
+      "solicitationNumber": "26-1046",
+      "title": "SteelCloud Cybersecurity Software",
+      "type": "Justification",
+      "typeOfSetAside": null,
+      "typeOfSetAsideDescription": null,
+      "uiLink": "https://sam.gov/workspace/contract/opp/9e82b958b14348de96dd28419b096057/view"
+    },
+    {
+      "active": "Yes",
+      "additionalInfoLink": null,
+      "archiveDate": "2026-10-30",
+      "archiveType": "auto30",
+      "award": {
+        "date": "2026-09-30",
+        "number": "NNG15SD72B"
+      },
+      "baseType": "Justification",
+      "classificationCode": "DJ10",
+      "description": "https://api.sam.gov/prod/opportunities/v1/noticedesc?noticeid=9815d372e25a4fdea6e7386b59edf744",
+      "fullParentPathCode": "069.6925.693JJ3",
+      "fullParentPathName": "TRANSPORTATION, DEPARTMENT OF.FEDERAL HIGHWAY ADMINISTRATION.693JJ3 ACQUISITION AND GRANTS MGT",
+      "links": [
+        {
+          "rel": "self",
+          "href": "https://api.sam.gov/prod/opportunities/v2/search?noticeid=9815d372e25a4fdea6e7386b59edf744&limit=1"
+        }
+      ],
+      "naicsCode": "541519",
+      "naicsCodes": [
+        "541519"
+      ],
+      "noticeId": "9815d372e25a4fdea6e7386b59edf744",
+      "officeAddress": {
+        "zipcode": "20590",
+        "city": "WASHINGTON",
+        "countryCode": "USA",
+        "state": "DC"
+      },
+      "organizationType": "OFFICE",
+      "placeOfPerformance": {
+        "city": {
+          "code": "50000",
+          "name": "Washington"
+        },
+        "state": {
+          "code": "DC",
+          "name": "District of Columbia"
+        },
+        "zip": "20590",
+        "country": {
+          "code": "USA",
+          "name": "UNITED STATES"
+        }
+      },
+      "pointOfContact": [
+        {
+          "type": "primary",
+          "email": "kyle.griggs@dot.gov",
+          "fullName": "Griggs, Kyle"
+        }
+      ],
+      "postedDate": "2026-09-30",
+      "resourceLinks": [
+        "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/f91f58120f9149f8809a428007ed6060/download"
+      ],
+      "responseDeadLine": null,
+      "solicitationNumber": "693JJ126F00015N_P00001",
+      "title": "Logical Follow-on Justification for Palo Alto Unit 42 Cybersecurity",
+      "type": "Justification",
+      "typeOfSetAside": null,
+      "typeOfSetAsideDescription": null,
+      "uiLink": "https://sam.gov/workspace/contract/opp/9815d372e25a4fdea6e7386b59edf744/view"
+    },
+    {
+      "active": "Yes",
+      "additionalInfoLink": null,
+      "archiveDate": "2026-10-29",
+      "archiveType": "autocustom",
+      "award": {
+        "date": "2026-09-28",
+        "number": "693JJ126F00118N",
+        "amount": "758088.88",
+        "awardee": {
+          "name": "CRITERION SYSTEMS, L.L.C.",
+          "location": {
+            "city": {
+              "name": "Mclean"
+            },
+            "state": {
+              "code": "VA",
+              "name": "Virginia"
+            },
+            "zip": "22102",
+            "country": {
+              "code": "USA",
+              "name": "UNITED STATES"
+            }
+          }
+        }
+      },
+      "baseType": "Award Notice",
+      "classificationCode": "DJ01",
+      "description": "https://api.sam.gov/prod/opportunities/v1/noticedesc?noticeid=a5607e32b8fb483fb3f9018cdcb5d2dc",
+      "fullParentPathCode": "069.6925.693JJ3",
+      "fullParentPathName": "TRANSPORTATION, DEPARTMENT OF.FEDERAL HIGHWAY ADMINISTRATION.693JJ3 ACQUISITION AND GRANTS MGT",
+      "links": [
+        {
+          "rel": "self",
+          "href": "https://api.sam.gov/prod/opportunities/v2/search?noticeid=a5607e32b8fb483fb3f9018cdcb5d2dc&limit=1"
+        }
+      ],
+      "naicsCode": "541519",
+      "naicsCodes": [
+        "541519"
+      ],
+      "noticeId": "a5607e32b8fb483fb3f9018cdcb5d2dc",
+      "officeAddress": {
+        "zipcode": "20590",
+        "city": "WASHINGTON",
+        "countryCode": "USA",
+        "state": "DC"
+      },
+      "organizationType": "OFFICE",
+      "placeOfPerformance": {
+        "country": {
+          "code": "USA",
+          "name": "UNITED STATES"
+        }
+      },
+      "pointOfContact": null,
+      "postedDate": "2026-09-29",
+      "resourceLinks": [
+        "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/0e9f760988fd40d6b80baf9edbf9a3ab/download"
+      ],
+      "responseDeadLine": null,
+      "solicitationNumber": "693JJ126F00118N",
+      "title": "Cybersecurity Managment Support Services",
+      "type": "Award Notice",
+      "typeOfSetAside": null,
+      "typeOfSetAsideDescription": null,
+      "uiLink": "https://sam.gov/workspace/contract/opp/a5607e32b8fb483fb3f9018cdcb5d2dc/view"
+    },
+    {
+      "active": "Yes",
+      "additionalInfoLink": null,
+      "archiveDate": "2026-10-28",
+      "archiveType": "auto30",
+      "award": {
+        "date": "2026-09-21",
+        "number": "75N98119D00077"
+      },
+      "baseType": "Justification",
+      "classificationCode": "DJ01",
+      "description": "https://api.sam.gov/prod/opportunities/v1/noticedesc?noticeid=1b321c983bf041e88f0ba5aeea4e65b3",
+      "fullParentPathCode": "069.6901.6913G6",
+      "fullParentPathName": "TRANSPORTATION, DEPARTMENT OF.OFFICE OF THE SECRETARY.6913G6 VOLPE NATL TRANS SYS CNTR",
+      "links": [
+        {
+          "rel": "self",
+          "href": "https://api.sam.gov/prod/opportunities/v2/search?noticeid=1b321c983bf041e88f0ba5aeea4e65b3&limit=1"
+        }
+      ],
+      "naicsCode": "541512",
+      "naicsCodes": [
+        "541512"
+      ],
+      "noticeId": "1b321c983bf041e88f0ba5aeea4e65b3",
+      "officeAddress": {
+        "zipcode": "02142",
+        "city": "CAMBRIDGE",
+        "countryCode": "USA",
+        "state": "MA"
+      },
+      "organizationType": "OFFICE",
+      "placeOfPerformance": {
+        "city": {
+          "code": "70450",
+          "name": "Savage"
+        },
+        "state": {
+          "code": "MD",
+          "name": "Maryland"
+        },
+        "zip": "20763",
+        "country": {
+          "code": "USA",
+          "name": "UNITED STATES"
+        }
+      },
+      "pointOfContact": [
+        {
+          "fax": "",
+          "type": "primary",
+          "email": "christopher.dooley@dot.gov",
+          "phone": "",
+          "fullName": "Christopher Dooley"
+        }
+      ],
+      "postedDate": "2026-09-28",
+      "resourceLinks": [
+        "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/9c34a697c0b34ebc9db07a9b09bc2577/download"
+      ],
+      "responseDeadLine": null,
+      "solicitationNumber": "6913G626Q300048 ",
+      "title": "Cybersecurity Assessment Services Justification for an exception to fair opportunity",
+      "type": "Justification",
+      "typeOfSetAside": null,
+      "typeOfSetAsideDescription": null,
+      "uiLink": "https://sam.gov/workspace/contract/opp/1b321c983bf041e88f0ba5aeea4e65b3/view"
+    }
+  ],
+  "links": [
+    {
+      "rel": "self",
+      "href": "https://api.sam.gov/prod/opportunities/v2/search?limit=10&postedFrom=09%2F01%2F2026&postedTo=09%2F30%2F2026&title=cybersecurity"
+    }
+  ]
+}

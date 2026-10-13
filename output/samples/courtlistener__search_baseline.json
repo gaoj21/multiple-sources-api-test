@@ -1,0 +1,1387 @@
+{
+  "count": 8332113,
+  "next": "https://www.courtlistener.com/api/rest/v4/search/?cursor=cz0xNzkxNTA0MDAwMDAwJnM9MTEwMzIwMTcmdD1vJmQ9MjAyNi0xMC0xMiZwPTI%3D&order_by=dateFiled+desc&type=o",
+  "previous": null,
+  "results": [
+    {
+      "absolute_url": "/opinion/11032004/people-of-michigan-v-jimmy-lee-fuller/",
+      "attorney": "",
+      "caseName": "People of Michigan v. Jimmy Lee Fuller",
+      "caseNameFull": "",
+      "citation": [],
+      "citeCount": 0,
+      "cluster_id": 11032004,
+      "court": "Michigan Court of Appeals",
+      "court_citation_string": "Mich. Ct. App.",
+      "court_id": "michctapp",
+      "court_jurisdiction": "SA",
+      "dateArgued": null,
+      "dateFiled": "2026-10-12",
+      "dateReargued": null,
+      "dateReargumentDenied": null,
+      "docketNumber": "372013",
+      "docket_id": 74951954,
+      "judge": "",
+      "lexisCite": "",
+      "meta": {
+        "timestamp": "2026-10-13T05:06:18.978150Z",
+        "date_created": "2026-10-13T05:06:18.884487Z",
+        "score": {
+          "bm25": null
+        }
+      },
+      "neutralCite": "",
+      "non_participating_judge_ids": [],
+      "opinions": [
+        {
+          "author_id": null,
+          "cites": [
+            1703326,
+            1965715,
+            2231025,
+            2710721,
+            3219544,
+            3491018,
+            4199156,
+            7961197,
+            7961323,
+            7961770,
+            9424967,
+            9433597,
+            9433986,
+            9502979,
+            9503841,
+            9504189,
+            9504698,
+            9516082,
+            9521585,
+            9657831,
+            9669839,
+            9671432,
+            9673138,
+            9677570,
+            9715547,
+            9721444,
+            9737652,
+            9738916,
+            9742562,
+            9873152,
+            10145967
+          ],
+          "download_url": "https://www.courts.michigan.gov/4a8dcd/siteassets/case-documents/uploads/opinions/final/coa/20261012_c372013_90_372013.opn.pdf",
+          "id": 11499694,
+          "joined_by_ids": [],
+          "local_path": "pdf/2026/10/12/people_of_michigan_v._jimmy_lee_fuller.pdf",
+          "meta": {
+            "timestamp": "2026-10-13T05:08:52.497687Z",
+            "date_created": "2026-10-13T05:06:18.889204Z"
+          },
+          "ordering_key": null,
+          "per_curiam": false,
+          "sha1": "2cebecfffd1d07142d2cb34fcc3d9e400eeae0bf",
+          "snippet": "            If this opinion indicates that it is “FOR PUBLICATION,” it is subject to\n                 revision until final publication in the Michigan Appeals Reports.\n\n\n\n\n                           STATE OF MICHIGAN\n\n                            COURT OF APPEALS\n\n\nPEOPLE OF THE STATE OF MICHIGAN,                                     FOR PUBLICATION\n                                                                     October 12, 2026\n               Plaintiff-Appellee,                              ",
+          "type": "lead-opinion"
+        }
+      ],
+      "panel_ids": [],
+      "panel_names": [],
+      "posture": "",
+      "procedural_history": "",
+      "scdb_id": "",
+      "sibling_ids": [
+        11499694
+      ],
+      "source": "C",
+      "status": "Published",
+      "suitNature": "",
+      "syllabus": ""
+    },
+    {
+      "absolute_url": "/opinion/11032001/robert-davis-v-secretary-of-state/",
+      "attorney": "",
+      "caseName": "Robert Davis v. Secretary of State",
+      "caseNameFull": "",
+      "citation": [],
+      "citeCount": 0,
+      "cluster_id": 11032001,
+      "court": "Michigan Court of Appeals",
+      "court_citation_string": "Mich. Ct. App.",
+      "court_id": "michctapp",
+      "court_jurisdiction": "SA",
+      "dateArgued": null,
+      "dateFiled": "2026-10-12",
+      "dateReargued": null,
+      "dateReargumentDenied": null,
+      "docketNumber": "380990",
+      "docket_id": 74951951,
+      "judge": "",
+      "lexisCite": "",
+      "meta": {
+        "timestamp": "2026-10-13T05:06:15.845552Z",
+        "date_created": "2026-10-13T05:06:15.750264Z",
+        "score": {
+          "bm25": null
+        }
+      },
+      "neutralCite": "",
+      "non_participating_judge_ids": [],
+      "opinions": [
+        {
+          "author_id": null,
+          "cites": [
+            1788189,
+            1963180,
+            3214533,
+            9503171,
+            9504751,
+            9845171
+          ],
+          "download_url": "https://www.courts.michigan.gov/4a8d80/siteassets/case-documents/uploads/opinions/final/coa/20261012_c380990_43_380990.opn.pdf",
+          "id": 11499691,
+          "joined_by_ids": [],
+          "local_path": "pdf/2026/10/12/robert_davis_v._secretary_of_state.pdf",
+          "meta": {
+            "timestamp": "2026-10-13T05:08:49.808247Z",
+            "date_created": "2026-10-13T05:06:15.760533Z"
+          },
+          "ordering_key": null,
+          "per_curiam": false,
+          "sha1": "209049aee0309e16667bdd838a499364499f9968",
+          "snippet": "            If this opinion indicates that it is “FOR PUBLICATION,” it is subject to\n                 revision until final publication in the Michigan Appeals Reports.\n\n\n\n\n                          STATE OF MICHIGAN\n\n                            COURT OF APPEALS\n\n\nROBERT DAVIS,                                                        FOR PUBLICATION\n                                                                     October 12, 2026\n               Plaintiff-Appellant,                              ",
+          "type": "lead-opinion"
+        }
+      ],
+      "panel_ids": [],
+      "panel_names": [],
+      "posture": "",
+      "procedural_history": "",
+      "scdb_id": "",
+      "sibling_ids": [
+        11499691
+      ],
+      "source": "C",
+      "status": "Published",
+      "suitNature": "",
+      "syllabus": ""
+    },
+    {
+      "absolute_url": "/opinion/11031998/maclary-v-james-malin-plumbing/",
+      "attorney": "",
+      "caseName": "Maclary v. James Malin Plumbing",
+      "caseNameFull": "",
+      "citation": [],
+      "citeCount": 0,
+      "cluster_id": 11031998,
+      "court": "Superior Court of Delaware",
+      "court_citation_string": "Del. Super. Ct.",
+      "court_id": "delsuperct",
+      "court_jurisdiction": "SA",
+      "dateArgued": null,
+      "dateFiled": "2026-10-12",
+      "dateReargued": null,
+      "dateReargumentDenied": null,
+      "docketNumber": "N24A-07-002 DJB",
+      "docket_id": 71196183,
+      "judge": "",
+      "lexisCite": "",
+      "meta": {
+        "timestamp": "2026-10-13T00:03:34.259525Z",
+        "date_created": "2026-10-13T00:03:33.857000Z",
+        "score": {
+          "bm25": null
+        }
+      },
+      "neutralCite": "",
+      "non_participating_judge_ids": [],
+      "opinions": [
+        {
+          "author_id": null,
+          "cites": [
+            1969455,
+            2395273,
+            5178936
+          ],
+          "download_url": "https://courts.delaware.gov/opinions/download.aspx?id=402060",
+          "id": 11499688,
+          "joined_by_ids": [],
+          "local_path": "pdf/2026/10/12/maclary_v._james_malin_plumbing.pdf",
+          "meta": {
+            "timestamp": "2026-10-13T00:04:03.758196Z",
+            "date_created": "2026-10-13T00:03:34.018397Z"
+          },
+          "ordering_key": null,
+          "per_curiam": false,
+          "sha1": "5325bfd1ddd30fd352d052d08949bcfd4e01335f",
+          "snippet": "       IN THE SUPERIOR COURT OF THE STATE OF DELAWARE\n\n\nTHOMAS MACLARY,                        )\n                                       )\n      Claimant-Below / Appellant,      )\n                                       )      C.A. No. N24A-07-002 DJB\n                   v.                  )\n                                       )\nJAMES MALIN PLUMBING,                  )\n    Employer-Below / Appellee.         )\n\n                           Date Submitted: July 8, 2026\n                          Dat",
+          "type": "combined-opinion"
+        }
+      ],
+      "panel_ids": [],
+      "panel_names": [],
+      "posture": "",
+      "procedural_history": "",
+      "scdb_id": "",
+      "sibling_ids": [
+        11499688
+      ],
+      "source": "C",
+      "status": "Published",
+      "suitNature": "",
+      "syllabus": ""
+    },
+    {
+      "absolute_url": "/opinion/11031995/state-v-magazu/",
+      "attorney": "",
+      "caseName": "State v. Magazu",
+      "caseNameFull": "",
+      "citation": [],
+      "citeCount": 0,
+      "cluster_id": 11031995,
+      "court": "Hawaii Supreme Court",
+      "court_citation_string": "Haw.",
+      "court_id": "haw",
+      "court_jurisdiction": "S",
+      "dateArgued": null,
+      "dateFiled": "2026-10-12",
+      "dateReargued": null,
+      "dateReargumentDenied": null,
+      "docketNumber": "SCWC-26-0000219",
+      "docket_id": 74951223,
+      "judge": "",
+      "lexisCite": "",
+      "meta": {
+        "timestamp": "2026-10-12T23:09:07.371933Z",
+        "date_created": "2026-10-12T23:09:07.238308Z",
+        "score": {
+          "bm25": null
+        }
+      },
+      "neutralCite": "",
+      "non_participating_judge_ids": [],
+      "opinions": [
+        {
+          "author_id": null,
+          "cites": [],
+          "download_url": "https://www.courts.state.hi.us/wp-content/uploads/2026/10/SCWC-26-0000219certrej.pdf",
+          "id": 11499685,
+          "joined_by_ids": [],
+          "local_path": "pdf/2026/10/12/state_v._magazu.pdf",
+          "meta": {
+            "timestamp": "2026-10-12T23:09:50.653735Z",
+            "date_created": "2026-10-12T23:09:07.244009Z"
+          },
+          "ordering_key": null,
+          "per_curiam": false,
+          "sha1": "7fb3672e5a91dfa4c1503a1c34e18b7e21c7af50",
+          "snippet": "                                                        Electronically Filed\n                                                        Supreme Court\n                                                        SCWC-XX-XXXXXXX\n                                                        12-OCT-2026\n                                                        12:24 PM\n                                                        Dkt. 7 ODAC\n\n\n                          SCWC-XX-XXXXXXX\n\n          IN THE SUPREME COURT OF T",
+          "type": "combined-opinion"
+        }
+      ],
+      "panel_ids": [],
+      "panel_names": [],
+      "posture": "",
+      "procedural_history": "",
+      "scdb_id": "",
+      "sibling_ids": [
+        11499685
+      ],
+      "source": "C",
+      "status": "Published",
+      "suitNature": "",
+      "syllabus": ""
+    },
+    {
+      "absolute_url": "/opinion/11031981/people-v-super-ct/",
+      "attorney": "",
+      "caseName": "People v. Super. Ct.",
+      "caseNameFull": "",
+      "citation": [],
+      "citeCount": 0,
+      "cluster_id": 11031981,
+      "court": "California Court of Appeal",
+      "court_citation_string": "Cal. Ct. App.",
+      "court_id": "calctapp",
+      "court_jurisdiction": "SA",
+      "dateArgued": null,
+      "dateFiled": "2026-10-12",
+      "dateReargued": null,
+      "dateReargumentDenied": null,
+      "docketNumber": "E087702",
+      "docket_id": 74951209,
+      "judge": "",
+      "lexisCite": "",
+      "meta": {
+        "timestamp": "2026-10-12T23:06:48.595605Z",
+        "date_created": "2026-10-12T23:06:48.512114Z",
+        "score": {
+          "bm25": null
+        }
+      },
+      "neutralCite": "",
+      "non_participating_judge_ids": [],
+      "opinions": [
+        {
+          "author_id": null,
+          "cites": [
+            1235563,
+            2274004,
+            4706396,
+            9728903
+          ],
+          "download_url": "https://www.courts.ca.gov/opinions/documents/E087702.PDF",
+          "id": 11499671,
+          "joined_by_ids": [],
+          "local_path": "pdf/2026/10/12/people_v._super._ct..pdf",
+          "meta": {
+            "timestamp": "2026-10-12T23:07:01.276683Z",
+            "date_created": "2026-10-12T23:06:48.518359Z"
+          },
+          "ordering_key": null,
+          "per_curiam": false,
+          "sha1": "34dba9245c7508fee7df6d5a809cc08d8c81f8c2",
+          "snippet": "Filed 10/12/26\n\n\n\n                            CERTIFIED FOR PUBLICATION\n\n           IN THE COURT OF APPEAL OF THE STATE OF CALIFORNIA\n\n                           FOURTH APPELLATE DISTRICT\n\n                                    DIVISION TWO\n\n\n\n THE PEOPLE,\n\n         Petitioner,                                E087702\n\n v.                                                 (Super.Ct.No. RIF111066)\n\n THE SUPERIOR COURT OF                              OPINION\n RIVERSIDE COUNTY,\n\n         Respondent;\n\n CHR",
+          "type": "combined-opinion"
+        }
+      ],
+      "panel_ids": [],
+      "panel_names": [],
+      "posture": "",
+      "procedural_history": "",
+      "scdb_id": "",
+      "sibling_ids": [
+        11499671
+      ],
+      "source": "C",
+      "status": "Published",
+      "suitNature": "",
+      "syllabus": ""
+    },
+    {
+      "absolute_url": "/opinion/11031980/people-v-centeno/",
+      "attorney": "",
+      "caseName": "People v. Centeno",
+      "caseNameFull": "",
+      "citation": [],
+      "citeCount": 0,
+      "cluster_id": 11031980,
+      "court": "California Court of Appeal",
+      "court_citation_string": "Cal. Ct. App.",
+      "court_id": "calctapp",
+      "court_jurisdiction": "SA",
+      "dateArgued": null,
+      "dateFiled": "2026-10-12",
+      "dateReargued": null,
+      "dateReargumentDenied": null,
+      "docketNumber": "A171308M",
+      "docket_id": 74951208,
+      "judge": "",
+      "lexisCite": "",
+      "meta": {
+        "timestamp": "2026-10-12T23:04:51.665036Z",
+        "date_created": "2026-10-12T23:04:51.129594Z",
+        "score": {
+          "bm25": null
+        }
+      },
+      "neutralCite": "",
+      "non_participating_judge_ids": [],
+      "opinions": [
+        {
+          "author_id": null,
+          "cites": [
+            844274,
+            1175653,
+            1190808,
+            1288088,
+            1387168,
+            1446760,
+            2152110,
+            2255940,
+            2265590,
+            2267094,
+            2274479,
+            2300367,
+            2521268,
+            2590164,
+            2598797,
+            3169847,
+            4032236,
+            4346560,
+            4409582,
+            4464608,
+            4503065,
+            5667130,
+            6107004,
+            9559873,
+            9786104,
+            9788908,
+            9793484
+          ],
+          "download_url": "https://www.courts.ca.gov/opinions/documents/A171308M.PDF",
+          "id": 11499670,
+          "joined_by_ids": [],
+          "local_path": "pdf/2026/10/12/people_v._centeno.pdf",
+          "meta": {
+            "timestamp": "2026-10-12T23:06:31.740030Z",
+            "date_created": "2026-10-12T23:04:51.291298Z"
+          },
+          "ordering_key": null,
+          "per_curiam": false,
+          "sha1": "30af742f975ddf770cdbba46905c86320dcd1f52",
+          "snippet": "Filed 10/12/26 (unmodified opn. attached)\n                  CERTIFIED FOR PARTIAL PUBLICATION*\n\n       IN THE COURT OF APPEAL OF THE STATE OF CALIFORNIA\n\n                             FIRST APPELLATE DISTRICT\n\n                                     DIVISION THREE\n\n\n THE PEOPLE,\n        Plaintiff and Respondent,               A171308\n\n v.                                             (Sonoma County\n JOSE ANTHONY CENTENO,                          Super. Ct. No. SCR-740196-2)\n        Defendant and Appel",
+          "type": "combined-opinion"
+        }
+      ],
+      "panel_ids": [],
+      "panel_names": [],
+      "posture": "",
+      "procedural_history": "",
+      "scdb_id": "",
+      "sibling_ids": [
+        11499670
+      ],
+      "source": "C",
+      "status": "Published",
+      "suitNature": "",
+      "syllabus": ""
+    },
+    {
+      "absolute_url": "/opinion/11031975/andrew-radulescu-et-ano-v-portsmith-apartments-llc/",
+      "attorney": "",
+      "caseName": "Andrew Radulescu Et Ano, V. Portsmith Apartments Llc",
+      "caseNameFull": "",
+      "citation": [],
+      "citeCount": 0,
+      "cluster_id": 11031975,
+      "court": "Court of Appeals of Washington",
+      "court_citation_string": "Wash. Ct. App.",
+      "court_id": "washctapp",
+      "court_jurisdiction": "SA",
+      "dateArgued": null,
+      "dateFiled": "2026-10-12",
+      "dateReargued": null,
+      "dateReargumentDenied": null,
+      "docketNumber": "87987-1",
+      "docket_id": 74950859,
+      "judge": "",
+      "lexisCite": "",
+      "meta": {
+        "timestamp": "2026-10-12T21:19:46.264214Z",
+        "date_created": "2026-10-12T21:19:46.158754Z",
+        "score": {
+          "bm25": null
+        }
+      },
+      "neutralCite": "",
+      "non_participating_judge_ids": [],
+      "opinions": [
+        {
+          "author_id": null,
+          "cites": [
+            1348708,
+            2335712,
+            2612148,
+            2624899,
+            2628146,
+            4712204,
+            4716582,
+            4752612,
+            4764674
+          ],
+          "download_url": "https://www.courts.wa.gov/opinions/pdf/879871.pdf",
+          "id": 11499665,
+          "joined_by_ids": [],
+          "local_path": "pdf/2026/10/12/andrew_radulescu_et_ano_v._portsmith_apartments_llc.pdf",
+          "meta": {
+            "timestamp": "2026-10-12T21:20:02.830657Z",
+            "date_created": "2026-10-12T21:19:46.162020Z"
+          },
+          "ordering_key": null,
+          "per_curiam": false,
+          "sha1": "b847894a80a74aa2ed0727ece19bced61bebfdfc",
+          "snippet": "IN THE COURT OF APPEALS OF THE STATE OF WASHINGTON\n\n ANDREW RADULESCU and JUSTIN\n GREEN, each individually and on                 No. 87987-1-I\n behalf of all others similarly situated,\n                                                 DIVISION ONE\n               Respondents,\n                                                 PUBLISHED OPINION\n               v.\n\n WEST COAST SECURITY, a Nevada\n corporation; WEST COAST\n SECURITY CONCEPTS INC., a\n Nevada corporation; ANTHONY\n LOMBARDI, individually an",
+          "type": "lead-opinion"
+        }
+      ],
+      "panel_ids": [],
+      "panel_names": [],
+      "posture": "",
+      "procedural_history": "",
+      "scdb_id": "",
+      "sibling_ids": [
+        11499665
+      ],
+      "source": "C",
+      "status": "Published",
+      "suitNature": "",
+      "syllabus": ""
+    },
+    {
+      "absolute_url": "/opinion/11031974/geoff-minor-v-mark-kimball/",
+      "attorney": "",
+      "caseName": "Geoff Minor, V. Mark Kimball",
+      "caseNameFull": "",
+      "citation": [],
+      "citeCount": 0,
+      "cluster_id": 11031974,
+      "court": "Court of Appeals of Washington",
+      "court_citation_string": "Wash. Ct. App.",
+      "court_id": "washctapp",
+      "court_jurisdiction": "SA",
+      "dateArgued": null,
+      "dateFiled": "2026-10-12",
+      "dateReargued": null,
+      "dateReargumentDenied": null,
+      "docketNumber": "88718-1",
+      "docket_id": 73677401,
+      "judge": "",
+      "lexisCite": "",
+      "meta": {
+        "timestamp": "2026-10-12T21:19:44.794298Z",
+        "date_created": "2026-10-12T21:19:44.627402Z",
+        "score": {
+          "bm25": null
+        }
+      },
+      "neutralCite": "",
+      "non_participating_judge_ids": [],
+      "opinions": [
+        {
+          "author_id": null,
+          "cites": [
+            1162803,
+            1176252,
+            1427947,
+            1435640,
+            2451576,
+            2548664,
+            2588192,
+            2598191,
+            4664903,
+            4710729,
+            4714933,
+            4716267,
+            4741478,
+            4745404,
+            4750244,
+            6914143
+          ],
+          "download_url": "https://www.courts.wa.gov/opinions/pdf/887181 orderpubopin.pdf",
+          "id": 11499664,
+          "joined_by_ids": [],
+          "local_path": "pdf/2026/10/12/geoff_minor_v._mark_kimball.pdf",
+          "meta": {
+            "timestamp": "2026-10-12T21:20:32.321102Z",
+            "date_created": "2026-10-12T21:19:44.662442Z"
+          },
+          "ordering_key": null,
+          "per_curiam": false,
+          "sha1": "e524738fed1d77a941215e7a885050ff2d2a9187",
+          "snippet": "      IN THE COURT OF APPEALS OF THE STATE OF WASHINGTON\n                         DIVISIONE ONE\n\n\nGEOFF MINOR, an individual; and                     No. 88718-1-I\nMINOR ENTERPRISES, LLC, d/b/a The\nMetal Shop Gold & Silver, a Washington       ORDER GRANTING MOTION\nLimited Liability Company,                   TO PUBLISH OPINION\n\n                           Appellants,\n\n             v.\n\nMARK KIMBALL, an individual; and\nMDK LAW, a Washington Limited\nLiability Company,\n\n                           Res",
+          "type": "combined-opinion"
+        }
+      ],
+      "panel_ids": [],
+      "panel_names": [],
+      "posture": "",
+      "procedural_history": "",
+      "scdb_id": "",
+      "sibling_ids": [
+        11499664
+      ],
+      "source": "C",
+      "status": "Published",
+      "suitNature": "",
+      "syllabus": ""
+    },
+    {
+      "absolute_url": "/opinion/11031973/state-v-alday-morales/",
+      "attorney": "",
+      "caseName": "State v. Alday-Morales",
+      "caseNameFull": "",
+      "citation": [],
+      "citeCount": 0,
+      "cluster_id": 11031973,
+      "court": "Hawaii Intermediate Court of Appeals",
+      "court_citation_string": "Haw. App.",
+      "court_id": "hawapp",
+      "court_jurisdiction": "SA",
+      "dateArgued": null,
+      "dateFiled": "2026-10-12",
+      "dateReargued": null,
+      "dateReargumentDenied": null,
+      "docketNumber": "CAAP-25-0000823",
+      "docket_id": 74832335,
+      "judge": "",
+      "lexisCite": "",
+      "meta": {
+        "timestamp": "2026-10-12T21:05:35.822616Z",
+        "date_created": "2026-10-12T21:05:35.685237Z",
+        "score": {
+          "bm25": null
+        }
+      },
+      "neutralCite": "",
+      "non_participating_judge_ids": [],
+      "opinions": [
+        {
+          "author_id": null,
+          "cites": [
+            1133612,
+            4503120
+          ],
+          "download_url": "https://www.courts.state.hi.us/wp-content/uploads/2026/10/CAAP-25-0000823recond.pdf",
+          "id": 11499663,
+          "joined_by_ids": [],
+          "local_path": "pdf/2026/10/12/state_v._alday-morales.pdf",
+          "meta": {
+            "timestamp": "2026-10-12T21:05:41.388433Z",
+            "date_created": "2026-10-12T21:05:35.709815Z"
+          },
+          "ordering_key": null,
+          "per_curiam": false,
+          "sha1": "783d584e5209e942e4de1dd3ac8e1b76c1ad1ba5",
+          "snippet": "  NOT FOR PUBLICATION IN WEST'S HAWAIʻI REPORTS AND PACIFIC REPORTER\n\n\n\n                                            Electronically Filed\n                                            Intermediate Court of Appeals\n                                            CAAP-XX-XXXXXXX\n                                            12-OCT-2026\n                                            10:09 AM\n                                            Dkt. 52 ODMR\n\n\n\n\n                        NO. CAAP-XX-XXXXXXX\n\n\n             ",
+          "type": "combined-opinion"
+        }
+      ],
+      "panel_ids": [],
+      "panel_names": [],
+      "posture": "",
+      "procedural_history": "",
+      "scdb_id": "",
+      "sibling_ids": [
+        11499663
+      ],
+      "source": "C",
+      "status": "Published",
+      "suitNature": "",
+      "syllabus": ""
+    },
+    {
+      "absolute_url": "/opinion/11031972/forian-holdings-llc-v-symphony-health-solutions-corporation/",
+      "attorney": "",
+      "caseName": "Forian Holdings LLC v. Symphony Health Solutions Corporation",
+      "caseNameFull": "",
+      "citation": [],
+      "citeCount": 0,
+      "cluster_id": 11031972,
+      "court": "Court of Chancery of Delaware",
+      "court_citation_string": "Del. Ch.",
+      "court_id": "delch",
+      "court_jurisdiction": "SA",
+      "dateArgued": null,
+      "dateFiled": "2026-10-12",
+      "dateReargued": null,
+      "dateReargumentDenied": null,
+      "docketNumber": "2026-0686-LWW",
+      "docket_id": 73495501,
+      "judge": "",
+      "lexisCite": "",
+      "meta": {
+        "timestamp": "2026-10-12T21:04:05.913167Z",
+        "date_created": "2026-10-12T21:04:05.766762Z",
+        "score": {
+          "bm25": null
+        }
+      },
+      "neutralCite": "",
+      "non_participating_judge_ids": [],
+      "opinions": [
+        {
+          "author_id": null,
+          "cites": [
+            767394,
+            2445928
+          ],
+          "download_url": "https://courts.delaware.gov/opinions/download.aspx?id=402070",
+          "id": 11499662,
+          "joined_by_ids": [],
+          "local_path": "pdf/2026/10/12/forian_holdings_llc_v._symphony_health_solutions_corporation.pdf",
+          "meta": {
+            "timestamp": "2026-10-12T21:04:10.459143Z",
+            "date_created": "2026-10-12T21:04:05.775620Z"
+          },
+          "ordering_key": null,
+          "per_curiam": false,
+          "sha1": "1e08672a37ec9904a2d895b84db9c6709cd7ea39",
+          "snippet": "                               COURT OF CHANCERY\n                                     OF THE\n                               STATE OF DELAWARE\n\n         LORI W. WILL                                    LEONARD L. WILLIAMS JUSTICE CENTER\n       VICE CHANCELLOR                                     500 N. KING STREET, SUITE 11400\n                                                          WILMINGTON, DELAWARE 19801-3734\n\n\n\n                                    October 12, 2026\n\nMichael A. Barlow, Esquire ",
+          "type": "combined-opinion"
+        }
+      ],
+      "panel_ids": [],
+      "panel_names": [],
+      "posture": "",
+      "procedural_history": "",
+      "scdb_id": "",
+      "sibling_ids": [
+        11499662
+      ],
+      "source": "C",
+      "status": "Published",
+      "suitNature": "",
+      "syllabus": ""
+    },
+    {
+      "absolute_url": "/opinion/11031971/crouch-v-bowser/",
+      "attorney": "",
+      "caseName": "Crouch v. Bowser",
+      "caseNameFull": "",
+      "citation": [],
+      "citeCount": 0,
+      "cluster_id": 11031971,
+      "court": "District Court, District of Columbia",
+      "court_citation_string": "D.D.C.",
+      "court_id": "dcd",
+      "court_jurisdiction": "FD",
+      "dateArgued": null,
+      "dateFiled": "2026-10-12",
+      "dateReargued": null,
+      "dateReargumentDenied": null,
+      "docketNumber": "Civil Action No. 2025-2212",
+      "docket_id": 73318095,
+      "judge": "Judge Randolph D. Moss",
+      "lexisCite": "",
+      "meta": {
+        "timestamp": "2026-10-12T21:02:11.224315Z",
+        "date_created": "2026-10-12T21:02:10.029987Z",
+        "score": {
+          "bm25": null
+        }
+      },
+      "neutralCite": "",
+      "non_participating_judge_ids": [],
+      "opinions": [
+        {
+          "author_id": 2334,
+          "cites": [
+            487109,
+            2517522,
+            4113784,
+            4191618,
+            7237288
+          ],
+          "download_url": "https://ecf.dcd.uscourts.gov/cgi-bin/show_public_doc?2025cv2212-21",
+          "id": 11499661,
+          "joined_by_ids": [],
+          "local_path": "pdf/2026/10/12/crouch_v._bowser.pdf",
+          "meta": {
+            "timestamp": "2026-10-12T21:03:04.081095Z",
+            "date_created": "2026-10-12T21:02:10.638415Z"
+          },
+          "ordering_key": null,
+          "per_curiam": false,
+          "sha1": "dd811503bea9178a348800a37ed99bcd6ed35479",
+          "snippet": "                             UNITED STATES DISTRICT COURT\n                             FOR THE DISTRICT OF COLUMBIA\n\n\n NELSON F. CROUCH,\n\n                Plaintiff,\n                                                              Case No. 1:25-2212 (RDM)\n        v.\n\n UNITED STATES DEPARTMENT OF\n JUSTICE,\n\n                 Defendant.\n\n\n                                  MEMORANDUM OPINION\n\n       Plaintiff Nelson Crouch, proceeding pro se, brings this action against Muriel Bowser in\n\nher official cap",
+          "type": "combined-opinion"
+        }
+      ],
+      "panel_ids": [],
+      "panel_names": [],
+      "posture": "",
+      "procedural_history": "",
+      "scdb_id": "",
+      "sibling_ids": [
+        11499661
+      ],
+      "source": "C",
+      "status": "Published",
+      "suitNature": "",
+      "syllabus": ""
+    },
+    {
+      "absolute_url": "/opinion/11031970/kr-v-super-ct/",
+      "attorney": "",
+      "caseName": "K.R. v. Super. Ct.",
+      "caseNameFull": "",
+      "citation": [],
+      "citeCount": 0,
+      "cluster_id": 11031970,
+      "court": "California Court of Appeal",
+      "court_citation_string": "Cal. Ct. App.",
+      "court_id": "calctapp",
+      "court_jurisdiction": "SA",
+      "dateArgued": null,
+      "dateFiled": "2026-10-12",
+      "dateReargued": null,
+      "dateReargumentDenied": null,
+      "docketNumber": "D088471",
+      "docket_id": 74950538,
+      "judge": "",
+      "lexisCite": "",
+      "meta": {
+        "timestamp": "2026-10-12T20:03:32.331095Z",
+        "date_created": "2026-10-12T20:03:31.831754Z",
+        "score": {
+          "bm25": null
+        }
+      },
+      "neutralCite": "",
+      "non_participating_judge_ids": [],
+      "opinions": [
+        {
+          "author_id": null,
+          "cites": [
+            854388,
+            2147527,
+            2269935,
+            2282126,
+            3200871,
+            5665419,
+            9862518
+          ],
+          "download_url": "https://www.courts.ca.gov/opinions/documents/D088471.PDF",
+          "id": 11499660,
+          "joined_by_ids": [],
+          "local_path": "pdf/2026/10/12/k.r._v._super._ct..pdf",
+          "meta": {
+            "timestamp": "2026-10-12T20:04:12.226363Z",
+            "date_created": "2026-10-12T20:03:31.987651Z"
+          },
+          "ordering_key": null,
+          "per_curiam": false,
+          "sha1": "bae84a56a8bef845e16307243b02ae9c72a5567a",
+          "snippet": "Filed 10/12/26\n\n\n\n                 CERTIFIED FOR PARTIAL PUBLICATION*\n\n            COURT OF APPEAL, FOURTH APPELLATE DISTRICT\n\n\n                                 DIVISION ONE\n\n                           STATE OF CALIFORNIA\n\n\n\nK.R. et al.,                             D088471\n\n       Petitioners,                      (San Diego County\n                                         Super. Ct. No. J521474A-B)\n       v.\n\nTHE SUPERIOR COURT OF SAN\nDIEGO COUNTY,\n\n       Respondent;\n\n\nSAN DIEGO COUNTY HEALTH\nA",
+          "type": "combined-opinion"
+        }
+      ],
+      "panel_ids": [],
+      "panel_names": [],
+      "posture": "",
+      "procedural_history": "",
+      "scdb_id": "",
+      "sibling_ids": [
+        11499660
+      ],
+      "source": "C",
+      "status": "Published",
+      "suitNature": "",
+      "syllabus": ""
+    },
+    {
+      "absolute_url": "/opinion/11031965/state-v-bekkum/",
+      "attorney": "",
+      "caseName": "State v. Bekkum",
+      "caseNameFull": "",
+      "citation": [],
+      "citeCount": 0,
+      "cluster_id": 11031965,
+      "court": "Hawaii Intermediate Court of Appeals",
+      "court_citation_string": "Haw. App.",
+      "court_id": "hawapp",
+      "court_jurisdiction": "SA",
+      "dateArgued": null,
+      "dateFiled": "2026-10-12",
+      "dateReargued": null,
+      "dateReargumentDenied": null,
+      "docketNumber": "CAAP-22-0000698",
+      "docket_id": 70532636,
+      "judge": "",
+      "lexisCite": "",
+      "meta": {
+        "timestamp": "2026-10-12T19:10:25.940314Z",
+        "date_created": "2026-10-12T19:10:24.538668Z",
+        "score": {
+          "bm25": null
+        }
+      },
+      "neutralCite": "",
+      "non_participating_judge_ids": [],
+      "opinions": [
+        {
+          "author_id": null,
+          "cites": [
+            1119472,
+            1210526,
+            1226379,
+            2625903,
+            2638813,
+            4290183,
+            4455019,
+            4541428,
+            4541777,
+            4880444,
+            9782381,
+            9798575,
+            10589524
+          ],
+          "download_url": "https://www.courts.state.hi.us/wp-content/uploads/2026/10/CAAP-22-0000698sdo.pdf",
+          "id": 11499655,
+          "joined_by_ids": [],
+          "local_path": "pdf/2026/10/12/state_v._bekkum_1.pdf",
+          "meta": {
+            "timestamp": "2026-10-12T19:11:01.920602Z",
+            "date_created": "2026-10-12T19:10:24.544162Z"
+          },
+          "ordering_key": null,
+          "per_curiam": false,
+          "sha1": "4cf599ffe408dc61da72958514269a98348acd61",
+          "snippet": "  NOT FOR PUBLICATION IN WEST'S HAWAI#I REPORTS AND PACIFIC REPORTER\n\n\n\n\n                                                        Electronically Filed\n                                                        Intermediate Court of Appeals\n                                                        CAAP-XX-XXXXXXX\n                                                        12-OCT-2026\n                                                        07:59 AM\n                                                        Dkt",
+          "type": "combined-opinion"
+        }
+      ],
+      "panel_ids": [],
+      "panel_names": [],
+      "posture": "",
+      "procedural_history": "",
+      "scdb_id": "",
+      "sibling_ids": [
+        11499655,
+        11499644
+      ],
+      "source": "C",
+      "status": "Published",
+      "suitNature": "",
+      "syllabus": ""
+    },
+    {
+      "absolute_url": "/opinion/11031953/bates-v-administrative-director-of-the-courts/",
+      "attorney": "",
+      "caseName": "Bates v. Administrative Director of the Courts",
+      "caseNameFull": "",
+      "citation": [],
+      "citeCount": 0,
+      "cluster_id": 11031953,
+      "court": "Hawaii Supreme Court",
+      "court_citation_string": "Haw.",
+      "court_id": "haw",
+      "court_jurisdiction": "S",
+      "dateArgued": null,
+      "dateFiled": "2026-10-12",
+      "dateReargued": null,
+      "dateReargumentDenied": null,
+      "docketNumber": "SCWC-24-0000827",
+      "docket_id": 74950203,
+      "judge": "",
+      "lexisCite": "",
+      "meta": {
+        "timestamp": "2026-10-12T18:03:58.232410Z",
+        "date_created": "2026-10-12T18:03:57.879920Z",
+        "score": {
+          "bm25": null
+        }
+      },
+      "neutralCite": "",
+      "non_participating_judge_ids": [],
+      "opinions": [
+        {
+          "author_id": null,
+          "cites": [],
+          "download_url": "https://www.courts.state.hi.us/wp-content/uploads/2026/10/SCWC-24-0000827certacc.pdf",
+          "id": 11499643,
+          "joined_by_ids": [],
+          "local_path": "pdf/2026/10/12/bates_v._administrative_director_of_the_courts.pdf",
+          "meta": {
+            "timestamp": "2026-10-12T18:21:46.221143Z",
+            "date_created": "2026-10-12T18:03:58.053795Z"
+          },
+          "ordering_key": null,
+          "per_curiam": false,
+          "sha1": "deaeeb2ebb2c74833ddc72efa1e83b3d118857cc",
+          "snippet": "                                                        Electronically Filed\n                                                        Supreme Court\n                                                        SCWC-XX-XXXXXXX\n                                                        12-OCT-2026\n                                                        07:48 AM\n                                                        Dkt. 23 OGAC\n\n\n                          SCWC-XX-XXXXXXX\n\n          IN THE SUPREME COURT OF ",
+          "type": "combined-opinion"
+        }
+      ],
+      "panel_ids": [],
+      "panel_names": [],
+      "posture": "",
+      "procedural_history": "",
+      "scdb_id": "",
+      "sibling_ids": [
+        11499643
+      ],
+      "source": "C",
+      "status": "Published",
+      "suitNature": "",
+      "syllabus": ""
+    },
+    {
+      "absolute_url": "/opinion/11031951/united-states-v-tekippe/",
+      "attorney": "",
+      "caseName": "United States v. Tekippe",
+      "caseNameFull": "",
+      "citation": [],
+      "citeCount": 0,
+      "cluster_id": 11031951,
+      "court": "Court of Appeals for the Fifth Circuit",
+      "court_citation_string": "5th Cir.",
+      "court_id": "ca5",
+      "court_jurisdiction": "F",
+      "dateArgued": "2026-09-01",
+      "dateFiled": "2026-10-12",
+      "dateReargued": null,
+      "dateReargumentDenied": null,
+      "docketNumber": "25-30528",
+      "docket_id": 74672806,
+      "judge": "",
+      "lexisCite": "",
+      "meta": {
+        "timestamp": "2026-10-12T18:00:29.893493Z",
+        "date_created": "2026-10-12T18:00:29.598048Z",
+        "score": {
+          "bm25": null
+        }
+      },
+      "neutralCite": "",
+      "non_participating_judge_ids": [],
+      "opinions": [
+        {
+          "author_id": null,
+          "cites": [
+            6290,
+            619051,
+            802374,
+            4013580,
+            4464648,
+            4581396,
+            7361221
+          ],
+          "download_url": "https://www.ca5.uscourts.gov/opinions/pub/25/25-30528-CR0.pdf",
+          "id": 11499641,
+          "joined_by_ids": [],
+          "local_path": "pdf/2026/10/12/united_states_v._tekippe.pdf",
+          "meta": {
+            "timestamp": "2026-10-12T18:01:09.453947Z",
+            "date_created": "2026-10-12T18:00:29.672530Z"
+          },
+          "ordering_key": null,
+          "per_curiam": false,
+          "sha1": "88487591698a34a71147552b20b8368354e141aa",
+          "snippet": " Case: 25-30528         Document: 73-1          Page: 1      Date Filed: 10/12/2026\n\n\n\n\n            United States Court of Appeals\n                 for the Fifth Circuit\n                                  ____________                              United States Court of Appeals\n                                                                                     Fifth Circuit\n\n                                                                                   FILED\n                                  ",
+          "type": "combined-opinion"
+        }
+      ],
+      "panel_ids": [],
+      "panel_names": [],
+      "posture": "",
+      "procedural_history": "",
+      "scdb_id": "",
+      "sibling_ids": [
+        11499641
+      ],
+      "source": "C",
+      "status": "Published",
+      "suitNature": "",
+      "syllabus": ""
+    },
+    {
+      "absolute_url": "/opinion/11031948/t-b-v-department-of-children-and-families-and-guardian-ad-litem/",
+      "attorney": "",
+      "caseName": "T. B. v. Department of Children and Families and Guardian Ad Litem",
+      "caseNameFull": "",
+      "citation": [],
+      "citeCount": 0,
+      "cluster_id": 11031948,
+      "court": "District Court of Appeal of Florida",
+      "court_citation_string": "Fla. Dist. Ct. App.",
+      "court_id": "fladistctapp",
+      "court_jurisdiction": "SA",
+      "dateArgued": null,
+      "dateFiled": "2026-10-12",
+      "dateReargued": null,
+      "dateReargumentDenied": null,
+      "docketNumber": "6D2026-0841",
+      "docket_id": 74949763,
+      "judge": "",
+      "lexisCite": "",
+      "meta": {
+        "timestamp": "2026-10-12T16:03:45.588441Z",
+        "date_created": "2026-10-12T16:03:18.611384Z",
+        "score": {
+          "bm25": null
+        }
+      },
+      "neutralCite": "",
+      "non_participating_judge_ids": [],
+      "opinions": [
+        {
+          "author_id": null,
+          "cites": [],
+          "download_url": "https://flcourts-media.flcourts.gov/content/download/2496561/opinion/Opinion_2026-0841.pdf",
+          "id": 11499638,
+          "joined_by_ids": [],
+          "local_path": "pdf/2026/10/12/t._b._v._department_of_children_and_families_and_guardian_ad_litem.pdf",
+          "meta": {
+            "timestamp": "2026-10-12T16:05:27.414532Z",
+            "date_created": "2026-10-12T16:03:18.617586Z"
+          },
+          "ordering_key": null,
+          "per_curiam": true,
+          "sha1": "8cb52b4dd08f281c6fcfdc411cfcae107fd6531b",
+          "snippet": "                       SIXTH DISTRICT COURT OF APPEAL\n                              STATE OF FLORIDA\n                             _____________________________\n\n                                  Case No. 6D2026-0841\n                            Lower Tribunal No. 2024-DP-000314\n                             _____________________________\n\n                           In the Interest of L.B. and A.B., children.\n\n                                             T.B.,\n\n                                      ",
+          "type": "combined-opinion"
+        }
+      ],
+      "panel_ids": [],
+      "panel_names": [],
+      "posture": "",
+      "procedural_history": "",
+      "scdb_id": "",
+      "sibling_ids": [
+        11499638
+      ],
+      "source": "C",
+      "status": "Published",
+      "suitNature": "",
+      "syllabus": ""
+    },
+    {
+      "absolute_url": "/opinion/11031905/people-of-guam-v-dj-tosiuo-aka-dj-peter-robert-tosiuo-aka-david-peter/",
+      "attorney": "",
+      "caseName": "People of Guam v. D.J. Tosiuo (aka DJ Peter Robert Tosiuo; aka David Peter Robert Tosiuo; aka D.J.R. Tosiuo; aka D.J. BJ Saki Prick from Barrigada)",
+      "caseNameFull": "",
+      "citation": [
+        "2026 Guam 12"
+      ],
+      "citeCount": 0,
+      "cluster_id": 11031905,
+      "court": "Supreme Court of Guam",
+      "court_citation_string": "Guam",
+      "court_id": "guam",
+      "court_jurisdiction": "TS",
+      "dateArgued": null,
+      "dateFiled": "2026-10-12",
+      "dateReargued": null,
+      "dateReargumentDenied": null,
+      "docketNumber": "CRA25-012",
+      "docket_id": 74949201,
+      "judge": "",
+      "lexisCite": "",
+      "meta": {
+        "timestamp": "2026-10-12T06:17:05.657180Z",
+        "date_created": "2026-10-12T06:17:05.246271Z",
+        "score": {
+          "bm25": null
+        }
+      },
+      "neutralCite": "",
+      "non_participating_judge_ids": [],
+      "opinions": [
+        {
+          "author_id": null,
+          "cites": [
+            791030,
+            1158261,
+            2258400,
+            4552809,
+            9725133
+          ],
+          "download_url": "https://guamcourts.gov/sites/default/files/SupremeCourtOpinions/2026%20Guam%2012.pdf",
+          "id": 11499595,
+          "joined_by_ids": [],
+          "local_path": "pdf/2026/10/12/people_of_guam_v._d.j._tosiuo_aka_dj_peter_robert_tosiuo_aka_david_peter.pdf",
+          "meta": {
+            "timestamp": "2026-10-12T06:17:37.586290Z",
+            "date_created": "2026-10-12T06:17:05.482365Z"
+          },
+          "ordering_key": null,
+          "per_curiam": false,
+          "sha1": "0d6a85de428cc2e094a35dfeebabc57ecb699490",
+          "snippet": "                                                                    !F iled\n                                                                    S premeCo rt ofG am C lerk of Co rt\n\n\n\n\n                         IN THE SUPREME COURT OF GUAM\n\n\n\n                                    PEOPLE OF GUAM,\n                                        Plaintiff-Appellee,\n\n                                                v.\n\n                                    D.J. TOSIUO\n             (aka DJ Peter Robert Tosiuo; aka ",
+          "type": "combined-opinion"
+        }
+      ],
+      "panel_ids": [],
+      "panel_names": [],
+      "posture": "",
+      "procedural_history": "",
+      "scdb_id": "",
+      "sibling_ids": [
+        11499595
+      ],
+      "source": "C",
+      "status": "Published",
+      "suitNature": "",
+      "syllabus": ""
+    },
+    {
+      "absolute_url": "/opinion/11026597/gakou-v-warden/",
+      "attorney": "",
+      "caseName": "Gakou v. Warden",
+      "caseNameFull": "",
+      "citation": [],
+      "citeCount": 0,
+      "cluster_id": 11026597,
+      "court": "Court of Appeals for the Fifth Circuit",
+      "court_citation_string": "5th Cir.",
+      "court_id": "ca5",
+      "court_jurisdiction": "F",
+      "dateArgued": null,
+      "dateFiled": "2026-10-10",
+      "dateReargued": null,
+      "dateReargumentDenied": null,
+      "docketNumber": "26-10925",
+      "docket_id": 74948684,
+      "judge": "",
+      "lexisCite": "",
+      "meta": {
+        "timestamp": "2026-10-10T21:02:34.507683Z",
+        "date_created": "2026-10-10T21:02:34.392925Z",
+        "score": {
+          "bm25": null
+        }
+      },
+      "neutralCite": "",
+      "non_participating_judge_ids": [],
+      "opinions": [
+        {
+          "author_id": null,
+          "cites": [
+            93510,
+            100967,
+            145884,
+            9413873,
+            9878291
+          ],
+          "download_url": "https://www.ca5.uscourts.gov/opinions/pub/26/26-10925-CV0.pdf",
+          "id": 11494284,
+          "joined_by_ids": [],
+          "local_path": "pdf/2026/10/10/gakou_v._warden.pdf",
+          "meta": {
+            "timestamp": "2026-10-10T21:03:04.677416Z",
+            "date_created": "2026-10-10T21:02:34.397292Z"
+          },
+          "ordering_key": null,
+          "per_curiam": false,
+          "sha1": "7f1443902464831e49779553af9e59bf0b3d34c6",
+          "snippet": "Case: 26-10925      Document: 31-2      Page: 1    Date Filed: 10/10/2026\n\n\n\n\n        United States Court of Appeals\n             for the Fifth Circuit                              United States Court of Appeals\n                           _____________                                 Fifth Circuit\n\n                                                                       FILED\n                             No. 26-10925                        October 10, 2026\n                           _____________ ",
+          "type": "combined-opinion"
+        }
+      ],
+      "panel_ids": [],
+      "panel_names": [],
+      "posture": "",
+      "procedural_history": "",
+      "scdb_id": "",
+      "sibling_ids": [
+        11494284
+      ],
+      "source": "C",
+      "status": "Published",
+      "suitNature": "",
+      "syllabus": ""
+    },
+    {
+      "absolute_url": "/opinion/11032018/in-re-meredith-johnson-v-the-state-of-texas/",
+      "attorney": "",
+      "caseName": "In Re Meredith Johnson v. the State of Texas",
+      "caseNameFull": "",
+      "citation": [],
+      "citeCount": 0,
+      "cluster_id": 11032018,
+      "court": "Texas Court of Appeals, 3rd District (Austin)",
+      "court_citation_string": "Tex. App.-Austin",
+      "court_id": "txctapp3",
+      "court_jurisdiction": "SA",
+      "dateArgued": null,
+      "dateFiled": "2026-10-09",
+      "dateReargued": null,
+      "dateReargumentDenied": null,
+      "docketNumber": "03-26-00730-CV",
+      "docket_id": 74039815,
+      "judge": "",
+      "lexisCite": "",
+      "meta": {
+        "timestamp": "2026-10-13T06:14:11.700972Z",
+        "date_created": "2026-10-13T06:14:11.569414Z",
+        "score": {
+          "bm25": null
+        }
+      },
+      "neutralCite": "",
+      "non_participating_judge_ids": [],
+      "opinions": [
+        {
+          "author_id": null,
+          "cites": [],
+          "download_url": "https://search.txcourts.gov/SearchMedia.aspx?MediaVersionID=2ef01b16-429f-4622-b7c9-f88781b08074&coa=coa03&DT=Opinion&MediaID=ca178fed-f1dd-4757-9313-dd41258bc0a7",
+          "id": 11499708,
+          "joined_by_ids": [],
+          "local_path": "pdf/2026/10/09/in_re_meredith_johnson_v._the_state_of_texas.pdf",
+          "meta": {
+            "timestamp": "2026-10-13T06:14:27.674961Z",
+            "date_created": "2026-10-13T06:14:11.573626Z"
+          },
+          "ordering_key": null,
+          "per_curiam": false,
+          "sha1": "11a4bbc15ca7a1cf3609464637d0a5c218c4627b",
+          "snippet": "       TEXAS COURT OF APPEALS, THIRD DISTRICT, AT AUSTIN\n\n\n                                    NO. 03-26-00730-CV\n\n\n\n\n                                   In re Meredith Johnson\n\n\n\n\n                 ORIGINAL PROCEEDING FROM WILLIAMSON COUNTY\n\n\n\n                           MEMORANDUM OPINION\n\n\n              The petition for writ of mandamus is denied. See Tex. R. App. P. 52.8(a).\n\n\n\n                                           __________________________________________\n                                ",
+          "type": "lead-opinion"
+        }
+      ],
+      "panel_ids": [],
+      "panel_names": [],
+      "posture": "",
+      "procedural_history": "",
+      "scdb_id": "",
+      "sibling_ids": [
+        11499708
+      ],
+      "source": "C",
+      "status": "Published",
+      "suitNature": "Mandamus",
+      "syllabus": ""
+    },
+    {
+      "absolute_url": "/opinion/11032017/in-re-omni-hotels-management-corporation-barton-creek-resorts-llc-and/",
+      "attorney": "",
+      "caseName": "In Re Omni Hotels Management Corporation; Barton Creek Resorts, LLC; And Omni Barton Creek, Inc. v. the State of Texas",
+      "caseNameFull": "",
+      "citation": [],
+      "citeCount": 0,
+      "cluster_id": 11032017,
+      "court": "Texas Court of Appeals, 3rd District (Austin)",
+      "court_citation_string": "Tex. App.-Austin",
+      "court_id": "txctapp3",
+      "court_jurisdiction": "SA",
+      "dateArgued": null,
+      "dateFiled": "2026-10-09",
+      "dateReargued": null,
+      "dateReargumentDenied": null,
+      "docketNumber": "03-26-00895-CV",
+      "docket_id": 74850435,
+      "judge": "",
+      "lexisCite": "",
+      "meta": {
+        "timestamp": "2026-10-13T06:14:10.577301Z",
+        "date_created": "2026-10-13T06:14:10.457639Z",
+        "score": {
+          "bm25": null
+        }
+      },
+      "neutralCite": "",
+      "non_participating_judge_ids": [],
+      "opinions": [
+        {
+          "author_id": null,
+          "cites": [],
+          "download_url": "https://search.txcourts.gov/SearchMedia.aspx?MediaVersionID=e874390a-c8be-486a-a04a-f504329be762&coa=coa03&DT=Opinion&MediaID=4544cd7a-a639-4461-8782-597ea2476d53",
+          "id": 11499707,
+          "joined_by_ids": [],
+          "local_path": "pdf/2026/10/09/in_re_omni_hotels_management_corporation_barton_creek_resorts_llc_and.pdf",
+          "meta": {
+            "timestamp": "2026-10-13T06:14:14.163228Z",
+            "date_created": "2026-10-13T06:14:10.462059Z"
+          },
+          "ordering_key": null,
+          "per_curiam": false,
+          "sha1": "8e884dba2715874632398e9b510920d6ae3e3530",
+          "snippet": "       TEXAS COURT OF APPEALS, THIRD DISTRICT, AT AUSTIN\n\n\n                                    NO. 03-26-00895-CV\n\n\n\n\n   In re Omni Hotels Management Corporation; Barton Creek Resorts, LLC; and Omni\n                                 Barton Creek, Inc.\n\n\n\n\n                      ORIGINAL PROCEEDING FROM TRAVIS COUNTY\n\n\n\n                           MEMORANDUM OPINION\n\n\n               Relators’ petition for writ of mandamus and motion to stay are denied. See Tex.\n\nR. App. P. 52.8(a).\n\n\n\n              ",
+          "type": "lead-opinion"
+        }
+      ],
+      "panel_ids": [],
+      "panel_names": [],
+      "posture": "",
+      "procedural_history": "",
+      "scdb_id": "",
+      "sibling_ids": [
+        11499707
+      ],
+      "source": "C",
+      "status": "Published",
+      "suitNature": "Mandamus",
+      "syllabus": ""
+    }
+  ]
+}

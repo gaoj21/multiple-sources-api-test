@@ -1,0 +1,474 @@
+{
+  "totalRecords": 57,
+  "excludedEntity": [
+    {
+      "exclusionDetails": {
+        "classificationType": "Individual",
+        "exclusionType": "Ineligible (Proceedings Completed)",
+        "exclusionProgram": "Reciprocal",
+        "excludingAgencyCode": "FSA",
+        "excludingAgencyName": "FARM SERVICE AGENCY"
+      },
+      "exclusionIdentification": {
+        "ueiSAM": null,
+        "cageCode": null,
+        "npi": null,
+        "prefix": null,
+        "firstName": "Duane",
+        "middleName": "E.",
+        "lastName": "Crawson",
+        "suffix": null,
+        "entityName": "Duane E. Crawson",
+        "dnbOpenData": null
+      },
+      "exclusionActions": {
+        "listOfActions": [
+          {
+            "createDate": "05-16-2025",
+            "updateDate": "05-16-2025",
+            "activateDate": "05-15-2025",
+            "terminationDate": "05-14-2035",
+            "terminationType": "Definite",
+            "recordStatus": "Active"
+          }
+        ]
+      },
+      "exclusionPrimaryAddress": {
+        "addressLine1": null,
+        "addressLine2": null,
+        "city": "Bonifay",
+        "stateOrProvinceCode": "FL",
+        "zipCode": "32425",
+        "zipCodePlus4": null,
+        "countryCode": "USA"
+      },
+      "exclusionSecondaryAddress": [],
+      "exclusionOtherInformation": {
+        "isFASCSAOrder": "No",
+        "additionalComments": "Duane Crawson, in his official capacity as a FSA employee, devised a scheme in\r\\nwhich his co-conspirators filed false Livestock Forage Program claims and paid a\r\\nkickback to him. Mr. Crawson pleaded guilty to 37 counts including Theft of\r\\nGovernment Funds, Conspiracy to Commit Wire fraud and Aggravated Identity\r\\nTheft. Mr. Crawson was sentenced to thirty-six (36) months in prison, three (3)\r\\nyears’ supervised release, and ordered to pay FSA restitution. For further information contact the U.S. Department of Agriculture Agency Exclusions POC.",
+        "ctCode": null,
+        "evsInvestigationStatus": null,
+        "references": {
+          "referencesList": [
+            {
+              "exclusionName": null,
+              "type": null
+            }
+          ]
+        },
+        "moreLocations": [
+          {
+            "exclusionName": null,
+            "ueiSAM": null,
+            "cageCode": null,
+            "npi": null,
+            "primaryAddress": {
+              "addressLine1": null,
+              "addressLine2": null,
+              "city": null,
+              "stateOrProvinceCode": null,
+              "zipCode": null,
+              "zipCodePlus4": null,
+              "countryCode": null
+            },
+            "secondaryAddress": [
+              {
+                "addressLine1": null,
+                "addressLine2": null,
+                "city": null,
+                "stateOrProvinceCode": null,
+                "zipCode": null,
+                "zipCodePlus4": null,
+                "countryCode": null
+              }
+            ]
+          }
+        ]
+      },
+      "vesselDetails": {
+        "callSign": null,
+        "type": null,
+        "tonnage": null,
+        "grt": null,
+        "flag": null,
+        "owner": null
+      }
+    },
+    {
+      "exclusionDetails": {
+        "classificationType": "Individual",
+        "exclusionType": "Prohibition/Restriction",
+        "exclusionProgram": "Reciprocal",
+        "excludingAgencyCode": "FSA",
+        "excludingAgencyName": "FARM SERVICE AGENCY"
+      },
+      "exclusionIdentification": {
+        "ueiSAM": null,
+        "cageCode": null,
+        "npi": null,
+        "prefix": null,
+        "firstName": "Trey",
+        "middleName": "Michael",
+        "lastName": "Held",
+        "suffix": null,
+        "entityName": "Trey Michael Held",
+        "dnbOpenData": null
+      },
+      "exclusionActions": {
+        "listOfActions": [
+          {
+            "createDate": "02-27-2024",
+            "updateDate": "02-27-2024",
+            "activateDate": "02-23-2024",
+            "terminationDate": "02-22-2034",
+            "terminationType": "Definite",
+            "recordStatus": "Active"
+          }
+        ]
+      },
+      "exclusionPrimaryAddress": {
+        "addressLine1": null,
+        "addressLine2": null,
+        "city": "West Des Moines",
+        "stateOrProvinceCode": "IA",
+        "zipCode": "50265",
+        "zipCodePlus4": null,
+        "countryCode": "USA"
+      },
+      "exclusionSecondaryAddress": [],
+      "exclusionOtherInformation": {
+        "isFASCSAOrder": "No",
+        "additionalComments": "Based on Trey Michael Held’s felony fraud conviction, he is debarred for participating\r\\nin USDA programs for ten (10) years. For further information contact the U.S. Department of Agriculture Agency Exclusions POC.",
+        "ctCode": null,
+        "evsInvestigationStatus": null,
+        "references": {
+          "referencesList": [
+            {
+              "exclusionName": "Trey Michael Held",
+              "type": "Cross Reference"
+            }
+          ]
+        },
+        "moreLocations": [
+          {
+            "exclusionName": null,
+            "ueiSAM": null,
+            "cageCode": null,
+            "npi": null,
+            "primaryAddress": {
+              "addressLine1": null,
+              "addressLine2": null,
+              "city": null,
+              "stateOrProvinceCode": null,
+              "zipCode": null,
+              "zipCodePlus4": null,
+              "countryCode": null
+            },
+            "secondaryAddress": [
+              {
+                "addressLine1": null,
+                "addressLine2": null,
+                "city": null,
+                "stateOrProvinceCode": null,
+                "zipCode": null,
+                "zipCodePlus4": null,
+                "countryCode": null
+              }
+            ]
+          }
+        ]
+      },
+      "vesselDetails": {
+        "callSign": null,
+        "type": null,
+        "tonnage": null,
+        "grt": null,
+        "flag": null,
+        "owner": null
+      }
+    },
+    {
+      "exclusionDetails": {
+        "classificationType": "Individual",
+        "exclusionType": "Prohibition/Restriction",
+        "exclusionProgram": "Reciprocal",
+        "excludingAgencyCode": "FSA",
+        "excludingAgencyName": "FARM SERVICE AGENCY"
+      },
+      "exclusionIdentification": {
+        "ueiSAM": null,
+        "cageCode": null,
+        "npi": null,
+        "prefix": null,
+        "firstName": "Daris",
+        "middleName": "William",
+        "lastName": "LaPlante",
+        "suffix": null,
+        "entityName": "Daris William LaPlante",
+        "dnbOpenData": null
+      },
+      "exclusionActions": {
+        "listOfActions": [
+          {
+            "createDate": "11-01-2023",
+            "updateDate": "11-01-2023",
+            "activateDate": "10-31-2023",
+            "terminationDate": "10-30-2033",
+            "terminationType": "Definite",
+            "recordStatus": "Active"
+          }
+        ]
+      },
+      "exclusionPrimaryAddress": {
+        "addressLine1": null,
+        "addressLine2": null,
+        "city": "Dupree",
+        "stateOrProvinceCode": "SD",
+        "zipCode": "57623",
+        "zipCodePlus4": null,
+        "countryCode": "USA"
+      },
+      "exclusionSecondaryAddress": [],
+      "exclusionOtherInformation": {
+        "isFASCSAOrder": "No",
+        "additionalComments": "Daris William LaPlante was convicted of a felony fraud, 18 U.S.C. §\r\\n658, Conversion of Mortgaged or Pledged Property, in connection\r\\nwith a program administered by USDA. He is eligible for permanent\r\\nUSDA debarment but it was reduced downward to a ten (10) year\r\\nUSDA debarment. For further information contact the U.S. Department of Agriculture Agency Exclusions POC.",
+        "ctCode": null,
+        "evsInvestigationStatus": null,
+        "references": {
+          "referencesList": [
+            {
+              "exclusionName": "Daris William LaPlante",
+              "type": "Cross Reference"
+            }
+          ]
+        },
+        "moreLocations": [
+          {
+            "exclusionName": null,
+            "ueiSAM": null,
+            "cageCode": null,
+            "npi": null,
+            "primaryAddress": {
+              "addressLine1": null,
+              "addressLine2": null,
+              "city": null,
+              "stateOrProvinceCode": null,
+              "zipCode": null,
+              "zipCodePlus4": null,
+              "countryCode": null
+            },
+            "secondaryAddress": [
+              {
+                "addressLine1": null,
+                "addressLine2": null,
+                "city": null,
+                "stateOrProvinceCode": null,
+                "zipCode": null,
+                "zipCodePlus4": null,
+                "countryCode": null
+              }
+            ]
+          }
+        ]
+      },
+      "vesselDetails": {
+        "callSign": null,
+        "type": null,
+        "tonnage": null,
+        "grt": null,
+        "flag": null,
+        "owner": null
+      }
+    },
+    {
+      "exclusionDetails": {
+        "classificationType": "Individual",
+        "exclusionType": "Prohibition/Restriction",
+        "exclusionProgram": "Reciprocal",
+        "excludingAgencyCode": "FSA",
+        "excludingAgencyName": "FARM SERVICE AGENCY"
+      },
+      "exclusionIdentification": {
+        "ueiSAM": null,
+        "cageCode": null,
+        "npi": null,
+        "prefix": null,
+        "firstName": "Stewart",
+        "middleName": "Jerome",
+        "lastName": "Messerschmidt",
+        "suffix": null,
+        "entityName": "Stewart Jerome Messerschmidt",
+        "dnbOpenData": null
+      },
+      "exclusionActions": {
+        "listOfActions": [
+          {
+            "createDate": "10-03-2023",
+            "updateDate": "10-03-2023",
+            "activateDate": "09-28-2023",
+            "terminationDate": "09-27-2033",
+            "terminationType": "Definite",
+            "recordStatus": "Active"
+          }
+        ]
+      },
+      "exclusionPrimaryAddress": {
+        "addressLine1": null,
+        "addressLine2": null,
+        "city": "Minden",
+        "stateOrProvinceCode": "IA",
+        "zipCode": "51553",
+        "zipCodePlus4": null,
+        "countryCode": "USA"
+      },
+      "exclusionSecondaryAddress": [],
+      "exclusionOtherInformation": {
+        "isFASCSAOrder": "No",
+        "additionalComments": "Stewart Jerome Messerschmidt pleaded guilty to and was convicted of Bank Fraud.\r\\nSince Mr. Messerschmidt was convicted of defrauding USDA he was eligible for\r\\npermanent USDA debarment which was reduced to a ten year USDA debarment. For further information contact the U.S. Department of Agriculture Agency Exclusions POC.",
+        "ctCode": null,
+        "evsInvestigationStatus": null,
+        "references": {
+          "referencesList": [
+            {
+              "exclusionName": "Stewart Jerome Messerschmidt",
+              "type": "Cross Reference"
+            }
+          ]
+        },
+        "moreLocations": [
+          {
+            "exclusionName": null,
+            "ueiSAM": null,
+            "cageCode": null,
+            "npi": null,
+            "primaryAddress": {
+              "addressLine1": null,
+              "addressLine2": null,
+              "city": null,
+              "stateOrProvinceCode": null,
+              "zipCode": null,
+              "zipCodePlus4": null,
+              "countryCode": null
+            },
+            "secondaryAddress": [
+              {
+                "addressLine1": null,
+                "addressLine2": null,
+                "city": null,
+                "stateOrProvinceCode": null,
+                "zipCode": null,
+                "zipCodePlus4": null,
+                "countryCode": null
+              }
+            ]
+          }
+        ]
+      },
+      "vesselDetails": {
+        "callSign": null,
+        "type": null,
+        "tonnage": null,
+        "grt": null,
+        "flag": null,
+        "owner": null
+      }
+    },
+    {
+      "exclusionDetails": {
+        "classificationType": "Individual",
+        "exclusionType": "Prohibition/Restriction",
+        "exclusionProgram": "Reciprocal",
+        "excludingAgencyCode": "FSA",
+        "excludingAgencyName": "FARM SERVICE AGENCY"
+      },
+      "exclusionIdentification": {
+        "ueiSAM": null,
+        "cageCode": null,
+        "npi": null,
+        "prefix": null,
+        "firstName": "Kelly",
+        "middleName": null,
+        "lastName": "Wachter",
+        "suffix": null,
+        "entityName": "Kelly  Wachter",
+        "dnbOpenData": null
+      },
+      "exclusionActions": {
+        "listOfActions": [
+          {
+            "createDate": "03-15-2023",
+            "updateDate": "03-15-2023",
+            "activateDate": "03-13-2023",
+            "terminationDate": "03-12-2033",
+            "terminationType": "Definite",
+            "recordStatus": "Active"
+          }
+        ]
+      },
+      "exclusionPrimaryAddress": {
+        "addressLine1": null,
+        "addressLine2": null,
+        "city": "Heiskell",
+        "stateOrProvinceCode": "TN",
+        "zipCode": "37754",
+        "zipCodePlus4": null,
+        "countryCode": "USA"
+      },
+      "exclusionSecondaryAddress": [],
+      "exclusionOtherInformation": {
+        "isFASCSAOrder": "No",
+        "additionalComments": "Kelly Wachter pleaded guilty to and was convicted of Fraud Against the Farm Service Agency, a Class D Felony. Mr. Wachter was sentenced to three (3) years’ probation and ordered to pay $85,424.51 in restitution and a $100.00 Court fee. Mr. Wachter received a Permanent USDA Debarment, which has been reduced to 10 years. For further information contact the U.S. Department of Agriculture Agency Exclusions POC.",
+        "ctCode": null,
+        "evsInvestigationStatus": null,
+        "references": {
+          "referencesList": [
+            {
+              "exclusionName": null,
+              "type": null
+            }
+          ]
+        },
+        "moreLocations": [
+          {
+            "exclusionName": null,
+            "ueiSAM": null,
+            "cageCode": null,
+            "npi": null,
+            "primaryAddress": {
+              "addressLine1": null,
+              "addressLine2": null,
+              "city": null,
+              "stateOrProvinceCode": null,
+              "zipCode": null,
+              "zipCodePlus4": null,
+              "countryCode": null
+            },
+            "secondaryAddress": [
+              {
+                "addressLine1": null,
+                "addressLine2": null,
+                "city": null,
+                "stateOrProvinceCode": null,
+                "zipCode": null,
+                "zipCodePlus4": null,
+                "countryCode": null
+              }
+            ]
+          }
+        ]
+      },
+      "vesselDetails": {
+        "callSign": null,
+        "type": null,
+        "tonnage": null,
+        "grt": null,
+        "flag": null,
+        "owner": null
+      }
+    }
+  ],
+  "links": {
+    "selfLink": "https://api.sam.gov/entity-information/v4/exclusions?api_key=REPLACE_WITH_API_KEY&q=fraud&size=5&page=0",
+    "nextLink": "https://api.sam.gov/entity-information/v4/exclusions?api_key=REPLACE_WITH_API_KEY&q=fraud&size=5&page=1"
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "count": 10,
+  "message": null,
+  "nextPage": "https://api.govinfo.gov/collections/FR/2026-10-01T00:00:00Z?offsetMark=AoJ4vZG7%2FKADLUZSLTIwMjYtMTAtMDE%3D&pageSize=10",
+  "previousPage": null,
+  "packages": [
+    {
+      "congress": null,
+      "dateIssued": "2026-10-13",
+      "docClass": "FR",
+      "lastModified": "2026-10-10T07:43:47Z",
+      "packageId": "FR-2026-10-13",
+      "packageLink": "https://api.govinfo.gov/packages/FR-2026-10-13/summary",
+      "title": "Federal Register Volume 91 Issue 196 (October 13, 2026)"
+    },
+    {
+      "congress": null,
+      "dateIssued": "2026-09-30",
+      "docClass": "FR",
+      "lastModified": "2026-10-09T14:51:53Z",
+      "packageId": "FR-2026-09-30",
+      "packageLink": "https://api.govinfo.gov/packages/FR-2026-09-30/summary",
+      "title": "Federal Register Volume 91 Issue 188 (September 30, 2026)"
+    },
+    {
+      "congress": null,
+      "dateIssued": "2026-10-09",
+      "docClass": "FR",
+      "lastModified": "2026-10-09T14:49:22Z",
+      "packageId": "FR-2026-10-09",
+      "packageLink": "https://api.govinfo.gov/packages/FR-2026-10-09/summary",
+      "title": "Federal Register Volume 91 Issue 195 (October 9, 2026)"
+    },
+    {
+      "congress": null,
+      "dateIssued": "2026-10-07",
+      "docClass": "FR",
+      "lastModified": "2026-10-08T17:10:31Z",
+      "packageId": "FR-2026-10-07",
+      "packageLink": "https://api.govinfo.gov/packages/FR-2026-10-07/summary",
+      "title": "Federal Register Volume 91 Issue 193 (October 7, 2026)"
+    },
+    {
+      "congress": null,
+      "dateIssued": "2026-10-08",
+      "docClass": "FR",
+      "lastModified": "2026-10-08T16:14:31Z",
+      "packageId": "FR-2026-10-08",
+      "packageLink": "https://api.govinfo.gov/packages/FR-2026-10-08/summary",
+      "title": "Federal Register Volume 91 Issue 194 (October 8, 2026)"
+    },
+    {
+      "congress": null,
+      "dateIssued": "2026-04-01",
+      "docClass": "FR",
+      "lastModified": "2026-10-06T20:57:20Z",
+      "packageId": "FR-2026-04-01",
+      "packageLink": "https://api.govinfo.gov/packages/FR-2026-04-01/summary",
+      "title": "Federal Register Volume 91 Issue 62 (April 1, 2026)"
+    },
+    {
+      "congress": null,
+      "dateIssued": "2026-10-05",
+      "docClass": "FR",
+      "lastModified": "2026-10-06T14:32:11Z",
+      "packageId": "FR-2026-10-05",
+      "packageLink": "https://api.govinfo.gov/packages/FR-2026-10-05/summary",
+      "title": "Federal Register Volume 91 Issue 191 (October 5, 2026)"
+    },
+    {
+      "congress": null,
+      "dateIssued": "2026-10-06",
+      "docClass": "FR",
+      "lastModified": "2026-10-06T07:44:12Z",
+      "packageId": "FR-2026-10-06",
+      "packageLink": "https://api.govinfo.gov/packages/FR-2026-10-06/summary",
+      "title": "Federal Register Volume 91 Issue 192 (October 6, 2026)"
+    },
+    {
+      "congress": null,
+      "dateIssued": "2026-10-02",
+      "docClass": "FR",
+      "lastModified": "2026-10-02T06:15:17Z",
+      "packageId": "FR-2026-10-02",
+      "packageLink": "https://api.govinfo.gov/packages/FR-2026-10-02/summary",
+      "title": "Federal Register Volume 91 Issue 190 (October 2, 2026)"
+    },
+    {
+      "congress": null,
+      "dateIssued": "2026-10-01",
+      "docClass": "FR",
+      "lastModified": "2026-10-01T19:24:07Z",
+      "packageId": "FR-2026-10-01",
+      "packageLink": "https://api.govinfo.gov/packages/FR-2026-10-01/summary",
+      "title": "Federal Register Volume 91 Issue 189 (October 1, 2026)"
+    }
+  ]
+}
