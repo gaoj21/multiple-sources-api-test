@@ -1,0 +1,20 @@
+[
+  {
+    "debtorid": "296913",
+    "fileid": "422053",
+    "actiontypecode": "A",
+    "actiontype": "add",
+    "recordstatuscode": "A",
+    "recordstatus": "active",
+    "organizationname": "PROSPECTORS RUN, LLC",
+    "organizationjurisdiction": "CO",
+    "organizationtype": "LIMITED LIABILITY COMPANY",
+    "organizationid": "20031174041",
+    "address1": "100 LAWRENCE ST (P.O. BOX 156)",
+    "city": "CENTRAL CITY",
+    "state": "CO",
+    "country": "United States",
+    "zipcode": "80427",
+    "efsuniqueid": "180160030"
+  }
+]

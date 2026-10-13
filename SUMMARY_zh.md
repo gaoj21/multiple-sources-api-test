@@ -1,4 +1,4 @@
-# 12 个数据源 API 调研汇总
+# 15 个数据源 API 调研汇总
 
 > 整理日期：2026-10-13 · 测试环境：Python 3.12，出口 IP 在新加坡
 > 英文版：[SUMMARY_en.md](SUMMARY_en.md)
@@ -15,20 +15,21 @@
 
 | 状态 | 数据源 |
 |---|---|
-| ✅ **已用真实请求验证，可以用** | USAspending、Grants.gov、GovInfo、CourtListener、SAM.gov |
+| ✅ **已用真实请求验证，可以用** | USAspending、Grants.gov、GovInfo、CourtListener、SAM.gov、OSHA、UCC Filings（科罗拉多 + 康涅狄格）、Earnings Calls（Alpha Vantage） |
 | 🟡 **能用，但接口本身功能有限** | DOJ（只能按标题搜、只能查某一天）；api.ftc.gov（只有并购审查 HSR 公告） |
 | ⛔ **调用不了** | FTC 新闻稿：本机 IP 被网站拦截，要换美国 IP<br>USPTO：key 要 ID.me 实名，需要美国证件，已放弃 |
+| 🔑 **免费，等你注册 key** | Alpha Vantage 正式 key（演示 key 只能查 IBM） |
 | 🔑 **付费，等凭证** | D&B Direct+、Moody's Orbis、Quartr、LexisNexis：代码已按文档写好，没用真实凭证跑过 |
 
 **凭证情况**：
-- 已配置（都在 `.env` 里）：api.data.gov key（GovInfo 和 api.ftc.gov 共用）、CourtListener token、SAM.gov key。
+- 已配置（都在 `.env` 里）：api.data.gov key（GovInfo 和 api.ftc.gov 共用）、CourtListener token、SAM.gov key、DOL key（OSHA）。
 - 其他都没有。
 
 ---
 
 ## 2. 速查总表
 
-| 数据源 | 认证 / 费用 | 拿到什么 | 关键词搜索 | 时间过滤 | 时间戳精度 | 频率/额度限制 | 建议多久跑一次 |
+| 数据源 | 拿到什么 | 认证 / 费用 | 关键词搜索 | 时间过滤 | 时间戳精度 | 频率/额度限制 | 建议多久跑一次 |
 |---|---|---|---|---|---|---|---|
 | **USAspending** | 联邦合同/拨款：编号、收款方、金额、机构、行业代码、竞争方式、履约期 | 不需要 key，免费 | ✅ `keywords` | ✅ `time_period`，可选 4 种日期口径 | 最后修改时间到秒 | 未公布；单次查询最多拿 5 万条 | 每天 1 次 |
 | **Grants.gov** | 拨款机会：标题、机构、资金额度、申请资格、截止日、联系人、附件 | 不需要 key，免费 | ✅ `keyword` | ❌ 不支持，只能排序后自己筛 | 列表只有日期；详情到秒（带时区） | 未公布 | 每天 1 次 |
@@ -37,6 +38,9 @@
 | **SAM.gov** | 合同机会（含授标）、供应商注册信息、禁止参与采购的名单 | 免费 SAM key | 🟡 只搜标题 | ✅ 发布日期区间（必填，≤1 年） | 只有日期 | **10 次/天** | 每天 1 次 |
 | **DOJ** | 司法部新闻稿：标题、HTML 全文、发布部门、主题 | 不需要 key，免费 | 🟡 只匹配标题 | 🟡 只能查某一天 | 创建/修改时间到秒 | ≤ 4 次/秒 | 每 2～4 小时 1 次 |
 | **api.ftc.gov** | 并购审查提前终止：收购方、被收购方、交易编号、日期 | 免费 api.data.gov key | ✅ 按字段过滤 | ✅ 按字段过滤 | 到秒 | 20,000 次/小时 | 每周 1 次 |
+| **OSHA** | 安全检查、违规与罚款、工伤事故（11 张表，按检查编号关联） | 免费 DOL key | ✅ `like` 模糊匹配 | ✅ `gt`/`lt` | 入库时间 `load_dt` 到秒 | 单次 1 万条 / 5MB；实测连续请求会 429 | 每天 1 次 |
+| **UCC Filings**（CO / CT） | 担保登记：债务人、担保权人、担保物（CO）、申报日、失效日 | 不需要 key，免费 | ✅ `$where like` / `$q` | ✅ `$where between` | 只有日期 | 无 token 按 IP 限流；有 token 基本不限 | 每天 1 次 |
+| **Earnings Calls**（Alpha Vantage） | 电话会文字稿（发言人、内容、情绪分）、EPS 与发布日、财报日历 | 免费 key | ❌ 只能按代码 + 季度 | 🟡 按季度；日历按范围 | 发布日只有日期；文字稿无时间 | **25 次/天** | 财报季每天 1 次 |
 | FTC 新闻稿 | 新闻稿标题、链接、摘要、发布时间（全文要抓网页） | 没有 API，只有 RSS 和网页 | 只有网页能搜 | RSS 只有最近 10～30 条 | `pubDate` 带时区 | 网站防火墙按 IP 拦截 | 每天 1 次（换 IP 后） |
 | USPTO | 专利申请：名称、申请/授权日、发明人、申请人、CPC、审查文件 | 免费 key，但要 ID.me 实名 | ✅ | ✅ | 入库时间到秒 | 每周 500 万次，同一 key 不能并发 | —（已放弃） |
 | D&B Direct+ | 企业档案：DUNS、地址、行业、员工、财务、母子公司关系 | 💰 付费 | ✅ `searchTerm` | ❌（只能订阅变更推送） | 调用时间戳 | 按合同 | — |
@@ -282,6 +286,69 @@
 
 ---
 
+### 3.10 OSHA（职业安全与健康管理局）：检查、违规、事故
+- **认证**：免费 DOL API key，参数 `X-API-KEY` ✅，在 dataportal.dol.gov 注册后生成 ✅；已配置在 `.env`。数据集目录 `/v4/datasets` 不需要 key ✅🧪。
+- **怎么调用**：`GET https://apiprod.dol.gov/v4/get/OSHA/{表名}/json?X-API-KEY=...` ✅；字段说明在 `/json/metadata`（每个字段的名称、描述、类型、关联表）✅🧪；也支持 csv 和 xml 格式。
+- **拿到的信息** 🧪（实际返回）：
+  - **检查** `inspection`（36 个字段）：检查编号 `activity_nr`；被检查单位名称、现场地址、邮寄地址、员工人数；所有制类型；NAICS 和 SIC 行业代码；检查类型和范围（如事故调查、投诉、计划检查）；安全或卫生检查；工会状态；开案日 `open_date`、案件修改日、结案日。
+  - **违规** `violation`（29 个字段）：检查编号、传票编号、违反的条款 `standard`（如 1910.212）、违规类型（严重、故意、重复等）、严重程度、涉及人数和次数、**初始罚款和当前罚款**、签发日、整改期限、最终裁定日、是否被申诉、危险物质代码。
+  - **事故** `accident`（16 个字段）：事故编号、事故日期、**事故描述**（如 "Three employees struck by vehicle"）、关键词（如 Guardrail, Struck By）、是否死亡、工程类型和造价、建筑层数。另有受伤人员表 `accident_injury` 和事故摘要表 `accident_abstract`。
+  - 其他表：`violation_event`（违规处理过程）、`related_activity`、`emphasis_codes`（重点检查项目）、`optional_code_info` 等。
+  - 各表用 `activity_nr` 关联 🧪：从违规记录可以回查到被检查的单位。
+- **时间戳**：业务日期（开案、签发、事故日）只有日期；每张表都有入库时间 `load_dt`，**精确到秒** 🧪，适合做增量同步。
+- **关键词** ✅🧪：`filter_object={"field":"estab_name","operator":"like","value":"%WALMART%"}`，返回 20/20 条都含 WALMART。
+- **时间** ✅🧪：`filter_object` 里用 `gt` / `lt` 比较日期字段，可以用 and/or 组合。实测 `open_date` 2025 年 1 月 20/20 在区间内；`load_dt > 2026-10-01` 增量 20/20。
+- **限制**：
+  - 单次最多返回 10,000 条或 5 MB，先到为准；`limit` 默认 10，用 `offset` 翻页 ✅。
+  - 官方没写频率限制，但**实测约 10 分钟内 20 多个请求后开始返回 429**，响应头里没有限流信息，也没有 `Retry-After`，过一阵自动恢复 🧪。模块已设请求间隔 3 秒。
+  - 带过滤加排序的查询偶尔很慢，超过 40 秒，所以模块把超时设成 90 秒 🧪。
+  - **禁止把 key 公开到代码仓库或论坛** ✅。
+- **更新**：每天入库，实测最新 `load_dt` 是 2026-10-12 🧪。
+- **来源**：dataportal.dol.gov/api-guide 与用户指南 PDF（2024-08-05 版）、apiprod.dol.gov/v4/datasets、`/json/metadata`。官方确认程度：**高**。
+
+### 3.11 UCC Filings（统一商法典担保登记）
+- **背景**：美国**没有联邦统一的 UCC 数据**，各州州务卿分别登记。免费、有 API、能实时查的只有**科罗拉多（CO）**和**康涅狄格（CT）**两州的政府开放数据平台（Socrata SODA API）🧪。俄勒冈有每月一份上个月的新增数据。
+- **认证**：不需要 key ✅🧪。可选申请 Socrata app token（请求头 `X-App-Token`），有了 token 就有独立额度。
+- **怎么调用**：`GET https://data.colorado.gov/resource/{数据集ID}.json`、`https://data.ct.gov/resource/xfev-8smz.json`，用 SoQL 参数 `$where` / `$q` / `$order` / `$select` / `$limit` ✅。
+- **拿到的信息** 🧪（实际返回）：
+  - **科罗拉多**：260 万条申报，最早到 1966 年 ✅，分 4 张表，用 `fileid` 关联：
+    - 申报 `wffy-3uut`：交易 ID、主文件 ID、交易类型（新申报、修改、续期、终止）、申报日、失效日、文件类型、是否终止。
+    - 债务人 `8upq-58vz`：公司名或个人姓名、组织类型、注册地、地址。
+    - 担保权人 `ap62-sav4`（209 万条）：公司名或姓名、地址、是否为转让方。
+    - 担保物 `4am6-w6u4`：担保物描述、是否农产品、所在县。
+  - **康涅狄格**：85 万条，一张平表：留置/UCC 编号、状态、申报类型、债务人姓名或公司名及地址、担保权人姓名或公司名及地址、受理日 `dt_accept`、失效日 `dt_lapse`、页数。**没有担保物字段**。
+- **时间戳**：申报日、受理日、失效日，格式是无时区的时间戳，实际只有日期精度 🧪。
+- **关键词** ✅🧪：`$where=upper(organizationname) like '%BANK%'`。科罗拉多担保权人 209 万 → 60.8 万；也可以用 `$q=` 全文搜索。
+- **时间** ✅🧪：`$where=filingdate between '2026-09-01T00:00:00' and '2026-09-30T23:59:59'`，科罗拉多 260 万 → 10,609，抽查 20/20 在区间内。康涅狄格的关键词加日期组合查询：85 万 → 2,023 条。
+- **限制**：
+  - 没有 app token 时按 IP 共享额度，请求过多返回 429，没公布具体数字 ✅。
+  - 有 app token 时"目前不限流"，除非被判定为滥用 ✅。
+- **更新**：科罗拉多"每天午夜后"自动更新 ✅（实测最新申报 10/11）；康涅狄格每天更新（实测最新 10/12）🧪。
+- **其他州和全国数据**（🔶 调研结果，未实测）：
+  - 多数州只卖批量文件，例如德州每天 $65（全量 $1,150）、肯塔基每月 $1,500、华盛顿/明尼苏达/伊利诺伊每周更新。
+  - 加州、纽约只能网页查询，加州有反爬保护。
+  - 商业 API：**Middesk**（覆盖 50 州，含担保物和失效日，按公司查）；**D&B UCC Filings**（按 DUNS 返回最近 10 笔，或按名称加日期区间查。需要单独开通，而且要确认 Direct+ 是否支持）。
+  - LexisNexis 的 Web Services API 没有找到 UCC 内容，UCC 在它另外的 Public Records 产品里。
+- **来源**：data.colorado.gov 数据集元数据、catalog.data.gov（康涅狄格）、dev.socrata.com/docs/app-tokens.html；各州批量产品见各州州务卿官网。官方确认程度：**高**（CO/CT）。
+
+### 3.12 Earnings Calls（财报电话会，免费来源；付费的 Quartr 见 3.9）
+- **认证**：
+  - Alpha Vantage：免费 key，填邮箱就能拿 ✅；`demo` key 只能查官方示例 IBM 🧪。
+- **怎么调用**：
+  - 文字稿：`GET https://www.alphavantage.co/query?function=EARNINGS_CALL_TRANSCRIPT&symbol=IBM&quarter=2024Q1` ✅
+  - 历史财报：`function=EARNINGS` ✅
+  - 财报日历：`function=EARNINGS_CALENDAR&horizon=3month`，返回 CSV ✅
+- **拿到的信息** 🧪（实际返回）：
+  - **文字稿**：每段有发言人 `speaker`、职位 `title`、内容 `content`、情绪分 `sentiment`。IBM 2024Q1 共 37 段、5 万多字符。覆盖 2010Q1 起 ✅。**没有通话的具体时间**。
+  - **历史财报**：发布日 `reportedDate`、盘前或盘后 `reportTime`、EPS 实际值、预期值、超预期幅度。IBM 共 122 个季度。
+  - **财报日历**：股票代码、公司名、报告日、财年截止日、EPS 预期、币种，覆盖全市场未来 3/6/12 个月。
+- **关键词** ❌：文字稿只能按"股票代码 + 季度"取。
+- **时间**：文字稿用 `quarter=YYYYQn`；日历用 `horizon`。
+- **限制**：
+  - Alpha Vantage 免费 key **25 次/天** ✅。超额度时**仍返回 HTTP 200**，返回体里是 `Information` 提示，必须检查返回体。
+- **状态**：✅ Alpha Vantage 用 demo key 跑通，三项都正常。免费 key 能否查到所有公司的文字稿还没确认 ❓。
+- **来源**：alphavantage.co/documentation、/support、/premium。官方确认程度：**高**。
+
 ## 4. 通用注意事项
 
 1. **两种时间要分清**：
@@ -304,6 +371,9 @@
 | 每天 | SAM.gov 合同机会（`limit=1000`，postedFrom/To=昨天） | 20:00 | 1～2 |
 | 每天 | USAspending（先查 `last_updated`）、Grants.gov | 20:00 | 少量 |
 | 每天 | GovInfo（`/collections/FR/{上次时间}`） | 00:00 | 少量 |
+| 每天 | UCC（CO/CT，`$where` 申报日 = 昨天） | 16:00（美国前一天的数据已在午夜后更新） | 2～6 |
+| 每天 | OSHA 检查（`open_date` > 上次时间） | 20:00 | 1～3 |
+| 财报季每天 | 财报日历 + 前一天发布财报的公司文字稿（Alpha Vantage） | 08:00 | ≤ 25（受每天额度限制） |
 | 每周 | api.ftc.gov HSR 公告 | 周四 | 1 |
 
 **测试脚本本身也耗额度**：SAM 跑一次用 4 次（一天最多测 2 次），CourtListener 跑一次用 5 次。
@@ -314,7 +384,7 @@
 
 ```bash
 pip install -r requirements.txt
-cp .env.example .env              # 填入凭证（已有的 3 个已经填好）
+cp .env.example .env              # 填入凭证（已有的 4 个已经填好）
 python run_all.py                 # 全部测试
 python run_all.py sam doj         # 只测指定的几个
 python run_all.py --render-only   # 不发请求，只重新生成报告
@@ -332,6 +402,8 @@ python run_all.py --render-only   # 不发请求，只重新生成报告
 
 ## 7. 待办
 
+- [ ] Earnings Calls：申请 Alpha Vantage 正式 key（演示 key 只能查 IBM）
+- [ ] UCC：要覆盖更多州的话，决定是买州批量文件，还是用 Middesk / D&B UCC
 - [ ] FTC 新闻稿：在美国 IP 的机器上跑一次 `python run_all.py ftc`
 - [ ] 付费数据源：拿到凭证后逐个测试（Orbis 要先对照合同文档调整）
 - [ ] 如果 SAM 的 10 次/天不够用：在 SAM 申请角色（可提到 1,000 次/天）

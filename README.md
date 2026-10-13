@@ -1,4 +1,4 @@
-# 12 个数据源 API 能力测试
+# 15 个数据源 API 能力测试
 
 ## 运行
 
@@ -36,6 +36,9 @@ python run_all.py --render-only       # 不发请求, 只重新生成报告
 | Moody's Orbis | 🔑 401 | 💰 付费 | 名称匹配 / 条件筛选 | ❓ 需和 Moody's 确认 | 需在 SELECT 里请求 |
 | Quartr | 🔑 401 | 💰 付费 (v3, v1/v2 已 410) | ❌ 只能按 ticker/ISIN/CIK | ✅ `startDate/endDate`, `updatedAfter` | 事件 `date` (未用 key 验证) |
 | LexisNexis Data+ | 🔑 401/498 | 💰 付费 | ✅ `$search` 布尔 | ✅ `$filter=Date ge ...` | `Date` |
+| OSHA | ✅ 用 DOL key 全部通过 | 免费 DOL key；连续请求会 429 | ✅ `like` | ✅ `gt`/`lt` | 入库时间 `load_dt` 到秒 |
+| UCC Filings（CO / CT） | ✅ 完全可用 | 不需要 key，免费 | ✅ `$where like` / `$q` | ✅ `$where between` | 申报日、失效日（只有日期） |
+| Earnings Calls | ✅ Alpha Vantage demo 可用 | 免费 key（25 次/天） | ❌ 按代码 + 季度 | 🟡 按季度 / 日历范围 | 发布日只有日期；文字稿无时间 |
 
 ## 重点注意
 
@@ -70,4 +73,7 @@ python run_all.py --render-only       # 不发请求, 只重新生成报告
 | Quartr | quartr.com/docs + openapi.json | 高 | 默认每秒 50 次；每页最多 500 条 |
 | D&B Direct+ | directplus 文档（现在需要登录，用的是 Wayback 存档，最新到 2024-11） | 中 | token 接口换成 **v3 + 表单格式** |
 | LexisNexis | dev.lexisnexis.com 公开的规格文件 | 中高 | 官方名称是 Web Services API；公司数据集叫 `CompanyAndFinancial`；加 `$expand=Document` 可以直接拿全文 |
+| OSHA | dataportal.dol.gov/api-guide + 用户指南 PDF + `/json/metadata` | 高 | 新增；官方没写限流，实测会 429 |
+| UCC Filings | data.colorado.gov、data.ct.gov 元数据 + dev.socrata.com | 高 | 新增；其他州多为付费批量文件 |
+| Earnings Calls | alphavantage.co/documentation | 高 | 新增（Alpha Vantage） |
 | Moody's Orbis | **没有公开官方文档** | 低（全部是半官方或实测） | 匹配接口返回数组（修了一个会报错的 bug）；查询字段要加 `Match.` 前缀 |

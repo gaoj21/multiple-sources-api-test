@@ -1,4 +1,4 @@
-# API Research Summary: 12 Data Sources
+# API Research Summary: 15 Data Sources
 
 > Compiled: 2026-10-13 · Test environment: Python 3.12, egress IP in Singapore
 > Chinese version: [SUMMARY_zh.md](SUMMARY_zh.md)
@@ -15,20 +15,21 @@
 
 | Status | Sources |
 |---|---|
-| ✅ **Verified with real requests, usable** | USAspending, Grants.gov, GovInfo, CourtListener, SAM.gov |
+| ✅ **Verified with real requests, usable** | USAspending, Grants.gov, GovInfo, CourtListener, SAM.gov, OSHA, UCC Filings (Colorado + Connecticut), Earnings Calls (Alpha Vantage) |
 | 🟡 **Usable, but the API itself is limited** | DOJ (title match and single-day lookup only); api.ftc.gov (HSR notices only) |
 | ⛔ **Not usable** | FTC press releases: this machine's IP is blocked by the site, needs a US IP<br>USPTO: key requires ID.me, which needs a US ID; dropped |
+| 🔑 **Free, awaiting your key** | Alpha Vantage production key (the demo key only covers IBM) |
 | 🔑 **Paid, awaiting credentials** | D&B Direct+, Moody's Orbis, Quartr, LexisNexis: code written per docs, never run with real credentials |
 
 **Credentials**:
-- Configured (all in `.env`): api.data.gov key (shared by GovInfo and api.ftc.gov), CourtListener token, SAM.gov key.
+- Configured (all in `.env`): api.data.gov key (shared by GovInfo and api.ftc.gov), CourtListener token, SAM.gov key, DOL key (OSHA).
 - Everything else: not configured.
 
 ---
 
 ## 2. Quick reference
 
-| Source | Auth / cost | What you get | Keyword search | Date filter | Timestamp precision | Rate / quota | Suggested schedule |
+| Source | What you get | Auth / cost | Keyword search | Date filter | Timestamp precision | Rate / quota | Suggested schedule |
 |---|---|---|---|---|---|---|---|
 | **USAspending** | Federal contracts/grants: IDs, recipient, amount, agency, industry codes, competition, performance period | No key, free | ✅ `keywords` | ✅ `time_period`, 4 date types | last-modified to the second | Unpublished; max 50k results per query | Daily |
 | **Grants.gov** | Grant opportunities: title, agency, funding amounts, eligibility, deadlines, contacts, attachments | No key, free | ✅ `keyword` | ❌ none; sort then filter locally | list: date only; detail: to the second (with TZ) | Unpublished | Daily |
@@ -37,6 +38,9 @@
 | **SAM.gov** | Contract opportunities (incl. awards), vendor registrations, procurement exclusion list | Free SAM key | 🟡 title only | ✅ posted-date range (required, ≤ 1 yr) | date only | **10/day** | Daily |
 | **DOJ** | DOJ press releases: title, full HTML text, issuing office, topic | No key, free | 🟡 title match only | 🟡 single day only | created/changed to the second | ≤ 4 req/s | Every 2–4 h |
 | **api.ftc.gov** | HSR early terminations: acquirer, acquired party, transaction number, date | Free api.data.gov key | ✅ field filters | ✅ field filters | to the second | 20,000/hr | Weekly |
+| **OSHA** | Safety inspections, violations and penalties, workplace accidents (11 tables, joined on inspection number) | Free DOL key | ✅ `like` matching | ✅ `gt`/`lt` | load time `load_dt` to the second | 10k records / 5 MB per request; bursts trigger 429 in testing | Daily |
+| **UCC Filings** (CO / CT) | Liens: debtors, secured parties, collateral (CO), filing date, lapse date | No key, free | ✅ `$where like` / `$q` | ✅ `$where between` | date only | IP-throttled without token; effectively unlimited with one | Daily |
+| **Earnings Calls** (Alpha Vantage) | Call transcripts (speaker, content, sentiment), EPS and report dates, earnings calendar | Free key | ❌ ticker + quarter only | 🟡 by quarter; calendar by horizon | report dates are date-only; transcripts have none | **25/day** | Daily in earnings season |
 | FTC press releases | Press-release title, link, summary, publish time (full text needs the web page) | No API; RSS and web pages only | web page search only | RSS holds only the latest 10–30 items | `pubDate` with TZ | Site firewall blocks by IP | Daily (after an IP change) |
 | USPTO | Patent applications: title, filing/grant dates, inventors, applicants, CPC, prosecution documents | Free key, but needs ID.me | ✅ | ✅ | ingest time to the second | 5M/week; no concurrency per key | — (dropped) |
 | D&B Direct+ | Company profiles: DUNS, address, industry, employees, financials, corporate linkage | 💰 paid | ✅ `searchTerm` | ❌ (change-notification subscription only) | transaction timestamp | per contract | — |
@@ -282,6 +286,69 @@
 
 ---
 
+### 3.10 OSHA (Occupational Safety and Health Administration): inspections, violations, accidents
+- **Auth**: free DOL API key as `X-API-KEY` ✅, issued after registering at dataportal.dol.gov ✅; configured in `.env`. The dataset catalog `/v4/datasets` needs no key ✅🧪.
+- **How to call**: `GET https://apiprod.dol.gov/v4/get/OSHA/{table}/json?X-API-KEY=...` ✅; field definitions at `/json/metadata` (name, description, type and linked tables per field) ✅🧪; csv and xml formats are also supported.
+- **What you get** 🧪 (actual responses):
+  - **Inspections** `inspection` (36 fields): inspection number `activity_nr`; establishment name, site address, mailing address, employee count; owner type; NAICS and SIC industry codes; inspection type and scope (e.g. accident, complaint, planned); safety or health inspection; union status; open date `open_date`, case-modified date, close dates.
+  - **Violations** `violation` (29 fields): inspection number, citation ID, cited `standard` (e.g. 1910.212), violation type (serious, willful, repeat, etc.), gravity, instances and people exposed, **initial and current penalty**, issuance date, abatement date, final order date, contest date, hazardous-substance codes.
+  - **Accidents** `accident` (16 fields): summary number, event date, **event description** (e.g. "Three employees struck by vehicle"), keywords (e.g. Guardrail, Struck By), fatality flag, project type and cost, building stories. The injured-person table `accident_injury` and narrative table `accident_abstract` are separate.
+  - Other tables: `violation_event` (violation history), `related_activity`, `emphasis_codes` (emphasis programs), `optional_code_info`, etc.
+  - Tables join on `activity_nr` 🧪: a violation can be traced back to the inspected establishment.
+- **Timestamps**: business dates (open, issuance, event) are date-only; every table has a load time `load_dt` **to the second** 🧪, suitable for incremental sync.
+- **Keyword** ✅🧪: `filter_object={"field":"estab_name","operator":"like","value":"%WALMART%"}`; 20/20 results contained WALMART.
+- **Date** ✅🧪: compare date fields with `gt` / `lt` inside `filter_object`, combinable with and/or. Tested `open_date` in Jan 2025: 20/20 in range; incremental `load_dt > 2026-10-01`: 20/20.
+- **Limits**:
+  - Max 10,000 records or 5 MB per request, whichever comes first; `limit` defaults to 10; paginate with `offset` ✅.
+  - No rate limit published, but **in testing, 429s started after about 20+ requests within ~10 minutes**, with no rate-limit headers and no `Retry-After`; access recovers on its own after a while 🧪. The module spaces requests 3 seconds apart.
+  - Filtered + sorted queries are occasionally very slow (over 40 seconds), so the module uses a 90-second timeout 🧪.
+  - **Sharing your key in public code repositories or forums is prohibited** ✅.
+- **Updates**: loaded daily; the latest `load_dt` seen was 2026-10-12 🧪.
+- **Sources**: dataportal.dol.gov/api-guide and the user-guide PDF (2024-08-05 edition), apiprod.dol.gov/v4/datasets, `/json/metadata`. Official confidence: **high**.
+
+### 3.11 UCC Filings (Uniform Commercial Code liens)
+- **Background**: the US has **no federal UCC database**; each state's Secretary of State keeps its own records. The only free, live-queryable APIs are the open-data portals of **Colorado (CO)** and **Connecticut (CT)** (Socrata SODA API) 🧪. Oregon publishes a monthly file of the previous month's filings.
+- **Auth**: no key needed ✅🧪. A Socrata app token (`X-App-Token` header) is optional and gives you your own quota.
+- **How to call**: `GET https://data.colorado.gov/resource/{dataset id}.json` and `https://data.ct.gov/resource/xfev-8smz.json`, with SoQL parameters `$where` / `$q` / `$order` / `$select` / `$limit` ✅.
+- **What you get** 🧪 (actual responses):
+  - **Colorado**: 2.6M filings back to 1966 ✅, in 4 tables joined on `fileid`:
+    - Filings `wffy-3uut`: transaction ID, master document ID, transaction type (initial, amendment, continuation, termination), filing date, lapse date, document type, termination flag.
+    - Debtors `8upq-58vz`: organization or individual name, organization type, jurisdiction, address.
+    - Secured parties `ap62-sav4` (2.09M): organization or individual name, address, assignor flag.
+    - Collateral `4am6-w6u4`: collateral description, farm-product flag, county.
+  - **Connecticut**: 848k rows in one flat table: lien/UCC numbers, status, filing type, debtor name and address, secured-party name and address, accepted date `dt_accept`, lapse date `dt_lapse`, page count. **No collateral field.**
+- **Timestamps**: filing, accepted and lapse dates as time-zone-less timestamps; date precision only 🧪.
+- **Keyword** ✅🧪: `$where=upper(organizationname) like '%BANK%'`. Colorado secured parties 2.09M → 608k; `$q=` full-text search also works.
+- **Date** ✅🧪: `$where=filingdate between '2026-09-01T00:00:00' and '2026-09-30T23:59:59'`; Colorado 2.6M → 10,609, and 20/20 sampled records in range. Connecticut keyword + date combined: 848k → 2,023.
+- **Limits**:
+  - Without an app token, requests share an IP-based pool and too many get a 429; no figure is published ✅.
+  - With an app token, requests are "currently not throttled" unless deemed abusive ✅.
+- **Updates**: Colorado updates automatically "every day after midnight" ✅ (latest filing seen: 10/11); Connecticut updates daily (latest seen: 10/12) 🧪.
+- **Other states and national coverage** (🔶 research findings, not tested):
+  - Most states sell bulk files only, e.g. Texas $65/day ($1,150 for the full master), Kentucky $1,500/month; Washington, Minnesota and Illinois offer weekly updates.
+  - California and New York offer web search only, and California has anti-bot protection.
+  - Commercial APIs: **Middesk** (50 states, includes collateral and lapse date, per-business lookup); **D&B UCC Filings** (the 10 most recent filings per DUNS, or name search with a date range; needs a separate entitlement, and Direct+ support must be confirmed).
+  - LexisNexis's Web Services API showed no UCC content; its UCC data lives in its separate Public Records products.
+- **Sources**: data.colorado.gov dataset metadata, catalog.data.gov (Connecticut), dev.socrata.com/docs/app-tokens.html; each state's bulk products on its Secretary of State site. Official confidence: **high** (CO/CT).
+
+### 3.12 Earnings Calls (free sources; paid Quartr is in 3.9)
+- **Auth**:
+  - Alpha Vantage: free key, email only ✅; the `demo` key works only for the IBM example 🧪.
+- **How to call**:
+  - Transcripts: `GET https://www.alphavantage.co/query?function=EARNINGS_CALL_TRANSCRIPT&symbol=IBM&quarter=2024Q1` ✅
+  - Earnings history: `function=EARNINGS` ✅
+  - Earnings calendar: `function=EARNINGS_CALENDAR&horizon=3month`, returns CSV ✅
+- **What you get** 🧪 (actual responses):
+  - **Transcripts**: each segment has `speaker`, `title`, `content` and a `sentiment` score. IBM 2024Q1 has 37 segments and 51k+ characters. Coverage starts at 2010Q1 ✅. **No call date or time.**
+  - **Earnings history**: `reportedDate`, pre- or post-market `reportTime`, reported EPS, estimated EPS, surprise. 122 quarters for IBM.
+  - **Earnings calendar**: symbol, company name, report date, fiscal period end, EPS estimate, currency; whole market, next 3/6/12 months.
+- **Keyword** ❌: transcripts are fetched by "ticker + quarter" only.
+- **Date**: `quarter=YYYYQn` for transcripts; `horizon` for the calendar.
+- **Limits**:
+  - Alpha Vantage free key: **25 requests/day** ✅. When over quota it **still returns HTTP 200**, with an `Information` message in the body, so always check the body.
+- **Status**: ✅ Alpha Vantage works with the demo key, all three checks pass. Whether a free key returns transcripts for every company is unconfirmed ❓.
+- **Sources**: alphavantage.co/documentation, /support, /premium. Official confidence: **high**.
+
 ## 4. Cross-cutting notes
 
 1. **Two kinds of time**:
@@ -304,6 +371,9 @@
 | Daily | SAM.gov opportunities (`limit=1000`, postedFrom/To = yesterday) | 20:00 | 1–2 |
 | Daily | USAspending (check `last_updated` first), Grants.gov | 20:00 | a few |
 | Daily | GovInfo (`/collections/FR/{last run}`) | 00:00 | a few |
+| Daily | UCC (CO/CT, `$where` filing date = yesterday) | 16:00 (US data refreshed after midnight) | 2–6 |
+| Daily | OSHA inspections (`open_date` > last run) | 20:00 | 1–3 |
+| Daily in earnings season | Earnings calendar + transcripts for companies that reported the day before (Alpha Vantage) | 08:00 | ≤ 25 (daily quota) |
 | Weekly | api.ftc.gov HSR notices | Thursday | 1 |
 
 **The test script also uses quota**: one SAM run costs 4 calls (at most 2 test runs per day); one CourtListener run costs 5.
@@ -314,7 +384,7 @@
 
 ```bash
 pip install -r requirements.txt
-cp .env.example .env              # add credentials (the 3 existing ones are already set)
+cp .env.example .env              # add credentials (the 4 existing ones are already set)
 python run_all.py                 # run all tests
 python run_all.py sam doj         # run selected modules only
 python run_all.py --render-only   # rebuild the report without making requests
@@ -332,6 +402,8 @@ python run_all.py --render-only   # rebuild the report without making requests
 
 ## 7. To-do
 
+- [ ] Earnings Calls: get an Alpha Vantage production key (the demo key only covers IBM)
+- [ ] UCC: for more states, decide between state bulk files and Middesk / D&B UCC
 - [ ] FTC press releases: run `python run_all.py ftc` on a machine with a US IP
 - [ ] Paid sources: test each once credentials arrive (adjust Orbis against the contract docs first)
 - [ ] If SAM's 10/day is not enough: request a role in SAM (raises it to 1,000/day)

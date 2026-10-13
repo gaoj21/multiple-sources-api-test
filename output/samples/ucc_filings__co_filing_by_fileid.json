@@ -1,0 +1,14 @@
+[
+  {
+    "transactionid": "2006F085604",
+    "masterdocumentid": "2006F085604",
+    "transactiontype": "Initial Filing",
+    "filingdate": "2006-09-01T00:00:00.000",
+    "lapsedate": "2011-09-01T00:00:00.000",
+    "filingtype": "ucc",
+    "documenttype": "UCC financing statement",
+    "continuation": false,
+    "terminationflag": false,
+    "fileid": "422053"
+  }
+]

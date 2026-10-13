@@ -17,7 +17,7 @@ import traceback
 from common import OUT_DIR, Probe
 
 MODULES = ["usaspending", "sam", "grants", "dnb", "orbis", "doj", "ftc", "uspto",
-           "quartr", "govinfo", "courtlistener", "lexisnexis"]
+           "quartr", "earnings_calls", "govinfo", "courtlistener", "lexisnexis", "osha", "ucc"]
 ICON = {True: "✅", False: "❌", None: "⏭️"}
 STATUS_TXT = {"ok": "✅ 可用", "partial": "🟡 部分可用", "needs_key": "🔑 需要 key/license",
               "blocked": "⛔ 被拦截", "rate_limited": "⏳ 被限流", "error": "❌ 出错", "unknown": "?"}

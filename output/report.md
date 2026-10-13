@@ -11,9 +11,12 @@
 | FTC Press Releases | ⛔ 被拦截 | 新闻稿: 无官方 API, 只有 RSS + 网页 (无需 key); api.ftc.gov (HSR 提前终止/DNC 投诉) 需要 api.data.gov key | 免费公开 | RSS 不支持; 网页列表 ?search_api_fulltext=xxx 支持 (需抓 HTML) | RSS 只有最近若干条 (10~30 条不等, pubDate 带时区如 -0400); 网页列表有起止日期筛选; api.ftc.gov 支持 filter[date][condition][path/value/operator] |
 | USPTO | 🔑 需要 key/license | Open Data Portal: Header X-API-KEY (免费, 需 USPTO.gov 账号 + MFA + 已关联的 ID.me 实名验证, 在 https://data.uspto.gov/apikey 生成); TSDR 商标: 另一个 key (account.uspto.gov/api-manager), Header USPTO-API-KEY | 免费 (官方: at no cost; 未见数据 license 声明) | 支持: q=applicationMetaData.inventionTitle:battery 或全文 q=battery; 支持 AND/OR/字段过滤 | 支持: rangeFilters (POST) 或 GET 的 rangeFilters=applicationMetaData.filingDate 2024-01-01:2024-12-31; 可按 filingDate/grantDate 等 |
 | Quartr | 🔑 需要 key/license | Header x-api-key (Quartr 商务开通, 在 Quartr Portal portal.quartr.dev 生成) | 💰 商业付费 license: 数据集可单买或打包 (transcripts、audio、live、summaries、解析文档等), companies 和 events 始终包含 | ❗没有全文关键词搜索; 只能按 tickers / isins / ciks / companyIds / countries / exchanges / typeIds 过滤 | 支持: startDate / endDate (事件日期) 以及 updatedAfter / updatedBefore (数据更新时间, 适合增量) |
+| Earnings Calls | ✅ 可用 | Alpha Vantage: 免费 API key (alphavantage.co/support/#api-key, 填邮箱即得), 参数 apikey; 'demo' key 只能查官方示例 (IBM) | 免费层 (25 次/天) + 付费 Premium | ❌ Alpha Vantage 文字稿只能按 股票代码+季度 取, 不能关键词搜 | Alpha Vantage: quarter=YYYYQn (2010Q1 起); 财报日历 horizon=3month/6month/12month |
 | GovInfo | ✅ 可用 | 需要 api.data.gov key (免费, 邮箱注册: https://api.data.gov/signup); DEMO_KEY 可试用 | 免费公开 | 支持: POST /search {query:'antitrust collection:(FR)'} (字段操作符语法, 可加 publishdate:range(...)) | 支持: 路径里的 lastModified 时间 (ISO8601, 精确到秒) / published 日期区间 / search 的 publishdate:range() |
 | CourtListener | ✅ 可用 | 搜索接口 /search/ 可匿名; 其他 (dockets/opinions/clusters/people...) 需要免费 token (注册账号后获取), Header: Authorization: Token xxx | 免费 (非营利); bulk 数据标注 Public Domain Mark; 提额、Webhooks 等高级功能需会员或商业协议 (收费) | 支持: q= (Solr/ES 语法, 支持 AND/OR/"短语"/字段 caseName:xxx) | 支持: filed_after / filed_before (YYYY-MM-DD, 实测可用但文档没列名字; 官方写法是 q=dateFiled:[2025-01-01 TO 2025-06-30]); REST 端点 date_modified__gte=ISO时间 (官方只给了 __gte 语法模式; 实测 dockets 可用, 精确到微秒, 适合增量) |
 | LexisNexis Data+ | 🔑 需要 key/license | OAuth2 client_credentials: POST auth-api.lexisnexis.com/oauth/v2/token (Basic client_id:secret, form 表单, scope=http://oauth.lexisnexis.com/all) → Bearer, 24 小时有效; 凭证需要 Service-to-Service ID | 💰 商业付费 license: 调用方承担所有 LexisNexis 费用, 能看哪些内容源取决于授权; 具体计费和再分发条款看合同 | 支持: $search= (必填; 有 Boolean 布尔检索模式, 如 antitrust AND merger; w/5 近邻语法在 API 文档里未确认) | 支持: $filter=Date ge 2025-01-01 and Date le 2025-03-31; $orderby=Date desc |
+| OSHA | ✅ 可用 | 免费 DOL API key (在 dataportal.dol.gov/registration 注册并填问卷后生成, 最多 5 个); 参数 X-API-KEY; 数据集目录 /v4/datasets 无需 key | 免费公开 (美国政府数据) | 支持: filter_object 用 like 运算符做模糊匹配, 如 {"field":"estab_name","operator":"like","value":"%WALMART%"} | 支持: filter_object 用 gt / lt 比较日期字段 (如 open_date), 可用 and/or 组合; sort + sort_by 排序 |
+| UCC Filings | ✅ 可用 | 不需要 key; 可选 Socrata app token (请求头 X-App-Token, 免费注册) 以获得独立额度 | 免费公开 (州政府开放数据) | 支持: $q= 全文搜索, 或 $where=upper(organizationname) like '%XXX%' (按债务人/担保权人名称) | 支持: $where=filingdate between '2026-09-01' and '2026-09-30' (CO) / dt_accept (CT); 也能按失效日 lapsedate / dt_lapse 查 |
 
 ## USAspending.gov  —  ✅ 可用
 _测试时间 2026-10-13T06:43:01+00:00_
@@ -401,6 +404,48 @@ _测试时间 2026-10-13T06:43:14+00:00_
 - documents/*/summary 提供 AI 摘要 (length / plain 参数); transcripts/{id}/chapters 有分段
 - OpenAPI 公开, 但所有数据接口无 key 返回 401
 
+## Earnings Calls  —  ✅ 可用
+_测试时间 2026-10-13T12:24:48+00:00_
+
+- **文档**: https://www.alphavantage.co/documentation/ (Earnings Call Transcript / Earnings / Earnings Calendar)
+- **认证**: Alpha Vantage: 免费 API key (alphavantage.co/support/#api-key, 填邮箱即得), 参数 apikey; 'demo' key 只能查官方示例 (IBM)
+- **License**: 免费层 (25 次/天) + 付费 Premium
+- **限制**: Alpha Vantage 免费 key: 25 次/天 (官方), 超出返回 200 + 'Information' 提示而不是 429
+- **获取方式**: Alpha Vantage: GET https://www.alphavantage.co/query?function=EARNINGS_CALL_TRANSCRIPT&symbol=IBM&quarter=2024Q1; 另有 function=EARNINGS (历史财报) 和 EARNINGS_CALENDAR (CSV)
+- **关键词**: ❌ Alpha Vantage 文字稿只能按 股票代码+季度 取, 不能关键词搜
+- **时间**: Alpha Vantage: quarter=YYYYQn (2010Q1 起); 财报日历 horizon=3month/6month/12month
+
+### 信息来源 (调用方式从哪来)
+- ✅ 官方: https://www.alphavantage.co/documentation/ — EARNINGS_CALL_TRANSCRIPT 参数 symbol + quarter (YYYYQM, 2010Q1 起), 含逐段情绪信号; EARNINGS_CALENDAR (CSV, horizon); EARNINGS
+- ✅ 官方: https://www.alphavantage.co/support/ 与 /premium/ — 免费 25 次/天
+- ❓ 未核对: 免费 key 能否取所有公司的文字稿 (demo key 只覆盖 IBM)
+
+### 测试结果
+- ✅ **Alpha Vantage 文字稿** — 37 段发言, 51420 字符
+- ✅ **历史财报 (EPS / 发布日)** — 122 个季度
+- ✅ **财报日历 (未来 3 个月)** — 200/200 条在 2026-10-12~2100-01-01 内; 样例 ['2026-10-13', '2026-10-13', '2026-10-13']
+- ⏭️ **关键词搜索** — Alpha Vantage 不支持
+
+### 拿到的字段 / 时间戳
+- **transcript segment** (4 个字段): `speaker, title, content, sentiment`
+- **quarterly earnings** (7 个字段): `fiscalDateEnding, reportedDate, reportedEPS, estimatedEPS, surprise, surprisePercentage, reportTime`
+  - ⏱ `reportedDate` = `2026-07-22`
+  - ⏱ `reportTime` = `post-market`
+- **calendar row** (7 个字段): `symbol, name, reportDate, fiscalDateEnding, estimate, currency, timeOfTheDay`
+  - ⏱ `reportDate` = `2026-10-13`
+  - ⏱ `timeOfTheDay` = `pre-market`
+
+### HTTP 调用
+- `GET transcript IBM 2024Q1` → **200** (1.29s)
+- `GET earnings history IBM` → **200** (0.81s)
+- `GET earnings calendar` → **200** (1.31s)
+
+### 注意事项
+- 实测拿到的内容: 文字稿每段 = 发言人 speaker、职位 title、内容 content、情绪分 sentiment (IBM 2024Q1 共 37 段、5 万多字符), 但没有通话时间; 历史财报有 reportedDate、reportTime (盘前/盘后)、EPS 实际值/预期值/超预期幅度 (IBM 共 122 个季度); 财报日历是 CSV: 股票代码、公司名、报告日、财年截止日、EPS 预期、币种
+- Alpha Vantage 超额度或参数错误时仍返回 HTTP 200, 内容是 {'Information': ...} 或 {'Error Message': ...}, 必须检查返回体
+- 未配置 ALPHAVANTAGE_API_KEY, 用 demo key (只能查 IBM)
+- 文字稿每段字段: ['speaker', 'title', 'content', 'sentiment']; 顶层只有 symbol / quarter, 没有通话日期时间戳
+
 ## GovInfo  —  ✅ 可用
 _测试时间 2026-10-13T06:43:20+00:00_
 
@@ -541,3 +586,120 @@ _测试时间 2026-10-13T06:44:11+00:00_
 - 端点/实体集名称 (News, LegalNews, Cases, CompanyAndFinancial ...) 取决于开通的数据集, 用 LEXIS_ENTITY 变量调整
 - 本机无凭证探测: token 端点返回 401, 数据端点返回 498 'token invalid or expired' (498 是实测, 官方文档只列了 429)
 - 返回带 Date (出版日期) 和 ResultId; 加 $expand=Document 可在同一次请求里拿到全文 (计费方式看合同)
+
+## OSHA  —  ✅ 可用
+_测试时间 2026-10-13T12:24:20+00:00_
+
+- **文档**: https://dataportal.dol.gov/api-guide  ·  用户指南 PDF: https://dataportal.dol.gov/pdf/dol-api-user-guide.pdf
+- **认证**: 免费 DOL API key (在 dataportal.dol.gov/registration 注册并填问卷后生成, 最多 5 个); 参数 X-API-KEY; 数据集目录 /v4/datasets 无需 key
+- **License**: 免费公开 (美国政府数据)
+- **限制**: 单次最多 10,000 条或 5 MB (先到为准), limit 默认 10, 用 offset 翻页; 官方未写频率限制, 但实测约 10 分钟内 20 多个请求后开始返回 429 (无限流响应头、无 Retry-After), 过一阵自动恢复 → 请求间隔 ≥ 3 秒; 禁止把 key 公开到代码仓库或论坛
+- **获取方式**: REST GET https://apiprod.dol.gov/v4/get/OSHA/{表名}/json?X-API-KEY=...; 元数据 /json/metadata; 另支持 csv / xml 格式
+- **关键词**: 支持: filter_object 用 like 运算符做模糊匹配, 如 {"field":"estab_name","operator":"like","value":"%WALMART%"}
+- **时间**: 支持: filter_object 用 gt / lt 比较日期字段 (如 open_date), 可用 and/or 组合; sort + sort_by 排序
+
+### 信息来源 (调用方式从哪来)
+- ✅ 官方: https://dataportal.dol.gov/pdf/dol-api-user-guide.pdf (2024-08-05 版): 注册拿 key、请求模板、limit/offset/fields/sort/sort_by/filter_object、运算符 eq/neq/gt/lt/in/not_in/like、10,000 条或 5MB 上限、禁止公开 key
+- ✅ 官方: https://apiprod.dol.gov/v4/datasets (无需 key, 实测可访问): OSHA 有 11 张表
+- 🧪 实测: 无 key 请求数据返回 401 'The API key is either incorrect or missing'
+- 🧪 实测 (有 key): 公司名 like 过滤、open_date 区间、load_dt 增量、违规表 → 检查表关联都有效; 连续请求会触发 429
+- ✅ 官方: /json/metadata 字段说明 (实测可读): 每个字段的名称、描述、类型、关联表
+
+### 测试结果
+- ✅ **数据集目录 (无需 key)** — OSHA 表 11 张: ['OSHA_accident_lookup2', 'OSHA_accident', 'OSHA_accident_abstract', 'OSHA_accident_injury', 'OSHA_inspection', 'OSHA_related_activity', 'OSHA_emphasis_codes', 'OSHA_violation', 'OSHA_violation_gen_duty_std', 'OSHA_optional_code_info', 'OSHA_violation_event']
+- ✅ **元数据 (字段说明)** — inspection 表 36 个字段; 每个字段有名称、描述、类型、关联表
+- ✅ **连接 / 最新检查记录** — 返回 10 条, 最新 open_date 2026-09-23T00:00:00
+- ✅ **公司名模糊匹配 'WALMART'** — 返回20条, 其中20条包含'WALMART'
+- ✅ **open_date 2025-01** — 20/20 条在 2025-01-01~2025-01-31 内; 样例 ['2025-01-30', '2025-01-30', '2025-01-30']
+- ✅ **增量 load_dt > 2026-10-01 (入库时间)** — 20/20 条在 2026-10-01~2100-01-01 内; 样例 ['2026-10-12', '2026-10-12', '2026-10-12']
+- ✅ **违规表 (violation)** — 返回 10 条
+- ✅ **按 activity_nr 关联 违规 → 检查** — activity_nr=349149898 → JOHNSON COUNTY BOARD OF EDUCATION - MIDDLE SCHOOL
+- ✅ **事故表 (accident)** — 返回 5 条
+
+### 拿到的字段 / 时间戳
+- **inspection** (36 个字段): `activity_nr, reporting_id, state_flag, estab_name, site_address, site_city, site_state, site_zip, owner_type, owner_code, adv_notice, safety_hlth, sic_code, naics_code, insp_type, insp_scope, why_no_insp, union_status, safety_manuf, safety_const, safety_marit, health_manuf, health_const, health_marit, migrant`
+  - ⏱ `open_date` = `2026-09-23T00:00:00`
+  - ⏱ `case_mod_date` = `2026-10-11T00:00:00`
+  - ⏱ `load_dt` = `2026-10-12T00:20:22`
+- **violation** (29 个字段): `activity_nr, citation_id, delete_flag, standard, viol_type, issuance_date, abate_date, abate_complete, current_penalty, initial_penalty, contest_date, final_order_date, nr_instances, nr_exposed, rec, gravity, emphasis, hazcat, fta_insp_nr, fta_issuance_date, fta_penalty, fta_contest_date, fta_final_order_date, hazsub1, hazsub2`
+  - ⏱ `issuance_date` = `2026-09-10T00:00:00`
+  - ⏱ `final_order_date` = `2026-09-10T00:00:00`
+  - ⏱ `load_dt` = `2026-10-12T00:24:18`
+- **accident** (16 个字段): `summary_nr, report_id, event_date, event_time, event_desc, event_keyword, const_end_use, build_stories, nonbuild_ht, project_cost, project_type, sic_list, fatality, state_flag, abstract_text, load_dt`
+  - ⏱ `event_date` = `2025-03-28T00:00:00`
+  - ⏱ `load_dt` = `2026-10-12T00:17:52`
+
+### HTTP 调用
+- `GET dataset catalog (no key)` → **200** (2.6s)
+- `GET inspection metadata` → **200** (2.92s)
+- `GET inspection latest` → **200** (3.72s)
+- `GET keyword (estab_name like)` → **200** (4.48s)
+- `GET date range (open_date)` → **200** (3.38s)
+- `GET incremental (load_dt)` → **200** (2.79s)
+- `GET violation latest` → **200** (2.8s)
+- `GET inspection of a violation` → **200** (3.46s)
+- `GET accident latest` → **200** (3.27s)
+
+### 注意事项
+- OSHA 的 11 张表: inspection (检查)、violation (违规)、violation_event、violation_gen_duty_std、accident (事故)、accident_abstract、accident_injury、accident_lookup2、related_activity、emphasis_codes、optional_code_info
+- 表之间用 activity_nr (检查编号) 关联: 先按公司名查 inspection, 再用 activity_nr 查 violation 拿罚款
+- OSHA 原来的 enforcedata.dol.gov 已跳转到 data.dol.gov
+
+## UCC Filings  —  ✅ 可用
+_测试时间 2026-10-13T09:58:36+00:00_
+
+- **文档**: https://data.colorado.gov/d/wffy-3uut  ·  https://data.ct.gov/d/xfev-8smz  ·  SODA API: https://dev.socrata.com/docs/queries/
+- **认证**: 不需要 key; 可选 Socrata app token (请求头 X-App-Token, 免费注册) 以获得独立额度
+- **License**: 免费公开 (州政府开放数据)
+- **限制**: 无 app token: 按 IP 共享额度, 请求过多会被限流 (返回 429, 无公布数字); 有 app token: 目前不限流 (除非被判滥用); 单次 $limit 可自定, 用 $offset 翻页
+- **获取方式**: REST GET https://data.colorado.gov/resource/{数据集ID}.json 或 data.ct.gov/resource/xfev-8smz.json, 用 SoQL 参数 $where / $q / $order / $select / $limit
+- **关键词**: 支持: $q= 全文搜索, 或 $where=upper(organizationname) like '%XXX%' (按债务人/担保权人名称)
+- **时间**: 支持: $where=filingdate between '2026-09-01' and '2026-09-30' (CO) / dt_accept (CT); 也能按失效日 lapsedate / dt_lapse 查
+
+### 信息来源 (调用方式从哪来)
+- ✅ 官方 (州政府): 科罗拉多数据集元数据 https://data.colorado.gov/api/views/wffy-3uut.json — 每天午夜后自动更新, 最早记录 1966-04-01, 来源 Colorado Department of State
+- ✅ 官方 (州政府): 康涅狄格 https://catalog.data.gov/dataset/uniform-commercial-code-ucc-lien-filings 与 data.ct.gov/d/xfev-8smz
+- ✅ 官方: https://dev.socrata.com/docs/app-tokens.html — 无 token 按 IP 限流、有 token 目前不限流、超限 429
+- 🧪 实测: 字段名 (响应头 X-SODA2-Fields)、CO 4 张表用 fileid 关联、CO 最新申报 2026-10-11 / CT 最新 2026-10-12、关键词和日期过滤结果
+- 🔶 调研 (见汇总): 其他州多为付费批量文件 (TX $65/天, KY $1,500/月 等) 或只有网页; 商业 API 有 Middesk、D&B UCC Filings
+
+### 测试结果
+- ✅ **CO 连接 / 最新申报** — 总数 2602391, 最新 filingdate 2026-10-11
+- ✅ **CO 按申报日 2026-09-01~2026-09-30** — 20/20 条在 2026-09-01~2026-09-30 内; 总数 2602391 → 10609; 样例 ['2026-09-30', '2026-09-30', '2026-09-30']
+- ✅ **CO 担保权人名称含 'BANK'** — 返回10条, 其中10条包含'BANK'; 总数 2092969 → 608235
+- ✅ **CO 按 fileid 关联 4 张表** — fileid=422053: 申报 1 条 (UCC financing statement), 债务人 1 个, 担保物 1 条
+- ✅ **CT 连接 / 最新申报** — 总数 848486, 最新 dt_accept 2026-10-12
+- ✅ **CT 担保权人含 'BANK' + 2026-09** — 返回20条, 其中20条包含'BANK'; 总数 848486 → 2023
+- ✅ **CT dt_accept 2026-09** — 20/20 条在 2026-09-01~2026-09-30 内; 样例 ['2026-09-01', '2026-09-01', '2026-09-01']
+
+### 拿到的字段 / 时间戳
+- **CO filing** (10 个字段): `transactionid, masterdocumentid, transactiontype, filingdate, filingtype, documenttype, continuation, terminationflag, manufacturedhometransactions, fileid`
+  - ⏱ `filingdate` = `2026-10-11T00:00:00.000`
+- **CO secured party** (13 个字段): `spid, fileid, actiontypecode, actiontype, recordstatuscd, recordstatus, organizationname, address1, city, state, country, zipcode, assignor`
+- **CO debtor** (16 个字段): `debtorid, fileid, actiontypecode, actiontype, recordstatuscode, recordstatus, organizationname, organizationjurisdiction, organizationtype, organizationid, address1, city, state, country, zipcode, efsuniqueid`
+- **CO collateral** (9 个字段): `collateralid, fileid, actiontypecode, actiontype, recordstatuscode, recordstatus, farmproductflag, collateraldescription, additionalcollateraldescription`
+- **CT filing** (20 个字段): `id_lien_flng_nbr, id_ucc_flng_nbr, lien_status, cd_flng_type, tx_lien_descript, debtor_nm_last, debtor_nm_first, debtor_nm_mid, debtor_ad_str1, debtor_ad_city, debtor_ad_state, debtor_ad_zip, sec_party_nm_bus, sec_party_ad_str1, sec_party_ad_city, sec_party_ad_state, sec_party_ad_zip, dt_lapse, dt_accept, qt_pages`
+  - ⏱ `dt_lapse` = `2031-11-10T00:00:00.000`
+  - ⏱ `dt_accept` = `2026-10-12T00:00:00.000`
+
+### HTTP 调用
+- `GET CO filings latest` → **200** (1.38s)
+- `GET CO filings count` → **200** (0.45s)
+- `GET CO filings date range` → **200** (0.35s)
+- `GET CO date count` → **200** (0.37s)
+- `GET CO secured party keyword` → **200** (0.35s)
+- `GET CO sp total` → **200** (0.63s)
+- `GET CO sp kw count` → **200** (2.14s)
+- `GET CO filing by fileid` → **200** (0.35s)
+- `GET CO debtor by fileid` → **200** (0.36s)
+- `GET CO collateral by fileid` → **200** (0.37s)
+- `GET CT latest` → **200** (1.37s)
+- `GET CT count` → **200** (0.4s)
+- `GET CT keyword+date` → **200** (0.36s)
+- `GET CT keyword+date count` → **200** (0.4s)
+
+### 注意事项
+- 只覆盖 CO 和 CT 两个州 (加上 OR 每月一份上月新增); 要全国数据只能买各州批量文件或用商业 API
+- CO 分 4 张表, 用 fileid 关联: 申报 wffy-3uut (类型、申报日、失效日)、债务人 8upq-58vz、担保权人 ap62-sav4、担保物 4am6-w6u4
+- CT 是一张平表 (债务人 + 担保权人 + 日期), 没有担保物字段
+- 日期是 floating_timestamp (无时区), 实际只有日期精度

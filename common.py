@@ -28,7 +28,8 @@ OUT_DIR = Path(__file__).parent / "output"
 SAMPLE_DIR = OUT_DIR / "samples"
 UA = "Mozilla/5.0 (api-capability-test; python-requests)"
 # 时间戳字段识别: date_signed / closeDate / Start Date / created / updated_at ... (排除 consolidated 这种误伤)
-TS_KEY_RE = re.compile(r"(?:^|[^a-zA-Z])(?i:date|time|timestamp)|[a-z](?:Date|Time|At)\b|_at$|"
+TS_KEY_RE = re.compile(r"(?:^|[^a-zA-Z])(?i:date|time|timestamp)|[a-z](?:Date|Time|At)\b|_at$|^dt_|_dt$|"
+                       r"^[a-z]+(?:date|time)$|"  # 全小写连写: filingdate / lapsedate
                        r"(?i:created|changed|modified|updated|posted|filed|published|issued)")
 RATE_HDR_RE = re.compile(r"(ratelimit|rate-limit|retry-after|x-quota|quota)", re.I)
 

@@ -1343,6 +1343,130 @@
     "tested_at": "2026-10-13T06:43:14+00:00"
   },
   {
+    "name": "Earnings Calls",
+    "status": "ok",
+    "meta": {
+      "auth": "Alpha Vantage: 免费 API key (alphavantage.co/support/#api-key, 填邮箱即得), 参数 apikey; 'demo' key 只能查官方示例 (IBM)",
+      "license": "免费层 (25 次/天) + 付费 Premium",
+      "docs": "https://www.alphavantage.co/documentation/ (Earnings Call Transcript / Earnings / Earnings Calendar)",
+      "limits": "Alpha Vantage 免费 key: 25 次/天 (官方), 超出返回 200 + 'Information' 提示而不是 429",
+      "how": "Alpha Vantage: GET https://www.alphavantage.co/query?function=EARNINGS_CALL_TRANSCRIPT&symbol=IBM&quarter=2024Q1; 另有 function=EARNINGS (历史财报) 和 EARNINGS_CALENDAR (CSV)",
+      "keyword": "❌ Alpha Vantage 文字稿只能按 股票代码+季度 取, 不能关键词搜",
+      "date": "Alpha Vantage: quarter=YYYYQn (2010Q1 起); 财报日历 horizon=3month/6month/12month",
+      "sources": [
+        "✅ 官方: https://www.alphavantage.co/documentation/ — EARNINGS_CALL_TRANSCRIPT 参数 symbol + quarter (YYYYQM, 2010Q1 起), 含逐段情绪信号; EARNINGS_CALENDAR (CSV, horizon); EARNINGS",
+        "✅ 官方: https://www.alphavantage.co/support/ 与 /premium/ — 免费 25 次/天",
+        "❓ 未核对: 免费 key 能否取所有公司的文字稿 (demo key 只覆盖 IBM)"
+      ],
+      "notes": [
+        "实测拿到的内容: 文字稿每段 = 发言人 speaker、职位 title、内容 content、情绪分 sentiment (IBM 2024Q1 共 37 段、5 万多字符), 但没有通话时间; 历史财报有 reportedDate、reportTime (盘前/盘后)、EPS 实际值/预期值/超预期幅度 (IBM 共 122 个季度); 财报日历是 CSV: 股票代码、公司名、报告日、财年截止日、EPS 预期、币种",
+        "Alpha Vantage 超额度或参数错误时仍返回 HTTP 200, 内容是 {'Information': ...} 或 {'Error Message': ...}, 必须检查返回体"
+      ]
+    },
+    "checks": [
+      {
+        "item": "Alpha Vantage 文字稿",
+        "passed": true,
+        "detail": "37 段发言, 51420 字符"
+      },
+      {
+        "item": "历史财报 (EPS / 发布日)",
+        "passed": true,
+        "detail": "122 个季度"
+      },
+      {
+        "item": "财报日历 (未来 3 个月)",
+        "passed": true,
+        "detail": "200/200 条在 2026-10-12~2100-01-01 内; 样例 ['2026-10-13', '2026-10-13', '2026-10-13']"
+      },
+      {
+        "item": "关键词搜索",
+        "passed": null,
+        "detail": "Alpha Vantage 不支持"
+      }
+    ],
+    "fields": {
+      "transcript segment": {
+        "all_fields": [
+          "speaker",
+          "title",
+          "content",
+          "sentiment"
+        ],
+        "timestamp_fields": {}
+      },
+      "quarterly earnings": {
+        "all_fields": [
+          "fiscalDateEnding",
+          "reportedDate",
+          "reportedEPS",
+          "estimatedEPS",
+          "surprise",
+          "surprisePercentage",
+          "reportTime"
+        ],
+        "timestamp_fields": {
+          "reportedDate": "2026-07-22",
+          "reportTime": "post-market"
+        }
+      },
+      "calendar row": {
+        "all_fields": [
+          "symbol",
+          "name",
+          "reportDate",
+          "fiscalDateEnding",
+          "estimate",
+          "currency",
+          "timeOfTheDay"
+        ],
+        "timestamp_fields": {
+          "reportDate": "2026-10-13",
+          "timeOfTheDay": "pre-market"
+        }
+      }
+    },
+    "notes": [
+      "实测拿到的内容: 文字稿每段 = 发言人 speaker、职位 title、内容 content、情绪分 sentiment (IBM 2024Q1 共 37 段、5 万多字符), 但没有通话时间; 历史财报有 reportedDate、reportTime (盘前/盘后)、EPS 实际值/预期值/超预期幅度 (IBM 共 122 个季度); 财报日历是 CSV: 股票代码、公司名、报告日、财年截止日、EPS 预期、币种",
+      "Alpha Vantage 超额度或参数错误时仍返回 HTTP 200, 内容是 {'Information': ...} 或 {'Error Message': ...}, 必须检查返回体",
+      "未配置 ALPHAVANTAGE_API_KEY, 用 demo key (只能查 IBM)",
+      "文字稿每段字段: ['speaker', 'title', 'content', 'sentiment']; 顶层只有 symbol / quarter, 没有通话日期时间戳"
+    ],
+    "calls": [
+      {
+        "label": "transcript IBM 2024Q1",
+        "method": "GET",
+        "url": "https://www.alphavantage.co/query?function=EARNINGS_CALL_TRANSCRIPT&symbol=IBM&quarter=2024Q1&apikey=***",
+        "status": 200,
+        "elapsed_s": 1.29,
+        "content_type": "application/json",
+        "bytes": 57092,
+        "rate_headers": {}
+      },
+      {
+        "label": "earnings history IBM",
+        "method": "GET",
+        "url": "https://www.alphavantage.co/query?function=EARNINGS&symbol=IBM&apikey=***",
+        "status": 200,
+        "elapsed_s": 0.81,
+        "content_type": "application/json",
+        "bytes": 39172,
+        "rate_headers": {}
+      },
+      {
+        "label": "earnings calendar",
+        "method": "GET",
+        "url": "https://www.alphavantage.co/query?function=EARNINGS_CALENDAR&horizon=3month&apikey=***",
+        "status": 200,
+        "elapsed_s": 1.31,
+        "content_type": "application/x-download",
+        "bytes": 306998,
+        "rate_headers": {}
+      }
+    ],
+    "tested_at": "2026-10-13T12:24:48+00:00"
+  },
+  {
     "name": "GovInfo",
     "status": "ok",
     "meta": {
@@ -1927,5 +2051,596 @@
       }
     ],
     "tested_at": "2026-10-13T06:44:11+00:00"
+  },
+  {
+    "name": "OSHA",
+    "status": "ok",
+    "meta": {
+      "auth": "免费 DOL API key (在 dataportal.dol.gov/registration 注册并填问卷后生成, 最多 5 个); 参数 X-API-KEY; 数据集目录 /v4/datasets 无需 key",
+      "license": "免费公开 (美国政府数据)",
+      "docs": "https://dataportal.dol.gov/api-guide  ·  用户指南 PDF: https://dataportal.dol.gov/pdf/dol-api-user-guide.pdf",
+      "limits": "单次最多 10,000 条或 5 MB (先到为准), limit 默认 10, 用 offset 翻页; 官方未写频率限制, 但实测约 10 分钟内 20 多个请求后开始返回 429 (无限流响应头、无 Retry-After), 过一阵自动恢复 → 请求间隔 ≥ 3 秒; 禁止把 key 公开到代码仓库或论坛",
+      "how": "REST GET https://apiprod.dol.gov/v4/get/OSHA/{表名}/json?X-API-KEY=...; 元数据 /json/metadata; 另支持 csv / xml 格式",
+      "keyword": "支持: filter_object 用 like 运算符做模糊匹配, 如 {\"field\":\"estab_name\",\"operator\":\"like\",\"value\":\"%WALMART%\"}",
+      "date": "支持: filter_object 用 gt / lt 比较日期字段 (如 open_date), 可用 and/or 组合; sort + sort_by 排序",
+      "sources": [
+        "✅ 官方: https://dataportal.dol.gov/pdf/dol-api-user-guide.pdf (2024-08-05 版): 注册拿 key、请求模板、limit/offset/fields/sort/sort_by/filter_object、运算符 eq/neq/gt/lt/in/not_in/like、10,000 条或 5MB 上限、禁止公开 key",
+        "✅ 官方: https://apiprod.dol.gov/v4/datasets (无需 key, 实测可访问): OSHA 有 11 张表",
+        "🧪 实测: 无 key 请求数据返回 401 'The API key is either incorrect or missing'",
+        "🧪 实测 (有 key): 公司名 like 过滤、open_date 区间、load_dt 增量、违规表 → 检查表关联都有效; 连续请求会触发 429",
+        "✅ 官方: /json/metadata 字段说明 (实测可读): 每个字段的名称、描述、类型、关联表"
+      ],
+      "notes": [
+        "OSHA 的 11 张表: inspection (检查)、violation (违规)、violation_event、violation_gen_duty_std、accident (事故)、accident_abstract、accident_injury、accident_lookup2、related_activity、emphasis_codes、optional_code_info",
+        "表之间用 activity_nr (检查编号) 关联: 先按公司名查 inspection, 再用 activity_nr 查 violation 拿罚款",
+        "OSHA 原来的 enforcedata.dol.gov 已跳转到 data.dol.gov"
+      ]
+    },
+    "checks": [
+      {
+        "item": "数据集目录 (无需 key)",
+        "passed": true,
+        "detail": "OSHA 表 11 张: ['OSHA_accident_lookup2', 'OSHA_accident', 'OSHA_accident_abstract', 'OSHA_accident_injury', 'OSHA_inspection', 'OSHA_related_activity', 'OSHA_emphasis_codes', 'OSHA_violation', 'OSHA_violation_gen_duty_std', 'OSHA_optional_code_info', 'OSHA_violation_event']"
+      },
+      {
+        "item": "元数据 (字段说明)",
+        "passed": true,
+        "detail": "inspection 表 36 个字段; 每个字段有名称、描述、类型、关联表"
+      },
+      {
+        "item": "连接 / 最新检查记录",
+        "passed": true,
+        "detail": "返回 10 条, 最新 open_date 2026-09-23T00:00:00"
+      },
+      {
+        "item": "公司名模糊匹配 'WALMART'",
+        "passed": true,
+        "detail": "返回20条, 其中20条包含'WALMART'"
+      },
+      {
+        "item": "open_date 2025-01",
+        "passed": true,
+        "detail": "20/20 条在 2025-01-01~2025-01-31 内; 样例 ['2025-01-30', '2025-01-30', '2025-01-30']"
+      },
+      {
+        "item": "增量 load_dt > 2026-10-01 (入库时间)",
+        "passed": true,
+        "detail": "20/20 条在 2026-10-01~2100-01-01 内; 样例 ['2026-10-12', '2026-10-12', '2026-10-12']"
+      },
+      {
+        "item": "违规表 (violation)",
+        "passed": true,
+        "detail": "返回 10 条"
+      },
+      {
+        "item": "按 activity_nr 关联 违规 → 检查",
+        "passed": true,
+        "detail": "activity_nr=349149898 → JOHNSON COUNTY BOARD OF EDUCATION - MIDDLE SCHOOL"
+      },
+      {
+        "item": "事故表 (accident)",
+        "passed": true,
+        "detail": "返回 5 条"
+      }
+    ],
+    "fields": {
+      "inspection": {
+        "all_fields": [
+          "activity_nr",
+          "reporting_id",
+          "state_flag",
+          "estab_name",
+          "site_address",
+          "site_city",
+          "site_state",
+          "site_zip",
+          "owner_type",
+          "owner_code",
+          "adv_notice",
+          "safety_hlth",
+          "sic_code",
+          "naics_code",
+          "insp_type",
+          "insp_scope",
+          "why_no_insp",
+          "union_status",
+          "safety_manuf",
+          "safety_const",
+          "safety_marit",
+          "health_manuf",
+          "health_const",
+          "health_marit",
+          "migrant",
+          "mail_street",
+          "mail_city",
+          "mail_state",
+          "mail_zip",
+          "host_est_key",
+          "nr_in_estab",
+          "open_date",
+          "case_mod_date",
+          "close_conf_date",
+          "close_case_date",
+          "load_dt"
+        ],
+        "timestamp_fields": {
+          "open_date": "2026-09-23T00:00:00",
+          "case_mod_date": "2026-10-11T00:00:00",
+          "load_dt": "2026-10-12T00:20:22"
+        }
+      },
+      "violation": {
+        "all_fields": [
+          "activity_nr",
+          "citation_id",
+          "delete_flag",
+          "standard",
+          "viol_type",
+          "issuance_date",
+          "abate_date",
+          "abate_complete",
+          "current_penalty",
+          "initial_penalty",
+          "contest_date",
+          "final_order_date",
+          "nr_instances",
+          "nr_exposed",
+          "rec",
+          "gravity",
+          "emphasis",
+          "hazcat",
+          "fta_insp_nr",
+          "fta_issuance_date",
+          "fta_penalty",
+          "fta_contest_date",
+          "fta_final_order_date",
+          "hazsub1",
+          "hazsub2",
+          "hazsub3",
+          "hazsub4",
+          "hazsub5",
+          "load_dt"
+        ],
+        "timestamp_fields": {
+          "issuance_date": "2026-09-10T00:00:00",
+          "final_order_date": "2026-09-10T00:00:00",
+          "load_dt": "2026-10-12T00:24:18"
+        }
+      },
+      "accident": {
+        "all_fields": [
+          "summary_nr",
+          "report_id",
+          "event_date",
+          "event_time",
+          "event_desc",
+          "event_keyword",
+          "const_end_use",
+          "build_stories",
+          "nonbuild_ht",
+          "project_cost",
+          "project_type",
+          "sic_list",
+          "fatality",
+          "state_flag",
+          "abstract_text",
+          "load_dt"
+        ],
+        "timestamp_fields": {
+          "event_date": "2025-03-28T00:00:00",
+          "load_dt": "2026-10-12T00:17:52"
+        }
+      }
+    },
+    "notes": [
+      "OSHA 的 11 张表: inspection (检查)、violation (违规)、violation_event、violation_gen_duty_std、accident (事故)、accident_abstract、accident_injury、accident_lookup2、related_activity、emphasis_codes、optional_code_info",
+      "表之间用 activity_nr (检查编号) 关联: 先按公司名查 inspection, 再用 activity_nr 查 violation 拿罚款",
+      "OSHA 原来的 enforcedata.dol.gov 已跳转到 data.dol.gov"
+    ],
+    "calls": [
+      {
+        "label": "dataset catalog (no key)",
+        "method": "GET",
+        "url": "https://apiprod.dol.gov/v4/datasets?limit=500",
+        "status": 200,
+        "elapsed_s": 2.6,
+        "content_type": "application/json",
+        "bytes": 48975,
+        "rate_headers": {}
+      },
+      {
+        "label": "inspection metadata",
+        "method": "GET",
+        "url": "https://apiprod.dol.gov/v4/get/OSHA/inspection/json/metadata?X-API-KEY=***",
+        "status": 200,
+        "elapsed_s": 2.92,
+        "content_type": "\"application/json\"",
+        "bytes": 36428,
+        "rate_headers": {}
+      },
+      {
+        "label": "inspection latest",
+        "method": "GET",
+        "url": "https://apiprod.dol.gov/v4/get/OSHA/inspection/json?X-API-KEY=***&limit=10&sort=desc&sort_by=open_date",
+        "status": 200,
+        "elapsed_s": 3.72,
+        "content_type": "application/json",
+        "bytes": 9143,
+        "rate_headers": {}
+      },
+      {
+        "label": "keyword (estab_name like)",
+        "method": "GET",
+        "url": "https://apiprod.dol.gov/v4/get/OSHA/inspection/json?X-API-KEY=***&limit=20&filter_object={\"field\": \"estab_name\", \"operator\": \"like\", \"value\": \"%WALMART%\"}",
+        "status": 200,
+        "elapsed_s": 4.48,
+        "content_type": "application/json",
+        "bytes": 18164,
+        "rate_headers": {}
+      },
+      {
+        "label": "date range (open_date)",
+        "method": "GET",
+        "url": "https://apiprod.dol.gov/v4/get/OSHA/inspection/json?X-API-KEY=***&limit=20&sort=desc&sort_by=open_date&filter_object={\"and\": [{\"field\": \"open_date\", \"operator\": \"gt\", \"value\": \"2025-01-01\"}, {\"field\": \"open_date\", \"operator\": \"lt\", \"value\": \"2025-01-31\"}]}",
+        "status": 200,
+        "elapsed_s": 3.38,
+        "content_type": "application/json",
+        "bytes": 18440,
+        "rate_headers": {}
+      },
+      {
+        "label": "incremental (load_dt)",
+        "method": "GET",
+        "url": "https://apiprod.dol.gov/v4/get/OSHA/inspection/json?X-API-KEY=***&limit=20&sort=desc&sort_by=load_dt&filter_object={\"field\": \"load_dt\", \"operator\": \"gt\", \"value\": \"2026-10-01\"}",
+        "status": 200,
+        "elapsed_s": 2.79,
+        "content_type": "application/json",
+        "bytes": 18556,
+        "rate_headers": {}
+      },
+      {
+        "label": "violation latest",
+        "method": "GET",
+        "url": "https://apiprod.dol.gov/v4/get/OSHA/violation/json?X-API-KEY=***&limit=10&sort=desc&sort_by=activity_nr",
+        "status": 200,
+        "elapsed_s": 2.8,
+        "content_type": "application/json",
+        "bytes": 6671,
+        "rate_headers": {}
+      },
+      {
+        "label": "inspection of a violation",
+        "method": "GET",
+        "url": "https://apiprod.dol.gov/v4/get/OSHA/inspection/json?X-API-KEY=***&limit=1&filter_object={\"field\": \"activity_nr\", \"operator\": \"eq\", \"value\": \"349149898\"}",
+        "status": 200,
+        "elapsed_s": 3.46,
+        "content_type": "application/json",
+        "bytes": 975,
+        "rate_headers": {}
+      },
+      {
+        "label": "accident latest",
+        "method": "GET",
+        "url": "https://apiprod.dol.gov/v4/get/OSHA/accident/json?X-API-KEY=***&limit=5&sort=desc&sort_by=event_date",
+        "status": 200,
+        "elapsed_s": 3.27,
+        "content_type": "application/json",
+        "bytes": 2380,
+        "rate_headers": {}
+      }
+    ],
+    "tested_at": "2026-10-13T12:24:20+00:00"
+  },
+  {
+    "name": "UCC Filings",
+    "status": "ok",
+    "meta": {
+      "auth": "不需要 key; 可选 Socrata app token (请求头 X-App-Token, 免费注册) 以获得独立额度",
+      "license": "免费公开 (州政府开放数据)",
+      "docs": "https://data.colorado.gov/d/wffy-3uut  ·  https://data.ct.gov/d/xfev-8smz  ·  SODA API: https://dev.socrata.com/docs/queries/",
+      "limits": "无 app token: 按 IP 共享额度, 请求过多会被限流 (返回 429, 无公布数字); 有 app token: 目前不限流 (除非被判滥用); 单次 $limit 可自定, 用 $offset 翻页",
+      "how": "REST GET https://data.colorado.gov/resource/{数据集ID}.json 或 data.ct.gov/resource/xfev-8smz.json, 用 SoQL 参数 $where / $q / $order / $select / $limit",
+      "keyword": "支持: $q= 全文搜索, 或 $where=upper(organizationname) like '%XXX%' (按债务人/担保权人名称)",
+      "date": "支持: $where=filingdate between '2026-09-01' and '2026-09-30' (CO) / dt_accept (CT); 也能按失效日 lapsedate / dt_lapse 查",
+      "sources": [
+        "✅ 官方 (州政府): 科罗拉多数据集元数据 https://data.colorado.gov/api/views/wffy-3uut.json — 每天午夜后自动更新, 最早记录 1966-04-01, 来源 Colorado Department of State",
+        "✅ 官方 (州政府): 康涅狄格 https://catalog.data.gov/dataset/uniform-commercial-code-ucc-lien-filings 与 data.ct.gov/d/xfev-8smz",
+        "✅ 官方: https://dev.socrata.com/docs/app-tokens.html — 无 token 按 IP 限流、有 token 目前不限流、超限 429",
+        "🧪 实测: 字段名 (响应头 X-SODA2-Fields)、CO 4 张表用 fileid 关联、CO 最新申报 2026-10-11 / CT 最新 2026-10-12、关键词和日期过滤结果",
+        "🔶 调研 (见汇总): 其他州多为付费批量文件 (TX $65/天, KY $1,500/月 等) 或只有网页; 商业 API 有 Middesk、D&B UCC Filings"
+      ],
+      "notes": [
+        "只覆盖 CO 和 CT 两个州 (加上 OR 每月一份上月新增); 要全国数据只能买各州批量文件或用商业 API",
+        "CO 分 4 张表, 用 fileid 关联: 申报 wffy-3uut (类型、申报日、失效日)、债务人 8upq-58vz、担保权人 ap62-sav4、担保物 4am6-w6u4",
+        "CT 是一张平表 (债务人 + 担保权人 + 日期), 没有担保物字段",
+        "日期是 floating_timestamp (无时区), 实际只有日期精度"
+      ]
+    },
+    "checks": [
+      {
+        "item": "CO 连接 / 最新申报",
+        "passed": true,
+        "detail": "总数 2602391, 最新 filingdate 2026-10-11"
+      },
+      {
+        "item": "CO 按申报日 2026-09-01~2026-09-30",
+        "passed": true,
+        "detail": "20/20 条在 2026-09-01~2026-09-30 内; 总数 2602391 → 10609; 样例 ['2026-09-30', '2026-09-30', '2026-09-30']"
+      },
+      {
+        "item": "CO 担保权人名称含 'BANK'",
+        "passed": true,
+        "detail": "返回10条, 其中10条包含'BANK'; 总数 2092969 → 608235"
+      },
+      {
+        "item": "CO 按 fileid 关联 4 张表",
+        "passed": true,
+        "detail": "fileid=422053: 申报 1 条 (UCC financing statement), 债务人 1 个, 担保物 1 条"
+      },
+      {
+        "item": "CT 连接 / 最新申报",
+        "passed": true,
+        "detail": "总数 848486, 最新 dt_accept 2026-10-12"
+      },
+      {
+        "item": "CT 担保权人含 'BANK' + 2026-09",
+        "passed": true,
+        "detail": "返回20条, 其中20条包含'BANK'; 总数 848486 → 2023"
+      },
+      {
+        "item": "CT dt_accept 2026-09",
+        "passed": true,
+        "detail": "20/20 条在 2026-09-01~2026-09-30 内; 样例 ['2026-09-01', '2026-09-01', '2026-09-01']"
+      }
+    ],
+    "fields": {
+      "CO filing": {
+        "all_fields": [
+          "transactionid",
+          "masterdocumentid",
+          "transactiontype",
+          "filingdate",
+          "filingtype",
+          "documenttype",
+          "continuation",
+          "terminationflag",
+          "manufacturedhometransactions",
+          "fileid"
+        ],
+        "timestamp_fields": {
+          "filingdate": "2026-10-11T00:00:00.000"
+        }
+      },
+      "CO secured party": {
+        "all_fields": [
+          "spid",
+          "fileid",
+          "actiontypecode",
+          "actiontype",
+          "recordstatuscd",
+          "recordstatus",
+          "organizationname",
+          "address1",
+          "city",
+          "state",
+          "country",
+          "zipcode",
+          "assignor"
+        ],
+        "timestamp_fields": {}
+      },
+      "CO debtor": {
+        "all_fields": [
+          "debtorid",
+          "fileid",
+          "actiontypecode",
+          "actiontype",
+          "recordstatuscode",
+          "recordstatus",
+          "organizationname",
+          "organizationjurisdiction",
+          "organizationtype",
+          "organizationid",
+          "address1",
+          "city",
+          "state",
+          "country",
+          "zipcode",
+          "efsuniqueid"
+        ],
+        "timestamp_fields": {}
+      },
+      "CO collateral": {
+        "all_fields": [
+          "collateralid",
+          "fileid",
+          "actiontypecode",
+          "actiontype",
+          "recordstatuscode",
+          "recordstatus",
+          "farmproductflag",
+          "collateraldescription",
+          "additionalcollateraldescription"
+        ],
+        "timestamp_fields": {}
+      },
+      "CT filing": {
+        "all_fields": [
+          "id_lien_flng_nbr",
+          "id_ucc_flng_nbr",
+          "lien_status",
+          "cd_flng_type",
+          "tx_lien_descript",
+          "debtor_nm_last",
+          "debtor_nm_first",
+          "debtor_nm_mid",
+          "debtor_ad_str1",
+          "debtor_ad_city",
+          "debtor_ad_state",
+          "debtor_ad_zip",
+          "sec_party_nm_bus",
+          "sec_party_ad_str1",
+          "sec_party_ad_city",
+          "sec_party_ad_state",
+          "sec_party_ad_zip",
+          "dt_lapse",
+          "dt_accept",
+          "qt_pages"
+        ],
+        "timestamp_fields": {
+          "dt_lapse": "2031-11-10T00:00:00.000",
+          "dt_accept": "2026-10-12T00:00:00.000"
+        }
+      }
+    },
+    "notes": [
+      "只覆盖 CO 和 CT 两个州 (加上 OR 每月一份上月新增); 要全国数据只能买各州批量文件或用商业 API",
+      "CO 分 4 张表, 用 fileid 关联: 申报 wffy-3uut (类型、申报日、失效日)、债务人 8upq-58vz、担保权人 ap62-sav4、担保物 4am6-w6u4",
+      "CT 是一张平表 (债务人 + 担保权人 + 日期), 没有担保物字段",
+      "日期是 floating_timestamp (无时区), 实际只有日期精度"
+    ],
+    "calls": [
+      {
+        "label": "CO filings latest",
+        "method": "GET",
+        "url": "https://data.colorado.gov/resource/wffy-3uut.json?$limit=10&$order=filingdate DESC",
+        "status": 200,
+        "elapsed_s": 1.38,
+        "content_type": "application/json;charset=utf-8",
+        "bytes": 3435,
+        "rate_headers": {}
+      },
+      {
+        "label": "CO filings count",
+        "method": "GET",
+        "url": "https://data.colorado.gov/resource/wffy-3uut.json?$select=count(*) AS n",
+        "status": 200,
+        "elapsed_s": 0.45,
+        "content_type": "application/json;charset=utf-8",
+        "bytes": 18,
+        "rate_headers": {}
+      },
+      {
+        "label": "CO filings date range",
+        "method": "GET",
+        "url": "https://data.colorado.gov/resource/wffy-3uut.json?$where=filingdate between '2026-09-01T00:00:00' and '2026-09-30T23:59:59'&$limit=20&$order=filingdate DESC",
+        "status": 200,
+        "elapsed_s": 0.35,
+        "content_type": "application/json;charset=utf-8",
+        "bytes": 6584,
+        "rate_headers": {}
+      },
+      {
+        "label": "CO date count",
+        "method": "GET",
+        "url": "https://data.colorado.gov/resource/wffy-3uut.json?$select=count(*) AS n&$where=filingdate between '2026-09-01T00:00:00' and '2026-09-30T23:59:59'",
+        "status": 200,
+        "elapsed_s": 0.37,
+        "content_type": "application/json;charset=utf-8",
+        "bytes": 16,
+        "rate_headers": {}
+      },
+      {
+        "label": "CO secured party keyword",
+        "method": "GET",
+        "url": "https://data.colorado.gov/resource/ap62-sav4.json?$where=upper(organizationname) like '%BANK%'&$limit=10",
+        "status": 200,
+        "elapsed_s": 0.35,
+        "content_type": "application/json;charset=utf-8",
+        "bytes": 2783,
+        "rate_headers": {}
+      },
+      {
+        "label": "CO sp total",
+        "method": "GET",
+        "url": "https://data.colorado.gov/resource/ap62-sav4.json?$select=count(*) AS n",
+        "status": 200,
+        "elapsed_s": 0.63,
+        "content_type": "application/json;charset=utf-8",
+        "bytes": 18,
+        "rate_headers": {}
+      },
+      {
+        "label": "CO sp kw count",
+        "method": "GET",
+        "url": "https://data.colorado.gov/resource/ap62-sav4.json?$select=count(*) AS n&$where=upper(organizationname) like '%BANK%'",
+        "status": 200,
+        "elapsed_s": 2.14,
+        "content_type": "application/json;charset=utf-8",
+        "bytes": 17,
+        "rate_headers": {}
+      },
+      {
+        "label": "CO filing by fileid",
+        "method": "GET",
+        "url": "https://data.colorado.gov/resource/wffy-3uut.json?fileid=422053",
+        "status": 200,
+        "elapsed_s": 0.35,
+        "content_type": "application/json;charset=utf-8",
+        "bytes": 302,
+        "rate_headers": {}
+      },
+      {
+        "label": "CO debtor by fileid",
+        "method": "GET",
+        "url": "https://data.colorado.gov/resource/8upq-58vz.json?fileid=422053",
+        "status": 200,
+        "elapsed_s": 0.36,
+        "content_type": "application/json;charset=utf-8",
+        "bytes": 430,
+        "rate_headers": {}
+      },
+      {
+        "label": "CO collateral by fileid",
+        "method": "GET",
+        "url": "https://data.colorado.gov/resource/4am6-w6u4.json?fileid=422053",
+        "status": 200,
+        "elapsed_s": 0.37,
+        "content_type": "application/json;charset=utf-8",
+        "bytes": 932,
+        "rate_headers": {}
+      },
+      {
+        "label": "CT latest",
+        "method": "GET",
+        "url": "https://data.ct.gov/resource/xfev-8smz.json?$limit=10&$order=dt_accept DESC",
+        "status": 200,
+        "elapsed_s": 1.37,
+        "content_type": "application/json;charset=utf-8",
+        "bytes": 5787,
+        "rate_headers": {}
+      },
+      {
+        "label": "CT count",
+        "method": "GET",
+        "url": "https://data.ct.gov/resource/xfev-8smz.json?$select=count(*) AS n",
+        "status": 200,
+        "elapsed_s": 0.4,
+        "content_type": "application/json;charset=utf-8",
+        "bytes": 17,
+        "rate_headers": {}
+      },
+      {
+        "label": "CT keyword+date",
+        "method": "GET",
+        "url": "https://data.ct.gov/resource/xfev-8smz.json?$where=dt_accept between '2026-09-01T00:00:00' and '2026-09-30T23:59:59' AND upper(sec_party_nm_bus) like '%BANK%'&$limit=20",
+        "status": 200,
+        "elapsed_s": 0.36,
+        "content_type": "application/json;charset=utf-8",
+        "bytes": 11607,
+        "rate_headers": {}
+      },
+      {
+        "label": "CT keyword+date count",
+        "method": "GET",
+        "url": "https://data.ct.gov/resource/xfev-8smz.json?$select=count(*) AS n&$where=dt_accept between '2026-09-01T00:00:00' and '2026-09-30T23:59:59' AND upper(sec_party_nm_bus) like '%BANK%'",
+        "status": 200,
+        "elapsed_s": 0.4,
+        "content_type": "application/json;charset=utf-8",
+        "bytes": 15,
+        "rate_headers": {}
+      }
+    ],
+    "tested_at": "2026-10-13T09:58:36+00:00"
   }
 ]

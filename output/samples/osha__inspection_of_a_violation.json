@@ -1,0 +1,42 @@
+{
+  "data": [
+    {
+      "activity_nr": 349149898,
+      "reporting_id": "0454734",
+      "state_flag": null,
+      "estab_name": "JOHNSON COUNTY BOARD OF EDUCATION - MIDDLE SCHOOL",
+      "site_address": "278 FAIRGROUND LANE",
+      "site_city": "MOUNTAIN CITY",
+      "site_state": "TN",
+      "site_zip": "37683",
+      "owner_type": "B",
+      "owner_code": null,
+      "adv_notice": "N",
+      "safety_hlth": "S",
+      "sic_code": null,
+      "naics_code": "611110",
+      "insp_type": "H",
+      "insp_scope": "A",
+      "why_no_insp": "I",
+      "union_status": "B",
+      "safety_manuf": null,
+      "safety_const": null,
+      "safety_marit": null,
+      "health_manuf": null,
+      "health_const": null,
+      "health_marit": null,
+      "migrant": null,
+      "mail_street": "211 NORTH CHURCH STREET",
+      "mail_city": "MOUNTAIN CITY",
+      "mail_state": "TN",
+      "mail_zip": "37683",
+      "host_est_key": "HOST_EST_KEY_VALUE",
+      "nr_in_estab": "40",
+      "open_date": "2026-08-19T00:00:00",
+      "case_mod_date": "2026-10-11T00:00:00",
+      "close_conf_date": "2026-08-19T00:00:00",
+      "close_case_date": "2026-09-10T00:00:00",
+      "load_dt": "2026-10-12T00:20:22"
+    }
+  ]
+}
