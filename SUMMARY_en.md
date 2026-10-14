@@ -45,6 +45,28 @@
 | Quartr | No: paid, credentials not purchased | Listed-company earnings calls: events, transcripts, audio, slides, AI summaries | Paid | No: filter by ticker etc. only | Yes: event date + updated-time incremental | Unknown | default 50 req/s | — |
 | LexisNexis | No: paid, credentials not purchased | News and legal documents: title, date, source + full text | Paid | Yes: boolean syntax | Yes: `Date ge/le` | publication date | per contract; ≤ 50 per page | — |
 
+### Country coverage
+
+Two layers: **which country's institution produces the data**, and **which countries the companies or people in the records can be in**. Government sources cover only the US government's own business, but counterparties can be foreign. Figures come from live queries on 2026-10-14; the four paid vendors use their official published figures.
+
+| Source | Data produced by | Countries of the records' subjects | Basis |
+|---|---|---|---|
+| **USAspending** | US federal government | Worldwide. Of 5.78M FY2025 contracts, 103,866 went to foreign recipients (about 1.8%) and 162,470 were performed abroad, across 215 countries or areas; the largest non-US amounts were Japan, Germany, Canada, the UK and South Korea | tested |
+| **SAM.gov** | US federal government | Worldwide. Foreign companies can register; 5,176 entities are registered in the UK (e.g. Barclays) | tested |
+| **Grants.gov** | US federal government | Grant opportunities from US federal agencies; whether foreign organizations may apply depends on each opportunity's eligibility | official docs |
+| **GovInfo** | US federal government (GPO) | US federal publications only: Federal Register, regulations, congressional documents, federal court opinions | official docs |
+| **CourtListener** | US (aggregated by Free Law Project) | Mainly US courts, 3,359 in total: federal courts, state courts for the 50 states plus DC (55 state supreme courts), territorial courts (Guam, Northern Mariana Islands, Puerto Rico, Virgin Islands, etc.) and tribal courts (e.g. Cherokee Nation Supreme Court); plus 3 historical English courts (House of Lords etc.) with very little data | tested |
+| **DOJ** | US Department of Justice | DOJ press releases; defendants can be foreign nationals (a sample featured a Colombian national) | tested |
+| **api.ftc.gov** (HSR) | US FTC | Mergers affecting US commerce; both parties can be foreign (sample: Swiss ABB acquiring UK Rotork) | tested |
+| FTC press releases | US FTC | US FTC press releases | official docs |
+| **OSHA** | US Department of Labor | Workplaces in the 50 states and US territories (Puerto Rico inspections confirmed) | tested |
+| **UCC Filings** | Colorado and Connecticut state governments | **Only filings made in these two states.** Debtors are mostly in-state (93% of Connecticut debtors are in CT), with a few out of state or abroad (Colorado has Canadian and UK debtors, among others) | tested |
+| USPTO | US Patent and Trademark Office | US patents and trademarks; applicants can be from any country (unconfirmed, not tested) | — |
+| D&B Direct+ | Global | 190+ countries and markets, nearly 600M organizations (2024 annual report); a few countries have no data (legacy docs list Antarctica, Cuba, North Korea, etc.) and some data blocks cover only certain regions, so ask D&B for its data-block coverage matrix | official |
+| Moody's Orbis | Global | 635M+ companies from 170+ sources; no official country count. Over 99% are private companies, and financial depth depends on each country's filing rules | official |
+| Quartr | Global listed companies | 16,000+ listed companies across 65+ markets; no public list of exchanges or countries, so you'd enumerate them via the API | official |
+| LexisNexis (news) | Global | 33,000+ licensed news sources from 170+ countries in 51 languages; about 23,000 of them are licensed for generative-AI use | official |
+
 ---
 
 ## 3. Source-by-source details
