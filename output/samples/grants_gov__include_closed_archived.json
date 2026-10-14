@@ -1,7 +1,7 @@
 {
   "errorcode": 0,
   "msg": "Webservice Succeeds",
-  "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.ImZRMkVjSmxyeFBBRmx4OXEyaVlldnF5YW01a1VUdWVzTkk2cnh6TWZTbEE9Ig.N6Sl6J1T33Sol1Mn12SVY3m0Gp7HOkp89gDbnS9pE3M",
+  "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.Inpuc0NjbVAyQzJUcUlRUGZvSG13WFQ5bTkzVUFEY1ZBWG53TWcxUEMxbjg9Ig.RwpamEXoimp3Ho_tWdp-vFJoZP8_k-MTMIS9awykFBo",
   "data": {
     "searchParams": {
       "resultType": "json",
@@ -19,7 +19,7 @@
       "keyword": "cybersecurity",
       "keywordEncoded": true
     },
-    "hitCount": 2126,
+    "hitCount": 2127,
     "startRecord": 0,
     "oppHits": [
       {
@@ -384,7 +384,7 @@
       {
         "label": "posted",
         "value": "posted",
-        "count": 182
+        "count": 183
       },
       {
         "label": "closed",
@@ -404,44 +404,49 @@
     ],
     "dateRangeOptions": [
       {
+        "label": "Posted Date - Last 3 Days",
+        "value": "3",
+        "count": 1
+      },
+      {
         "label": "Posted Date - Last 1 Week",
         "value": "7",
-        "count": 13
+        "count": 14
       },
       {
         "label": "Posted Date - Last 2 Weeks",
         "value": "14",
-        "count": 27
+        "count": 28
       },
       {
         "label": "Posted Date - Last 3 Weeks",
         "value": "21",
-        "count": 33
+        "count": 34
       },
       {
         "label": "Posted Date - Last 4 Weeks",
         "value": "28",
-        "count": 35
+        "count": 36
       },
       {
         "label": "Posted Date - Last 5 Weeks",
         "value": "35",
-        "count": 37
+        "count": 38
       },
       {
         "label": "Posted Date - Last 6 Weeks",
         "value": "42",
-        "count": 40
+        "count": 41
       },
       {
         "label": "Posted Date - Last 7 Weeks",
         "value": "49",
-        "count": 60
+        "count": 61
       },
       {
         "label": "Posted Date - Last 8 Weeks",
         "value": "56",
-        "count": 64
+        "count": 65
       }
     ],
     "suggestion": "",
@@ -449,22 +454,22 @@
       {
         "label": "City or township governments",
         "value": "02",
-        "count": 461
+        "count": 462
       },
       {
         "label": "County governments",
         "value": "01",
-        "count": 459
+        "count": 460
       },
       {
         "label": "For profit organizations other than small businesses",
         "value": "22",
-        "count": 355
+        "count": 356
       },
       {
         "label": "Independent school districts",
         "value": "05",
-        "count": 292
+        "count": 293
       },
       {
         "label": "Individuals",
@@ -474,57 +479,57 @@
       {
         "label": "Native American tribal governments (Federally recognized)",
         "value": "07",
-        "count": 486
+        "count": 487
       },
       {
         "label": "Native American tribal organizations (other than Federally recognized tribal governments)",
         "value": "11",
-        "count": 355
+        "count": 356
       },
       {
         "label": "Nonprofits having a 501(c)(3) status with the IRS, other than institutions of higher education",
         "value": "12",
-        "count": 587
+        "count": 588
       },
       {
         "label": "Nonprofits that do not have a 501(c)(3) status with the IRS, other than institutions of higher education",
         "value": "13",
-        "count": 461
+        "count": 462
       },
       {
         "label": "Others (see text field entitled \"Additional Information on Eligibility\" for clarification)",
         "value": "25",
-        "count": 1306
+        "count": 1307
       },
       {
         "label": "Private institutions of higher education",
         "value": "20",
-        "count": 556
+        "count": 557
       },
       {
         "label": "Public and State controlled institutions of higher education",
         "value": "06",
-        "count": 605
+        "count": 606
       },
       {
         "label": "Public housing authorities/Indian housing authorities",
         "value": "08",
-        "count": 212
+        "count": 213
       },
       {
         "label": "Small businesses",
         "value": "23",
-        "count": 326
+        "count": 327
       },
       {
         "label": "Special district governments",
         "value": "04",
-        "count": 375
+        "count": 376
       },
       {
         "label": "State governments",
         "value": "00",
-        "count": 667
+        "count": 668
       },
       {
         "label": "Unrestricted (i.e., open to any type of entity above), subject to any clarification in text field entitled \"Additional Information on Eligibility\"",
@@ -601,7 +606,7 @@
       {
         "label": "Health",
         "value": "HL",
-        "count": 406
+        "count": 407
       },
       {
         "label": "Housing",
@@ -678,7 +683,7 @@
       {
         "label": "Grant",
         "value": "G",
-        "count": 1252
+        "count": 1253
       },
       {
         "label": "Other",
@@ -1185,7 +1190,7 @@
           {
             "label": "National Institutes of Health",
             "value": "HHS-NIH11",
-            "count": 186
+            "count": 187
           },
           {
             "label": "Office of the Assistant Secretary for Health",
@@ -1200,7 +1205,7 @@
         ],
         "label": "Department of Health and Human Services",
         "value": "HHS",
-        "count": 392
+        "count": 393
       },
       {
         "subAgencyOptions": [

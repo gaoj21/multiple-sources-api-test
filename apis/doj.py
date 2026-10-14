@@ -9,13 +9,13 @@ META = {
     "docs": "https://www.justice.gov/developer",
     "limits": "pagesize 最大 50; 官方限流: 超过 4 次/秒会降速甚至被封; 总量 27 万+ 条 (2009 至今, 官方页面写的 14,000 已过时)",
     "how": "GET https://www.justice.gov/api/v1/press_releases.json (另有 blog_entries.json; speeches/videos 不存在, 实测 404); 也有 RSS /news/rss?type=press_release",
-    "keyword": "❗无全文搜索参数 (parameters[keyword] 会被静默忽略); 只能 parameters[title]=xxx 做标题匹配",
+    "keyword": "无全文搜索参数 (parameters[keyword] 会被静默忽略); 只能 parameters[title]=xxx 做标题匹配",
     "date": "支持: parameters[date] 精确匹配某一天 (官方示例用 Unix 时间戳, 实测 YYYY-MM-DD 也可以); 无区间 → 需逐天查或按 sort=date 翻页 (不传 sort 默认从 2009 年最旧的开始)",
     "sources": [
-        "✅ 官方: https://www.justice.gov/developer/api-documentation/api_v1 (2025-12-18 更新: press_releases / blog_entries 端点、pagesize≤50、4 次/秒限流、parameters[title] / parameters[date]、sort/direction/page、字段格式)",
-        "✅ 官方: https://www.justice.gov/developer (概览; 写着可按部门/主题过滤, 与实测不符)",
-        "✅ 官方: https://www.justice.gov/legalpolicies (内容默认 public domain, 部分图片除外)",
-        "🧪 实测: parameters[keyword] 和 parameters[component] 被忽略、YYYY-MM-DD 日期格式可用、date 为当天 12:00 UTC、RSS /news/rss?type=press_release (不在 API 文档里)",
+        "官方: https://www.justice.gov/developer/api-documentation/api_v1 (2025-12-18 更新: press_releases / blog_entries 端点、pagesize≤50、4 次/秒限流、parameters[title] / parameters[date]、sort/direction/page、字段格式)",
+        "官方: https://www.justice.gov/developer (概览; 写着可按部门/主题过滤, 与实测不符)",
+        "官方: https://www.justice.gov/legalpolicies (内容默认 public domain, 部分图片除外)",
+        "实测: parameters[keyword] 和 parameters[component] 被忽略、YYYY-MM-DD 日期格式可用、date 为当天 12:00 UTC、RSS /news/rss?type=press_release (不在 API 文档里)",
     ],
     "notes": [
         "时间字段: date = Unix 秒 (实测是发布日 12:00 UTC, 只有日期精度); created/changed 是 HTML <time datetime=...> 包着 Unix 秒, 精确到秒",

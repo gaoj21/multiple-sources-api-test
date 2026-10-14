@@ -17,10 +17,9 @@ import traceback
 from common import OUT_DIR, Probe
 
 MODULES = ["usaspending", "sam", "grants", "dnb", "orbis", "doj", "ftc", "uspto",
-           "quartr", "earnings_calls", "govinfo", "courtlistener", "lexisnexis", "osha", "ucc"]
-ICON = {True: "✅", False: "❌", None: "⏭️"}
-STATUS_TXT = {"ok": "✅ 可用", "partial": "🟡 部分可用", "needs_key": "🔑 需要 key/license",
-              "blocked": "⛔ 被拦截", "rate_limited": "⏳ 被限流", "error": "❌ 出错", "unknown": "?"}
+           "quartr", "govinfo", "courtlistener", "lexisnexis", "osha", "ucc"]
+ICON = {True: "[通过]", False: "[失败]", None: "[跳过]"}
+STATUS_TXT = {"ok": "可用", "partial": "部分可用", "needs_key": "需要 key / license", "blocked": "被拦截", "rate_limited": "被限流", "error": "出错", "unknown": "未知"}
 
 
 def main(selected):
@@ -52,6 +51,13 @@ def main(selected):
     print(f"\n报告已写入 {OUT_DIR / 'report.md'}")
 
 
+def _plain(text):
+    """旧结果里的备注可能带图标, 生成报告时换成文字。"""
+    for a, b in (("⚠️ ", "注意: "), (" ✅", ""), ("✅", ""), ("❌", "不支持"), ("❓", "未确认"), ("🧪 ", ""), ("📝 ", "")):
+        text = text.replace(a, b)
+    return text
+
+
 def render(results):
     L = ["# API 能力测试报告\n", "| API | 结论 | 认证 | License/费用 | 关键词 | 时间过滤 |", "|---|---|---|---|---|---|"]
     for r in results:
@@ -74,7 +80,7 @@ def render(results):
             for label, f in r["fields"].items():
                 L.append(f"- **{label}** ({len(f['all_fields'])} 个字段): `{', '.join(f['all_fields'][:25])}`")
                 for k, v in f["timestamp_fields"].items():
-                    L.append(f"  - ⏱ `{k}` = `{v}`")
+                    L.append(f"  - 时间戳 `{k}` = `{v}`")
         L.append("\n### HTTP 调用")
         for c in r["calls"]:
             rate = f" · 限流头 `{c['rate_headers']}`" if c.get("rate_headers") else ""
@@ -82,7 +88,7 @@ def render(results):
             L.append(f"- `{c['method']} {c['label']}` → **{c.get('status')}** ({c.get('elapsed_s')}s){rate}{err}")
         if r["notes"]:
             L.append("\n### 注意事项")
-            L += [f"- {n}" for n in r["notes"]]
+            L += [f"- {_plain(n)}" for n in r["notes"]]
     return "\n".join(L) + "\n"
 
 

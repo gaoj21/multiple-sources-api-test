@@ -13,11 +13,11 @@ META = {
     "keyword": "支持: $q= 全文搜索, 或 $where=upper(organizationname) like '%XXX%' (按债务人/担保权人名称)",
     "date": "支持: $where=filingdate between '2026-09-01' and '2026-09-30' (CO) / dt_accept (CT); 也能按失效日 lapsedate / dt_lapse 查",
     "sources": [
-        "✅ 官方 (州政府): 科罗拉多数据集元数据 https://data.colorado.gov/api/views/wffy-3uut.json — 每天午夜后自动更新, 最早记录 1966-04-01, 来源 Colorado Department of State",
-        "✅ 官方 (州政府): 康涅狄格 https://catalog.data.gov/dataset/uniform-commercial-code-ucc-lien-filings 与 data.ct.gov/d/xfev-8smz",
-        "✅ 官方: https://dev.socrata.com/docs/app-tokens.html — 无 token 按 IP 限流、有 token 目前不限流、超限 429",
-        "🧪 实测: 字段名 (响应头 X-SODA2-Fields)、CO 4 张表用 fileid 关联、CO 最新申报 2026-10-11 / CT 最新 2026-10-12、关键词和日期过滤结果",
-        "🔶 调研 (见汇总): 其他州多为付费批量文件 (TX $65/天, KY $1,500/月 等) 或只有网页; 商业 API 有 Middesk、D&B UCC Filings",
+        "官方 (州政府): 科罗拉多数据集元数据 https://data.colorado.gov/api/views/wffy-3uut.json — 每天午夜后自动更新, 最早记录 1966-04-01, 来源 Colorado Department of State",
+        "官方 (州政府): 康涅狄格 https://catalog.data.gov/dataset/uniform-commercial-code-ucc-lien-filings 与 data.ct.gov/d/xfev-8smz",
+        "官方: https://dev.socrata.com/docs/app-tokens.html — 无 token 按 IP 限流、有 token 目前不限流、超限 429",
+        "实测: 字段名 (响应头 X-SODA2-Fields)、CO 4 张表用 fileid 关联、CO 最新申报 2026-10-11 / CT 最新 2026-10-12、关键词和日期过滤结果",
+        "调研 (见汇总): 其他州多为付费批量文件 (TX $65/天, KY $1,500/月 等) 或只有网页; 商业 API 有 Middesk、D&B UCC Filings",
     ],
     "notes": [
         "只覆盖 CO 和 CT 两个州 (加上 OR 每月一份上月新增); 要全国数据只能买各州批量文件或用商业 API",

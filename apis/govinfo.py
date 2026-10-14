@@ -12,18 +12,18 @@ META = {
     "keyword": "支持: POST /search {query:'antitrust collection:(FR)'} (字段操作符语法, 可加 publishdate:range(...))",
     "date": "支持: 路径里的 lastModified 时间 (ISO8601, 精确到秒) / published 日期区间 / search 的 publishdate:range()",
     "sources": [
-        "✅ 官方: https://github.com/usgpo/api (README: 认证、限流 36,000/小时、/collections、/published、/search、offsetMark、sorts、/packages/{id}/summary 下载链接)",
-        "✅ 官方: https://api.govinfo.gov/api-docs (OpenAPI 3.0.1 规格; /docs 页面是 JS 渲染, 实际从这里读) — lastModified 格式 yyyy-MM-dd'T'HH:mm:ss'Z'、pageSize≤1000",
-        "✅ 官方: https://www.govinfo.gov/help/finding-info (publishdate:range(...) 语法)",
-        "✅ 官方: https://api.data.gov/docs/developer-manual/ (DEMO_KEY 默认 30/小时、50/天; X-RateLimit 头)",
-        "🧪 实测: DEMO_KEY 实际 Limit=10、用完后 Retry-After≈64000s; 个人 key Limit=36000; 各项过滤的总数变化",
+        "官方: https://github.com/usgpo/api (README: 认证、限流 36,000/小时、/collections、/published、/search、offsetMark、sorts、/packages/{id}/summary 下载链接)",
+        "官方: https://api.govinfo.gov/api-docs (OpenAPI 3.0.1 规格; /docs 页面是 JS 渲染, 实际从这里读) — lastModified 格式 yyyy-MM-dd'T'HH:mm:ss'Z'、pageSize≤1000",
+        "官方: https://www.govinfo.gov/help/finding-info (publishdate:range(...) 语法)",
+        "官方: https://api.data.gov/docs/developer-manual/ (DEMO_KEY 默认 30/小时、50/天; X-RateLimit 头)",
+        "实测: DEMO_KEY 实际 Limit=10、用完后 Retry-After≈64000s; 个人 key Limit=36000; 各项过滤的总数变化",
     ],
     "notes": [
         "翻页使用 offsetMark=* 游标 (旧的 offset 参数已废弃)",
         "两种时间要区分: dateIssued (文件发布日) vs lastModified (GovInfo 入库/更新时间, 用于增量同步)",
         "DEMO_KEY 用完后返回 429 + Retry-After≈64000s (约 18 小时), 实际上是按天的额度",
-        "实测 (2026-10-13, DEMO_KEY 用完前): 连接 ✅ 42 个 collection; 关键词 antitrust 使 FR 总数 1,027,506 → 14,650 ✅; "
-        "publishdate:range(2025Q1) 14,650 → 101 且 10/10 条在区间内 ✅; /collections/FR/{lastModified} 增量 ✅; /packages/{id}/summary 提供 pdf/xml/zip/mods 下载链接 ✅",
+        "实测 (2026-10-13, DEMO_KEY 用完前): 连接  42 个 collection; 关键词 antitrust 使 FR 总数 1,027,506 → 14,650 ; "
+        "publishdate:range(2025Q1) 14,650 → 101 且 10/10 条在区间内 ; /collections/FR/{lastModified} 增量 ; /packages/{id}/summary 提供 pdf/xml/zip/mods 下载链接 ",
         "collection 代码: FR=联邦公报, CFR, USCOURTS=法院意见, BILLS, CREC=国会记录, PLAW 等",
     ],
 }

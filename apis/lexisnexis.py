@@ -5,18 +5,18 @@ from common import Probe, env
 NAME = "LexisNexis Data+"
 META = {
     "auth": "OAuth2 client_credentials: POST auth-api.lexisnexis.com/oauth/v2/token (Basic client_id:secret, form 表单, scope=http://oauth.lexisnexis.com/all) → Bearer, 24 小时有效; 凭证需要 Service-to-Service ID",
-    "license": "💰 商业付费 license: 调用方承担所有 LexisNexis 费用, 能看哪些内容源取决于授权; 具体计费和再分发条款看合同",
+    "license": "商业付费 license: 调用方承担所有 LexisNexis 费用, 能看哪些内容源取决于授权; 具体计费和再分发条款看合同",
     "docs": "https://dev.lexisnexis.com (公开可读的 API 规格; 凭证需要合同)",
     "limits": "QPS 按合同, 超出返回 429 (官方无数字); 每页默认 10 条, $top 最大 50",
     "how": "OData REST: GET services-api.lexisnexis.com/v1/News?$search=...&$filter=...&$top=...; 另有 bulk 交付 (S3/SFTP)",
     "keyword": "支持: $search= (必填; 有 Boolean 布尔检索模式, 如 antitrust AND merger; w/5 近邻语法在 API 文档里未确认)",
     "date": "支持: $filter=Date ge 2025-01-01 and Date le 2025-03-31; $orderby=Date desc",
     "sources": [
-        "✅ 官方: https://dev.lexisnexis.com — Web Services API 规格文件 (公开): Introduction&Endpoint URI.yml (服务地址、token 地址)、Authorization and Authentication.yml (client_credentials 请求示例、24 小时)",
-        "✅ 官方: 同门户 Filter Descriptions and Examples.yml ($filter=Date gt/le 示例、$top≤50)、News/NewsAPI.yml 与 NewsExamples.yml ($search 必填、Boolean、$orderby、$expand、value/@odata.count/ResultId、429)",
-        "✅ 官方: https://www.lexisnexis.com/en-us/products/nexis-data-plus/data-delivery.page (Nexis Data+ 产品与交付方式)",
-        "🔶 半官方: https://github.com/rwcuffney/lexisnexisapi (LexisNexis 集成顾问写的 Python 包)",
-        "🧪 实测: token 端点无凭证 401、数据端点 498",
+        "官方: https://dev.lexisnexis.com — Web Services API 规格文件 (公开): Introduction&Endpoint URI.yml (服务地址、token 地址)、Authorization and Authentication.yml (client_credentials 请求示例、24 小时)",
+        "官方: 同门户 Filter Descriptions and Examples.yml ($filter=Date gt/le 示例、$top≤50)、News/NewsAPI.yml 与 NewsExamples.yml ($search 必填、Boolean、$orderby、$expand、value/@odata.count/ResultId、429)",
+        "官方: https://www.lexisnexis.com/en-us/products/nexis-data-plus/data-delivery.page (Nexis Data+ 产品与交付方式)",
+        "半官方: https://github.com/rwcuffney/lexisnexisapi (LexisNexis 集成顾问写的 Python 包)",
+        "实测: token 端点无凭证 401、数据端点 498",
     ],
     "notes": [
         "端点/实体集名称 (News, LegalNews, Cases, CompanyAndFinancial ...) 取决于开通的数据集, 用 LEXIS_ENTITY 变量调整",

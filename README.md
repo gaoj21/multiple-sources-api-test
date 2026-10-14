@@ -1,4 +1,4 @@
-# 15 个数据源 API 能力测试
+# 14 个数据源 API 能力测试
 
 ## 运行
 
@@ -20,25 +20,24 @@ python run_all.py --render-only       # 不发请求, 只重新生成报告
 
 **调用限制与建议运行频率见 [LIMITS.md](LIMITS.md)。**
 
-## 实测结论 (2026-10-13, 出口 IP 在新加坡)
+## 实测结论（2026-10-13，出口 IP 在新加坡）
 
-| API | 无 key 能连? | 认证 / 费用 | 关键词 | 时间过滤 | 时间戳 |
+| API | 是否可用 | 认证 / 费用 | 关键词 | 时间过滤 | 时间戳 |
 |---|---|---|---|---|---|
-| USAspending.gov | ✅ 完全可用 | 无需 key, 免费 | ✅ `keywords` | ✅ `time_period` (可选 action/signed/last_modified) | `Last Modified Date` 到秒 |
-| Grants.gov | ✅ 完全可用 | 无需 key, 免费 | ✅ `keyword` | ❌ 无区间参数, 只能按 openDate 排序后客户端过滤 | 列表只有日期; 详情有 `lastUpdatedDate` 到秒 |
-| CourtListener | ✅ search 匿名可用 | 其他端点需免费 token；默认只有 5 次/分钟、50 次/小时、125 次/天 | ✅ `q` (布尔语法) | ✅ `filed_after/before`, `date_modified__gte` | `dateFiled` + `meta.timestamp` 到微秒 |
-| DOJ News | ✅ | 无需 key, 免费 | ⚠️ **只能匹配标题**, `parameters[keyword]` 被静默忽略 | ⚠️ 只能查**单日** `parameters[date]` | `date` (Unix 秒, 日期精度), `created`/`changed` 到秒 |
-| GovInfo | ✅ 个人 key 全部通过 | 免费 api.data.gov key，36,000 次/小时 | ✅ 字段操作符语法 | ✅ `publishdate:range()` / lastModified 增量 | `dateIssued`, `lastModified` 到秒 |
-| FTC 新闻稿 | ⛔ **www.ftc.gov 被 WAF 拦截** | 新闻稿无 API, 只有 RSS/网页 | 网页可以 | RSS 只有最近的条目 | `pubDate`; api.ftc.gov 有 `created/updated` |
-| SAM.gov | ✅ 有效 key 全部通过 | 免费 key, 但**无角色每天只有 10 次** | `title` | ✅ `postedFrom/To` 必填, 跨度 ≤1 年 | `postedDate`, `responseDeadLine` |
-| USPTO | ⛔ 拿不到 key（ID.me 需要美国证件） | 免费 key, 需 MFA + ID.me 实名; 商标用另一个 key | ✅ `q` | ✅ `rangeFilters` | `filingDate`, `lastIngestionDateTime` |
-| D&B Direct+ | 🔑 401 | 💰 付费, 按调用计费 | ✅ `searchTerm` | ❌ 只能用 Monitoring 推送 | `transactionTimestamp` |
-| Moody's Orbis | 🔑 401 | 💰 付费 | 名称匹配 / 条件筛选 | ❓ 需和 Moody's 确认 | 需在 SELECT 里请求 |
-| Quartr | 🔑 401 | 💰 付费 (v3, v1/v2 已 410) | ❌ 只能按 ticker/ISIN/CIK | ✅ `startDate/endDate`, `updatedAfter` | 事件 `date` (未用 key 验证) |
-| LexisNexis Data+ | 🔑 401/498 | 💰 付费 | ✅ `$search` 布尔 | ✅ `$filter=Date ge ...` | `Date` |
-| OSHA | ✅ 用 DOL key 全部通过 | 免费 DOL key；连续请求会 429 | ✅ `like` | ✅ `gt`/`lt` | 入库时间 `load_dt` 到秒 |
-| UCC Filings（CO / CT） | ✅ 完全可用 | 不需要 key，免费 | ✅ `$where like` / `$q` | ✅ `$where between` | 申报日、失效日（只有日期） |
-| Earnings Calls | ✅ Alpha Vantage demo 可用 | 免费 key（25 次/天） | ❌ 按代码 + 季度 | 🟡 按季度 / 日历范围 | 发布日只有日期；文字稿无时间 |
+| USAspending.gov | 可用 | 无需 key, 免费 | 支持 `keywords` | 支持 `time_period` (可选 action/signed/last_modified) | `Last Modified Date` 到秒 |
+| Grants.gov | 可用 | 无需 key, 免费 | 支持 `keyword` | 不支持，无区间参数, 只能按 openDate 排序后客户端过滤 | 列表只有日期; 详情有 `lastUpdatedDate` 到秒 |
+| CourtListener | 可用（搜索可匿名，其他接口用 token） | 其他端点需免费 token；默认只有 5 次/分钟、50 次/小时、125 次/天 | 支持 `q` (布尔语法) | 支持 `filed_after/before`, `date_modified__gte` | `dateFiled` + `meta.timestamp` 到微秒 |
+| DOJ News | 可用（只能按标题搜、只能查某一天） | 无需 key, 免费 | 部分支持：**只能匹配标题**, `parameters[keyword]` 被静默忽略 | 部分支持：只能查**单日** `parameters[date]` | `date` (Unix 秒, 日期精度), `created`/`changed` 到秒 |
+| GovInfo | 可用 | 免费 api.data.gov key，36,000 次/小时 | 支持，字段操作符语法 | 支持 `publishdate:range()` / lastModified 增量 | `dateIssued`, `lastModified` 到秒 |
+| FTC 新闻稿 | 不可用：本机 IP 被 FTC 网站拦截，需要换美国 IP（api.ftc.gov 的并购审查公告可用） | 新闻稿无 API, 只有 RSS/网页 | 网页可以 | RSS 只有最近的条目 | `pubDate`; api.ftc.gov 有 `created/updated` |
+| SAM.gov | 可用（每天只有 10 次） | 免费 key, 但**无角色每天只有 10 次** | `title` | 支持 `postedFrom/To` 必填, 跨度 ≤1 年 | `postedDate`, `responseDeadLine` |
+| USPTO | 不可用：key 需要 ID.me 实名验证，没有美国证件 | 免费 key, 需 MFA + ID.me 实名; 商标用另一个 key | 支持 `q` | 支持 `rangeFilters` | `filingDate`, `lastIngestionDateTime` |
+| D&B Direct+ | 不可用：付费，还没买凭证 | 付费, 按调用计费 | 支持 `searchTerm` | 不支持，只能用 Monitoring 推送 | `transactionTimestamp` |
+| Moody's Orbis | 不可用：付费，还没买凭证 | 付费 | 名称匹配 / 条件筛选 | 未确认：需和 Moody's 确认 | 需在 SELECT 里请求 |
+| Quartr | 不可用：付费，还没买凭证 | 付费 (v3, v1/v2 已 410) | 不支持，只能按 ticker/ISIN/CIK | 支持 `startDate/endDate`, `updatedAfter` | 事件 `date` (未用 key 验证) |
+| LexisNexis Data+ | 不可用：付费，还没买凭证 | 付费 | 支持 `$search` 布尔 | 支持 `$filter=Date ge ...` | `Date` |
+| OSHA | 可用 | 免费 DOL key；连续请求会 429 | 支持 `like` | 支持 `gt`/`lt` | 入库时间 `load_dt` 到秒 |
+| UCC Filings（CO / CT） | 可用（只覆盖科罗拉多、康涅狄格两州） | 不需要 key，免费 | 支持 `$where like` / `$q` | 支持 `$where between` | 申报日、失效日（只有日期） |
 
 ## 重点注意
 
@@ -51,12 +50,11 @@ python run_all.py --render-only       # 不发请求, 只重新生成报告
 
 ## 调用方式的信息来源
 
-每个 `apis/*.py` 的 `META["sources"]` 里都逐条列了来源，`output/report.md` 每个 API 下面也有"信息来源"一节。标记含义：
+每个 `apis/*.py` 的 `META["sources"]` 里都逐条列了来源，`output/report.md` 每个 API 下面也有"信息来源"一节。没有特别标注的信息都来自官方文档。括号里的标注表示：
 
-- ✅ **官方**：在官方文档里亲眼看到（附网址）
-- 🔶 **半官方**：厂商合作方的开源代码或文档、采购目录等（只用于 Orbis 和 Lexis）
-- 🧪 **实测**：文档里没写，是实际调用观察到的
-- ❓ **未确认**：官方没找到，也没实测
+- （实测）：实际调用时观察到的，文档里没写
+- （半官方）：来自厂商合作方的开源代码或文档、采购目录等（只用于 Orbis 和 Lexis）
+- （未确认）：官方没找到，也没实测
 
 做法：最初的代码基于对这些 API 的已有知识写成，再逐一实际调用验证；之后分 4 组对照官方文档逐条核对，把和官方不一致的地方都改掉了。
 
@@ -75,5 +73,4 @@ python run_all.py --render-only       # 不发请求, 只重新生成报告
 | LexisNexis | dev.lexisnexis.com 公开的规格文件 | 中高 | 官方名称是 Web Services API；公司数据集叫 `CompanyAndFinancial`；加 `$expand=Document` 可以直接拿全文 |
 | OSHA | dataportal.dol.gov/api-guide + 用户指南 PDF + `/json/metadata` | 高 | 新增；官方没写限流，实测会 429 |
 | UCC Filings | data.colorado.gov、data.ct.gov 元数据 + dev.socrata.com | 高 | 新增；其他州多为付费批量文件 |
-| Earnings Calls | alphavantage.co/documentation | 高 | 新增（Alpha Vantage） |
 | Moody's Orbis | **没有公开官方文档** | 低（全部是半官方或实测） | 匹配接口返回数组（修了一个会报错的 bug）；查询字段要加 `Match.` 前缀 |

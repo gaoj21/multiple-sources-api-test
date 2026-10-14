@@ -13,11 +13,11 @@ META = {
     "keyword": "支持: filter_object 用 like 运算符做模糊匹配, 如 {\"field\":\"estab_name\",\"operator\":\"like\",\"value\":\"%WALMART%\"}",
     "date": "支持: filter_object 用 gt / lt 比较日期字段 (如 open_date), 可用 and/or 组合; sort + sort_by 排序",
     "sources": [
-        "✅ 官方: https://dataportal.dol.gov/pdf/dol-api-user-guide.pdf (2024-08-05 版): 注册拿 key、请求模板、limit/offset/fields/sort/sort_by/filter_object、运算符 eq/neq/gt/lt/in/not_in/like、10,000 条或 5MB 上限、禁止公开 key",
-        "✅ 官方: https://apiprod.dol.gov/v4/datasets (无需 key, 实测可访问): OSHA 有 11 张表",
-        "🧪 实测: 无 key 请求数据返回 401 'The API key is either incorrect or missing'",
-        "🧪 实测 (有 key): 公司名 like 过滤、open_date 区间、load_dt 增量、违规表 → 检查表关联都有效; 连续请求会触发 429",
-        "✅ 官方: /json/metadata 字段说明 (实测可读): 每个字段的名称、描述、类型、关联表",
+        "官方: https://dataportal.dol.gov/pdf/dol-api-user-guide.pdf (2024-08-05 版): 注册拿 key、请求模板、limit/offset/fields/sort/sort_by/filter_object、运算符 eq/neq/gt/lt/in/not_in/like、10,000 条或 5MB 上限、禁止公开 key",
+        "官方: https://apiprod.dol.gov/v4/datasets (无需 key, 实测可访问): OSHA 有 11 张表",
+        "实测: 无 key 请求数据返回 401 'The API key is either incorrect or missing'",
+        "实测 (有 key): 公司名 like 过滤、open_date 区间、load_dt 增量、违规表 → 检查表关联都有效; 连续请求会触发 429",
+        "官方: /json/metadata 字段说明 (实测可读): 每个字段的名称、描述、类型、关联表",
     ],
     "notes": [
         "OSHA 的 11 张表: inspection (检查)、violation (违规)、violation_event、violation_gen_duty_std、accident (事故)、accident_abstract、accident_injury、accident_lookup2、related_activity、emphasis_codes、optional_code_info",

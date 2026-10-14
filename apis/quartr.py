@@ -5,18 +5,18 @@ from common import Probe, env
 NAME = "Quartr"
 META = {
     "auth": "Header x-api-key (Quartr 商务开通, 在 Quartr Portal portal.quartr.dev 生成)",
-    "license": "💰 商业付费 license: 数据集可单买或打包 (transcripts、audio、live、summaries、解析文档等), companies 和 events 始终包含",
+    "license": "商业付费 license: 数据集可单买或打包 (transcripts、audio、live、summaries、解析文档等), companies 和 events 始终包含",
     "docs": "https://quartr.com/docs/ (docs.quartr.com 会跳转到这里)  ·  OpenAPI: https://api.quartr.com/public/v3/openapi.json",
     "limits": "按套餐, 默认 50 次/秒, 超出返回 429; 游标分页 (limit 默认 10、最大 500, 跟 nextCursor 直到为 null); v1/v2 已下线 (实测 410 Gone), 只能用 v3",
     "how": "REST JSON: /public/v3/companies, /events, /documents/{transcripts|reports|slides}, /audio, /live; 另有 Webhooks 和 Snowflake 数据共享",
-    "keyword": "❗没有全文关键词搜索; 只能按 tickers / isins / ciks / companyIds / countries / exchanges / typeIds 过滤",
+    "keyword": "没有全文关键词搜索; 只能按 tickers / isins / ciks / companyIds / countries / exchanges / typeIds 过滤",
     "date": "支持: startDate / endDate (事件日期) 以及 updatedAfter / updatedBefore (数据更新时间, 适合增量)",
     "sources": [
-        "✅ 官方: https://api.quartr.com/public/v3/openapi.json (全部端点和参数、x-api-key、无关键词参数)",
-        "✅ 官方: https://quartr.com/docs/rest-api/auth.md (认证、Portal、默认 50 次/秒)",
-        "✅ 官方: https://quartr.com/docs/rest-api/fetching-data.md (游标分页、startDate/endDate 按事件日期、updatedAfter 用于增量、计费方式)",
-        "✅ 官方: https://quartr.com/docs/datasets/summaries.md 与 live-earnings-call-transcripts.md (摘要、直播文字稿 transcriptVersion 1.6/1.7)",
-        "🧪 实测: v1/v2 返回 410、v3 无 key 返回 401",
+        "官方: https://api.quartr.com/public/v3/openapi.json (全部端点和参数、x-api-key、无关键词参数)",
+        "官方: https://quartr.com/docs/rest-api/auth.md (认证、Portal、默认 50 次/秒)",
+        "官方: https://quartr.com/docs/rest-api/fetching-data.md (游标分页、startDate/endDate 按事件日期、updatedAfter 用于增量、计费方式)",
+        "官方: https://quartr.com/docs/datasets/summaries.md 与 live-earnings-call-transcripts.md (摘要、直播文字稿 transcriptVersion 1.6/1.7)",
+        "实测: v1/v2 返回 410、v3 无 key 返回 401",
     ],
     "notes": [
         "实时电话会: /live 和 /live/transcripts 提供直播中的文字稿 (transcriptVersion)",

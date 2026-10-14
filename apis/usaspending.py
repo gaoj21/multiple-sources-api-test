@@ -12,11 +12,11 @@ META = {
     "keyword": "支持: filters.keywords (字符串数组; 官方没写具体搜哪些字段; 旧的单数 keyword 已废弃)",
     "date": "支持: filters.time_period[{start_date,end_date,date_type}], date_type 可选 action_date / date_signed / last_modified_date / new_awards_only",
     "sources": [
-        "✅ 官方: https://api.usaspending.gov/docs/endpoints (无需认证、端点列表)",
-        "✅ 官方: GitHub api_contracts — https://github.com/fedspendingtransparency/usaspending-api/tree/master/usaspending_api/api_contracts (spending_by_award.md / spending_by_award_count.md / awards/last_updated.md / bulk_download/awards.md: 参数、字段名、award 类型代码)",
-        "✅ 官方: .../api_contracts/search_filters.md (keywords、time_period + date_type 四种取值、最早 2007-10-01)",
-        "✅ 官方: https://www.usaspending.gov/data/data-sources-download.pdf 与 about-the-data-download.pdf (每日更新、DoD/USACE 90 天延迟)",
-        "🧪 实测: limit 最大 100、award_type_codes 不能跨组混用 (官方示例反而混用了)、各项过滤的总数变化",
+        "官方: https://api.usaspending.gov/docs/endpoints (无需认证、端点列表)",
+        "官方: GitHub api_contracts — https://github.com/fedspendingtransparency/usaspending-api/tree/master/usaspending_api/api_contracts (spending_by_award.md / spending_by_award_count.md / awards/last_updated.md / bulk_download/awards.md: 参数、字段名、award 类型代码)",
+        "官方: .../api_contracts/search_filters.md (keywords、time_period + date_type 四种取值、最早 2007-10-01)",
+        "官方: https://www.usaspending.gov/data/data-sources-download.pdf 与 about-the-data-download.pdf (每日更新、DoD/USACE 90 天延迟)",
+        "实测: limit 最大 100、award_type_codes 不能跨组混用 (官方示例反而混用了)、各项过滤的总数变化",
     ],
     "notes": [
         "award_type_codes 必须同一大类: 合同 A/B/C/D, 拨款 02-05, 贷款 07/08 等, 混用会 400",

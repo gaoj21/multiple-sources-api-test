@@ -5,19 +5,19 @@ from common import Probe, env
 NAME = "D&B Direct+"
 META = {
     "auth": "OAuth2 client_credentials: Basic base64(key:secret) → POST /v3/token (form 表单 grant_type=client_credentials) 拿 access_token (24 小时有效), 之后 Bearer; 旧版 /v2/token 用 JSON body",
-    "license": "💰 商业付费 license: key/secret 只能找 D&B 客户代表开通, 按产品/Data Block 授权 (companyinfo L1 是所有 block 的起点); 每次调用计入合同配额",
+    "license": "商业付费 license: key/secret 只能找 D&B 客户代表开通, 按产品/Data Block 授权 (companyinfo L1 是所有 block 的起点); 每次调用计入合同配额",
     "docs": "https://directplus.documentation.dnb.com (除首页外现在都要 D&B 账号登录)",
     "limits": "TPS 和 周/月/年配额都按合同 (官方无默认数字), 超出返回 429 (errorCode 0045/0046), 配额每天 UTC 0 点重置; 未开通的产品返回 401 errorCode 00004",
     "how": "REST JSON: /v1/match/cleanseMatch (名称+地址→DUNS), /v1/search/criteria (条件搜索), /v1/data/duns/{duns}?blockIDs=... (数据块)",
     "keyword": "支持: search/criteria 的 searchTerm (公司名/关键词) 及 industry/地域等条件; typeahead 可前缀匹配",
-    "date": "❗不支持按时间查询; 变化追踪要用 Monitoring (订阅 DUNS 后推送变更通知) ",
+    "date": "不支持按时间查询; 变化追踪要用 Monitoring (订阅 DUNS 后推送变更通知) ",
     "sources": [
-        "✅ 官方 (Wayback 存档, 因现在需登录): directplus.documentation.dnb.com/html/pages/Authentication.html — 2024-11 版 /v3/token、form body、24 小时、错误码 00004/00040; 2022 版 /v2/token",
-        "✅ 官方 (Wayback 存档 2024-01): .../html/pages/UsingDplusAPIs.html — 配额按合同、429 错误码 0045/0046",
-        "✅ 官方 (Wayback 存档 2025-01): .../html/resources/JSONSample_IDR.html 与 JSONSample_Search.html — cleanseMatch、search/criteria、typeahead 的请求和返回字段",
-        "✅ 官方 (Wayback 存档): companyinfo_L2_v1.json swagger (data/duns + blockIDs)、StandardDataBlocks、Monitoring 页面",
-        "🧪 实测: 无凭证请求 token 返回 401 'not currently authorised' (= 官方错误码 00004)",
-        "⚠️ 未用真实凭证跑过; 官方文档最新只看到 2024-11 的存档",
+        "官方 (Wayback 存档, 因现在需登录): directplus.documentation.dnb.com/html/pages/Authentication.html — 2024-11 版 /v3/token、form body、24 小时、错误码 00004/00040; 2022 版 /v2/token",
+        "官方 (Wayback 存档 2024-01): .../html/pages/UsingDplusAPIs.html — 配额按合同、429 错误码 0045/0046",
+        "官方 (Wayback 存档 2025-01): .../html/resources/JSONSample_IDR.html 与 JSONSample_Search.html — cleanseMatch、search/criteria、typeahead 的请求和返回字段",
+        "官方 (Wayback 存档): companyinfo_L2_v1.json swagger (data/duns + blockIDs)、StandardDataBlocks、Monitoring 页面",
+        "实测: 无凭证请求 token 返回 401 'not currently authorised' (= 官方错误码 00004)",
+        "注意: 未用真实凭证跑过; 官方文档最新只看到 2024-11 的存档",
     ],
     "notes": [
         "每个响应都带 transactionDetail.transactionTimestamp (调用时间); 数据块里各元素带 lastUpdatedDate",
