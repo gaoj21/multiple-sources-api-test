@@ -1343,6 +1343,232 @@
     "tested_at": "2026-10-13T06:43:14+00:00"
   },
   {
+    "name": "EarningsCall",
+    "status": "partial",
+    "meta": {
+      "auth": "参数 apikey; 'demo' key 无需注册, 只能查 AAPL 和 MSFT; 免费试用 key 需邮箱或 Google 登录; 正式使用要付费",
+      "license": "付费: Starter $60/月 (只有纯文本)、Premium $69/月 (发言人、逐词时间、问答拆分)、Ultimate $129/月 (加音频)、Ultimate+ $155/月 (加 webhooks)",
+      "docs": "https://earningscall.biz/docs  ·  套餐: https://earningscall.biz/docs/plans  ·  价格: https://earningscall.biz/api-pricing",
+      "limits": "Starter 套餐 10 次/分钟; 实测响应头 x-ratelimit-remaining (demo 为 89 左右); 试用 key 的剩余次数在 x-trial-calls-remaining",
+      "how": "REST JSON: GET https://api.earningscall.dev/events (某公司全部电话会) → /transcript?year=&quarter=&level=1..4; 另有 /symbols、/calendar、/audio、/slides",
+      "keyword": "只能按公司名或代码搜公司 (/symbols?search=); 不能在文字稿里做关键词搜索",
+      "date": "按 year + quarter 取某一场; /calendar?year=&month=&day= 查某一天有哪些电话会",
+      "sources": [
+        "官方: https://earningscall.biz/docs 、/docs/plans 、/api-pricing — 接口、四个 level、套餐价格、覆盖 9,000+ 家公司 (主要美国, 加拿大/欧洲/澳洲较少)、多数公司 2020 年起",
+        "实测: demo key 的 level 4 没有拆分: prepared_remarks 就是整篇全文, 没有 questions_and_answers 字段 (多个季度都一样; 不确定是 demo 限制还是功能问题)",
+        "实测: demo key 可取 AAPL/MSFT 全部四个 level; 查 JPM 返回 403 'Demo accounts can only access Apple (AAPL) and Microsoft'; 日历只能查 2025-01-10"
+      ],
+      "notes": [
+        "四个 level (官方): 1 = 整篇纯文本; 2 = 按发言人分段 + 发言人姓名职位; 3 = 每个词的开始时间 (秒); 4 = 拆成管理层发言 prepared_remarks 和问答 questions_and_answers (demo key 实测没拆)",
+        "实测 AAPL: 33 场电话会 (2018-07 起); 一场约 4.5 万字符、58 段发言、11 位发言人; level 3 有 7,692 个词的时间, 整场约 60 分钟",
+        "财报日历里的 conference_date 只有日期 (时间是 00:00), 单场电话会的 conference_date 精确到分钟",
+        "每场电话会都有 conference_date (带时区, 如 2024-10-31T17:00:00-04:00), 精确到分钟",
+        "官方说约一半电话会在结束后 15 分钟内可取"
+      ]
+    },
+    "checks": [
+      {
+        "item": "连接 / 电话会列表",
+        "passed": true,
+        "detail": "AAPL 共 33 场, 最早 2018-07-31T17:00:00-04:00, 最新 2026-07-30T14:00:00-07:00"
+      },
+      {
+        "item": "level 1 纯文本 (2026Q3)",
+        "passed": true,
+        "detail": "44767 字符; 开头: Good afternoon and welcome to the Apple Q3 Fiscal Year 2026 Earnings Conference "
+      },
+      {
+        "item": "level 2 按发言人分段",
+        "passed": true,
+        "detail": "58 段, 11 位发言人, 如 [('Suhasini Chandramouli', 'Director of Investor Relations'), ('Tim Cook', 'Chief Executive Officer'), ('Kevan Parekh', 'Chief Financial Officer'), ('Operator', 'Conference Operator')]"
+      },
+      {
+        "item": "level 3 逐词时间",
+        "passed": true,
+        "detail": "7692 个词带开始时间; 最后一个词在第 3627.862 秒 (约 60 分钟)"
+      },
+      {
+        "item": "level 4 管理层发言 / 问答拆分",
+        "passed": false,
+        "detail": "管理层发言 44767 字符, 问答 0 字符; prepared_remarks 与 level 1 全文完全相同, 没有拆分"
+      },
+      {
+        "item": "按公司名搜索 'microsoft'",
+        "passed": true,
+        "detail": "返回1条, 其中1条包含'microsoft'"
+      },
+      {
+        "item": "财报日历 2025-01-10",
+        "passed": true,
+        "detail": "16/16 条在 2025-01-10~2025-01-11 内; 样例 ['2025-01-10', '2025-01-10', '2025-01-10']"
+      },
+      {
+        "item": "demo key 限制",
+        "passed": true,
+        "detail": "查 AAPL/MSFT 以外的公司返回 403"
+      }
+    ],
+    "fields": {
+      "event": {
+        "all_fields": [
+          "year",
+          "quarter",
+          "conference_date",
+          "is_published"
+        ],
+        "timestamp_fields": {
+          "conference_date": "2026-07-30T14:00:00-07:00",
+          "is_published": "true"
+        }
+      },
+      "transcript level 1": {
+        "all_fields": [
+          "exchange",
+          "symbol",
+          "company_name",
+          "level",
+          "event.year",
+          "event.quarter",
+          "event.conference_date"
+        ],
+        "timestamp_fields": {
+          "event.conference_date": "2026-07-30T14:00:00-07:00"
+        }
+      },
+      "speaker segment": {
+        "all_fields": [
+          "speaker.id",
+          "speaker.name",
+          "speaker.title",
+          "text"
+        ],
+        "timestamp_fields": {}
+      },
+      "calendar row": {
+        "all_fields": [
+          "symbol",
+          "company_name",
+          "exchange",
+          "conference_date",
+          "year",
+          "quarter",
+          "transcript_ready"
+        ],
+        "timestamp_fields": {
+          "conference_date": "2025-01-10T00:00:00-05:00"
+        }
+      }
+    },
+    "notes": [
+      "四个 level (官方): 1 = 整篇纯文本; 2 = 按发言人分段 + 发言人姓名职位; 3 = 每个词的开始时间 (秒); 4 = 拆成管理层发言 prepared_remarks 和问答 questions_and_answers (demo key 实测没拆)",
+      "实测 AAPL: 33 场电话会 (2018-07 起); 一场约 4.5 万字符、58 段发言、11 位发言人; level 3 有 7,692 个词的时间, 整场约 60 分钟",
+      "财报日历里的 conference_date 只有日期 (时间是 00:00), 单场电话会的 conference_date 精确到分钟",
+      "每场电话会都有 conference_date (带时区, 如 2024-10-31T17:00:00-04:00), 精确到分钟",
+      "官方说约一半电话会在结束后 15 分钟内可取",
+      "未配置 EARNINGSCALL_API_KEY, 用 demo key (只能查 AAPL / MSFT)"
+    ],
+    "calls": [
+      {
+        "label": "events AAPL",
+        "method": "GET",
+        "url": "https://api.earningscall.dev/events?apikey=***&exchange=NASDAQ&symbol=AAPL",
+        "status": 200,
+        "elapsed_s": 0.69,
+        "content_type": "application/json",
+        "bytes": 3112,
+        "rate_headers": {
+          "X-Ratelimit-Remaining": "89"
+        }
+      },
+      {
+        "label": "transcript level 1",
+        "method": "GET",
+        "url": "https://api.earningscall.dev/transcript?apikey=***&exchange=NASDAQ&symbol=AAPL&year=2026&quarter=3&level=1",
+        "status": 200,
+        "elapsed_s": 0.44,
+        "content_type": "application/json",
+        "bytes": 45819,
+        "rate_headers": {
+          "X-Ratelimit-Remaining": "89"
+        }
+      },
+      {
+        "label": "transcript level 2",
+        "method": "GET",
+        "url": "https://api.earningscall.dev/transcript?apikey=***&exchange=NASDAQ&symbol=AAPL&year=2026&quarter=3&level=2",
+        "status": 200,
+        "elapsed_s": 0.28,
+        "content_type": "application/json",
+        "bytes": 51141,
+        "rate_headers": {
+          "X-Ratelimit-Remaining": "88"
+        }
+      },
+      {
+        "label": "transcript level 3",
+        "method": "GET",
+        "url": "https://api.earningscall.dev/transcript?apikey=***&exchange=NASDAQ&symbol=AAPL&year=2026&quarter=3&level=3",
+        "status": 200,
+        "elapsed_s": 0.47,
+        "content_type": "application/json",
+        "bytes": 133417,
+        "rate_headers": {
+          "X-Ratelimit-Remaining": "87"
+        }
+      },
+      {
+        "label": "transcript level 4",
+        "method": "GET",
+        "url": "https://api.earningscall.dev/transcript?apikey=***&exchange=NASDAQ&symbol=AAPL&year=2026&quarter=3&level=4",
+        "status": 200,
+        "elapsed_s": 0.23,
+        "content_type": "application/json",
+        "bytes": 45831,
+        "rate_headers": {
+          "X-Ratelimit-Remaining": "87"
+        }
+      },
+      {
+        "label": "symbols search",
+        "method": "GET",
+        "url": "https://api.earningscall.dev/symbols?apikey=***&search=microsoft",
+        "status": 200,
+        "elapsed_s": 0.22,
+        "content_type": "application/json",
+        "bytes": 82,
+        "rate_headers": {
+          "X-Ratelimit-Remaining": "86"
+        }
+      },
+      {
+        "label": "calendar 2025-01-10",
+        "method": "GET",
+        "url": "https://api.earningscall.dev/calendar?apikey=***&year=2025&month=1&day=10",
+        "status": 200,
+        "elapsed_s": 0.22,
+        "content_type": "application/json",
+        "bytes": 2739,
+        "rate_headers": {
+          "X-Ratelimit-Remaining": "85"
+        }
+      },
+      {
+        "label": "demo restriction (JPM)",
+        "method": "GET",
+        "url": "https://api.earningscall.dev/transcript?apikey=***&exchange=NYSE&symbol=JPM&year=2024&quarter=4",
+        "status": 403,
+        "elapsed_s": 0.23,
+        "content_type": "application/json",
+        "bytes": 229,
+        "rate_headers": {
+          "X-Ratelimit-Remaining": "84"
+        },
+        "error_body": "{\"error\": \"Demo accounts can only access Apple (AAPL) and Microsoft (MSFT)\", \"code\": \"demo_restriction\", \"documentation_url\": \"https://earningscall.biz/docs/errors#demo_restriction\", \"request_id\": \"95ea8e3e-458b-4bc0-b2fe-786fa5022b62\"}"
+      }
+    ],
+    "tested_at": "2026-10-14T06:00:07+00:00"
+  },
+  {
     "name": "GovInfo",
     "status": "ok",
     "meta": {

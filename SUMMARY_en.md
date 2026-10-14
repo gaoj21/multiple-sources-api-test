@@ -1,4 +1,4 @@
-# API Research Summary: 14 Data Sources
+# API Research Summary: 15 Data Sources
 
 > Compiled: 2026-10-13 · Test environment: Python 3.12, egress IP in Singapore
 > Chinese version: [SUMMARY_zh.md](SUMMARY_zh.md)
@@ -17,6 +17,7 @@
 | **Verified with real requests, usable** | USAspending, Grants.gov, GovInfo, CourtListener, SAM.gov, OSHA, UCC Filings (Colorado + Connecticut) |
 | **Usable, but the API itself is limited** | DOJ (title match and single-day lookup only); api.ftc.gov (HSR notices only) |
 | **Not usable** | FTC press releases: this machine's IP is blocked by the site, needs a US IP<br>USPTO: key requires ID.me, which needs a US ID; dropped |
+| **Free demo works, paid for real use** | EarningsCall (earnings calls; demo key covers AAPL and MSFT only) |
 | **Paid, awaiting credentials** | D&B Direct+, Moody's Orbis, Quartr (earnings calls), LexisNexis: code written per docs, never run with real credentials |
 
 **Credentials**:
@@ -43,6 +44,7 @@
 | D&B Direct+ | No: paid, credentials not purchased | US + International: 190+ countries, nearly 600M organizations | Company profiles: DUNS, address, industry, employees, financials, corporate linkage | Paid | Yes: `searchTerm` | No (change-notification subscription only) | transaction timestamp | per contract | — |
 | Moody's Orbis | No: paid, credentials not purchased | US + International: 635M+ companies (no official country count) | Global companies: firmographics, financials (by year), employees, ownership | Paid | name match / criteria | Unknown | must be requested in the query | per contract (semi-official: typically 1–10 concurrent) | — |
 | Quartr | No: paid, credentials not purchased | US + International: 16,000+ listed companies across 65+ markets | Listed-company earnings calls: events, transcripts, audio, slides, AI summaries | Paid | No: filter by ticker etc. only | Yes: event date + updated-time incremental | Unknown | default 50 req/s | — |
+| **EarningsCall** | Partial: demo key covers AAPL and MSFT only; real use is paid (from $60/mo) | US + International: 9,000+ listed companies, mostly US, fewer in Canada, Europe and Australia | Call transcripts (full text, speaker turns, word timings), audio, slides, earnings calendar | Paid; demo key needs no signup | No: company name/ticker search only | Yes: by year + quarter; calendar by date | call time to the minute (with TZ); word timings to the millisecond | from 10 req/min by plan | Daily in earnings season |
 | LexisNexis | No: paid, credentials not purchased | US + International: news sources from 170+ countries, 51 languages | News and legal documents: title, date, source + full text | Paid | Yes: boolean syntax | Yes: `Date ge/le` | publication date | per contract; ≤ 50 per page | — |
 
 ### Country coverage
@@ -65,6 +67,7 @@ Two layers: **which country's institution produces the data**, and **which count
 | D&B Direct+ | Global | 190+ countries and markets, nearly 600M organizations (2024 annual report); a few countries have no data (legacy docs list Antarctica, Cuba, North Korea, etc.) and some data blocks cover only certain regions, so ask D&B for its data-block coverage matrix | official |
 | Moody's Orbis | Global | 635M+ companies from 170+ sources; no official country count. Over 99% are private companies, and financial depth depends on each country's filing rules | official |
 | Quartr | Global listed companies | 16,000+ listed companies across 65+ markets; no public list of exchanges or countries, so you'd enumerate them via the API | official |
+| EarningsCall | Commercial vendor | 9,000+ listed companies, mostly US, fewer in Canada, Europe and Australia; most from 2020 | official |
 | LexisNexis (news) | Global | 33,000+ licensed news sources from 170+ countries in 51 languages; about 23,000 of them are licensed for generative-AI use | official |
 
 ---
@@ -349,6 +352,45 @@ Two layers: **which country's institution produces the data**, and **which count
   - Commercial APIs: **Middesk** (50 states, includes collateral and lapse date, per-business lookup); **D&B UCC Filings** (the 10 most recent filings per DUNS, or name search with a date range; needs a separate entitlement, and Direct+ support must be confirmed).
   - LexisNexis's Web Services API showed no UCC content; its UCC data lives in its separate Public Records products.
 - **Sources**: data.colorado.gov dataset metadata, catalog.data.gov (Connecticut), dev.socrata.com/docs/app-tokens.html; each state's bulk products on its Secretary of State site. Official confidence: **high** (CO/CT).
+
+### 3.12 EarningsCall (earnings call transcripts)
+- **Auth**: `apikey` parameter. The `demo` key needs no signup but covers only AAPL and MSFT (JPM returned 403 in testing); a free trial key needs an email or Google login; real use is paid.
+- **How to call**:
+  - All calls for a company: `GET https://api.earningscall.dev/events?exchange=NASDAQ&symbol=AAPL`
+  - Transcript: `GET /transcript?exchange=&symbol=&year=&quarter=&level=1..4`
+  - Also `/symbols` (company search), `/calendar` (calls on a given day), `/audio`, `/slides`
+- **What you get** (tested, AAPL):
+  - **Call list**: 33 calls from July 2018 to July 2026, each with year, quarter, call time and a published flag.
+  - **Level 1, full plain text**: about 45k characters per call.
+  - **Level 2, speaker turns**: 58 segments, 11 speakers, each with name and title (e.g. Tim Cook, CEO; Kevan Parekh, CFO; analysts by firm).
+  - **Level 3, word timings**: start time (seconds) for each of 7,692 words; the call runs about 60 minutes, so text can be aligned with audio.
+  - **Level 4, prepared remarks / Q&A split**: the docs say it splits into `prepared_remarks` and `questions_and_answers`, but with the demo key it **did not split**: `prepared_remarks` was the whole transcript, for every quarter tried. Whether that's a demo restriction or a product issue is unclear.
+  - **Earnings calendar**: which companies hold calls on a given day (the demo key only allows 2025-01-10: 16 calls).
+- **Timestamps**: a call's `conference_date` is to the minute with time zone (e.g. `2024-10-31T17:00:00-04:00`); the calendar has dates only.
+- **Keyword** (not supported): company name/ticker search only (`/symbols?search=`); no keyword search inside transcripts.
+- **Date** (supported): fetch a call by year + quarter; calendar by date.
+- **Pricing**: Starter $60/mo (plain text only, 10 req/min), Premium $69/mo (speakers, word timings, Q&A split), Ultimate $129/mo (adds audio), Ultimate+ $155/mo (adds webhooks).
+- **Coverage**: 9,000+ companies, mostly US, fewer in Canada, Europe and Australia; most from 2020. About half of calls are available within 15 minutes of ending, per the vendor.
+- **Sources**: earningscall.biz/docs, /docs/plans, /api-pricing. Official confidence: **high**.
+
+### 3.13 Other earnings call transcript APIs (researched, not tested)
+
+| Provider | Transcripts for free? | Cheapest plan with transcripts | Coverage | Structure |
+|---|---|---|---|---|
+| **EarningsCall** (see 3.12) | Demo key: AAPL and MSFT only | $60/mo (plain text); $69/mo (speakers + Q&A split) | 9,000+ companies, mostly US, from 2020 | Speakers, word timings, audio, slides |
+| **roic.ai** | Yes: free signup (email only, no card), latest 2 calls per company, 5 req/min | $89/mo (full history + speakers + audio) | 70+ exchanges, 68k companies; best international coverage | Free tier plain text; paid tier has speakers |
+| **Financial Modeling Prep** | No: free plan excludes transcripts | $139/mo ($99/mo billed annually) | Mostly US, 8,200 companies, 10+ years | One block of text, no Q&A split |
+| **API Ninjas** | No: transcripts are paid-only | $59/mo (last 5 years); $149/mo (speakers, Q&A, from 2005) | 8,000+ companies, mostly US | Speaker and Q&A flags on the higher plan |
+| **Finnhub** | No | All-in-One plan only (about $3,500/mo) | US, UK, Europe, Australia, Canada; 15+ years | Speakers, Q&A sessions, audio |
+| **Benzinga** | No | Quote only | Russell 3000, from 2023 | Transcripts, summaries, audio |
+| **FactSet, S&P Capital IQ, LSEG, Bloomberg, AlphaSense** | No | Enterprise, typically five figures USD per year or more | Global, longest history | Full structure |
+
+No API: Seeking Alpha (transcripts are web Premium only), Motley Fool, Koyfin.
+
+**Recommendation**:
+- US-only with speakers and Q&A split: EarningsCall Premium ($69/mo) is the cheapest.
+- International companies: validate coverage on roic.ai's free tier first, then consider its $89/mo plan.
+- Quartr, already on the list, covers 65+ markets and is another international option (pricing by quote).
 
 ## 4. Cross-cutting notes
 

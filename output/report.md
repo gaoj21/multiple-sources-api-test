@@ -11,6 +11,7 @@
 | FTC Press Releases | 被拦截 | 新闻稿: 无官方 API, 只有 RSS + 网页 (无需 key); api.ftc.gov (HSR 提前终止/DNC 投诉) 需要 api.data.gov key | 免费公开 | RSS 不支持; 网页列表 ?search_api_fulltext=xxx 支持 (需抓 HTML) | RSS 只有最近若干条 (10~30 条不等, pubDate 带时区如 -0400); 网页列表有起止日期筛选; api.ftc.gov 支持 filter[date][condition][path/value/operator] |
 | USPTO | 需要 key / license | Open Data Portal: Header X-API-KEY (免费, 需 USPTO.gov 账号 + MFA + 已关联的 ID.me 实名验证, 在 https://data.uspto.gov/apikey 生成); TSDR 商标: 另一个 key (account.uspto.gov/api-manager), Header USPTO-API-KEY | 免费 (官方: at no cost; 未见数据 license 声明) | 支持: q=applicationMetaData.inventionTitle:battery 或全文 q=battery; 支持 AND/OR/字段过滤 | 支持: rangeFilters (POST) 或 GET 的 rangeFilters=applicationMetaData.filingDate 2024-01-01:2024-12-31; 可按 filingDate/grantDate 等 |
 | Quartr | 需要 key / license | Header x-api-key (Quartr 商务开通, 在 Quartr Portal portal.quartr.dev 生成) | 商业付费 license: 数据集可单买或打包 (transcripts、audio、live、summaries、解析文档等), companies 和 events 始终包含 | 没有全文关键词搜索; 只能按 tickers / isins / ciks / companyIds / countries / exchanges / typeIds 过滤 | 支持: startDate / endDate (事件日期) 以及 updatedAfter / updatedBefore (数据更新时间, 适合增量) |
+| EarningsCall | 部分可用 | 参数 apikey; 'demo' key 无需注册, 只能查 AAPL 和 MSFT; 免费试用 key 需邮箱或 Google 登录; 正式使用要付费 | 付费: Starter $60/月 (只有纯文本)、Premium $69/月 (发言人、逐词时间、问答拆分)、Ultimate $129/月 (加音频)、Ultimate+ $155/月 (加 webhooks) | 只能按公司名或代码搜公司 (/symbols?search=); 不能在文字稿里做关键词搜索 | 按 year + quarter 取某一场; /calendar?year=&month=&day= 查某一天有哪些电话会 |
 | GovInfo | 可用 | 需要 api.data.gov key (免费, 邮箱注册: https://api.data.gov/signup); DEMO_KEY 可试用 | 免费公开 | 支持: POST /search {query:'antitrust collection:(FR)'} (字段操作符语法, 可加 publishdate:range(...)) | 支持: 路径里的 lastModified 时间 (ISO8601, 精确到秒) / published 日期区间 / search 的 publishdate:range() |
 | CourtListener | 可用 | 搜索接口 /search/ 可匿名; 其他 (dockets/opinions/clusters/people...) 需要免费 token (注册账号后获取), Header: Authorization: Token xxx | 免费 (非营利); bulk 数据标注 Public Domain Mark; 提额、Webhooks 等高级功能需会员或商业协议 (收费) | 支持: q= (Solr/ES 语法, 支持 AND/OR/"短语"/字段 caseName:xxx) | 支持: filed_after / filed_before (YYYY-MM-DD, 实测可用但文档没列名字; 官方写法是 q=dateFiled:[2025-01-01 TO 2025-06-30]); REST 端点 date_modified__gte=ISO时间 (官方只给了 __gte 语法模式; 实测 dockets 可用, 精确到微秒, 适合增量) |
 | LexisNexis Data+ | 需要 key / license | OAuth2 client_credentials: POST auth-api.lexisnexis.com/oauth/v2/token (Basic client_id:secret, form 表单, scope=http://oauth.lexisnexis.com/all) → Bearer, 24 小时有效; 凭证需要 Service-to-Service ID | 商业付费 license: 调用方承担所有 LexisNexis 费用, 能看哪些内容源取决于授权; 具体计费和再分发条款看合同 | 支持: $search= (必填; 有 Boolean 布尔检索模式, 如 antitrust AND merger; w/5 近邻语法在 API 文档里未确认) | 支持: $filter=Date ge 2025-01-01 and Date le 2025-03-31; $orderby=Date desc |
@@ -402,6 +403,60 @@ _测试时间 2026-10-13T06:43:14+00:00_
 - 实时电话会: /live 和 /live/transcripts 提供直播中的文字稿 (transcriptVersion)
 - documents/*/summary 提供 AI 摘要 (length / plain 参数); transcripts/{id}/chapters 有分段
 - OpenAPI 公开, 但所有数据接口无 key 返回 401
+
+## EarningsCall  —  部分可用
+_测试时间 2026-10-14T06:00:07+00:00_
+
+- **文档**: https://earningscall.biz/docs  ·  套餐: https://earningscall.biz/docs/plans  ·  价格: https://earningscall.biz/api-pricing
+- **认证**: 参数 apikey; 'demo' key 无需注册, 只能查 AAPL 和 MSFT; 免费试用 key 需邮箱或 Google 登录; 正式使用要付费
+- **License**: 付费: Starter $60/月 (只有纯文本)、Premium $69/月 (发言人、逐词时间、问答拆分)、Ultimate $129/月 (加音频)、Ultimate+ $155/月 (加 webhooks)
+- **限制**: Starter 套餐 10 次/分钟; 实测响应头 x-ratelimit-remaining (demo 为 89 左右); 试用 key 的剩余次数在 x-trial-calls-remaining
+- **获取方式**: REST JSON: GET https://api.earningscall.dev/events (某公司全部电话会) → /transcript?year=&quarter=&level=1..4; 另有 /symbols、/calendar、/audio、/slides
+- **关键词**: 只能按公司名或代码搜公司 (/symbols?search=); 不能在文字稿里做关键词搜索
+- **时间**: 按 year + quarter 取某一场; /calendar?year=&month=&day= 查某一天有哪些电话会
+
+### 信息来源 (调用方式从哪来)
+- 官方: https://earningscall.biz/docs 、/docs/plans 、/api-pricing — 接口、四个 level、套餐价格、覆盖 9,000+ 家公司 (主要美国, 加拿大/欧洲/澳洲较少)、多数公司 2020 年起
+- 实测: demo key 的 level 4 没有拆分: prepared_remarks 就是整篇全文, 没有 questions_and_answers 字段 (多个季度都一样; 不确定是 demo 限制还是功能问题)
+- 实测: demo key 可取 AAPL/MSFT 全部四个 level; 查 JPM 返回 403 'Demo accounts can only access Apple (AAPL) and Microsoft'; 日历只能查 2025-01-10
+
+### 测试结果
+- [通过] **连接 / 电话会列表** — AAPL 共 33 场, 最早 2018-07-31T17:00:00-04:00, 最新 2026-07-30T14:00:00-07:00
+- [通过] **level 1 纯文本 (2026Q3)** — 44767 字符; 开头: Good afternoon and welcome to the Apple Q3 Fiscal Year 2026 Earnings Conference 
+- [通过] **level 2 按发言人分段** — 58 段, 11 位发言人, 如 [('Suhasini Chandramouli', 'Director of Investor Relations'), ('Tim Cook', 'Chief Executive Officer'), ('Kevan Parekh', 'Chief Financial Officer'), ('Operator', 'Conference Operator')]
+- [通过] **level 3 逐词时间** — 7692 个词带开始时间; 最后一个词在第 3627.862 秒 (约 60 分钟)
+- [失败] **level 4 管理层发言 / 问答拆分** — 管理层发言 44767 字符, 问答 0 字符; prepared_remarks 与 level 1 全文完全相同, 没有拆分
+- [通过] **按公司名搜索 'microsoft'** — 返回1条, 其中1条包含'microsoft'
+- [通过] **财报日历 2025-01-10** — 16/16 条在 2025-01-10~2025-01-11 内; 样例 ['2025-01-10', '2025-01-10', '2025-01-10']
+- [通过] **demo key 限制** — 查 AAPL/MSFT 以外的公司返回 403
+
+### 拿到的字段 / 时间戳
+- **event** (4 个字段): `year, quarter, conference_date, is_published`
+  - 时间戳 `conference_date` = `2026-07-30T14:00:00-07:00`
+  - 时间戳 `is_published` = `true`
+- **transcript level 1** (7 个字段): `exchange, symbol, company_name, level, event.year, event.quarter, event.conference_date`
+  - 时间戳 `event.conference_date` = `2026-07-30T14:00:00-07:00`
+- **speaker segment** (4 个字段): `speaker.id, speaker.name, speaker.title, text`
+- **calendar row** (7 个字段): `symbol, company_name, exchange, conference_date, year, quarter, transcript_ready`
+  - 时间戳 `conference_date` = `2025-01-10T00:00:00-05:00`
+
+### HTTP 调用
+- `GET events AAPL` → **200** (0.69s) · 限流头 `{'X-Ratelimit-Remaining': '89'}`
+- `GET transcript level 1` → **200** (0.44s) · 限流头 `{'X-Ratelimit-Remaining': '89'}`
+- `GET transcript level 2` → **200** (0.28s) · 限流头 `{'X-Ratelimit-Remaining': '88'}`
+- `GET transcript level 3` → **200** (0.47s) · 限流头 `{'X-Ratelimit-Remaining': '87'}`
+- `GET transcript level 4` → **200** (0.23s) · 限流头 `{'X-Ratelimit-Remaining': '87'}`
+- `GET symbols search` → **200** (0.22s) · 限流头 `{'X-Ratelimit-Remaining': '86'}`
+- `GET calendar 2025-01-10` → **200** (0.22s) · 限流头 `{'X-Ratelimit-Remaining': '85'}`
+- `GET demo restriction (JPM)` → **403** (0.23s) · 限流头 `{'X-Ratelimit-Remaining': '84'}` · `{"error": "Demo accounts can only access Apple (AAPL) and Microsoft (MSFT)", "code": "demo_restriction", "documentation_url": "https://earningscall.biz/docs/err`
+
+### 注意事项
+- 四个 level (官方): 1 = 整篇纯文本; 2 = 按发言人分段 + 发言人姓名职位; 3 = 每个词的开始时间 (秒); 4 = 拆成管理层发言 prepared_remarks 和问答 questions_and_answers (demo key 实测没拆)
+- 实测 AAPL: 33 场电话会 (2018-07 起); 一场约 4.5 万字符、58 段发言、11 位发言人; level 3 有 7,692 个词的时间, 整场约 60 分钟
+- 财报日历里的 conference_date 只有日期 (时间是 00:00), 单场电话会的 conference_date 精确到分钟
+- 每场电话会都有 conference_date (带时区, 如 2024-10-31T17:00:00-04:00), 精确到分钟
+- 官方说约一半电话会在结束后 15 分钟内可取
+- 未配置 EARNINGSCALL_API_KEY, 用 demo key (只能查 AAPL / MSFT)
 
 ## GovInfo  —  可用
 _测试时间 2026-10-13T06:43:20+00:00_

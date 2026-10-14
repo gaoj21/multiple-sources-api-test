@@ -1,4 +1,4 @@
-# 14 个数据源 API 能力测试
+# 15 个数据源 API 能力测试
 
 ## 运行
 
@@ -35,6 +35,7 @@ python run_all.py --render-only       # 不发请求, 只重新生成报告
 | D&B Direct+ | 不可用：付费，还没买凭证 | 付费, 按调用计费 | 支持 `searchTerm` | 不支持，只能用 Monitoring 推送 | `transactionTimestamp` |
 | Moody's Orbis | 不可用：付费，还没买凭证 | 付费 | 名称匹配 / 条件筛选 | 未确认：需和 Moody's 确认 | 需在 SELECT 里请求 |
 | Quartr | 不可用：付费，还没买凭证 | 付费 (v3, v1/v2 已 410) | 不支持，只能按 ticker/ISIN/CIK | 支持 `startDate/endDate`, `updatedAfter` | 事件 `date` (未用 key 验证) |
+| EarningsCall | 部分可用：演示 key 只能查 AAPL、MSFT；正式使用要付费 | 付费（$60/月起）；演示 key 免注册 | 不支持，只能搜公司名 | 支持，按年份 + 季度 | 电话会时间到分钟；逐词时间 |
 | LexisNexis Data+ | 不可用：付费，还没买凭证 | 付费 | 支持 `$search` 布尔 | 支持 `$filter=Date ge ...` | `Date` |
 | OSHA | 可用 | 免费 DOL key；连续请求会 429 | 支持 `like` | 支持 `gt`/`lt` | 入库时间 `load_dt` 到秒 |
 | UCC Filings（CO / CT） | 可用（只覆盖科罗拉多、康涅狄格两州） | 不需要 key，免费 | 支持 `$where like` / `$q` | 支持 `$where between` | 申报日、失效日（只有日期） |
@@ -73,4 +74,5 @@ python run_all.py --render-only       # 不发请求, 只重新生成报告
 | LexisNexis | dev.lexisnexis.com 公开的规格文件 | 中高 | 官方名称是 Web Services API；公司数据集叫 `CompanyAndFinancial`；加 `$expand=Document` 可以直接拿全文 |
 | OSHA | dataportal.dol.gov/api-guide + 用户指南 PDF + `/json/metadata` | 高 | 新增；官方没写限流，实测会 429 |
 | UCC Filings | data.colorado.gov、data.ct.gov 元数据 + dev.socrata.com | 高 | 新增；其他州多为付费批量文件 |
+| EarningsCall | earningscall.biz/docs + 价格页 | 高 | 新增；演示 key 下 level 4 没有问答拆分（实测） |
 | Moody's Orbis | **没有公开官方文档** | 低（全部是半官方或实测） | 匹配接口返回数组（修了一个会报错的 bug）；查询字段要加 `Match.` 前缀 |
