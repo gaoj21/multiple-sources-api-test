@@ -12,6 +12,7 @@
 | USPTO | 需要 key / license | Open Data Portal: Header X-API-KEY (免费, 需 USPTO.gov 账号 + MFA + 已关联的 ID.me 实名验证, 在 https://data.uspto.gov/apikey 生成); TSDR 商标: 另一个 key (account.uspto.gov/api-manager), Header USPTO-API-KEY | 免费 (官方: at no cost; 未见数据 license 声明) | 支持: q=applicationMetaData.inventionTitle:battery 或全文 q=battery; 支持 AND/OR/字段过滤 | 支持: rangeFilters (POST) 或 GET 的 rangeFilters=applicationMetaData.filingDate 2024-01-01:2024-12-31; 可按 filingDate/grantDate 等 |
 | Quartr | 需要 key / license | Header x-api-key (Quartr 商务开通, 在 Quartr Portal portal.quartr.dev 生成) | 商业付费 license: 数据集可单买或打包 (transcripts、audio、live、summaries、解析文档等), companies 和 events 始终包含 | 没有全文关键词搜索; 只能按 tickers / isins / ciks / companyIds / countries / exchanges / typeIds 过滤 | 支持: startDate / endDate (事件日期) 以及 updatedAfter / updatedBefore (数据更新时间, 适合增量) |
 | EarningsCall | 部分可用 | 参数 apikey; 'demo' key 无需注册, 只能查 AAPL 和 MSFT; 免费试用 key 需邮箱或 Google 登录; 正式使用要付费 | 付费: Starter $60/月 (只有纯文本)、Premium $69/月 (发言人、逐词时间、问答拆分)、Ultimate $129/月 (加音频)、Ultimate+ $155/月 (加 webhooks) | 只能按公司名或代码搜公司 (/symbols?search=); 不能在文字稿里做关键词搜索 | 按 year + quarter 取某一场; /calendar?year=&month=&day= 查某一天有哪些电话会 |
+| Alpha Vantage (Earnings Calls) | 可用 | 参数 apikey; 免费 key 填邮箱即得 (alphavantage.co/support/#api-key), 不用信用卡; 'demo' key 只能查 IBM 2024Q1 这一场 | 免费 25 次/天; 更多次数要买 Premium | 不支持: 只能按 股票代码 + 季度 取, 不能关键词搜 | quarter=YYYYQn (2010Q1 起, 公司财年口径); 财报日历 horizon=3month/6month/12month |
 | GovInfo | 可用 | 需要 api.data.gov key (免费, 邮箱注册: https://api.data.gov/signup); DEMO_KEY 可试用 | 免费公开 | 支持: POST /search {query:'antitrust collection:(FR)'} (字段操作符语法, 可加 publishdate:range(...)) | 支持: 路径里的 lastModified 时间 (ISO8601, 精确到秒) / published 日期区间 / search 的 publishdate:range() |
 | CourtListener | 可用 | 搜索接口 /search/ 可匿名; 其他 (dockets/opinions/clusters/people...) 需要免费 token (注册账号后获取), Header: Authorization: Token xxx | 免费 (非营利); bulk 数据标注 Public Domain Mark; 提额、Webhooks 等高级功能需会员或商业协议 (收费) | 支持: q= (Solr/ES 语法, 支持 AND/OR/"短语"/字段 caseName:xxx) | 支持: filed_after / filed_before (YYYY-MM-DD, 实测可用但文档没列名字; 官方写法是 q=dateFiled:[2025-01-01 TO 2025-06-30]); REST 端点 date_modified__gte=ISO时间 (官方只给了 __gte 语法模式; 实测 dockets 可用, 精确到微秒, 适合增量) |
 | LexisNexis Data+ | 需要 key / license | OAuth2 client_credentials: POST auth-api.lexisnexis.com/oauth/v2/token (Basic client_id:secret, form 表单, scope=http://oauth.lexisnexis.com/all) → Bearer, 24 小时有效; 凭证需要 Service-to-Service ID | 商业付费 license: 调用方承担所有 LexisNexis 费用, 能看哪些内容源取决于授权; 具体计费和再分发条款看合同 | 支持: $search= (必填; 有 Boolean 布尔检索模式, 如 antitrust AND merger; w/5 近邻语法在 API 文档里未确认) | 支持: $filter=Date ge 2025-01-01 and Date le 2025-03-31; $orderby=Date desc |
@@ -457,6 +458,50 @@ _测试时间 2026-10-14T06:00:07+00:00_
 - 每场电话会都有 conference_date (带时区, 如 2024-10-31T17:00:00-04:00), 精确到分钟
 - 官方说约一半电话会在结束后 15 分钟内可取
 - 未配置 EARNINGSCALL_API_KEY, 用 demo key (只能查 AAPL / MSFT)
+
+## Alpha Vantage (Earnings Calls)  —  可用
+_测试时间 2026-10-14T07:28:12+00:00_
+
+- **文档**: https://www.alphavantage.co/documentation/ (Earnings Call Transcript / Earnings / Earnings Calendar)
+- **认证**: 参数 apikey; 免费 key 填邮箱即得 (alphavantage.co/support/#api-key), 不用信用卡; 'demo' key 只能查 IBM 2024Q1 这一场
+- **License**: 免费 25 次/天; 更多次数要买 Premium
+- **限制**: 免费 key 25 次/天 (官方), 且每秒最多 1 次 (实测: 连续请求时返回的提示里写的); 响应头里没有额度信息 (实测); 超额或出错仍返回 HTTP 200, 返回体里是 Information 或 Error Message (实测)
+- **获取方式**: GET https://www.alphavantage.co/query?function=EARNINGS_CALL_TRANSCRIPT&symbol=IBM&quarter=2024Q1; 另有 function=EARNINGS (历史财报) 和 EARNINGS_CALENDAR (CSV)
+- **关键词**: 不支持: 只能按 股票代码 + 季度 取, 不能关键词搜
+- **时间**: quarter=YYYYQn (2010Q1 起, 公司财年口径); 财报日历 horizon=3month/6month/12month
+
+### 信息来源 (调用方式从哪来)
+- 官方: https://www.alphavantage.co/documentation/ — EARNINGS_CALL_TRANSCRIPT 参数 symbol + quarter (YYYYQM, 2010Q1 起), 带逐段情绪信号; EARNINGS; EARNINGS_CALENDAR
+- 官方: https://www.alphavantage.co/support/ 与 /premium/ — 免费 25 次/天
+- 实测 (2026-10-14, 免费 key): AAPL 2010Q1/2015Q1/2020Q1/2026Q3 都有; JPM 2026Q2 有 (110 段); 小盘 PLTR 有; 在美上市的外国公司 TSM、SAP、TM 有; 伦敦 BP.LON、多伦多 SHOP.TRT 返回空 → 只覆盖美国上市股票
+- 实测: demo key 只能查 IBM 2024Q1, 其他季度或公司都返回 Information 提示
+
+### 测试结果
+- [通过] **文字稿 AAPL 2026Q3** — 61 段, 48339 字符, 12 位发言人
+- [通过] **历史财报 (发布日、盘前/盘后、EPS)** — 122 个季度, 最早 1996-03-31
+- [通过] **财报日历 (未来 3 个月, 4588 条)** — 300/300 条在 2026-10-13~2100-01-01 内; 样例 ['2026-10-13', '2026-10-13', '2026-10-13']
+- [跳过] **关键词搜索** — 不支持
+
+### 拿到的字段 / 时间戳
+- **transcript segment** (4 个字段): `speaker, title, content, sentiment`
+- **transcript (top level)** (2 个字段): `symbol, quarter`
+- **quarterly earnings** (7 个字段): `fiscalDateEnding, reportedDate, reportedEPS, estimatedEPS, surprise, surprisePercentage, reportTime`
+  - 时间戳 `reportedDate` = `2026-07-30`
+  - 时间戳 `reportTime` = `post-market`
+- **calendar row** (7 个字段): `symbol, name, reportDate, fiscalDateEnding, estimate, currency, timeOfTheDay`
+  - 时间戳 `reportDate` = `2026-10-13`
+  - 时间戳 `timeOfTheDay` = `pre-market`
+
+### HTTP 调用
+- `GET transcript AAPL 2026Q3` → **200** (0.83s)
+- `GET earnings history AAPL` → **200** (0.49s)
+- `GET earnings calendar` → **200** (1.19s)
+
+### 注意事项
+- 文字稿每段: 发言人 speaker、职位 title、内容 content、情绪分 sentiment (IBM 2024Q1 的取值在 0.0~0.8; 官方没说明范围和算法)
+- 文字稿没有电话会时间, 顶层只有 symbol 和 quarter; 可用 EARNINGS 接口的 reportedDate (财报发布日) + reportTime (盘前/盘后) 补, 但发布日不一定等于电话会当天
+- 财报日历是 CSV, 每行: 股票代码、公司名、报告日、财年截止日、EPS 预期、币种、盘前/盘后 timeOfTheDay; 未来 3 个月共约 4,600 条
+- 还没开的电话会返回 Error Message 'Invalid API call' (如 JPM 2026Q3); 查不到的非美国代码返回空 transcript 而不是错误
 
 ## GovInfo  —  可用
 _测试时间 2026-10-13T06:43:20+00:00_

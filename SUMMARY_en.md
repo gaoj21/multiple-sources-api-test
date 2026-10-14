@@ -1,4 +1,4 @@
-# API Research Summary: 15 Data Sources
+# API Research Summary: 16 Data Sources
 
 > Compiled: 2026-10-13 · Test environment: Python 3.12, egress IP in Singapore
 > Chinese version: [SUMMARY_zh.md](SUMMARY_zh.md)
@@ -14,14 +14,14 @@
 
 | Status | Sources |
 |---|---|
-| **Verified with real requests, usable** | USAspending, Grants.gov, GovInfo, CourtListener, SAM.gov, OSHA, UCC Filings (Colorado + Connecticut) |
+| **Verified with real requests, usable** | USAspending, Grants.gov, GovInfo, CourtListener, SAM.gov, OSHA, UCC Filings (Colorado + Connecticut), Alpha Vantage (earnings call transcripts) |
 | **Usable, but the API itself is limited** | DOJ (title match and single-day lookup only); api.ftc.gov (HSR notices only) |
 | **Not usable** | FTC press releases: this machine's IP is blocked by the site, needs a US IP<br>USPTO: key requires ID.me, which needs a US ID; dropped |
 | **Free demo works, paid for real use** | EarningsCall (earnings calls; demo key covers AAPL and MSFT only) |
 | **Paid, awaiting credentials** | D&B Direct+, Moody's Orbis, Quartr (earnings calls), LexisNexis: code written per docs, never run with real credentials |
 
 **Credentials**:
-- Configured (all in `.env`): api.data.gov key (shared by GovInfo and api.ftc.gov), CourtListener token, SAM.gov key, DOL key (OSHA).
+- Configured (all in `.env`): api.data.gov key (shared by GovInfo and api.ftc.gov), CourtListener token, SAM.gov key, DOL key (OSHA), Alpha Vantage key.
 - Everything else: not configured.
 
 ---
@@ -45,6 +45,7 @@
 | Moody's Orbis | No: paid, credentials not purchased | US + International: 635M+ companies (no official country count) | Global companies: firmographics, financials (by year), employees, ownership | Paid | name match / criteria | Unknown | must be requested in the query | per contract (semi-official: typically 1–10 concurrent) | — |
 | Quartr | No: paid, credentials not purchased | US + International: 16,000+ listed companies across 65+ markets | Listed-company earnings calls: events, transcripts, audio, slides, AI summaries | Paid | No: filter by ticker etc. only | Yes: event date + updated-time incremental | Unknown | default 50 req/s | — |
 | **EarningsCall** | Partial: demo key covers AAPL and MSFT only; real use is paid (from $60/mo) | US + International: 9,000+ listed companies, mostly US, fewer in Canada, Europe and Australia | Call transcripts (full text, speaker turns, word timings), audio, slides, earnings calendar | Paid; demo key needs no signup | No: company name/ticker search only | Yes: by year + quarter; calendar by date | call time to the minute (with TZ); word timings to the millisecond | from 10 req/min by plan | Daily in earnings season |
+| **Alpha Vantage** (earnings calls) | Yes (free key, 25 calls/day) | US only: US-listed stocks (including foreign companies listed in the US, e.g. TSMC, SAP); not London, Toronto, etc. | Call transcripts (speaker turns, titles, sentiment), earnings report dates and EPS, earnings calendar | Free key (email signup) | No: ticker + quarter only | Yes: by quarter (from 2010Q1); calendar by horizon | transcripts have no time; report dates are date-only | **25/day, 1/sec** | Daily in earnings season |
 | LexisNexis | No: paid, credentials not purchased | US + International: news sources from 170+ countries, 51 languages | News and legal documents: title, date, source + full text | Paid | Yes: boolean syntax | Yes: `Date ge/le` | publication date | per contract; ≤ 50 per page | — |
 
 ### Country coverage
@@ -68,6 +69,7 @@ Two layers: **which country's institution produces the data**, and **which count
 | Moody's Orbis | Global | 635M+ companies from 170+ sources; no official country count. Over 99% are private companies, and financial depth depends on each country's filing rules | official |
 | Quartr | Global listed companies | 16,000+ listed companies across 65+ markets; no public list of exchanges or countries, so you'd enumerate them via the API | official |
 | EarningsCall | Commercial vendor | 9,000+ listed companies, mostly US, fewer in Canada, Europe and Australia; most from 2020 | official |
+| Alpha Vantage | Commercial vendor | US-listed stocks, including foreign companies listed in the US (TSMC, SAP, Toyota); non-US exchange tickers such as London and Toronto return nothing | tested |
 | LexisNexis (news) | Global | 33,000+ licensed news sources from 170+ countries in 51 languages; about 23,000 of them are licensed for generative-AI use | official |
 
 ---
@@ -373,11 +375,40 @@ Two layers: **which country's institution produces the data**, and **which count
 - **Coverage**: 9,000+ companies, mostly US, fewer in Canada, Europe and Australia; most from 2020. About half of calls are available within 15 minutes of ending, per the vendor.
 - **Sources**: earningscall.biz/docs, /docs/plans, /api-pricing. Official confidence: **high**.
 
-### 3.13 Other earnings call transcript APIs (researched, not tested)
+### 3.13 Alpha Vantage (earnings call transcripts, free)
+- **Auth**: `apikey` parameter. A free key needs only an email, no card; configured in `.env`. The `demo` key covers only IBM 2024Q1 (tested).
+- **How to call**:
+  - Transcript: `GET https://www.alphavantage.co/query?function=EARNINGS_CALL_TRANSCRIPT&symbol=AAPL&quarter=2026Q3`
+  - Earnings history: `function=EARNINGS`
+  - Earnings calendar: `function=EARNINGS_CALENDAR&horizon=3month`, returns CSV
+- **What you get** (tested, 2026-10-14):
+  - **Transcripts**: speaker turns, each with `speaker`, `title`, `content` and a `sentiment` score. For example AAPL 2026Q3 has 61 segments, 48,339 characters and 12 speakers; JPM 2026Q2 has 110 segments. The sentiment scale and method are undocumented (IBM 2024Q1 ranged from 0.0 to 0.8).
+  - **Earnings history**: per quarter, `reportedDate`, pre- or post-market `reportTime`, reported EPS, estimated EPS, surprise. 122 quarters for AAPL, from 1996.
+  - **Earnings calendar**: about 4,600 rows for the next 3 months, each with symbol, name, report date, fiscal period end, EPS estimate, currency, and pre/post-market timing.
+- **History and freshness** (tested):
+  - AAPL 2010Q1, 2015Q1 and 2020Q1 all exist, so history really goes back to 2010.
+  - The latest quarter is available: AAPL 2026Q3 (call on July 30).
+  - Calls that haven't happened yet return an error (e.g. JPM 2026Q3). How soon after a call it becomes available was not measured this time.
+- **Coverage** (tested): **US-listed stocks only**.
+  - Covered: large and small caps (PLTR), and foreign companies listed in the US (TSMC TSM, SAP, Toyota TM).
+  - Not covered: non-US exchange tickers such as London (BP.LON) and Toronto (SHOP.TRT), which return an empty transcript without an error.
+- **Timestamps**: transcripts have **no call date or time**, only symbol and quarter. You can add the report date and pre/post-market flag from the earnings-history endpoint, but the report date isn't always the call date.
+- **Keyword** (not supported): fetch by "ticker + quarter" only.
+- **Date** (supported): `quarter=YYYYQn`, on the company's fiscal calendar.
+- **Limits**:
+  - Free key: **25 requests/day**.
+  - **At most 1 request per second**; back-to-back requests get rejected (tested; the limit is stated in the returned message).
+  - When over quota or on error it **still returns HTTP 200**, with `Information` or `Error Message` in the body, so always check the body.
+  - No remaining-quota headers (tested), so count calls yourself.
+- **How to spend the 25 calls**: each day, use 1 call for the earnings calendar to pick the key companies that held calls the day before, then 1 call per company for its transcript. That's about 20 companies a day at most.
+- **Sources**: alphavantage.co/documentation, /support, /premium. Official confidence: **high**.
+
+### 3.14 Other earnings call transcript APIs (researched, not tested)
 
 | Provider | Transcripts for free? | Cheapest plan with transcripts | Coverage | Structure |
 |---|---|---|---|---|
 | **EarningsCall** (see 3.12) | Demo key: AAPL and MSFT only | $60/mo (plain text); $69/mo (speakers + Q&A split) | 9,000+ companies, mostly US, from 2020 | Speakers, word timings, audio, slides |
+| **Alpha Vantage** (see 3.13) | Yes: free key, 25 calls/day, tested | Premium for more calls | US-listed stocks, from 2010 | Speaker turns, sentiment; no call time |
 | **roic.ai** | Yes: free signup (email only, no card), latest 2 calls per company, 5 req/min | $89/mo (full history + speakers + audio) | 70+ exchanges, 68k companies; best international coverage | Free tier plain text; paid tier has speakers |
 | **Financial Modeling Prep** | No: free plan excludes transcripts | $139/mo ($99/mo billed annually) | Mostly US, 8,200 companies, 10+ years | One block of text, no Q&A split |
 | **API Ninjas** | No: transcripts are paid-only | $59/mo (last 5 years); $149/mo (speakers, Q&A, from 2005) | 8,000+ companies, mostly US | Speaker and Q&A flags on the higher plan |
@@ -388,6 +419,7 @@ Two layers: **which country's institution produces the data**, and **which count
 No API: Seeking Alpha (transcripts are web Premium only), Motley Fool, Koyfin.
 
 **Recommendation**:
+- Completely free, US only: Alpha Vantage (25 calls/day, about 20 companies).
 - US-only with speakers and Q&A split: EarningsCall Premium ($69/mo) is the cheapest.
 - International companies: validate coverage on roic.ai's free tier first, then consider its $89/mo plan.
 - Quartr, already on the list, covers 65+ markets and is another international option (pricing by quote).
@@ -426,7 +458,7 @@ No API: Seeking Alpha (transcripts are web Premium only), Motley Fool, Koyfin.
 
 ```bash
 pip install -r requirements.txt
-cp .env.example .env              # add credentials (the 4 existing ones are already set)
+cp .env.example .env              # add credentials (the 5 existing ones are already set)
 python run_all.py                 # run all tests
 python run_all.py sam doj         # run selected modules only
 python run_all.py --render-only   # rebuild the report without making requests
