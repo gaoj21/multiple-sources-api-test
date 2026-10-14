@@ -1,0 +1,254 @@
+{
+  "jsonapi": {
+    "version": "1.0",
+    "meta": {
+      "links": {
+        "self": {
+          "href": "http://jsonapi.org/format/1.0/"
+        }
+      }
+    }
+  },
+  "data": [
+    {
+      "type": "early_termination_notice",
+      "id": "4cc85e71-3dac-43a3-9d52-13ac97a16ac9",
+      "links": {
+        "self": {
+          "href": "https://www.ftc.gov/v0/hsr-early-termination-notices/4cc85e71-3dac-43a3-9d52-13ac97a16ac9?resourceVersion=id%3A444026"
+        },
+        "working-copy": {
+          "href": "https://www.ftc.gov/v0/hsr-early-termination-notices/4cc85e71-3dac-43a3-9d52-13ac97a16ac9?resourceVersion=rel%3Aworking-copy"
+        }
+      },
+      "attributes": {
+        "title": "20262294: AE EventsCo Holdings LLC; ICG Strategic Equity Fund IV (Feeder) SCsP",
+        "created": "2026-10-07T13:22:08+00:00",
+        "updated": "2026-10-07T13:22:08+00:00",
+        "acquired-party": "ICG Strategic Equity Fund IV (Feeder) SCsP",
+        "acquiring-party": "AE EventsCo Holdings LLC",
+        "date": "2026-10-05",
+        "acquired-entities": [
+          "IE Investments S.A R.L."
+        ],
+        "transaction-number": "20262294"
+      },
+      "relationships": {
+        "node_type": {
+          "data": null,
+          "links": {
+            "self": {
+              "href": "https://www.ftc.gov/v0/hsr-early-termination-notices/4cc85e71-3dac-43a3-9d52-13ac97a16ac9/relationships/node_type?resourceVersion=id%3A444026"
+            }
+          }
+        },
+        "feeds_item": {
+          "data": [],
+          "links": {
+            "related": {
+              "href": "https://www.ftc.gov/v0/hsr-early-termination-notices/4cc85e71-3dac-43a3-9d52-13ac97a16ac9/feeds_item?resourceVersion=id%3A444026"
+            },
+            "self": {
+              "href": "https://www.ftc.gov/v0/hsr-early-termination-notices/4cc85e71-3dac-43a3-9d52-13ac97a16ac9/relationships/feeds_item?resourceVersion=id%3A444026"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "early_termination_notice",
+      "id": "2a5d8f75-5524-462c-a7df-38426cad7526",
+      "links": {
+        "self": {
+          "href": "https://www.ftc.gov/v0/hsr-early-termination-notices/2a5d8f75-5524-462c-a7df-38426cad7526?resourceVersion=id%3A443685"
+        },
+        "working-copy": {
+          "href": "https://www.ftc.gov/v0/hsr-early-termination-notices/2a5d8f75-5524-462c-a7df-38426cad7526?resourceVersion=rel%3Aworking-copy"
+        }
+      },
+      "attributes": {
+        "title": "20262310: Velocity I Aggregator, LP; AG FCH Aggregator Holdings, LP",
+        "created": "2026-09-30T12:38:22+00:00",
+        "updated": "2026-09-30T12:38:22+00:00",
+        "acquired-party": "AG FCH Aggregator Holdings, LP",
+        "acquiring-party": "Velocity I Aggregator, LP",
+        "date": "2026-09-29",
+        "acquired-entities": [
+          "FCH Intermediate Holdings, Inc.",
+          "FCH Intermediate Holdings II, Inc."
+        ],
+        "transaction-number": "20262310"
+      },
+      "relationships": {
+        "node_type": {
+          "data": null,
+          "links": {
+            "self": {
+              "href": "https://www.ftc.gov/v0/hsr-early-termination-notices/2a5d8f75-5524-462c-a7df-38426cad7526/relationships/node_type?resourceVersion=id%3A443685"
+            }
+          }
+        },
+        "feeds_item": {
+          "data": [],
+          "links": {
+            "related": {
+              "href": "https://www.ftc.gov/v0/hsr-early-termination-notices/2a5d8f75-5524-462c-a7df-38426cad7526/feeds_item?resourceVersion=id%3A443685"
+            },
+            "self": {
+              "href": "https://www.ftc.gov/v0/hsr-early-termination-notices/2a5d8f75-5524-462c-a7df-38426cad7526/relationships/feeds_item?resourceVersion=id%3A443685"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "early_termination_notice",
+      "id": "0d8c6442-999e-4062-81ee-95c0a13619db",
+      "links": {
+        "self": {
+          "href": "https://www.ftc.gov/v0/hsr-early-termination-notices/0d8c6442-999e-4062-81ee-95c0a13619db?resourceVersion=id%3A443679"
+        },
+        "working-copy": {
+          "href": "https://www.ftc.gov/v0/hsr-early-termination-notices/0d8c6442-999e-4062-81ee-95c0a13619db?resourceVersion=rel%3Aworking-copy"
+        }
+      },
+      "attributes": {
+        "title": "20262247: Nasdaq, Inc.; LeveL Holdings, LLC",
+        "created": "2026-09-30T12:38:21+00:00",
+        "updated": "2026-09-30T12:38:21+00:00",
+        "acquired-party": "LeveL Holdings, LLC",
+        "acquiring-party": "Nasdaq, Inc.",
+        "date": "2026-09-29",
+        "acquired-entities": [
+          "LeveL Holdings, LLC"
+        ],
+        "transaction-number": "20262247"
+      },
+      "relationships": {
+        "node_type": {
+          "data": null,
+          "links": {
+            "self": {
+              "href": "https://www.ftc.gov/v0/hsr-early-termination-notices/0d8c6442-999e-4062-81ee-95c0a13619db/relationships/node_type?resourceVersion=id%3A443679"
+            }
+          }
+        },
+        "feeds_item": {
+          "data": [],
+          "links": {
+            "related": {
+              "href": "https://www.ftc.gov/v0/hsr-early-termination-notices/0d8c6442-999e-4062-81ee-95c0a13619db/feeds_item?resourceVersion=id%3A443679"
+            },
+            "self": {
+              "href": "https://www.ftc.gov/v0/hsr-early-termination-notices/0d8c6442-999e-4062-81ee-95c0a13619db/relationships/feeds_item?resourceVersion=id%3A443679"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "early_termination_notice",
+      "id": "99aa43e1-9e36-4307-962e-33af52938088",
+      "links": {
+        "self": {
+          "href": "https://www.ftc.gov/v0/hsr-early-termination-notices/99aa43e1-9e36-4307-962e-33af52938088?resourceVersion=id%3A443677"
+        },
+        "working-copy": {
+          "href": "https://www.ftc.gov/v0/hsr-early-termination-notices/99aa43e1-9e36-4307-962e-33af52938088?resourceVersion=rel%3Aworking-copy"
+        }
+      },
+      "attributes": {
+        "title": "20262162: Kirin Holdings Company, Limited; Jamieson Wellness Inc.",
+        "created": "2026-09-30T12:38:19+00:00",
+        "updated": "2026-09-30T12:38:19+00:00",
+        "acquired-party": "Jamieson Wellness Inc.",
+        "acquiring-party": "Kirin Holdings Company, Limited",
+        "date": "2026-09-29",
+        "acquired-entities": [
+          "Jamieson Wellness Inc."
+        ],
+        "transaction-number": "20262162"
+      },
+      "relationships": {
+        "node_type": {
+          "data": null,
+          "links": {
+            "self": {
+              "href": "https://www.ftc.gov/v0/hsr-early-termination-notices/99aa43e1-9e36-4307-962e-33af52938088/relationships/node_type?resourceVersion=id%3A443677"
+            }
+          }
+        },
+        "feeds_item": {
+          "data": [],
+          "links": {
+            "related": {
+              "href": "https://www.ftc.gov/v0/hsr-early-termination-notices/99aa43e1-9e36-4307-962e-33af52938088/feeds_item?resourceVersion=id%3A443677"
+            },
+            "self": {
+              "href": "https://www.ftc.gov/v0/hsr-early-termination-notices/99aa43e1-9e36-4307-962e-33af52938088/relationships/feeds_item?resourceVersion=id%3A443677"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "early_termination_notice",
+      "id": "9628ee29-ba86-4337-911d-e5802743d8cd",
+      "links": {
+        "self": {
+          "href": "https://www.ftc.gov/v0/hsr-early-termination-notices/9628ee29-ba86-4337-911d-e5802743d8cd?resourceVersion=id%3A443678"
+        },
+        "working-copy": {
+          "href": "https://www.ftc.gov/v0/hsr-early-termination-notices/9628ee29-ba86-4337-911d-e5802743d8cd?resourceVersion=rel%3Aworking-copy"
+        }
+      },
+      "attributes": {
+        "title": "20262239: KKR Armstrong Aggregator L.P.; Integer Holdings Corporation",
+        "created": "2026-09-30T12:38:19+00:00",
+        "updated": "2026-09-30T12:38:19+00:00",
+        "acquired-party": "Integer Holdings Corporation",
+        "acquiring-party": "KKR Armstrong Aggregator L.P.",
+        "date": "2026-09-29",
+        "acquired-entities": [
+          "Integer Holdings Corporation"
+        ],
+        "transaction-number": "20262239"
+      },
+      "relationships": {
+        "node_type": {
+          "data": null,
+          "links": {
+            "self": {
+              "href": "https://www.ftc.gov/v0/hsr-early-termination-notices/9628ee29-ba86-4337-911d-e5802743d8cd/relationships/node_type?resourceVersion=id%3A443678"
+            }
+          }
+        },
+        "feeds_item": {
+          "data": [],
+          "links": {
+            "related": {
+              "href": "https://www.ftc.gov/v0/hsr-early-termination-notices/9628ee29-ba86-4337-911d-e5802743d8cd/feeds_item?resourceVersion=id%3A443678"
+            },
+            "self": {
+              "href": "https://www.ftc.gov/v0/hsr-early-termination-notices/9628ee29-ba86-4337-911d-e5802743d8cd/relationships/feeds_item?resourceVersion=id%3A443678"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "meta": {
+    "count": 2843
+  },
+  "links": {
+    "last": {
+      "href": "https://www.ftc.gov/v0/hsr-early-termination-notices?filter%5Btitle%5D%5Boperator%5D=CONTAINS&filter%5Btitle%5D%5Bvalue%5D=Holdings&page%5Boffset%5D=2840&page%5Blimit%5D=5&sort%5Bsort-created%5D%5Bpath%5D=created&sort%5Bsort-created%5D%5Bdirection%5D=DESC"
+    },
+    "next": {
+      "href": "https://www.ftc.gov/v0/hsr-early-termination-notices?filter%5Btitle%5D%5Boperator%5D=CONTAINS&filter%5Btitle%5D%5Bvalue%5D=Holdings&page%5Boffset%5D=5&page%5Blimit%5D=5&sort%5Bsort-created%5D%5Bpath%5D=created&sort%5Bsort-created%5D%5Bdirection%5D=DESC"
+    },
+    "self": {
+      "href": "https://www.ftc.gov/v0/hsr-early-termination-notices?filter%5Btitle%5D%5Boperator%5D=CONTAINS&filter%5Btitle%5D%5Bvalue%5D=Holdings&page%5Blimit%5D=5"
+    }
+  }
+}

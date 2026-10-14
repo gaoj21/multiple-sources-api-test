@@ -1,0 +1,31 @@
+{
+  "summary": "The consent agreement in this matter settles alleged violations of Federal law prohibiting unfair methods of competition. The attached Analysis of Proposed Agreement Containing Consent Order to Aid Public Comment describes both the allegations in the complaint and the terms of the consent order--embodied in the consent agreement--that would settle these allegations.",
+  "dateIssued": "2026-09-18",
+  "packageId": "FR-2026-09-18",
+  "packageLink": "https://api.govinfo.gov/packages/FR-2026-09-18/summary",
+  "collectionCode": "FR",
+  "detailsLink": "https://www.govinfo.gov/app/details/FR-2026-09-18/2026-19189",
+  "agencies": [
+    {
+      "name": "FEDERAL TRADE COMMISSION",
+      "order": "1"
+    }
+  ],
+  "title": "Beretta and Ruger; Analysis of Proposed Agreement Containing Consent Order To Aid Public Comment",
+  "collectionName": "Federal Register",
+  "billingCode": "6750-01-P",
+  "granuleClass": "NOTICE",
+  "granuleId": "2026-19189",
+  "download": {
+    "premisLink": "https://api.govinfo.gov/packages/FR-2026-09-18/premis",
+    "txtLink": "https://api.govinfo.gov/packages/FR-2026-09-18/granules/2026-19189/htm",
+    "zipLink": "https://api.govinfo.gov/packages/FR-2026-09-18/zip",
+    "modsLink": "https://api.govinfo.gov/packages/FR-2026-09-18/granules/2026-19189/mods",
+    "pdfLink": "https://api.govinfo.gov/packages/FR-2026-09-18/granules/2026-19189/pdf"
+  },
+  "relatedLink": "https://api.govinfo.gov/related/2026-19189",
+  "docClass": "FR",
+  "lastModified": "2026-09-23T15:15:51Z",
+  "category": "Regulatory Information",
+  "granulesLink": "https://api.govinfo.gov/packages/FR-2026-09-18/granules?offsetMark=*&pageSize=100"
+}

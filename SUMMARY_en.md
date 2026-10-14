@@ -15,7 +15,7 @@
 | Status | Sources |
 |---|---|
 | **Verified with real requests, usable** | USAspending, Grants.gov, GovInfo, CourtListener, SAM.gov, OSHA, UCC Filings (Colorado + Connecticut), Alpha Vantage (earnings call transcripts) |
-| **Usable, but the API itself is limited** | DOJ (title match and single-day lookup only); api.ftc.gov (HSR notices only) |
+| **Usable, but the API itself is limited** | DOJ (title match and single-day lookup only); api.ftc.gov (HSR notices only); FTC Federal Register documents (formal legal documents only, no press releases) |
 | **Not usable** | FTC press releases: this machine's IP is blocked by the site, needs a US IP<br>USPTO: key requires ID.me, which needs a US ID; dropped |
 | **Free demo works, paid for real use** | EarningsCall (earnings calls; demo key covers AAPL and MSFT only) |
 | **Paid, awaiting credentials** | D&B Direct+, Moody's Orbis, Quartr (earnings calls), LexisNexis: code written per docs, never run with real credentials |
@@ -37,6 +37,7 @@
 | **SAM.gov** | Yes (only 10 calls/day) | US + International: US federal procurement; registrants include foreign companies (5,176 in the UK alone) | Contract opportunities (incl. awards), vendor registrations, procurement exclusion list | Free SAM key | Partial: title only | Yes: posted-date range (required, ≤ 1 yr) | date only | **10/day** | Daily |
 | **DOJ** | Yes (title match and single-day lookup only) | US + International: DOJ press releases; defendants can be foreign nationals | DOJ press releases: title, full HTML text, issuing office, topic | No key, free | Partial: title match only | Partial: single day only | created/changed to the second | ≤ 4 req/s | Every 2–4 h |
 | **api.ftc.gov** | Yes (HSR notices only, no press releases) | US + International: mergers affecting US commerce; both parties can be foreign | HSR early terminations: acquirer, acquired party, transaction number, date | Free api.data.gov key | Yes: field filters | Yes: field filters | to the second | 20,000/hr | Weekly |
+| **FTC Federal Register documents** (via GovInfo) | Yes (formal legal documents only, no press releases) | US + International: FTC rules and enforcement settlements; parties can be foreign | Rules, proposed consent orders with case analysis, comment requests, etc. published by the FTC in the Federal Register, with PDF / TXT full text | Free api.data.gov key (shared with GovInfo) | Yes: full-text keywords (e.g. "consent order") | Yes: `publishdate:range()` | publish date is date-only; ingest time to the second | 36,000/hr | Daily (together with GovInfo) |
 | **OSHA** | Yes | US only: 50 states and territories | Safety inspections, violations and penalties, workplace accidents (11 tables, joined on inspection number) | Free DOL key | Yes: `like` matching | Yes: `gt`/`lt` | load time `load_dt` to the second | 10k records / 5 MB per request; bursts trigger 429 in testing | Daily |
 | **UCC Filings** (CO / CT) | Yes (Colorado and Connecticut only) | US + International: filings in Colorado and Connecticut only; a few debtors are abroad (e.g. Canada, UK) | Liens: debtors, secured parties, collateral (CO), filing date, lapse date | No key, free | Yes: `$where like` / `$q` | Yes: `$where between` | date only | IP-throttled without token; effectively unlimited with one | Daily |
 | FTC press releases | No: this machine's IP is blocked by the FTC site; needs a US IP | US only: US FTC press releases | Press-release title, link, summary, publish time (full text needs the web page) | No API; RSS and web pages only | web page search only | RSS holds only the latest 10–30 items | `pubDate` with TZ | Site firewall blocks by IP | Daily (after an IP change) |
@@ -61,6 +62,7 @@ Two layers: **which country's institution produces the data**, and **which count
 | **CourtListener** | US (aggregated by Free Law Project) | Mainly US courts, 3,359 in total: federal courts, state courts for the 50 states plus DC (55 state supreme courts), territorial courts (Guam, Northern Mariana Islands, Puerto Rico, Virgin Islands, etc.) and tribal courts (e.g. Cherokee Nation Supreme Court); plus 3 historical English courts (House of Lords etc.) with very little data | tested |
 | **DOJ** | US Department of Justice | DOJ press releases; defendants can be foreign nationals (a sample featured a Colombian national) | tested |
 | **api.ftc.gov** (HSR) | US FTC | Mergers affecting US commerce; both parties can be foreign (sample: Swiss ABB acquiring UK Rotork) | tested |
+| **FTC Federal Register documents** | US FTC (via GPO's GovInfo) | FTC rules and enforcement settlements; parties can be foreign | tested |
 | FTC press releases | US FTC | US FTC press releases | official docs |
 | **OSHA** | US Department of Labor | Workplaces in the 50 states and US territories (Puerto Rico inspections confirmed) | tested |
 | **UCC Filings** | Colorado and Connecticut state governments | **Only filings made in these two states.** Debtors are mostly in-state (93% of Connecticut debtors are in CT), with a few out of state or abroad (Colorado has Canadian and UK debtors, among others) | tested |
@@ -279,6 +281,15 @@ Two layers: **which country's institution produces the data**, and **which count
   - Quota: tested 20,000/hr. HSR notices are released in weekly batches (tested).
 - **Sources**: ftc.gov/developer, ftc.gov/developer/api/v0/endpoints/hsr-early-termination-notices, ftc.gov/news-events/stay-connected/ftc-rss-feeds. Official confidence: **high**.
 
+- **FTC documents in the Federal Register** (via GovInfo; usable and unaffected by the site block):
+  - **How to call**: `POST https://api.govinfo.gov/search` with the query `collection:(FR) agency:"Federal Trade Commission"`, optionally with keywords and `publishdate:range(from,to)`. For a single document use `/packages/{packageId}/granules/{granuleId}/summary` (`packageId` is the whole day's issue; `granuleId` is the individual document).
+  - **What you get** (tested): **4,228** FTC documents in the Federal Register. They include rules (e.g. "Rule on Impersonation of Government and Businesses", 2026-10-01), rules of practice, comment requests, and **proposed consent orders with the FTC's case analysis** (e.g. Beretta and Ruger, Aurobindo and Lannett, Ascension Health, CMG Media). Each document has a title, summary, issuing agency, publish date, ingest time, and PDF / TXT / ZIP full-text links.
+  - **Keyword** (supported, tested): adding `"consent order"` narrows 4,228 → 220.
+  - **Date** (supported, tested): July–September 2026 has 24 documents; 10/10 sampled in range.
+  - **Timestamps**: publish date `dateIssued` is date-only; ingest time `lastModified` is to the second.
+  - **Limits**: formal legal documents only, **no general press releases**; consent orders appear only at the settlement stage, later than FTC press releases.
+  - **Quota**: shares the GovInfo key, 36,000/hr.
+
 ### 3.8 USPTO (dropped)
 - **What you could get** (per official docs, not tested):
   - Patent applications: application number, invention title, filing date, grant date, patent number, publication date, application status, inventors, applicants, CPC classification, ingest time.
@@ -449,6 +460,7 @@ No API: Seeking Alpha (transcripts are web Premium only), Motley Fool, Koyfin.
 | Daily | UCC (CO/CT, `$where` filing date = yesterday) | 16:00 (US data refreshed after midnight) | 2–6 |
 | Daily | OSHA inspections (`open_date` > last run) | 20:00 | 1–3 |
 | Weekly | api.ftc.gov HSR notices | Thursday | 1 |
+| Daily | FTC Federal Register documents (with GovInfo, incremental by `lastModified`) | 00:00 | 1 |
 
 **The test script also uses quota**: one SAM run costs 4 calls (at most 2 test runs per day); one CourtListener run costs 5.
 

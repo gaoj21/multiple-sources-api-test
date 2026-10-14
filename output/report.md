@@ -8,7 +8,7 @@
 | D&B Direct+ | 需要 key / license | OAuth2 client_credentials: Basic base64(key:secret) → POST /v3/token (form 表单 grant_type=client_credentials) 拿 access_token (24 小时有效), 之后 Bearer; 旧版 /v2/token 用 JSON body | 商业付费 license: key/secret 只能找 D&B 客户代表开通, 按产品/Data Block 授权 (companyinfo L1 是所有 block 的起点); 每次调用计入合同配额 | 支持: search/criteria 的 searchTerm (公司名/关键词) 及 industry/地域等条件; typeahead 可前缀匹配 | 不支持按时间查询; 变化追踪要用 Monitoring (订阅 DUNS 后推送变更通知)  |
 | Moody's Orbis | 需要 key / license | Header ApiToken: <token> (由 BvD/Moody's 客户经理开通, 和 Orbis 网页账号绑定) | 商业付费 license (Orbis 订阅 + API 模块单独签约), 下载量/字段范围按合同 | 支持: match 接口按名称/国家/城市/网址等匹配; data 接口 WHERE 支持搜索策略 (行业、地区、规模等) | 财务数据按年份 (如 OPRE 的各年度); 按'更新时间'增量一般需要单独的 Updates/Delivery 产品, 需和 Moody's 确认 |
 | DOJ News | 部分可用 | 无需 key | 免费公开 (美国政府作品) | 无全文搜索参数 (parameters[keyword] 会被静默忽略); 只能 parameters[title]=xxx 做标题匹配 | 支持: parameters[date] 精确匹配某一天 (官方示例用 Unix 时间戳, 实测 YYYY-MM-DD 也可以); 无区间 → 需逐天查或按 sort=date 翻页 (不传 sort 默认从 2009 年最旧的开始) |
-| FTC Press Releases | 被拦截 | 新闻稿: 无官方 API, 只有 RSS + 网页 (无需 key); api.ftc.gov (HSR 提前终止/DNC 投诉) 需要 api.data.gov key | 免费公开 | RSS 不支持; 网页列表 ?search_api_fulltext=xxx 支持 (需抓 HTML) | RSS 只有最近若干条 (10~30 条不等, pubDate 带时区如 -0400); 网页列表有起止日期筛选; api.ftc.gov 支持 filter[date][condition][path/value/operator] |
+| FTC | 部分可用 | 新闻稿: 无官方 API, 只有 RSS + 网页 (无需 key); api.ftc.gov (HSR 提前终止/DNC 投诉) 和联邦公报 (GovInfo) 都用 api.data.gov key | 免费公开 | RSS 不支持; 网页列表 ?search_api_fulltext=xxx 支持 (需抓 HTML); api.ftc.gov 支持 filter[title]; 联邦公报支持全文关键词 (如 "consent order") | RSS 只有最近若干条 (10~30 条不等, pubDate 带时区如 -0400); 网页列表有起止日期筛选; api.ftc.gov 支持 filter[date][condition][path/value/operator]; 联邦公报用 publishdate:range(起,止) |
 | USPTO | 需要 key / license | Open Data Portal: Header X-API-KEY (免费, 需 USPTO.gov 账号 + MFA + 已关联的 ID.me 实名验证, 在 https://data.uspto.gov/apikey 生成); TSDR 商标: 另一个 key (account.uspto.gov/api-manager), Header USPTO-API-KEY | 免费 (官方: at no cost; 未见数据 license 声明) | 支持: q=applicationMetaData.inventionTitle:battery 或全文 q=battery; 支持 AND/OR/字段过滤 | 支持: rangeFilters (POST) 或 GET 的 rangeFilters=applicationMetaData.filingDate 2024-01-01:2024-12-31; 可按 filingDate/grantDate 等 |
 | Quartr | 需要 key / license | Header x-api-key (Quartr 商务开通, 在 Quartr Portal portal.quartr.dev 生成) | 商业付费 license: 数据集可单买或打包 (transcripts、audio、live、summaries、解析文档等), companies 和 events 始终包含 | 没有全文关键词搜索; 只能按 tickers / isins / ciks / companyIds / countries / exchanges / typeIds 过滤 | 支持: startDate / endDate (事件日期) 以及 updatedAfter / updatedBefore (数据更新时间, 适合增量) |
 | EarningsCall | 部分可用 | 参数 apikey; 'demo' key 无需注册, 只能查 AAPL 和 MSFT; 免费试用 key 需邮箱或 Google 登录; 正式使用要付费 | 付费: Starter $60/月 (只有纯文本)、Premium $69/月 (发言人、逐词时间、问答拆分)、Ultimate $129/月 (加音频)、Ultimate+ $155/月 (加 webhooks) | 只能按公司名或代码搜公司 (/symbols?search=); 不能在文字稿里做关键词搜索 | 按 year + quarter 取某一场; /calendar?year=&month=&day= 查某一天有哪些电话会 |
@@ -18,6 +18,7 @@
 | LexisNexis Data+ | 需要 key / license | OAuth2 client_credentials: POST auth-api.lexisnexis.com/oauth/v2/token (Basic client_id:secret, form 表单, scope=http://oauth.lexisnexis.com/all) → Bearer, 24 小时有效; 凭证需要 Service-to-Service ID | 商业付费 license: 调用方承担所有 LexisNexis 费用, 能看哪些内容源取决于授权; 具体计费和再分发条款看合同 | 支持: $search= (必填; 有 Boolean 布尔检索模式, 如 antitrust AND merger; w/5 近邻语法在 API 文档里未确认) | 支持: $filter=Date ge 2025-01-01 and Date le 2025-03-31; $orderby=Date desc |
 | OSHA | 可用 | 免费 DOL API key (在 dataportal.dol.gov/registration 注册并填问卷后生成, 最多 5 个); 参数 X-API-KEY; 数据集目录 /v4/datasets 无需 key | 免费公开 (美国政府数据) | 支持: filter_object 用 like 运算符做模糊匹配, 如 {"field":"estab_name","operator":"like","value":"%WALMART%"} | 支持: filter_object 用 gt / lt 比较日期字段 (如 open_date), 可用 and/or 组合; sort + sort_by 排序 |
 | UCC Filings | 可用 | 不需要 key; 可选 Socrata app token (请求头 X-App-Token, 免费注册) 以获得独立额度 | 免费公开 (州政府开放数据) | 支持: $q= 全文搜索, 或 $where=upper(organizationname) like '%XXX%' (按债务人/担保权人名称) | 支持: $where=filingdate between '2026-09-01' and '2026-09-30' (CO) / dt_accept (CT); 也能按失效日 lapsedate / dt_lapse 查 |
+| FTC Press Releases | 被拦截 | 新闻稿: 无官方 API, 只有 RSS + 网页 (无需 key); api.ftc.gov (HSR 提前终止/DNC 投诉) 需要 api.data.gov key | 免费公开 | RSS 不支持; 网页列表 ?search_api_fulltext=xxx 支持 (需抓 HTML) | RSS 只有最近若干条 (10~30 条不等, pubDate 带时区如 -0400); 网页列表有起止日期筛选; api.ftc.gov 支持 filter[date][condition][path/value/operator] |
 
 ## USAspending.gov  —  可用
 _测试时间 2026-10-13T06:43:01+00:00_
@@ -295,21 +296,23 @@ _测试时间 2026-10-13T06:43:07+00:00_
 - 按部门过滤 parameters[component]: 官方开发者页说支持按部门/主题过滤, 但实测被忽略 (总数不变), 需要客户端过滤
 - 时间戳示例: date=1791806400 → 2026-10-12 12:00:00 UTC; created=2026-10-12 01:47:15; changed=2026-10-12 13:02:46
 
-## FTC Press Releases  —  被拦截
-_测试时间 2026-10-13T06:43:11+00:00_
+## FTC  —  部分可用
+_测试时间 2026-10-14T07:40:58+00:00_
 
 - **文档**: https://www.ftc.gov/developer  ·  https://www.ftc.gov/developer/api/v0/endpoints/hsr-early-termination-notices  ·  RSS: https://www.ftc.gov/news-events/stay-connected/ftc-rss-feeds
-- **认证**: 新闻稿: 无官方 API, 只有 RSS + 网页 (无需 key); api.ftc.gov (HSR 提前终止/DNC 投诉) 需要 api.data.gov key
+- **认证**: 新闻稿: 无官方 API, 只有 RSS + 网页 (无需 key); api.ftc.gov (HSR 提前终止/DNC 投诉) 和联邦公报 (GovInfo) 都用 api.data.gov key
 - **License**: 免费公开
 - **限制**: www.ftc.gov 有 WAF, 识别为自动化请求会返回 404 拦截页 (按 IP, 换一台机器即可访问); api.ftc.gov 限流由 api.data.gov 控制 (实测个人 key X-RateLimit-Limit=20000, DEMO_KEY 实测 10), 每页最多 50 条
-- **获取方式**: RSS (feeds/press-release*.xml) 或抓取 /news-events/news/press-releases 列表页
-- **关键词**: RSS 不支持; 网页列表 ?search_api_fulltext=xxx 支持 (需抓 HTML)
-- **时间**: RSS 只有最近若干条 (10~30 条不等, pubDate 带时区如 -0400); 网页列表有起止日期筛选; api.ftc.gov 支持 filter[date][condition][path/value/operator]
+- **获取方式**: 新闻稿: RSS (feeds/press-release*.xml) 或网页列表; HSR: GET api.ftc.gov/v0/hsr-early-termination-notices; 联邦公报: POST api.govinfo.gov/search, query 里加 collection:(FR) agency:"Federal Trade Commission"
+- **关键词**: RSS 不支持; 网页列表 ?search_api_fulltext=xxx 支持 (需抓 HTML); api.ftc.gov 支持 filter[title]; 联邦公报支持全文关键词 (如 "consent order")
+- **时间**: RSS 只有最近若干条 (10~30 条不等, pubDate 带时区如 -0400); 网页列表有起止日期筛选; api.ftc.gov 支持 filter[date][condition][path/value/operator]; 联邦公报用 publishdate:range(起,止)
 
 ### 信息来源 (调用方式从哪来)
 - 官方: https://www.ftc.gov/developer (只有 dnc-complaints 和 hsr-early-termination-notices 两个 API, 无新闻稿 API; 需 api.data.gov key)
 - 官方: https://www.ftc.gov/developer/api/v0/endpoints/hsr-early-termination-notices (filter[title][value]+operator=CONTAINS、page[limit]/page[offset]、sort[x][path]/sort[x][direction])
 - 官方: https://www.ftc.gov/news-events/stay-connected/ftc-rss-feeds (feeds/press-release.xml、-competition.xml、-consumer-protection.xml 三个 RSS 地址) — 从另一台主机访问确认 feed 在线
+- 官方: https://github.com/usgpo/api 与 https://www.govinfo.gov/help/finding-info (GovInfo 搜索语法、publishdate:range、collection 过滤)
+- 实测 (2026-10-14): 联邦公报里 FTC 文件 2026-07~10 共 27 份; 过去一年拟议和解令 15 份 (如 Beretta and Ruger、Aurobindo and Lannett、Ascension Health、CMG Media)
 - 实测/页面观察: 网页列表 ?search_api_fulltext= 参数 (来自页面搜索表单, 无文档)、WAF 拦截行为、RSS 条数
 
 ### 测试结果
@@ -320,26 +323,43 @@ _测试时间 2026-10-13T06:43:11+00:00_
 - [失败] **网页关键词搜索 'merger'** — WAF 拦截 / 不可达
 - [通过] **api.ftc.gov 连接 (HSR 公告)** — 5 条
 - [通过] **api.ftc.gov filter[title] CONTAINS 'Holdings'** — 返回5条, 其中5条包含'holdings'
+- [通过] **联邦公报: 按机构筛 FTC 文件** — 共 4228 份, 最新: [('2026-10-14', 'Agency Information Collection Activities; Proposed Collectio'), ('2026-10-14', 'Agency Information Collection Activities; Proposed Collectio'), ('2026-10-01', 'Rule on Impersonation of Government and Businesses')]
+- [通过] **联邦公报: 刊登日 2026-07-01~2026-09-30** — 10/10 条在 2026-07-01~2026-09-30 内; 总数 4228 → 24; 样例 ['2026-09-30', '2026-09-24', '2026-09-24']
+- [通过] **联邦公报: 关键词 'consent order'** — FTC 文件 4228 → 220; 例: ['Beretta and Ruger; Analysis of Proposed Agreement Containing Consent O', 'Policy Statement Concerning the Suppression of Accuracy in Artificial ', 'Aurobindo and Lannett; Analysis of Proposed Agreement Containing Conse']
+- [通过] **联邦公报: 单份文件详情和全文链接** — 2026-19189: Beretta and Ruger; Analysis of Proposed Agreement Containing Consent O | 下载格式 ['premisLink', 'txtLink', 'zipLink', 'modsLink', 'pdfLink']
 
 ### 拿到的字段 / 时间戳
 - **HSR early termination notice** (8 个字段): `title, created, updated, acquired-party, acquiring-party, date, acquired-entities, transaction-number`
   - 时间戳 `created` = `2026-10-07T13:22:14+00:00`
   - 时间戳 `updated` = `2026-10-07T13:22:14+00:00`
   - 时间戳 `date` = `2026-10-05`
+- **Federal Register FTC document** (15 个字段): `title, packageId, granuleId, lastModified, governmentAuthor, dateIssued, collectionCode, dateIngested, download.premisLink, download.txtLink, download.zipLink, download.modsLink, download.pdfLink, relatedLink, resultLink`
+  - 时间戳 `lastModified` = `2026-10-14T06:27:49Z`
+  - 时间戳 `dateIssued` = `2026-10-14`
+  - 时间戳 `dateIngested` = `2026-10-14`
+- **Federal Register FTC document detail** (23 个字段): `summary, dateIssued, packageId, packageLink, collectionCode, detailsLink, agencies.[0].name, agencies.[0].order, title, collectionName, billingCode, granuleClass, granuleId, download.premisLink, download.txtLink, download.zipLink, download.modsLink, download.pdfLink, relatedLink, docClass, lastModified, category, granulesLink`
+  - 时间戳 `dateIssued` = `2026-09-18`
+  - 时间戳 `lastModified` = `2026-09-23T15:15:51Z`
 
 ### HTTP 调用
-- `GET homepage (WAF check)` → **404** (0.24s) · `Page Not Found No additional information is available with regards to this resource . $('#resource').text(window.location);`
-- `GET RSS all press releases` → **404** (0.07s) · `Page Not Found No additional information is available with regards to this resource . $('#resource').text(window.location);`
-- `GET RSS competition` → **404** (0.07s) · `Page Not Found No additional information is available with regards to this resource . $('#resource').text(window.location);`
-- `GET RSS consumer protection` → **404** (0.07s) · `Page Not Found No additional information is available with regards to this resource . $('#resource').text(window.location);`
-- `GET web search list` → **404** (0.07s) · `Page Not Found No additional information is available with regards to this resource . $('#resource').text(window.location);`
-- `GET api.ftc.gov HSR early termination` → **200** (2.31s) · 限流头 `{'X-Ratelimit-Limit': '20000', 'X-Ratelimit-Remaining': '19995'}`
-- `GET api.ftc.gov keyword filter` → **200** (1.4s) · 限流头 `{'X-Ratelimit-Limit': '20000', 'X-Ratelimit-Remaining': '19994'}`
+- `GET homepage (WAF check)` → **404** (0.36s) · `Page Not Found No additional information is available with regards to this resource . $('#resource').text(window.location);`
+- `GET RSS all press releases` → **404** (0.17s) · `Page Not Found No additional information is available with regards to this resource . $('#resource').text(window.location);`
+- `GET RSS competition` → **404** (0.06s) · `Page Not Found No additional information is available with regards to this resource . $('#resource').text(window.location);`
+- `GET RSS consumer protection` → **404** (0.06s) · `Page Not Found No additional information is available with regards to this resource . $('#resource').text(window.location);`
+- `GET web search list` → **404** (0.08s) · `Page Not Found No additional information is available with regards to this resource . $('#resource').text(window.location);`
+- `GET api.ftc.gov HSR early termination` → **200** (1.24s) · 限流头 `{'X-Ratelimit-Limit': '20000', 'X-Ratelimit-Remaining': '19997'}`
+- `GET api.ftc.gov keyword filter` → **200** (0.3s) · 限流头 `{'X-Ratelimit-Limit': '20000', 'X-Ratelimit-Remaining': '19996'}`
+- `POST Federal Register: FTC documents` → **200** (1.21s) · 限流头 `{'X-Ratelimit-Limit': '36000', 'X-Ratelimit-Remaining': '35993'}`
+- `POST Federal Register: FTC 2026Q3` → **200** (0.61s) · 限流头 `{'X-Ratelimit-Limit': '36000', 'X-Ratelimit-Remaining': '35992'}`
+- `POST Federal Register: FTC consent orders` → **200** (0.45s) · 限流头 `{'X-Ratelimit-Limit': '36000', 'X-Ratelimit-Remaining': '35991'}`
+- `GET Federal Register: document (granule) summary` → **200** (0.58s) · 限流头 `{'X-Ratelimit-Limit': '36000', 'X-Ratelimit-Remaining': '35990'}`
 
 ### 注意事项
 - 注意: 本机测试时 www.ftc.gov 对所有路径返回 'The request resembles an abusive automated request' (WAF 拦截, 带 Error Reference ID), 需要换 IP / 联系 PWH-Alert@ftc.gov 加白名单
 - api.ftc.gov 的数据不是新闻稿, 而是 HSR 早期终止公告等结构化数据 (JSON:API 格式)
 - 抓网页请降低频率、带正常 UA, 否则很容易被 WAF 拉黑
+- 联邦公报只收 FTC 的正式法律文件 (规则、拟议和解令及其案件分析、征求意见等), 没有一般新闻稿; 和解令要到和解阶段才刊登, 比新闻稿晚
+- 联邦公报每份文件有 dateIssued (刊登日) 和 lastModified (入库时间, 到秒); 单份文件用 /packages/{packageId}/granules/{granuleId}/summary 取详情和 PDF / HTML / TXT 链接 (packageId 是当天整期公报)
 
 ## USPTO  —  需要 key / license
 _测试时间 2026-10-13T06:43:13+00:00_
@@ -760,3 +780,49 @@ _测试时间 2026-10-13T09:58:36+00:00_
 - CO 分 4 张表, 用 fileid 关联: 申报 wffy-3uut (类型、申报日、失效日)、债务人 8upq-58vz、担保权人 ap62-sav4、担保物 4am6-w6u4
 - CT 是一张平表 (债务人 + 担保权人 + 日期), 没有担保物字段
 - 日期是 floating_timestamp (无时区), 实际只有日期精度
+
+## FTC Press Releases  —  被拦截
+_测试时间 2026-10-13T06:43:11+00:00_
+
+- **文档**: https://www.ftc.gov/developer  ·  https://www.ftc.gov/developer/api/v0/endpoints/hsr-early-termination-notices  ·  RSS: https://www.ftc.gov/news-events/stay-connected/ftc-rss-feeds
+- **认证**: 新闻稿: 无官方 API, 只有 RSS + 网页 (无需 key); api.ftc.gov (HSR 提前终止/DNC 投诉) 需要 api.data.gov key
+- **License**: 免费公开
+- **限制**: www.ftc.gov 有 WAF, 识别为自动化请求会返回 404 拦截页 (按 IP, 换一台机器即可访问); api.ftc.gov 限流由 api.data.gov 控制 (实测个人 key X-RateLimit-Limit=20000, DEMO_KEY 实测 10), 每页最多 50 条
+- **获取方式**: RSS (feeds/press-release*.xml) 或抓取 /news-events/news/press-releases 列表页
+- **关键词**: RSS 不支持; 网页列表 ?search_api_fulltext=xxx 支持 (需抓 HTML)
+- **时间**: RSS 只有最近若干条 (10~30 条不等, pubDate 带时区如 -0400); 网页列表有起止日期筛选; api.ftc.gov 支持 filter[date][condition][path/value/operator]
+
+### 信息来源 (调用方式从哪来)
+- 官方: https://www.ftc.gov/developer (只有 dnc-complaints 和 hsr-early-termination-notices 两个 API, 无新闻稿 API; 需 api.data.gov key)
+- 官方: https://www.ftc.gov/developer/api/v0/endpoints/hsr-early-termination-notices (filter[title][value]+operator=CONTAINS、page[limit]/page[offset]、sort[x][path]/sort[x][direction])
+- 官方: https://www.ftc.gov/news-events/stay-connected/ftc-rss-feeds (feeds/press-release.xml、-competition.xml、-consumer-protection.xml 三个 RSS 地址) — 从另一台主机访问确认 feed 在线
+- 实测/页面观察: 网页列表 ?search_api_fulltext= 参数 (来自页面搜索表单, 无文档)、WAF 拦截行为、RSS 条数
+
+### 测试结果
+- [失败] **www.ftc.gov 可访问** — 被 WAF 拦截 (IP 被判定为自动化请求)
+- [失败] **RSS all press releases** — HTTP 404 (主页已被 WAF 拦截, 无法判断 URL 是否正确)
+- [失败] **RSS competition** — HTTP 404 (主页已被 WAF 拦截, 无法判断 URL 是否正确)
+- [失败] **RSS consumer protection** — HTTP 404 (主页已被 WAF 拦截, 无法判断 URL 是否正确)
+- [失败] **网页关键词搜索 'merger'** — WAF 拦截 / 不可达
+- [通过] **api.ftc.gov 连接 (HSR 公告)** — 5 条
+- [通过] **api.ftc.gov filter[title] CONTAINS 'Holdings'** — 返回5条, 其中5条包含'holdings'
+
+### 拿到的字段 / 时间戳
+- **HSR early termination notice** (8 个字段): `title, created, updated, acquired-party, acquiring-party, date, acquired-entities, transaction-number`
+  - 时间戳 `created` = `2026-10-07T13:22:14+00:00`
+  - 时间戳 `updated` = `2026-10-07T13:22:14+00:00`
+  - 时间戳 `date` = `2026-10-05`
+
+### HTTP 调用
+- `GET homepage (WAF check)` → **404** (0.24s) · `Page Not Found No additional information is available with regards to this resource . $('#resource').text(window.location);`
+- `GET RSS all press releases` → **404** (0.07s) · `Page Not Found No additional information is available with regards to this resource . $('#resource').text(window.location);`
+- `GET RSS competition` → **404** (0.07s) · `Page Not Found No additional information is available with regards to this resource . $('#resource').text(window.location);`
+- `GET RSS consumer protection` → **404** (0.07s) · `Page Not Found No additional information is available with regards to this resource . $('#resource').text(window.location);`
+- `GET web search list` → **404** (0.07s) · `Page Not Found No additional information is available with regards to this resource . $('#resource').text(window.location);`
+- `GET api.ftc.gov HSR early termination` → **200** (2.31s) · 限流头 `{'X-Ratelimit-Limit': '20000', 'X-Ratelimit-Remaining': '19995'}`
+- `GET api.ftc.gov keyword filter` → **200** (1.4s) · 限流头 `{'X-Ratelimit-Limit': '20000', 'X-Ratelimit-Remaining': '19994'}`
+
+### 注意事项
+- 注意: 本机测试时 www.ftc.gov 对所有路径返回 'The request resembles an abusive automated request' (WAF 拦截, 带 Error Reference ID), 需要换 IP / 联系 PWH-Alert@ftc.gov 加白名单
+- api.ftc.gov 的数据不是新闻稿, 而是 HSR 早期终止公告等结构化数据 (JSON:API 格式)
+- 抓网页请降低频率、带正常 UA, 否则很容易被 WAF 拉黑

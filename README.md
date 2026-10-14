@@ -29,7 +29,7 @@ python run_all.py --render-only       # 不发请求, 只重新生成报告
 | CourtListener | 可用（搜索可匿名，其他接口用 token） | 其他端点需免费 token；默认只有 5 次/分钟、50 次/小时、125 次/天 | 支持 `q` (布尔语法) | 支持 `filed_after/before`, `date_modified__gte` | `dateFiled` + `meta.timestamp` 到微秒 |
 | DOJ News | 可用（只能按标题搜、只能查某一天） | 无需 key, 免费 | 部分支持：**只能匹配标题**, `parameters[keyword]` 被静默忽略 | 部分支持：只能查**单日** `parameters[date]` | `date` (Unix 秒, 日期精度), `created`/`changed` 到秒 |
 | GovInfo | 可用 | 免费 api.data.gov key，36,000 次/小时 | 支持，字段操作符语法 | 支持 `publishdate:range()` / lastModified 增量 | `dateIssued`, `lastModified` 到秒 |
-| FTC 新闻稿 | 不可用：本机 IP 被 FTC 网站拦截，需要换美国 IP（api.ftc.gov 的并购审查公告可用） | 新闻稿无 API, 只有 RSS/网页 | 网页可以 | RSS 只有最近的条目 | `pubDate`; api.ftc.gov 有 `created/updated` |
+| FTC 新闻稿 | 不可用：本机 IP 被 FTC 网站拦截，需要换美国 IP（api.ftc.gov 的并购审查公告、联邦公报里的 FTC 文件可用） | 新闻稿无 API, 只有 RSS/网页 | 网页可以 | RSS 只有最近的条目 | `pubDate`; api.ftc.gov 有 `created/updated` |
 | SAM.gov | 可用（每天只有 10 次） | 免费 key, 但**无角色每天只有 10 次** | `title` | 支持 `postedFrom/To` 必填, 跨度 ≤1 年 | `postedDate`, `responseDeadLine` |
 | USPTO | 不可用：key 需要 ID.me 实名验证，没有美国证件 | 免费 key, 需 MFA + ID.me 实名; 商标用另一个 key | 支持 `q` | 支持 `rangeFilters` | `filingDate`, `lastIngestionDateTime` |
 | D&B Direct+ | 不可用：付费，还没买凭证 | 付费, 按调用计费 | 支持 `searchTerm` | 不支持，只能用 Monitoring 推送 | `transactionTimestamp` |
@@ -67,7 +67,7 @@ python run_all.py --render-only       # 不发请求, 只重新生成报告
 | DOJ | justice.gov/developer/api-documentation/api_v1 | 高 | **官方限流每秒 4 次**；没有 speeches/videos 接口；按部门过滤官方说支持但实测无效 |
 | SAM.gov | open.gsa.gov（Opportunities / Entity / Exclusions） | 高 | 数据分级：税号、银行信息属于 Sensitive，不是 FOUO |
 | GovInfo | github.com/usgpo/api + api.govinfo.gov/api-docs | 高 | 个人 key **每小时 36,000 次**（不是 1,000） |
-| FTC | ftc.gov/developer + RSS 列表页 | 高（从另一台主机核实） | RSS 地址正确；排序参数换成文档写法 |
+| FTC | ftc.gov/developer + RSS 列表页 + GovInfo 文档 | 高（从另一台主机核实） | RSS 地址正确；排序参数换成文档写法；新增联邦公报里的 FTC 文件（实测 4,228 份） |
 | CourtListener | wiki.free.law/c/courtlistener/help/api/rest/v4 | 高 | **默认每分钟 5 次、每小时 50 次、每天 125 次**（不是每小时 5,000 次），实测也撞到了 |
 | USPTO | data.uspto.gov/apis/* + swagger | 高 | 申请 key 的页面是 `/apikey`；需要 MFA；PatentsView 的 API 还没迁到新平台 |
 | Quartr | quartr.com/docs + openapi.json | 高 | 默认每秒 50 次；每页最多 500 条 |

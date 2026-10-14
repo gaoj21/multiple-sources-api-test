@@ -1040,26 +1040,30 @@
     "tested_at": "2026-10-13T06:43:07+00:00"
   },
   {
-    "name": "FTC Press Releases",
-    "status": "blocked",
+    "name": "FTC",
+    "status": "partial",
     "meta": {
-      "auth": "新闻稿: 无官方 API, 只有 RSS + 网页 (无需 key); api.ftc.gov (HSR 提前终止/DNC 投诉) 需要 api.data.gov key",
+      "auth": "新闻稿: 无官方 API, 只有 RSS + 网页 (无需 key); api.ftc.gov (HSR 提前终止/DNC 投诉) 和联邦公报 (GovInfo) 都用 api.data.gov key",
       "license": "免费公开",
       "docs": "https://www.ftc.gov/developer  ·  https://www.ftc.gov/developer/api/v0/endpoints/hsr-early-termination-notices  ·  RSS: https://www.ftc.gov/news-events/stay-connected/ftc-rss-feeds",
       "limits": "www.ftc.gov 有 WAF, 识别为自动化请求会返回 404 拦截页 (按 IP, 换一台机器即可访问); api.ftc.gov 限流由 api.data.gov 控制 (实测个人 key X-RateLimit-Limit=20000, DEMO_KEY 实测 10), 每页最多 50 条",
-      "how": "RSS (feeds/press-release*.xml) 或抓取 /news-events/news/press-releases 列表页",
-      "keyword": "RSS 不支持; 网页列表 ?search_api_fulltext=xxx 支持 (需抓 HTML)",
-      "date": "RSS 只有最近若干条 (10~30 条不等, pubDate 带时区如 -0400); 网页列表有起止日期筛选; api.ftc.gov 支持 filter[date][condition][path/value/operator]",
+      "how": "新闻稿: RSS (feeds/press-release*.xml) 或网页列表; HSR: GET api.ftc.gov/v0/hsr-early-termination-notices; 联邦公报: POST api.govinfo.gov/search, query 里加 collection:(FR) agency:\"Federal Trade Commission\"",
+      "keyword": "RSS 不支持; 网页列表 ?search_api_fulltext=xxx 支持 (需抓 HTML); api.ftc.gov 支持 filter[title]; 联邦公报支持全文关键词 (如 \"consent order\")",
+      "date": "RSS 只有最近若干条 (10~30 条不等, pubDate 带时区如 -0400); 网页列表有起止日期筛选; api.ftc.gov 支持 filter[date][condition][path/value/operator]; 联邦公报用 publishdate:range(起,止)",
       "sources": [
         "官方: https://www.ftc.gov/developer (只有 dnc-complaints 和 hsr-early-termination-notices 两个 API, 无新闻稿 API; 需 api.data.gov key)",
         "官方: https://www.ftc.gov/developer/api/v0/endpoints/hsr-early-termination-notices (filter[title][value]+operator=CONTAINS、page[limit]/page[offset]、sort[x][path]/sort[x][direction])",
         "官方: https://www.ftc.gov/news-events/stay-connected/ftc-rss-feeds (feeds/press-release.xml、-competition.xml、-consumer-protection.xml 三个 RSS 地址) — 从另一台主机访问确认 feed 在线",
+        "官方: https://github.com/usgpo/api 与 https://www.govinfo.gov/help/finding-info (GovInfo 搜索语法、publishdate:range、collection 过滤)",
+        "实测 (2026-10-14): 联邦公报里 FTC 文件 2026-07~10 共 27 份; 过去一年拟议和解令 15 份 (如 Beretta and Ruger、Aurobindo and Lannett、Ascension Health、CMG Media)",
         "实测/页面观察: 网页列表 ?search_api_fulltext= 参数 (来自页面搜索表单, 无文档)、WAF 拦截行为、RSS 条数"
       ],
       "notes": [
         "注意: 本机测试时 www.ftc.gov 对所有路径返回 'The request resembles an abusive automated request' (WAF 拦截, 带 Error Reference ID), 需要换 IP / 联系 PWH-Alert@ftc.gov 加白名单",
         "api.ftc.gov 的数据不是新闻稿, 而是 HSR 早期终止公告等结构化数据 (JSON:API 格式)",
-        "抓网页请降低频率、带正常 UA, 否则很容易被 WAF 拉黑"
+        "抓网页请降低频率、带正常 UA, 否则很容易被 WAF 拉黑",
+        "联邦公报只收 FTC 的正式法律文件 (规则、拟议和解令及其案件分析、征求意见等), 没有一般新闻稿; 和解令要到和解阶段才刊登, 比新闻稿晚",
+        "联邦公报每份文件有 dateIssued (刊登日) 和 lastModified (入库时间, 到秒); 单份文件用 /packages/{packageId}/granules/{granuleId}/summary 取详情和 PDF / HTML / TXT 链接 (packageId 是当天整期公报)"
       ]
     },
     "checks": [
@@ -1097,6 +1101,26 @@
         "item": "api.ftc.gov filter[title] CONTAINS 'Holdings'",
         "passed": true,
         "detail": "返回5条, 其中5条包含'holdings'"
+      },
+      {
+        "item": "联邦公报: 按机构筛 FTC 文件",
+        "passed": true,
+        "detail": "共 4228 份, 最新: [('2026-10-14', 'Agency Information Collection Activities; Proposed Collectio'), ('2026-10-14', 'Agency Information Collection Activities; Proposed Collectio'), ('2026-10-01', 'Rule on Impersonation of Government and Businesses')]"
+      },
+      {
+        "item": "联邦公报: 刊登日 2026-07-01~2026-09-30",
+        "passed": true,
+        "detail": "10/10 条在 2026-07-01~2026-09-30 内; 总数 4228 → 24; 样例 ['2026-09-30', '2026-09-24', '2026-09-24']"
+      },
+      {
+        "item": "联邦公报: 关键词 'consent order'",
+        "passed": true,
+        "detail": "FTC 文件 4228 → 220; 例: ['Beretta and Ruger; Analysis of Proposed Agreement Containing Consent O', 'Policy Statement Concerning the Suppression of Accuracy in Artificial ', 'Aurobindo and Lannett; Analysis of Proposed Agreement Containing Conse']"
+      },
+      {
+        "item": "联邦公报: 单份文件详情和全文链接",
+        "passed": true,
+        "detail": "2026-19189: Beretta and Ruger; Analysis of Proposed Agreement Containing Consent O | 下载格式 ['premisLink', 'txtLink', 'zipLink', 'modsLink', 'pdfLink']"
       }
     ],
     "fields": {
@@ -1116,12 +1140,69 @@
           "updated": "2026-10-07T13:22:14+00:00",
           "date": "2026-10-05"
         }
+      },
+      "Federal Register FTC document": {
+        "all_fields": [
+          "title",
+          "packageId",
+          "granuleId",
+          "lastModified",
+          "governmentAuthor",
+          "dateIssued",
+          "collectionCode",
+          "dateIngested",
+          "download.premisLink",
+          "download.txtLink",
+          "download.zipLink",
+          "download.modsLink",
+          "download.pdfLink",
+          "relatedLink",
+          "resultLink"
+        ],
+        "timestamp_fields": {
+          "lastModified": "2026-10-14T06:27:49Z",
+          "dateIssued": "2026-10-14",
+          "dateIngested": "2026-10-14"
+        }
+      },
+      "Federal Register FTC document detail": {
+        "all_fields": [
+          "summary",
+          "dateIssued",
+          "packageId",
+          "packageLink",
+          "collectionCode",
+          "detailsLink",
+          "agencies.[0].name",
+          "agencies.[0].order",
+          "title",
+          "collectionName",
+          "billingCode",
+          "granuleClass",
+          "granuleId",
+          "download.premisLink",
+          "download.txtLink",
+          "download.zipLink",
+          "download.modsLink",
+          "download.pdfLink",
+          "relatedLink",
+          "docClass",
+          "lastModified",
+          "category",
+          "granulesLink"
+        ],
+        "timestamp_fields": {
+          "dateIssued": "2026-09-18",
+          "lastModified": "2026-09-23T15:15:51Z"
+        }
       }
     },
     "notes": [
-      "⚠️ 本机测试时 www.ftc.gov 对所有路径返回 'The request resembles an abusive automated request' (WAF 拦截, 带 Error Reference ID), 需要换 IP / 联系 PWH-Alert@ftc.gov 加白名单",
+      "注意: 本机测试时 www.ftc.gov 对所有路径返回 'The request resembles an abusive automated request' (WAF 拦截, 带 Error Reference ID), 需要换 IP / 联系 PWH-Alert@ftc.gov 加白名单",
       "api.ftc.gov 的数据不是新闻稿, 而是 HSR 早期终止公告等结构化数据 (JSON:API 格式)",
-      "抓网页请降低频率、带正常 UA, 否则很容易被 WAF 拉黑"
+      "抓网页请降低频率、带正常 UA, 否则很容易被 WAF 拉黑",
+      "联邦公报只收 FTC 的正式法律文件 (规则、拟议和解令及其案件分析、征求意见等), 没有一般新闻稿; 和解令要到和解阶段才刊登, 比新闻稿晚",
+      "联邦公报每份文件有 dateIssued (刊登日) 和 lastModified (入库时间, 到秒); 单份文件用 /packages/{packageId}/granules/{granuleId}/summary 取详情和 PDF / HTML / TXT 链接 (packageId 是当天整期公报)"
     ],
     "calls": [
       {
@@ -1129,7 +1210,7 @@
         "method": "GET",
         "url": "https://www.ftc.gov/",
         "status": 404,
-        "elapsed_s": 0.24,
+        "elapsed_s": 0.36,
         "content_type": "text/html",
         "bytes": 1301,
         "rate_headers": {},
@@ -1140,7 +1221,7 @@
         "method": "GET",
         "url": "https://www.ftc.gov/feeds/press-release.xml",
         "status": 404,
-        "elapsed_s": 0.07,
+        "elapsed_s": 0.17,
         "content_type": "text/html",
         "bytes": 1301,
         "rate_headers": {},
@@ -1151,7 +1232,7 @@
         "method": "GET",
         "url": "https://www.ftc.gov/feeds/press-release-competition.xml",
         "status": 404,
-        "elapsed_s": 0.07,
+        "elapsed_s": 0.06,
         "content_type": "text/html",
         "bytes": 1301,
         "rate_headers": {},
@@ -1162,7 +1243,7 @@
         "method": "GET",
         "url": "https://www.ftc.gov/feeds/press-release-consumer-protection.xml",
         "status": 404,
-        "elapsed_s": 0.07,
+        "elapsed_s": 0.06,
         "content_type": "text/html",
         "bytes": 1301,
         "rate_headers": {},
@@ -1173,7 +1254,7 @@
         "method": "GET",
         "url": "https://www.ftc.gov/news-events/news/press-releases?search_api_fulltext=merger",
         "status": 404,
-        "elapsed_s": 0.07,
+        "elapsed_s": 0.08,
         "content_type": "text/html",
         "bytes": 1301,
         "rate_headers": {},
@@ -1184,12 +1265,12 @@
         "method": "GET",
         "url": "https://api.ftc.gov/v0/hsr-early-termination-notices?api_key=***&page[limit]=5&sort[c][path]=created&sort[c][direction]=DESC",
         "status": 200,
-        "elapsed_s": 2.31,
+        "elapsed_s": 1.24,
         "content_type": "application/vnd.api+json",
         "bytes": 7605,
         "rate_headers": {
           "X-Ratelimit-Limit": "20000",
-          "X-Ratelimit-Remaining": "19995"
+          "X-Ratelimit-Remaining": "19997"
         }
       },
       {
@@ -1197,16 +1278,68 @@
         "method": "GET",
         "url": "https://api.ftc.gov/v0/hsr-early-termination-notices?api_key=***&page[limit]=5&filter[title][value]=Holdings&filter[title][operator]=CONTAINS",
         "status": 200,
-        "elapsed_s": 1.4,
+        "elapsed_s": 0.3,
         "content_type": "application/vnd.api+json",
         "bytes": 7607,
         "rate_headers": {
           "X-Ratelimit-Limit": "20000",
-          "X-Ratelimit-Remaining": "19994"
+          "X-Ratelimit-Remaining": "19996"
+        }
+      },
+      {
+        "label": "Federal Register: FTC documents",
+        "method": "POST",
+        "url": "https://api.govinfo.gov/search?api_key=***",
+        "status": 200,
+        "elapsed_s": 1.21,
+        "content_type": "application/json",
+        "bytes": 8989,
+        "rate_headers": {
+          "X-Ratelimit-Limit": "36000",
+          "X-Ratelimit-Remaining": "35993"
+        }
+      },
+      {
+        "label": "Federal Register: FTC 2026Q3",
+        "method": "POST",
+        "url": "https://api.govinfo.gov/search?api_key=***",
+        "status": 200,
+        "elapsed_s": 0.61,
+        "content_type": "application/json",
+        "bytes": 8886,
+        "rate_headers": {
+          "X-Ratelimit-Limit": "36000",
+          "X-Ratelimit-Remaining": "35992"
+        }
+      },
+      {
+        "label": "Federal Register: FTC consent orders",
+        "method": "POST",
+        "url": "https://api.govinfo.gov/search?api_key=***",
+        "status": 200,
+        "elapsed_s": 0.45,
+        "content_type": "application/json",
+        "bytes": 9240,
+        "rate_headers": {
+          "X-Ratelimit-Limit": "36000",
+          "X-Ratelimit-Remaining": "35991"
+        }
+      },
+      {
+        "label": "Federal Register: document (granule) summary",
+        "method": "GET",
+        "url": "https://api.govinfo.gov/packages/FR-2026-09-18/granules/2026-19189/summary?api_key=***",
+        "status": 200,
+        "elapsed_s": 0.58,
+        "content_type": "application/json",
+        "bytes": 1718,
+        "rate_headers": {
+          "X-Ratelimit-Limit": "36000",
+          "X-Ratelimit-Remaining": "35990"
         }
       }
     ],
-    "tested_at": "2026-10-13T06:43:11+00:00"
+    "tested_at": "2026-10-14T07:40:58+00:00"
   },
   {
     "name": "USPTO",
@@ -2878,5 +3011,174 @@
       }
     ],
     "tested_at": "2026-10-13T09:58:36+00:00"
+  },
+  {
+    "name": "FTC Press Releases",
+    "status": "blocked",
+    "meta": {
+      "auth": "新闻稿: 无官方 API, 只有 RSS + 网页 (无需 key); api.ftc.gov (HSR 提前终止/DNC 投诉) 需要 api.data.gov key",
+      "license": "免费公开",
+      "docs": "https://www.ftc.gov/developer  ·  https://www.ftc.gov/developer/api/v0/endpoints/hsr-early-termination-notices  ·  RSS: https://www.ftc.gov/news-events/stay-connected/ftc-rss-feeds",
+      "limits": "www.ftc.gov 有 WAF, 识别为自动化请求会返回 404 拦截页 (按 IP, 换一台机器即可访问); api.ftc.gov 限流由 api.data.gov 控制 (实测个人 key X-RateLimit-Limit=20000, DEMO_KEY 实测 10), 每页最多 50 条",
+      "how": "RSS (feeds/press-release*.xml) 或抓取 /news-events/news/press-releases 列表页",
+      "keyword": "RSS 不支持; 网页列表 ?search_api_fulltext=xxx 支持 (需抓 HTML)",
+      "date": "RSS 只有最近若干条 (10~30 条不等, pubDate 带时区如 -0400); 网页列表有起止日期筛选; api.ftc.gov 支持 filter[date][condition][path/value/operator]",
+      "sources": [
+        "官方: https://www.ftc.gov/developer (只有 dnc-complaints 和 hsr-early-termination-notices 两个 API, 无新闻稿 API; 需 api.data.gov key)",
+        "官方: https://www.ftc.gov/developer/api/v0/endpoints/hsr-early-termination-notices (filter[title][value]+operator=CONTAINS、page[limit]/page[offset]、sort[x][path]/sort[x][direction])",
+        "官方: https://www.ftc.gov/news-events/stay-connected/ftc-rss-feeds (feeds/press-release.xml、-competition.xml、-consumer-protection.xml 三个 RSS 地址) — 从另一台主机访问确认 feed 在线",
+        "实测/页面观察: 网页列表 ?search_api_fulltext= 参数 (来自页面搜索表单, 无文档)、WAF 拦截行为、RSS 条数"
+      ],
+      "notes": [
+        "注意: 本机测试时 www.ftc.gov 对所有路径返回 'The request resembles an abusive automated request' (WAF 拦截, 带 Error Reference ID), 需要换 IP / 联系 PWH-Alert@ftc.gov 加白名单",
+        "api.ftc.gov 的数据不是新闻稿, 而是 HSR 早期终止公告等结构化数据 (JSON:API 格式)",
+        "抓网页请降低频率、带正常 UA, 否则很容易被 WAF 拉黑"
+      ]
+    },
+    "checks": [
+      {
+        "item": "www.ftc.gov 可访问",
+        "passed": false,
+        "detail": "被 WAF 拦截 (IP 被判定为自动化请求)"
+      },
+      {
+        "item": "RSS all press releases",
+        "passed": false,
+        "detail": "HTTP 404 (主页已被 WAF 拦截, 无法判断 URL 是否正确)"
+      },
+      {
+        "item": "RSS competition",
+        "passed": false,
+        "detail": "HTTP 404 (主页已被 WAF 拦截, 无法判断 URL 是否正确)"
+      },
+      {
+        "item": "RSS consumer protection",
+        "passed": false,
+        "detail": "HTTP 404 (主页已被 WAF 拦截, 无法判断 URL 是否正确)"
+      },
+      {
+        "item": "网页关键词搜索 'merger'",
+        "passed": false,
+        "detail": "WAF 拦截 / 不可达"
+      },
+      {
+        "item": "api.ftc.gov 连接 (HSR 公告)",
+        "passed": true,
+        "detail": "5 条"
+      },
+      {
+        "item": "api.ftc.gov filter[title] CONTAINS 'Holdings'",
+        "passed": true,
+        "detail": "返回5条, 其中5条包含'holdings'"
+      }
+    ],
+    "fields": {
+      "HSR early termination notice": {
+        "all_fields": [
+          "title",
+          "created",
+          "updated",
+          "acquired-party",
+          "acquiring-party",
+          "date",
+          "acquired-entities",
+          "transaction-number"
+        ],
+        "timestamp_fields": {
+          "created": "2026-10-07T13:22:14+00:00",
+          "updated": "2026-10-07T13:22:14+00:00",
+          "date": "2026-10-05"
+        }
+      }
+    },
+    "notes": [
+      "⚠️ 本机测试时 www.ftc.gov 对所有路径返回 'The request resembles an abusive automated request' (WAF 拦截, 带 Error Reference ID), 需要换 IP / 联系 PWH-Alert@ftc.gov 加白名单",
+      "api.ftc.gov 的数据不是新闻稿, 而是 HSR 早期终止公告等结构化数据 (JSON:API 格式)",
+      "抓网页请降低频率、带正常 UA, 否则很容易被 WAF 拉黑"
+    ],
+    "calls": [
+      {
+        "label": "homepage (WAF check)",
+        "method": "GET",
+        "url": "https://www.ftc.gov/",
+        "status": 404,
+        "elapsed_s": 0.24,
+        "content_type": "text/html",
+        "bytes": 1301,
+        "rate_headers": {},
+        "error_body": "Page Not Found No additional information is available with regards to this resource . $('#resource').text(window.location);"
+      },
+      {
+        "label": "RSS all press releases",
+        "method": "GET",
+        "url": "https://www.ftc.gov/feeds/press-release.xml",
+        "status": 404,
+        "elapsed_s": 0.07,
+        "content_type": "text/html",
+        "bytes": 1301,
+        "rate_headers": {},
+        "error_body": "Page Not Found No additional information is available with regards to this resource . $('#resource').text(window.location);"
+      },
+      {
+        "label": "RSS competition",
+        "method": "GET",
+        "url": "https://www.ftc.gov/feeds/press-release-competition.xml",
+        "status": 404,
+        "elapsed_s": 0.07,
+        "content_type": "text/html",
+        "bytes": 1301,
+        "rate_headers": {},
+        "error_body": "Page Not Found No additional information is available with regards to this resource . $('#resource').text(window.location);"
+      },
+      {
+        "label": "RSS consumer protection",
+        "method": "GET",
+        "url": "https://www.ftc.gov/feeds/press-release-consumer-protection.xml",
+        "status": 404,
+        "elapsed_s": 0.07,
+        "content_type": "text/html",
+        "bytes": 1301,
+        "rate_headers": {},
+        "error_body": "Page Not Found No additional information is available with regards to this resource . $('#resource').text(window.location);"
+      },
+      {
+        "label": "web search list",
+        "method": "GET",
+        "url": "https://www.ftc.gov/news-events/news/press-releases?search_api_fulltext=merger",
+        "status": 404,
+        "elapsed_s": 0.07,
+        "content_type": "text/html",
+        "bytes": 1301,
+        "rate_headers": {},
+        "error_body": "Page Not Found No additional information is available with regards to this resource . $('#resource').text(window.location);"
+      },
+      {
+        "label": "api.ftc.gov HSR early termination",
+        "method": "GET",
+        "url": "https://api.ftc.gov/v0/hsr-early-termination-notices?api_key=***&page[limit]=5&sort[c][path]=created&sort[c][direction]=DESC",
+        "status": 200,
+        "elapsed_s": 2.31,
+        "content_type": "application/vnd.api+json",
+        "bytes": 7605,
+        "rate_headers": {
+          "X-Ratelimit-Limit": "20000",
+          "X-Ratelimit-Remaining": "19995"
+        }
+      },
+      {
+        "label": "api.ftc.gov keyword filter",
+        "method": "GET",
+        "url": "https://api.ftc.gov/v0/hsr-early-termination-notices?api_key=***&page[limit]=5&filter[title][value]=Holdings&filter[title][operator]=CONTAINS",
+        "status": 200,
+        "elapsed_s": 1.4,
+        "content_type": "application/vnd.api+json",
+        "bytes": 7607,
+        "rate_headers": {
+          "X-Ratelimit-Limit": "20000",
+          "X-Ratelimit-Remaining": "19994"
+        }
+      }
+    ],
+    "tested_at": "2026-10-13T06:43:11+00:00"
   }
 ]
