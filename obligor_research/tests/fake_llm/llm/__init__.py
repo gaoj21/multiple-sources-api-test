@@ -66,6 +66,14 @@ def default_provider():
 
 
 def chat_result(provider, messages, **options):
+    res = _chat(provider, messages, **options)
+    if os.environ.get("FAKE_LLM_NO_SEARCH_COUNT") != "1":
+        user = messages[-1]["content"]
+        res.web_search_calls = 0 if '"Beta Ltd"' in user else (1 if "official website" in user else 3)  # 适配器报告的次数
+    return res
+
+
+def _chat(provider, messages, **options):
     if os.environ.get("FAKE_LLM_MISSING_SDK") == "1":
         raise ProviderError("Fake provider requires fakechain.core.model.model")  # 模拟: 缺 SDK
     if os.environ.get("FAKE_LLM_NEEDS_KEY") == "1" and not os.environ.get("FAKE_LLM_KEY"):

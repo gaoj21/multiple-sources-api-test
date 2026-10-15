@@ -95,12 +95,16 @@ def main(argv=None):
 
     tracker = llm.UsageTracker()
     usage_missing = 0
+    search_counts = []  # 每次调用的实际搜索次数 (适配器报告的)
 
     def call(messages, options):
         nonlocal usage_missing
         rec, res = runner.call_model(llm, a.provider, messages, a.timeout, options)
         if res is not None and not tracker.add(res):
             usage_missing += 1
+        n = runner.web_search_count(res) if res is not None else None
+        search_counts.append(n)
+        print(f"    (本次调用搜索 {n if n is not None else '?'} 次)")
         if a.show_raw:
             u = res.usage.as_dict() if res is not None and res.usage else None
             print(f"    --- 原始回答 (用量 {u}) ---\n    {(rec.get('content') or rec.get('error') or '')[:1500]}")
@@ -152,6 +156,10 @@ def main(argv=None):
     snap = tracker.snapshot()
     record(6, "服务商报了用量", "提示",
            f"{snap.get('token_calls')} 次调用有用量, {usage_missing} 次没报; 输入 {snap.get('input_tokens_total')} / 输出 {snap.get('output_tokens_total')} token")
+    known = [n for n in search_counts if n is not None]
+    record("6b", "每次调用的搜索次数", "提示",
+           (f"适配器报告了 {len(known)}/{len(search_counts)} 次: {search_counts}, 合计 {sum(known)} 次" if known
+            else "适配器没有报告搜索次数 (LLMResult 上没有 web_search_calls), 见 obligor_research/ADAPTER_WEB_SEARCH_COUNT.md"))
 
     # 7. 对照: 不带工具
     if not a.skip_control:

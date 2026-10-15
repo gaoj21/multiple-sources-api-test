@@ -115,7 +115,21 @@ class Store:
 
 # ---------------------------------------------------------------- 调用模型
 
-DEFAULT_LLM_OPTIONS = {"tools": [{"type": "web_search"}]}  # 开启联网搜索工具; 写法按那台机器的要求用 --llm-options 改
+DEFAULT_LLM_OPTIONS = {"tools": [{"type": "web_search"}]}
+SEARCH_COUNT_FIELDS = ("web_search_calls", "web_search_requests", "web_searches")
+
+
+def web_search_count(res):
+    """适配器报告的本次请求实际搜索次数 (LLMResult 或其 usage 上的 web_search_calls 字段); 没报返回 None。
+
+    只读 LLMResult 的公开字段, 不读服务商原始响应 (contract)。
+    """
+    for obj in (res, getattr(res, "usage", None)):
+        for name in SEARCH_COUNT_FIELDS:
+            value = getattr(obj, name, None) if obj is not None else None
+            if isinstance(value, int) and not isinstance(value, bool):
+                return value
+    return None  # 开启联网搜索工具; 写法按那台机器的要求用 --llm-options 改
 
 
 def call_model(llm, provider, messages, timeout, llm_options):
@@ -127,7 +141,7 @@ def call_model(llm, provider, messages, timeout, llm_options):
     try:
         res = llm.chat_result(provider, messages, temperature=0, timeout=timeout, **llm_options)
         return {"status": "ok", "content": res.content, "usage": res.usage.as_dict() if res.usage else None,
-                "model": res.model, "seconds": round(time.time() - t0, 1)}, res
+                "model": res.model, "web_search_calls": web_search_count(res), "seconds": round(time.time() - t0, 1)}, res
     except llm.ProviderError as e:
         return {"status": "error", "error": f"ProviderError: {e}", "seconds": round(time.time() - t0, 1)}, None
     except Exception as e:  # 网络等其他错误, 记下来, 下次续跑会重试
@@ -145,8 +159,11 @@ def run_jobs(jobs, llm, provider, store, tracker, workers, timeout, llm_options)
         if res is not None:
             if not tracker.add(res):
                 rec["usage_missing"] = True  # 服务商没报用量, 不当作免费
-            if llm_options.get("tools") or llm_options.get("web_search_options") is not None:
-                tracker.add_web_search(1)    # 实际搜索次数拿不到, 按每次请求至少 1 次估算
+            if rec.get("web_search_calls") is not None:
+                tracker.add_web_search(rec["web_search_calls"])   # 适配器报告的真实次数
+            elif llm_options:
+                tracker.add_web_search(1)    # 适配器没报次数: 按每次请求至少 1 次估算
+                rec["web_search_estimated"] = True
         rec.update({"obligor_id": ob["id"], "obligor": ob["name"], "task": task})
         if rec["status"] == "ok":
             data = parse_json(rec["content"])
@@ -155,11 +172,15 @@ def run_jobs(jobs, llm, provider, store, tracker, workers, timeout, llm_options)
             else:
                 rec["data"] = data
                 rec["checked"] = post(data)
+                q = data.get("searched_queries") if isinstance(data, dict) else None
+                rec["self_reported_queries"] = len(q) if isinstance(q, list) else None  # 模型自报的搜索词数
         store.write(rec)
         with lock:
             done_n += 1
             mark = {"ok": "ok", "bad_json": "JSON 解析失败", "error": "出错"}[rec["status"]]
-            print(f"  [{done_n}/{total}] {ob['name'][:40]:40} {task:16} {mark} ({rec.get('seconds')}s)", flush=True)
+            n = rec.get("web_search_calls")
+            searches = f", 搜索 {n} 次" if n is not None else ""
+            print(f"  [{done_n}/{total}] {ob['name'][:40]:40} {task:16} {mark} ({rec.get('seconds')}s{searches})", flush=True)
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=workers) as pool:
         list(pool.map(one, jobs))
@@ -195,6 +216,39 @@ def preflight(llm, provider, timeout, llm_options, show_raw=False):
 
 
 # ---------------------------------------------------------------- 报告
+
+def _stats(values: list) -> str:
+    if not values:
+        return "| — | — | — | — |"
+    v = sorted(values)
+    mid = v[len(v) // 2] if len(v) % 2 else (v[len(v) // 2 - 1] + v[len(v) // 2]) / 2
+    return f"| {sum(v)} | {sum(v) / len(v):.1f} | {mid:g} | {v[-1]} |"
+
+
+def search_stats_section(recs: list, sources: list) -> list:
+    """每次请求搜了几次: 优先用适配器报告的真实次数, 没有就看模型自报的搜索词数。"""
+    real = [r for r in recs if r.get("web_search_calls") is not None]
+    L = ["", "## 联网搜索次数", ""]
+    if real:
+        L += [f"适配器报告了 {len(real)}/{len(recs)} 个请求的实际搜索次数。", "",
+              "| 任务 | 请求数 | 总搜索次数 | 平均每次 | 中位数 | 最多 | 没搜索就作答 |", "|---|---|---|---|---|---|---|"]
+        tasks = [WEBSITE_TASK] + sources
+        for t in tasks + ["(合计)"]:
+            vals = [r["web_search_calls"] for r in real if t == "(合计)" or r["task"] == t]
+            if not vals:
+                continue
+            label = "公司官网" if t == WEBSITE_TASK else (SOURCES[t]["name"] if t in SOURCES else t)
+            L.append(f"| {label} | {len(vals)} " + _stats(vals) + f" {sum(1 for v in vals if v == 0)} |")
+        zero = sum(1 for r in real if r["web_search_calls"] == 0)
+        if zero:
+            L += ["", f"注意: {zero} 个请求没有搜索就作答, 这些结果更可能来自模型记忆, 建议重点抽查。"]
+    else:
+        L += ["适配器没有报告实际搜索次数 (LLMResult 上没有 web_search_calls 字段), 下面是模型自己列出的搜索词数, 仅供参考。"]
+    self_rep = [r["self_reported_queries"] for r in recs if r.get("self_reported_queries") is not None]
+    if self_rep:
+        L += ["", "模型自报的搜索词数 (searched_queries, 不一定准):", "", "| 总数 | 平均每次 | 中位数 | 最多 |",
+              "|---|---|---|---|", _stats(self_rep)]
+    return L
 
 def build_report(out: Path, obligors: list, sources: list, start: date, end: date, usage: dict | None):
     store = Store(out)
@@ -261,12 +315,14 @@ def build_report(out: Path, obligors: list, sources: list, start: date, end: dat
           "| Obligor | " + " | ".join(sources) + " |", "|---|" + "---|" * len(sources)]
     for oid, nm in names.items():
         L.append(f"| {nm} | " + " | ".join(str(valid[s].get(oid, 0) or "") for s in sources) + " |")
+    L += search_stats_section(recs, sources)
     if usage:
         L += ["", "## 用量与费用", "", f"- 请求数 (有用量的): {usage.get('token_calls')}",
               f"- 输入 token: {usage.get('input_tokens_total')}, 输出 token: {usage.get('output_tokens_total')}",
               f"- token 费用: {usage.get('total_token_cost')} (单价来自环境变量 EVO_TOKEN_*)",
-              f"- 联网搜索: 按每次请求至少 1 次估算 {usage.get('web_search_actions')} 次 (实际次数从公开接口拿不到, 这是下限)",
-              f"- 合计 (下限): {usage.get('total_cost')}"]
+              f"- 联网搜索: {usage.get('web_search_actions')} 次 (适配器报告了次数的按真实次数; 没报的按每次请求 1 次估算), "
+              f"单价来自 EVO_WEB_SEARCH_PRICE_PER_1K",
+              f"- 合计: {usage.get('total_cost')}"]
     (out / "summary.md").write_text("\n".join(L) + "\n", encoding="utf-8")
     print(f"\n报告: {out / 'summary.md'} | 明细: items.csv ({len(item_rows)} 条), websites.csv ({len(site_rows)} 家)")
 

@@ -50,7 +50,11 @@ def main():
         summary = (out / "summary.md").read_text(encoding="utf-8")
         assert "| USAspending.gov | 1/2 | 1 | 1 | 1 | 1 |" in summary, summary
         assert "找到官网: 2/2" in summary
-        assert "联网搜索: 按每次请求至少 1 次估算" in summary
+        assert "## 联网搜索次数" in summary and "适配器报告了 8/8 个请求的实际搜索次数" in summary, summary
+        assert "没有搜索就作答" in summary                       # Beta Ltd 的请求报 0 次
+        assert "| 公司官网 | 2 | 1 | 0.5 | 0.5 | 1 | 1 |" in summary, summary
+        recs = [json.loads(l) for l in open(out / "results.jsonl", encoding="utf-8")]
+        assert any(r.get("web_search_calls") == 3 for r in recs)
 
         # 不带联网搜索工具时, 假 llm 拒绝 -> 预检不通过, 程序退出
         bad = Path(tempfile.mkdtemp())

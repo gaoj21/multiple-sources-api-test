@@ -69,6 +69,12 @@ chat_result(provider, messages, temperature=0, timeout=300, tools=[{"type": "web
 
 跑之前先用 `--preflight` 确认搜索真的生效，没生效会直接停下。
 
+## 统计每次请求的搜索次数
+
+程序会记录每次请求实际搜了几次，写在 `results.jsonl` 的 `web_search_calls` 字段里。运行时会实时打印"搜索 N 次"，`summary.md` 里也有一节"联网搜索次数"，按任务列出：总次数、平均每次、中位数、最多，以及没搜索就作答的请求数。搜索费用按真实次数计算。
+
+实际次数要由 `llm` 包的适配器从原始响应里数出来，放到 `LLMResult.web_search_calls` 上，因为 contract 规定外面的代码不能读原始响应。适配器要加的代码和验证方法见 [ADAPTER_WEB_SEARCH_COUNT.md](ADAPTER_WEB_SEARCH_COUNT.md)。适配器没报这个字段时，报告会注明，并改用模型自己列出的搜索词数作参考，这个数不一定准。
+
 ## 查哪些数据源
 
 USAspending、SAM.gov、Grants.gov、GovInfo / 联邦公报、CourtListener、DOJ、FTC、OSHA、UCC（各州州务卿）、USPTO、财报电话会文字稿。每个数据源只认它的官方域名（见 `sources.py`）。财报电话会还会额外认公司自己的网站。
@@ -100,7 +106,7 @@ D&B、Orbis、Quartr、LexisNexis 是付费数据，在登录墙后面，联网�
 请求数 = obligor 数 × (数据源数 + 1)。55 家 × 12 = **660 个请求**。
 
 - 费用按那台机器的 `EVO_TOKEN_*` 单价计算。
-- 联网搜索的实际次数从公开接口拿不到。程序按每次请求至少 1 次计入 `UsageTracker.add_web_search()`，单价用 `EVO_WEB_SEARCH_PRICE_PER_1K`，所以报告里的搜索费用是**下限**。
+- 搜索费用按适配器报告的真实次数，乘以 `EVO_WEB_SEARCH_PRICE_PER_1K` 计算；适配器没报次数的请求按 1 次估算。
 
 ## 注意
 
