@@ -52,6 +52,7 @@ def main(argv=None):
     ap.add_argument("--llm-options", default=json.dumps(runner.DEFAULT_LLM_OPTIONS))
     ap.add_argument("--timeout", type=int, default=300)
     ap.add_argument("--skip-control", action="store_true", help="跳过第 7 项对照调用 (省 1 次调用)")
+    ap.add_argument("--show-raw", action="store_true", help="打印每次调用模型的原始回答 (排查搜索是否真的发生)")
     a = ap.parse_args(argv)
     print(f"Python: {sys.executable}")
     loaded = runner.load_env_files(a.env_file)
@@ -100,10 +101,13 @@ def main(argv=None):
         rec, res = runner.call_model(llm, a.provider, messages, a.timeout, options)
         if res is not None and not tracker.add(res):
             usage_missing += 1
+        if a.show_raw:
+            u = res.usage.as_dict() if res is not None and res.usage else None
+            print(f"    --- 原始回答 (用量 {u}) ---\n    {(rec.get('content') or rec.get('error') or '')[:1500]}")
         return rec
 
     # 2. 联网搜索生效
-    ok_search, detail = runner.preflight(llm, a.provider, a.timeout, opts)
+    ok_search, detail = runner.preflight(llm, a.provider, a.timeout, opts, a.show_raw)
     record(2, f"联网搜索生效 (参数 {json.dumps(opts)})", "通过" if ok_search else "失败", detail)
 
     # 3. 官网
@@ -151,7 +155,7 @@ def main(argv=None):
 
     # 7. 对照: 不带工具
     if not a.skip_control:
-        ok_ctrl, d_ctrl = runner.preflight(llm, a.provider, a.timeout, {})
+        ok_ctrl, d_ctrl = runner.preflight(llm, a.provider, a.timeout, {}, a.show_raw)
         if ok_ctrl:
             verdict = "也能答出最新新闻稿 (模型可能自带搜索, 工具参数可以不传)"
         elif ok_search:

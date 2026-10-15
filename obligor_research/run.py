@@ -177,13 +177,15 @@ def missing_module_hint(text: str) -> str:
             f"可以先用  <那个python> -c \"import {mod}\"  确认能导入。")
 
 
-def preflight(llm, provider, timeout, llm_options):
+def preflight(llm, provider, timeout, llm_options, show_raw=False):
     """问一个只有联网搜索才答得出的问题, 确认 provider 开着联网搜索。"""
     since = date.today() - timedelta(days=14)
     msgs = [{"role": "system", "content": "Use web search. Reply with JSON only."},
             {"role": "user", "content": "Search justice.gov for the most recent US Department of Justice press release "
              f"published on or after {since.isoformat()}. Return JSON: {{\"title\": ..., \"date\": \"YYYY-MM-DD\", \"url\": ...}}"}]
     rec, _ = call_model(llm, provider, msgs, timeout, llm_options)
+    if show_raw:
+        print(f"    --- 预检原始回答 (参数 {json.dumps(llm_options)}) ---\n    {(rec.get('content') or rec.get('error') or '')[:1500]}")
     if rec["status"] != "ok":
         return False, rec.get("error")
     data = parse_json(rec["content"]) or {}
