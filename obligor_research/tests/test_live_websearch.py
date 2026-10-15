@@ -2,8 +2,8 @@
 
 会产生真实费用 (约 8~10 次调用)。测试公司用 Lockheed Martin: 政府合同和诉讼都很多, 结果好判断。
 
-    python obligor_research/tests/test_live_websearch.py --llm-root /path/to/repo
-    python obligor_research/tests/test_live_websearch.py --llm-root /path/to/repo --provider xxx \\
+    python obligor_research/tests/test_live_websearch.py                # llm/ 放在 obligor_research/ 下
+    python obligor_research/tests/test_live_websearch.py --provider xxx \\
         --llm-options '{"tools": [{"type": "web_search"}]}'
 
 检查项 (前 4 项不通过会以非 0 退出):
@@ -46,7 +46,7 @@ def url_opens(url: str, timeout: int = 20) -> str:
 
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--llm-root", type=Path, help="包含 llm/ 包的仓库根目录")
+    ap.add_argument("--llm-root", type=Path, help="llm/ 不在 obligor_research/ 下时, 指定包含 llm/ 的目录")
     ap.add_argument("--provider", default=None)
     ap.add_argument("--llm-options", default=json.dumps(runner.DEFAULT_LLM_OPTIONS))
     ap.add_argument("--timeout", type=int, default=300)
@@ -57,7 +57,7 @@ def main(argv=None):
     try:
         import llm
     except ImportError:
-        sys.exit("找不到 llm 包: 在包含 llm/ 的仓库根目录运行, 或用 --llm-root 指定")
+        sys.exit("找不到 llm 包: 把 llm/ 放在 obligor_research/ 下, 或用 --llm-root 指定包含 llm/ 的目录")
     opts = json.loads(a.llm_options)
     results = []  # (编号, 名称, 状态, 说明); 状态: 通过 / 失败 / 提示
 

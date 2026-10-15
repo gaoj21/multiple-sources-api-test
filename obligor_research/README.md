@@ -6,22 +6,34 @@
 
 ## 在另一台机器上运行
 
+`llm/` 包放在 `obligor_research/` 下面（`obligor_research/llm/`），程序会直接找到它，不需要额外参数。按 contract，每台机器自己提供 `llm/`，所以它已在 `.gitignore` 里，不会提交。如果 `llm/` 放在别处，用 `--llm-root` 指定包含它的目录。
+
+```
+obligor_research/
+├── llm/              ← 那台机器自己的 llm 包 (不进仓库)
+├── run.py
+├── sources.py
+├── tasks.py
+└── tests/
+```
+
 ```bash
 # 1. 准备 obligor 名单 (CSV), 格式见 obligors.example.csv
 #    必需: 公司名列 (name / obligor / company 等都认)
 #    可选: aliases, country, state, ticker, website, identifiers —— 越多越能区分同名公司
 
-# 2. 先预检 + 只跑 2 家试试 (在包含 llm/ 的仓库根目录运行, 或用 --llm-root 指过去)
-python obligor_research/run.py --obligors obligors.csv --llm-root /path/to/repo --preflight --limit 2
+# 2. 先预检 + 只跑 2 家试试
+python obligor_research/run.py --obligors obligors.csv --preflight --limit 2
 
 # 3. 没问题再全量跑; 中断了直接重跑同一条命令, 已完成的不会重查
-python obligor_research/run.py --obligors obligors.csv --llm-root /path/to/repo
+python obligor_research/run.py --obligors obligors.csv
 ```
 
 常用参数：
 
 | 参数 | 说明 |
 |---|---|
+| `--llm-root` | `llm/` 不在 `obligor_research/` 下时，指定包含它的目录 |
 | `--provider` | 用哪个 provider；不填就用配置里的 default，或环境变量 `LLM_PROVIDER` |
 | `--llm-options` | 每次调用额外传给 `chat_result` 的参数（JSON），用来开启联网搜索工具。默认 `{"tools": [{"type": "web_search"}]}` |
 | `--no-web-search-tool` | 不传联网搜索工具（模型自带搜索时用） |
@@ -111,9 +123,9 @@ python -m pytest obligor_research/tests/test_pipeline.py
 ### 第 2 步：联网冒烟测试（在 GPT 那台机器上，约 8～10 次调用，有少量费用）
 
 ```bash
-python obligor_research/tests/test_live_websearch.py --llm-root /path/to/repo
+python obligor_research/tests/test_live_websearch.py
 # 指定 provider 或换联网搜索工具的写法:
-python obligor_research/tests/test_live_websearch.py --llm-root /path/to/repo --provider xxx \
+python obligor_research/tests/test_live_websearch.py --provider xxx \
     --llm-options '{"tools": [{"type": "web_search"}]}'
 ```
 
@@ -137,7 +149,7 @@ python obligor_research/tests/test_live_websearch.py --llm-root /path/to/repo --
 
 ```bash
 # 先跑 2～5 家
-python obligor_research/run.py --obligors obligors.csv --llm-root /path/to/repo --preflight --limit 5
+python obligor_research/run.py --obligors obligors.csv --preflight --limit 5
 
 # 每个数据源随机抽 10 条有效结果, 自动检查链接能不能打开, 生成人工核对表
 python obligor_research/tests/sample_for_review.py --out obligor_research/out --per-source 10 --check-urls

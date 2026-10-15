@@ -3,7 +3,7 @@
 只用 llm 包的公开接口 (contract llm-v12): 不写服务商名字, provider 默认用配置里的 default,
 也可以用 --provider 或环境变量 LLM_PROVIDER 指定一个开了联网搜索的 provider。
 
-    python obligor_research/run.py --obligors obligors.csv --llm-root /path/to/repo-with-llm
+    python obligor_research/run.py --obligors obligors.csv              # llm/ 放在 obligor_research/ 下
     python obligor_research/run.py --obligors obligors.csv --dry-run          # 只生成提示词, 不调用模型
     python obligor_research/run.py --report-only --out obligor_research/out   # 只根据已有结果重新出报告
 """
@@ -227,7 +227,7 @@ def main():
     ap.add_argument("--obligors", type=Path, help="obligor 名单 CSV (需要公司名列; 可选 aliases/country/state/ticker/website/identifiers)")
     ap.add_argument("--out", type=Path, default=HERE / "out", help="输出目录 (默认 obligor_research/out)")
     ap.add_argument("--provider", default=None, help="llm provider 名; 不填用配置的 default 或环境变量 LLM_PROVIDER")
-    ap.add_argument("--llm-root", type=Path, help="包含 llm/ 包的仓库根目录 (llm 不在 PYTHONPATH 时用)")
+    ap.add_argument("--llm-root", type=Path, help="llm/ 不在 obligor_research/ 下时, 指定包含 llm/ 的目录")
     ap.add_argument("--days", type=int, default=365, help="往前查多少天 (默认 365)")
     ap.add_argument("--end", type=date.fromisoformat, default=date.today(), help="时间窗结束日 YYYY-MM-DD (默认今天)")
     ap.add_argument("--sources", default=",".join(SOURCES), help="逗号分隔, 默认全部: " + ",".join(SOURCES))
@@ -282,7 +282,7 @@ def main():
     try:
         import llm
     except ImportError:
-        sys.exit("找不到 llm 包: 在包含 llm/ 的仓库根目录运行, 或用 --llm-root 指定那个目录")
+        sys.exit("找不到 llm 包: 把 llm/ 放在 obligor_research/ 下, 或用 --llm-root 指定包含 llm/ 的目录")
     tracker = llm.UsageTracker()
 
     if a.preflight:

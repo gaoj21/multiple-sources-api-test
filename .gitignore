@@ -7,3 +7,5 @@ __pycache__/
 
 # obligor 调研的输出
 obligor_research/out/
+# 每台机器自己提供 llm 包 (contract llm-v12), 不进仓库
+obligor_research/llm/
