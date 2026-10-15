@@ -47,11 +47,14 @@ def url_opens(url: str, timeout: int = 20) -> str:
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--llm-root", type=Path, help="llm/ 不在 obligor_research/ 下时, 指定包含 llm/ 的目录")
+    ap.add_argument("--env-file", type=Path, help="指定 .env 文件; 默认依次找 obligor_research/.env 和上一级 (code/.env)")
     ap.add_argument("--provider", default=None)
     ap.add_argument("--llm-options", default=json.dumps(runner.DEFAULT_LLM_OPTIONS))
     ap.add_argument("--timeout", type=int, default=300)
     ap.add_argument("--skip-control", action="store_true", help="跳过第 7 项对照调用 (省 1 次调用)")
     a = ap.parse_args(argv)
+    loaded = runner.load_env_files(a.env_file)
+    print(f".env: {', '.join(loaded) if loaded else '没找到 (只用当前环境变量)'}")
     if a.llm_root:
         sys.path.insert(0, str(a.llm_root.resolve()))
     try:

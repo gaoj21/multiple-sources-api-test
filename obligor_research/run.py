@@ -28,6 +28,43 @@ NAME_COLUMNS = ("name", "obligor", "obligor_name", "company", "company_name", "l
 OPTIONAL = ("aliases", "country", "state", "ticker", "website", "identifiers")
 
 
+# ---------------------------------------------------------------- 环境变量
+
+def env_candidates(extra: Path | None = None) -> list:
+    """.env 的查找顺序: --env-file, obligor_research/.env, 上一级 (code/.env)。
+
+    llm 包自己只在 llm/ 的上一级和 llm/ 里找 .env; llm 放在 obligor_research/ 下时,
+    它找不到 code/.env, 所以这里在导入 llm 之前先加载。
+    """
+    paths = [extra] if extra else []
+    return paths + [HERE / ".env", HERE.parent / ".env"]
+
+
+def load_env_files(extra: Path | None = None) -> list:
+    """把 .env 读进 os.environ; 已有的环境变量不覆盖。不依赖 python-dotenv。返回读到的文件。"""
+    import os
+    loaded = []
+    for path in env_candidates(extra):
+        if not path or not path.is_file():
+            continue
+        for line in path.read_text(encoding="utf-8").splitlines():
+            line = line.strip()
+            if not line or line.startswith("#") or "=" not in line:
+                continue
+            if line.startswith("export "):
+                line = line[7:].strip()
+            key, value = line.split("=", 1)
+            key, value = key.strip(), value.strip()
+            if value[:1] in "\"'" and value[-1:] == value[:1] and len(value) >= 2:
+                value = value[1:-1]
+            elif " #" in value:
+                value = value.split(" #", 1)[0].rstrip()
+            if key and key not in os.environ:
+                os.environ[key] = value
+        loaded.append(str(path))
+    return loaded
+
+
 # ---------------------------------------------------------------- 输入
 
 def load_obligors(path: Path) -> list:
@@ -228,6 +265,7 @@ def main():
     ap.add_argument("--out", type=Path, default=HERE / "out", help="输出目录 (默认 obligor_research/out)")
     ap.add_argument("--provider", default=None, help="llm provider 名; 不填用配置的 default 或环境变量 LLM_PROVIDER")
     ap.add_argument("--llm-root", type=Path, help="llm/ 不在 obligor_research/ 下时, 指定包含 llm/ 的目录")
+    ap.add_argument("--env-file", type=Path, help="指定 .env 文件; 默认依次找 obligor_research/.env 和上一级 (code/.env)")
     ap.add_argument("--days", type=int, default=365, help="往前查多少天 (默认 365)")
     ap.add_argument("--end", type=date.fromisoformat, default=date.today(), help="时间窗结束日 YYYY-MM-DD (默认今天)")
     ap.add_argument("--sources", default=",".join(SOURCES), help="逗号分隔, 默认全部: " + ",".join(SOURCES))
@@ -277,6 +315,8 @@ def main():
         print(f"演练模式: {n} 个请求的提示词已写到 {a.out / 'prompts.jsonl'}")
         return
 
+    loaded = load_env_files(a.env_file)
+    print(f".env: {', '.join(loaded) if loaded else '没找到 (只用当前环境变量)'}")
     if a.llm_root:
         sys.path.insert(0, str(a.llm_root.resolve()))
     try:

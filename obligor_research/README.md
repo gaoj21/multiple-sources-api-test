@@ -6,16 +6,22 @@
 
 ## 在另一台机器上运行
 
-`llm/` 包放在 `obligor_research/` 下面（`obligor_research/llm/`），程序会直接找到它，不需要额外参数。按 contract，每台机器自己提供 `llm/`，所以它已在 `.gitignore` 里，不会提交。如果 `llm/` 放在别处，用 `--llm-root` 指定包含它的目录。
+只需要 `obligor_research/` 这一个目录。那台机器上的结构：
 
 ```
-obligor_research/
-├── llm/              ← 那台机器自己的 llm 包 (不进仓库)
-├── run.py
-├── sources.py
-├── tasks.py
-└── tests/
+code/
+├── .env                  ← API key 和单价 (EVO_TOKEN_* 等)
+└── obligor_research/
+    ├── llm/              ← 那台机器自己的 llm 包 (不进仓库)
+    ├── run.py
+    ├── sources.py
+    ├── tasks.py
+    └── tests/
 ```
+
+- **`llm/`**：程序直接从 `obligor_research/llm/` 导入，不需要额外参数。按 contract，每台机器自己提供它，已在 `.gitignore` 里。放在别处时用 `--llm-root` 指定。
+- **`.env`**：`llm` 包自己只在 `llm/` 的上一级（`obligor_research/`）和 `llm/` 里找 `.env`，找不到 `code/.env`。所以程序在导入 `llm` 之前先自己加载：依次找 `obligor_research/.env` 和 `code/.env`，已有的环境变量不覆盖。运行时会打印读到了哪个文件。放在别处时用 `--env-file` 指定。
+- 下面的命令都在 `code/` 目录下运行。
 
 ```bash
 # 1. 准备 obligor 名单 (CSV), 格式见 obligors.example.csv
@@ -34,6 +40,7 @@ python obligor_research/run.py --obligors obligors.csv
 | 参数 | 说明 |
 |---|---|
 | `--llm-root` | `llm/` 不在 `obligor_research/` 下时，指定包含它的目录 |
+| `--env-file` | 指定 `.env`；默认依次找 `obligor_research/.env` 和 `code/.env` |
 | `--provider` | 用哪个 provider；不填就用配置里的 default，或环境变量 `LLM_PROVIDER` |
 | `--llm-options` | 每次调用额外传给 `chat_result` 的参数（JSON），用来开启联网搜索工具。默认 `{"tools": [{"type": "web_search"}]}` |
 | `--no-web-search-tool` | 不传联网搜索工具（模型自带搜索时用） |
@@ -118,6 +125,7 @@ python -m pytest obligor_research/tests/test_pipeline.py
 - 坏 JSON 和调用出错后的断点续跑：第二次只重试失败的请求。
 - 官网结果、报告统计、演练模式。
 - 不带联网搜索工具时，预检会拦下并退出。
+- 真实目录布局：`code/obligor_research/llm/` 加 `code/.env`，确认能读到 `code/.env` 里的 key；没有 `.env` 时会报错退出。还会检查 `.env` 的几种写法（引号、`export`、行尾注释）。
 - 抽查脚本：抽样、人工填表、打分。
 
 ### 第 2 步：联网冒烟测试（在 GPT 那台机器上，约 8～10 次调用，有少量费用）

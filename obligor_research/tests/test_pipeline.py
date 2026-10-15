@@ -78,6 +78,34 @@ def main():
         sc = subprocess.run([sys.executable, str(HERE / "sample_for_review.py"), "--out", str(out), "--score"],
                             capture_output=True, text=True).stdout
         assert "已核对 2/2 条" in sc and "(合计)" in sc and "50%" in sc, sc
+        # 真实布局: code/obligor_research/llm/ + code/.env, 不带 --llm-root
+        code = Path(tempfile.mkdtemp()) / "code"
+        shutil.copytree(ROOT, code / "obligor_research", ignore=shutil.ignore_patterns("out", "__pycache__", "tests"))
+        shutil.copytree(FAKE / "llm", code / "obligor_research" / "llm")
+        (code / ".env").write_text('FAKE_LLM_KEY="from-code-env"\nexport EXTRA_VAR=1  # 注释\nPRESET=from-file\n')
+        env2 = {**os.environ, "FAKE_LLM_NEEDS_KEY": "1", "PRESET": "from-process", "FAKE_LLM_STATE": str(code / "st")}
+        env2.pop("FAKE_LLM_KEY", None)
+        lay = subprocess.run([sys.executable, str(code / "obligor_research" / "run.py"), "--obligors",
+                              str(ROOT / "obligors.example.csv"), "--out", str(code / "out"), "--sources", "usaspending",
+                              "--preflight", "--end", "2026-10-15"], capture_output=True, text=True, env=env2)
+        assert lay.returncode == 0 and "预检 (联网搜索): 通过" in lay.stdout, lay.stdout + lay.stderr
+        assert str(code / ".env") in lay.stdout                  # 读的是 code/.env
+        # 没有 .env 时读不到 key -> 预检失败退出
+        (code / ".env").unlink()
+        lay2 = subprocess.run([sys.executable, str(code / "obligor_research" / "run.py"), "--obligors",
+                               str(ROOT / "obligors.example.csv"), "--out", str(code / "out2"), "--preflight"],
+                              capture_output=True, text=True, env=env2)
+        assert lay2.returncode != 0 and "没找到" in lay2.stdout, lay2.stdout + lay2.stderr
+        # .env 解析: 引号、export、行尾注释; 已有环境变量不覆盖
+        sys.path.insert(0, str(ROOT))
+        import run as runner
+        envf = code / "t.env"
+        envf.write_text('A1="q v"\nexport A2=x  # c\nA3=keep\n# A4=no\n')
+        os.environ["A3"] = "process"
+        runner.load_env_files(envf)
+        assert (os.environ["A1"], os.environ["A2"], os.environ["A3"]) == ("q v", "x", "process")
+        assert "A4" not in os.environ
+        shutil.rmtree(code.parent, ignore_errors=True)
         print("全部通过")
     finally:
         shutil.rmtree(out, ignore_errors=True)
