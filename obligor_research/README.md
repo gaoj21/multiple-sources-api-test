@@ -42,8 +42,7 @@ python obligor_research/run.py --obligors obligors.csv
 | `--llm-root` | `llm/` 不在 `obligor_research/` 下时，指定包含它的目录 |
 | `--env-file` | 指定 `.env`；默认依次找 `obligor_research/.env` 和 `code/.env` |
 | `--provider` | 用哪个 provider；不填就用配置里的 default，或环境变量 `LLM_PROVIDER` |
-| `--llm-options` | 每次调用额外传给 `chat_result` 的参数（JSON），用来开启联网搜索工具。默认 `{"tools": [{"type": "web_search"}]}` |
-| `--no-web-search-tool` | 不传联网搜索工具（模型自带搜索时用） |
+| `--llm-options` | 每次调用额外传给 `chat_result` 的参数（JSON）。默认不传，因为适配器自动开启搜索；需要手动开启的机器才用 |
 | `--preflight` | 先问一个只有联网搜索才答得出的问题（justice.gov 最近两周的新闻稿），确认搜索真的开着 |
 | `--days` / `--end` | 时间窗，默认今天往前 365 天 |
 | `--sources` | 只跑部分数据源，逗号分隔 |
@@ -52,19 +51,18 @@ python obligor_research/run.py --obligors obligors.csv
 | `--dry-run` | 不调用模型，只把提示词写到 `out/prompts.jsonl`，可以先检查 |
 | `--report-only` | 不调用模型，按已有结果重新出报告 |
 
-## 联网搜索工具
+## 联网搜索怎么开启
 
-每次调用 `chat_result` 都会带上联网搜索工具，默认是：
+那台机器的 SafeChain 适配器**默认开着 GPT 联网搜索**（`tool_choice="auto"`，由模型自己决定要不要搜），所以程序默认不传任何额外参数：
 
 ```python
-chat_result(provider, messages, temperature=0, timeout=300, tools=[{"type": "web_search"}])
+chat_result(provider, messages, temperature=0, timeout=300)
 ```
 
-`llm` 包会把这些额外参数原样转给服务商（和 `providers.json` 里的 `params` 合并），所以不需要改 `llm` 包。如果那台机器要求别的写法，用 `--llm-options` 改，例如：
+换到需要手动开启搜索的机器，用 `--llm-options` 传。`llm` 包会把这些参数原样转给服务商（和 `providers.json` 里的 `params` 合并），例如：
 
 ```bash
---llm-options '{"tools": [{"type": "web_search_preview"}]}'
---llm-options '{"web_search_options": {}}'
+--llm-options '{"tools": [{"type": "web_search"}]}'
 ```
 
 跑之前先用 `--preflight` 确认搜索真的生效，没生效会直接停下。
@@ -153,9 +151,10 @@ python obligor_research/tests/test_live_websearch.py --provider xxx \
 | 4. 在 USAspending / CourtListener 上至少找到 1 条有效记录 | 退出码 1 |
 | 5. 有效链接能打开 | 只提示（有些网站会拦截脚本） |
 | 6. 服务商报了 token 用量 | 只提示 |
-| 7. 对照：不带联网搜索工具时能不能答出最新新闻稿 | 只提示，用来判断工具参数是否真的起作用 |
+| 6b. 每次调用的搜索次数 | 只提示，需要适配器报告 `web_search_calls` |
+| 7. 对照：不带额外参数时能不能答出最新新闻稿 | 只提示，只在传了 `--llm-options` 时做 |
 
-第 2 项不通过，多半是联网搜索工具的写法和那台机器的不一样，用 `--llm-options` 换写法再试。
+第 2 项不通过，先确认适配器开着搜索；需要手动开启的机器，用 `--llm-options` 传开启参数再试。
 
 参考：在只有 DeepSeek 的机器上跑，LiteLLM 会提示 "DeepSeek chat completions only supports function tools; dropping unsupported tool type(s) ['web_search']"，第 2 项不通过。这说明 `tools` 参数确实传到了服务商那一层，只是 DeepSeek 不支持。
 

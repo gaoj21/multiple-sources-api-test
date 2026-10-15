@@ -115,7 +115,9 @@ class Store:
 
 # ---------------------------------------------------------------- 调用模型
 
-DEFAULT_LLM_OPTIONS = {"tools": [{"type": "web_search"}]}
+# 默认不传额外参数: SafeChain 适配器默认开着 GPT 联网搜索 (tool_choice="auto", 由模型决定搜不搜)。
+# 换到需要手动开启的机器, 用 --llm-options 传, 例如 '{"tools": [{"type": "web_search"}]}'。
+DEFAULT_LLM_OPTIONS = {}
 SEARCH_COUNT_FIELDS = ("web_search_calls", "web_search_requests", "web_searches")
 
 
@@ -161,8 +163,8 @@ def run_jobs(jobs, llm, provider, store, tracker, workers, timeout, llm_options)
                 rec["usage_missing"] = True  # 服务商没报用量, 不当作免费
             if rec.get("web_search_calls") is not None:
                 tracker.add_web_search(rec["web_search_calls"])   # 适配器报告的真实次数
-            elif llm_options:
-                tracker.add_web_search(1)    # 适配器没报次数: 按每次请求至少 1 次估算
+            else:
+                tracker.add_web_search(1)    # 适配器没报次数: 按每次请求 1 次估算
                 rec["web_search_estimated"] = True
         rec.update({"obligor_id": ob["id"], "obligor": ob["name"], "task": task})
         if rec["status"] == "ok":
@@ -345,8 +347,9 @@ def main():
     ap.add_argument("--timeout", type=int, default=300, help="单个请求超时秒数 (联网搜索较慢, 默认 300)")
     ap.add_argument("--preflight", action="store_true", help="先确认 provider 开着联网搜索")
     ap.add_argument("--llm-options", default=json.dumps(DEFAULT_LLM_OPTIONS),
-                    help='传给 chat_result 的额外参数 (JSON), 用来开启联网搜索工具; 默认 \'{"tools": [{"type": "web_search"}]}\'')
-    ap.add_argument("--no-web-search-tool", action="store_true", help="不传联网搜索工具 (模型自带搜索时用)")
+                    help='传给 chat_result 的额外参数 (JSON); 默认不传 (适配器自动开启联网搜索)。'
+                         '需要手动开启时例如 \'{"tools": [{"type": "web_search"}]}\'')
+    ap.add_argument("--no-web-search-tool", action="store_true", help="不传任何额外参数 (等同默认)")
     ap.add_argument("--dry-run", action="store_true", help="只把提示词写到 out/prompts.jsonl, 不调用模型")
     ap.add_argument("--report-only", action="store_true", help="不调用模型, 只根据 out/results.jsonl 重新出报告")
     a = ap.parse_args()
@@ -397,13 +400,13 @@ def main():
     tracker = llm.UsageTracker()
 
     if a.preflight:
-        print(f"调用参数: {json.dumps(llm_options, ensure_ascii=False) or '(无)'}")
+        print(f"调用参数: {json.dumps(llm_options, ensure_ascii=False) if llm_options else '(无, 由适配器自动开启联网搜索)'}")
         ok, detail = preflight(llm, a.provider, a.timeout, llm_options)
         print(f"预检 (联网搜索): {'通过' if ok else '没通过'} - {detail}")
         if not ok and missing_module_hint(detail):
             sys.exit(missing_module_hint(detail))
         if not ok:
-            sys.exit("这个 provider 看起来没开联网搜索 (或搜索结果不新); 换一个 provider 再试, 或去掉 --preflight 强行运行")
+            sys.exit("这个 provider 看起来没开联网搜索 (或搜索结果不新); 检查适配器是否开着搜索, 或用 --llm-options 手动开启, 或去掉 --preflight 强行运行")
 
     # 第 1 步: 官网 (结果用来区分同名公司, 也加进财报电话会允许的域名)
     if not a.no_website:

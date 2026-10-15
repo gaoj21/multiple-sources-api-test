@@ -56,9 +56,13 @@ def main():
         recs = [json.loads(l) for l in open(out / "results.jsonl", encoding="utf-8")]
         assert any(r.get("web_search_calls") == 3 for r in recs)
 
-        # 不带联网搜索工具时, 假 llm 拒绝 -> 预检不通过, 程序退出
+        # 需要手动开启搜索的机器 (FAKE_LLM_REQUIRE_TOOLS=1): 不传工具 -> 预检不通过退出; 传了 --llm-options 就能过
         bad = Path(tempfile.mkdtemp())
-        env = {**os.environ, "FAKE_LLM_STATE": str(bad / "state.json")}
+        env = {**os.environ, "FAKE_LLM_STATE": str(bad / "state.json"), "FAKE_LLM_REQUIRE_TOOLS": "1"}
+        ok_tools = subprocess.run([sys.executable, str(ROOT / "run.py"), "--obligors", str(ROOT / "obligors.example.csv"),
+                                   "--out", str(bad / "ok"), "--llm-root", str(FAKE), "--sources", "doj", "--preflight",
+                                   "--llm-options", '{"tools": [{"type": "web_search"}]}'], capture_output=True, text=True, env=env)
+        assert ok_tools.returncode == 0 and "预检 (联网搜索): 通过" in ok_tools.stdout, ok_tools.stdout + ok_tools.stderr
         p = subprocess.run([sys.executable, str(ROOT / "run.py"), "--obligors", str(ROOT / "obligors.example.csv"),
                             "--out", str(bad), "--llm-root", str(FAKE), "--no-web-search-tool", "--preflight"],
                            capture_output=True, text=True, env=env)

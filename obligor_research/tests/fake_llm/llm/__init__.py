@@ -78,7 +78,7 @@ def _chat(provider, messages, **options):
         raise ProviderError("Fake provider requires fakechain.core.model.model")  # 模拟: 缺 SDK
     if os.environ.get("FAKE_LLM_NEEDS_KEY") == "1" and not os.environ.get("FAKE_LLM_KEY"):
         raise ProviderError("LLM provider 'fake' needs FAKE_LLM_KEY in the environment")  # 模拟: .env 没读到
-    if not options.get("tools") and os.environ.get("FAKE_LLM_REQUIRE_TOOLS", "1") == "1":
+    if not options.get("tools") and os.environ.get("FAKE_LLM_REQUIRE_TOOLS", "0") == "1":
         raise ProviderError("web search tool not enabled")  # 模拟: 不带工具就搜不了
     user = messages[-1]["content"]
     company = user.split('"')[1]

@@ -13,7 +13,8 @@
   4. 数据源: 在 USAspending / CourtListener 上至少找到 1 条有效记录 (官方域名 + 时间窗内)
   5. 返回的有效链接能打开 (只提示, 不算失败: 有些网站会拦截脚本)
   6. 服务商报了 token 用量 (只提示)
-  7. 对照: 不带联网搜索工具时能不能答出最新新闻稿 (只提示; 能答出说明模型自带搜索)
+  6b. 每次调用的搜索次数 (只提示; 需要适配器报告 web_search_calls)
+  7. 对照: 不带额外参数时能不能答出最新新闻稿 (只提示; 只在传了 --llm-options 时做)
 """
 import argparse
 import json
@@ -112,7 +113,7 @@ def main(argv=None):
 
     # 2. 联网搜索生效
     ok_search, detail = runner.preflight(llm, a.provider, a.timeout, opts, a.show_raw)
-    record(2, f"联网搜索生效 (参数 {json.dumps(opts)})", "通过" if ok_search else "失败", detail)
+    record(2, f"联网搜索生效 (参数 {json.dumps(opts) if opts else '无, 适配器自动开启'})", "通过" if ok_search else "失败", detail)
 
     # 3. 官网
     rec = call(website_messages(COMPANY), opts)
@@ -161,8 +162,10 @@ def main(argv=None):
            (f"适配器报告了 {len(known)}/{len(search_counts)} 次: {search_counts}, 合计 {sum(known)} 次" if known
             else "适配器没有报告搜索次数 (LLMResult 上没有 web_search_calls), 见 obligor_research/ADAPTER_WEB_SEARCH_COUNT.md"))
 
-    # 7. 对照: 不带工具
-    if not a.skip_control:
+    # 7. 对照: 不带工具 (只有传了 --llm-options 才有意义; 适配器自动开启搜索时两次结果一样)
+    if not opts:
+        record(7, "对照: 不带联网搜索工具", "提示", "跳过: 没传额外参数, 搜索由适配器自动开启")
+    elif not a.skip_control:
         ok_ctrl, d_ctrl = runner.preflight(llm, a.provider, a.timeout, {}, a.show_raw)
         if ok_ctrl:
             verdict = "也能答出最新新闻稿 (模型可能自带搜索, 工具参数可以不传)"
