@@ -89,10 +89,66 @@ D&B、Orbis、Quartr、LexisNexis 是付费数据，在登录墙后面，联网�
 - 对 UCC 这种只能在州政府网站的查询表单里查的数据，搜索引擎往往收录不到，预计结果很少。
 - 输出目录 `out/` 已在 `.gitignore` 里，不会提交。
 
-## 测试
+## 如何测试
+
+分三步，前一步通过再做下一步。
+
+### 第 1 步：离线测试（不联网、不花钱，任何机器都能跑）
 
 ```bash
 python obligor_research/tests/test_pipeline.py
+# 或
+python -m pytest obligor_research/tests/test_pipeline.py
 ```
 
-用假的 `llm` 包（`tests/fake_llm/`，公开接口和 contract 一致）把整个流程跑一遍，不联网、不花钱。覆盖：各类校验标记、去重、坏 JSON 和调用出错后的断点续跑、官网结果、报告统计、演练模式，以及不带联网搜索工具时预检会拦下。
+用假的 `llm` 包（`tests/fake_llm/`，公开接口和 contract 一致）跑完整流程，覆盖：
+- 各类校验标记：链接不在官方域名、日期不在窗口、没有链接，以及同一链接去重。
+- 坏 JSON 和调用出错后的断点续跑：第二次只重试失败的请求。
+- 官网结果、报告统计、演练模式。
+- 不带联网搜索工具时，预检会拦下并退出。
+- 抽查脚本：抽样、人工填表、打分。
+
+### 第 2 步：联网冒烟测试（在 GPT 那台机器上，约 8～10 次调用，有少量费用）
+
+```bash
+python obligor_research/tests/test_live_websearch.py --llm-root /path/to/repo
+# 指定 provider 或换联网搜索工具的写法:
+python obligor_research/tests/test_live_websearch.py --llm-root /path/to/repo --provider xxx \
+    --llm-options '{"tools": [{"type": "web_search"}]}'
+```
+
+用 Lockheed Martin 做测试公司（政府合同和诉讼很多，结果好判断）：
+
+| 检查 | 不通过时 |
+|---|---|
+| 1. provider 可用（需要的环境变量都在） | 退出码 1 |
+| 2. 联网搜索生效：能答出 justice.gov 最近两周的新闻稿 | 退出码 1 |
+| 3. 找到官网 lockheedmartin.com | 退出码 1 |
+| 4. 在 USAspending / CourtListener 上至少找到 1 条有效记录 | 退出码 1 |
+| 5. 有效链接能打开 | 只提示（有些网站会拦截脚本） |
+| 6. 服务商报了 token 用量 | 只提示 |
+| 7. 对照：不带联网搜索工具时能不能答出最新新闻稿 | 只提示，用来判断工具参数是否真的起作用 |
+
+第 2 项不通过，多半是联网搜索工具的写法和那台机器的不一样，用 `--llm-options` 换写法再试。
+
+参考：在只有 DeepSeek 的机器上跑，LiteLLM 会提示 "DeepSeek chat completions only supports function tools; dropping unsupported tool type(s) ['web_search']"，第 2 项不通过。这说明 `tools` 参数确实传到了服务商那一层，只是 DeepSeek 不支持。
+
+### 第 3 步：小规模试跑 + 结果抽查
+
+```bash
+# 先跑 2～5 家
+python obligor_research/run.py --obligors obligors.csv --llm-root /path/to/repo --preflight --limit 5
+
+# 每个数据源随机抽 10 条有效结果, 自动检查链接能不能打开, 生成人工核对表
+python obligor_research/tests/sample_for_review.py --out obligor_research/out --per-source 10 --check-urls
+```
+
+然后人工打开 `out/review_sample.csv` 里的每个链接，在最后几列填 `y` / `n`（公司对吗、日期对吗、内容对吗），再统计准确率：
+
+```bash
+python obligor_research/tests/sample_for_review.py --out obligor_research/out --score
+```
+
+会按数据源列出"全部正确"和各项的比例。准确率可以接受，再去掉 `--limit` 全量跑。
+
+抽查脚本不调用模型，也不调用任何数据源的 API，只是打开结果里的链接。

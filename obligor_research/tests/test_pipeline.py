@@ -65,9 +65,26 @@ def main():
                              "--out", str(dry), "--dry-run"], capture_output=True, text=True).stdout
         n = len((dry / "prompts.jsonl").read_text().splitlines())
         assert n == 2 * (11 + 1), n                          # 2 家 × (11 个数据源 + 官网)
+        # 抽查脚本: 抽样 -> 模拟人工填表 -> 打分
+        sp = subprocess.run([sys.executable, str(HERE / "sample_for_review.py"), "--out", str(out), "--per-source", "5"],
+                            capture_output=True, text=True)
+        assert sp.returncode == 0 and "抽中 2 条" in sp.stdout, sp.stdout + sp.stderr
+        review = list(csv.DictReader(open(out / "review_sample.csv", encoding="utf-8-sig")))
+        for r, ans in zip(review, (("y", "y", "y"), ("y", "n", "y"))):
+            r["公司对吗"], r["日期对吗"], r["内容对吗"] = ans
+        with open(out / "review_sample.csv", "w", newline="", encoding="utf-8-sig") as f:
+            w = csv.DictWriter(f, fieldnames=list(review[0].keys()))
+            w.writeheader(); w.writerows(review)
+        sc = subprocess.run([sys.executable, str(HERE / "sample_for_review.py"), "--out", str(out), "--score"],
+                            capture_output=True, text=True).stdout
+        assert "已核对 2/2 条" in sc and "(合计)" in sc and "50%" in sc, sc
         print("全部通过")
     finally:
         shutil.rmtree(out, ignore_errors=True)
+
+
+def test_pipeline():  # pytest 入口
+    main()
 
 
 if __name__ == "__main__":
