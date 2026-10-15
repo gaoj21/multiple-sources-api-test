@@ -62,8 +62,8 @@ return result
 ```
 
 几点说明：
-- 适配器默认开着搜索（`tool_choice="auto"`），模型可能搜也可能不搜。数出来是 0，说明这次没搜索就作答了，报告会单独统计这类请求。
-- 如果某些请求明确关掉了搜索，就不要加这个字段，免得它们被算成"没搜索就作答"。
+- 传了 `tools=[{"type": "web_search"}]` 的请求，模型可能搜也可能不搜（`tool_choice="auto"`）。数出来是 0，说明这次没搜索就作答了，报告会单独统计这类请求。
+- 没开启搜索的请求不要加这个字段，免得它们被算成"没搜索就作答"。
 - 如果 `LLMResult` 是用 `slots=True` 定义的、不能动态加属性，可以给 `LLMResult`（或 `LLMUsage`）加一个可选字段 `web_search_calls: int | None = None`。我们的程序两处都会读。
 
 ## 3. 验证
@@ -74,14 +74,14 @@ return result
 python -c "
 import sys; sys.path.insert(0, 'obligor_research')
 from llm import chat_result
-r = chat_result(None, [{'role': 'user', 'content': 'Search the web: latest US DOJ press release title and URL'}])
+r = chat_result(None, [{'role': 'user', 'content': 'Search the web: latest US DOJ press release title and URL'}], tools=[{'type': 'web_search'}])
 print('web_search_calls =', getattr(r, 'web_search_calls', None))
 raw = getattr(r, 'raw', None)
 print(type(raw)); print(repr(raw)[:3000])
 "
 ```
 
-适配器默认开着搜索，所以不用传参数。如果 `web_search_calls` 是 `None` 或 `0`，但原始响应里明明有搜索记录，就把 `repr(raw)` 里搜索记录那一段发过来，我再调整函数。
+如果 `web_search_calls` 是 `None` 或 `0`，但原始响应里明明有搜索记录，就把 `repr(raw)` 里搜索记录那一段发过来，我再调整函数。
 
 然后跑冒烟测试，第 6b 项会显示每次调用的搜索次数：
 

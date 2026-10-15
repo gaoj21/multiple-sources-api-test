@@ -42,7 +42,7 @@ python obligor_research/run.py --obligors obligors.csv
 | `--llm-root` | `llm/` 不在 `obligor_research/` 下时，指定包含它的目录 |
 | `--env-file` | 指定 `.env`；默认依次找 `obligor_research/.env` 和 `code/.env` |
 | `--provider` | 用哪个 provider；不填就用配置里的 default，或环境变量 `LLM_PROVIDER` |
-| `--llm-options` | 每次调用额外传给 `chat_result` 的参数（JSON）。默认不传，因为适配器自动开启搜索；需要手动开启的机器才用 |
+| `--llm-options` | 每次调用额外传给 `chat_result` 的参数（JSON），用来开启联网搜索。默认 `{"tools": [{"type": "web_search"}]}` |
 | `--preflight` | 先问一个只有联网搜索才答得出的问题（justice.gov 最近两周的新闻稿），确认搜索真的开着 |
 | `--days` / `--end` | 时间窗，默认今天往前 365 天 |
 | `--sources` | 只跑部分数据源，逗号分隔 |
@@ -53,19 +53,19 @@ python obligor_research/run.py --obligors obligors.csv
 
 ## 联网搜索怎么开启
 
-那台机器的 SafeChain 适配器**默认开着 GPT 联网搜索**（`tool_choice="auto"`，由模型自己决定要不要搜），所以程序默认不传任何额外参数：
+那台机器的 SafeChain 适配器需要每次调用都传 `tools=[{"type": "web_search"}]` 才会开启 GPT 联网搜索，不传就不搜。程序默认每次都带上，预检也一样：
 
 ```python
-chat_result(provider, messages, temperature=0, timeout=300)
+chat_result(provider, messages, temperature=0, timeout=180, tools=[{"type": "web_search"}])
 ```
 
-换到需要手动开启搜索的机器，用 `--llm-options` 传。`llm` 包会把这些参数原样转给服务商（和 `providers.json` 里的 `params` 合并），例如：
+`llm` 包会把这个参数原样转给适配器（和 `providers.json` 里的 `params` 合并），不需要改 `llm` 包。换到写法不同的机器，用 `--llm-options` 改，例如：
 
 ```bash
---llm-options '{"tools": [{"type": "web_search"}]}'
+--llm-options '{"web_search": true}'
 ```
 
-跑之前先用 `--preflight` 确认搜索真的生效，没生效会直接停下。
+跑之前先用 `--preflight` 确认搜索真的生效，没生效会直接停下。冒烟测试的第 7 项会再不带这个参数问一次作对照，答不出最新新闻稿，就说明搜索确实是这个参数打开的。
 
 ## 控制时间和费用
 
@@ -176,9 +176,9 @@ python obligor_research/tests/test_live_websearch.py --provider xxx \
 | 5. 有效链接能打开 | 只提示（有些网站会拦截脚本） |
 | 6. 服务商报了 token 用量 | 只提示 |
 | 6b. 每次调用的搜索次数 | 只提示，需要适配器报告 `web_search_calls` |
-| 7. 对照：不带额外参数时能不能答出最新新闻稿 | 只提示，只在传了 `--llm-options` 时做 |
+| 7. 对照：不带开启搜索的参数时能不能答出最新新闻稿 | 只提示；答不出说明搜索确实是这个参数打开的 |
 
-第 2 项不通过，先确认适配器开着搜索；需要手动开启的机器，用 `--llm-options` 传开启参数再试。
+第 2 项不通过，先确认 `--llm-options` 的写法和适配器要求的一致（默认 `{"tools": [{"type": "web_search"}]}`）。
 
 参考：在只有 DeepSeek 的机器上跑，LiteLLM 会提示 "DeepSeek chat completions only supports function tools; dropping unsupported tool type(s) ['web_search']"，第 2 项不通过。这说明 `tools` 参数确实传到了服务商那一层，只是 DeepSeek 不支持。
 

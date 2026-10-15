@@ -116,9 +116,8 @@ class Store:
 
 # ---------------------------------------------------------------- 调用模型
 
-# 默认不传额外参数: SafeChain 适配器默认开着 GPT 联网搜索 (tool_choice="auto", 由模型决定搜不搜)。
-# 换到需要手动开启的机器, 用 --llm-options 传, 例如 '{"tools": [{"type": "web_search"}]}'。
-DEFAULT_LLM_OPTIONS = {}
+# 每次调用都传这个参数, SafeChain 适配器据此开启 GPT 联网搜索 (不传就不搜)。写法不同的机器用 --llm-options 改。
+DEFAULT_LLM_OPTIONS = {"tools": [{"type": "web_search"}]}
 SEARCH_COUNT_FIELDS = ("web_search_calls", "web_search_requests", "web_searches")
 
 
@@ -406,9 +405,9 @@ def main():
     ap.add_argument("--max-calls", type=int, help="本次运行最多发多少个请求; 超过后不再发新请求")
     ap.add_argument("--preflight", action="store_true", help="先确认 provider 开着联网搜索")
     ap.add_argument("--llm-options", default=json.dumps(DEFAULT_LLM_OPTIONS),
-                    help='传给 chat_result 的额外参数 (JSON); 默认不传 (适配器自动开启联网搜索)。'
-                         '需要手动开启时例如 \'{"tools": [{"type": "web_search"}]}\'')
-    ap.add_argument("--no-web-search-tool", action="store_true", help="不传任何额外参数 (等同默认)")
+                    help='每次调用额外传给 chat_result 的参数 (JSON), 用来开启联网搜索; '
+                         '默认 \'{"tools": [{"type": "web_search"}]}\'')
+    ap.add_argument("--no-web-search-tool", action="store_true", help="不传任何额外参数 (不开启联网搜索)")
     ap.add_argument("--dry-run", action="store_true", help="只把提示词写到 out/prompts.jsonl, 不调用模型")
     ap.add_argument("--report-only", action="store_true", help="不调用模型, 只根据 out/results.jsonl 重新出报告")
     a = ap.parse_args()
@@ -462,13 +461,13 @@ def main():
           f"请求数上限: {a.max_calls if a.max_calls is not None else '不限'}")
 
     if a.preflight:
-        print(f"调用参数: {json.dumps(llm_options, ensure_ascii=False) if llm_options else '(无, 由适配器自动开启联网搜索)'}")
+        print(f"调用参数: {json.dumps(llm_options, ensure_ascii=False) if llm_options else '(无, 不开启联网搜索)'}")
         ok, detail = preflight(llm, a.provider, a.timeout, llm_options)
         print(f"预检 (联网搜索): {'通过' if ok else '没通过'} - {detail}")
         if not ok and missing_module_hint(detail):
             sys.exit(missing_module_hint(detail))
         if not ok:
-            sys.exit("这个 provider 看起来没开联网搜索 (或搜索结果不新); 检查适配器是否开着搜索, 或用 --llm-options 手动开启, 或去掉 --preflight 强行运行")
+            sys.exit("这个 provider 看起来没开联网搜索 (或搜索结果不新); 检查 --llm-options 的写法是否和适配器一致, 或去掉 --preflight 强行运行")
 
     # 第 1 步: 官网 (结果用来区分同名公司, 也加进财报电话会允许的域名)
     if not a.no_website:
