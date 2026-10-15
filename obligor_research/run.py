@@ -78,11 +78,17 @@ class Store:
 
 # ---------------------------------------------------------------- 调用模型
 
-def call_model(llm, provider, messages, timeout):
-    """一个请求失败只影响它自己 (batch_result 里一个失败会让整批报错, 所以不用它)。"""
+DEFAULT_LLM_OPTIONS = {"tools": [{"type": "web_search"}]}  # 开启联网搜索工具; 写法按那台机器的要求用 --llm-options 改
+
+
+def call_model(llm, provider, messages, timeout, llm_options):
+    """一个请求失败只影响它自己 (batch_result 里一个失败会让整批报错, 所以不用它)。
+
+    llm_options 原样作为关键字参数传给 chat_result, llm 包会把它转给服务商 (用来开启联网搜索工具)。
+    """
     t0 = time.time()
     try:
-        res = llm.chat_result(provider, messages, temperature=0, timeout=timeout)
+        res = llm.chat_result(provider, messages, temperature=0, timeout=timeout, **llm_options)
         return {"status": "ok", "content": res.content, "usage": res.usage.as_dict() if res.usage else None,
                 "model": res.model, "seconds": round(time.time() - t0, 1)}, res
     except llm.ProviderError as e:
@@ -91,16 +97,19 @@ def call_model(llm, provider, messages, timeout):
         return {"status": "error", "error": f"{type(e).__name__}: {e}", "seconds": round(time.time() - t0, 1)}, None
 
 
-def run_jobs(jobs, llm, provider, store, tracker, workers, timeout):
+def run_jobs(jobs, llm, provider, store, tracker, workers, timeout, llm_options):
     total, done_n = len(jobs), 0
     lock = threading.Lock()
 
     def one(job):
         nonlocal done_n
         ob, task, messages, post = job
-        rec, res = call_model(llm, provider, messages, timeout)
-        if res is not None and not tracker.add(res):
-            rec["usage_missing"] = True  # 服务商没报用量, 不当作免费
+        rec, res = call_model(llm, provider, messages, timeout, llm_options)
+        if res is not None:
+            if not tracker.add(res):
+                rec["usage_missing"] = True  # 服务商没报用量, 不当作免费
+            if llm_options.get("tools") or llm_options.get("web_search_options") is not None:
+                tracker.add_web_search(1)    # 实际搜索次数拿不到, 按每次请求至少 1 次估算
         rec.update({"obligor_id": ob["id"], "obligor": ob["name"], "task": task})
         if rec["status"] == "ok":
             data = parse_json(rec["content"])
@@ -119,13 +128,13 @@ def run_jobs(jobs, llm, provider, store, tracker, workers, timeout):
         list(pool.map(one, jobs))
 
 
-def preflight(llm, provider, timeout):
+def preflight(llm, provider, timeout, llm_options):
     """问一个只有联网搜索才答得出的问题, 确认 provider 开着联网搜索。"""
     since = date.today() - timedelta(days=14)
     msgs = [{"role": "system", "content": "Use web search. Reply with JSON only."},
             {"role": "user", "content": "Search justice.gov for the most recent US Department of Justice press release "
              f"published on or after {since.isoformat()}. Return JSON: {{\"title\": ..., \"date\": \"YYYY-MM-DD\", \"url\": ...}}"}]
-    rec, _ = call_model(llm, provider, msgs, timeout)
+    rec, _ = call_model(llm, provider, msgs, timeout, llm_options)
     if rec["status"] != "ok":
         return False, rec.get("error")
     data = parse_json(rec["content"]) or {}
@@ -204,7 +213,9 @@ def build_report(out: Path, obligors: list, sources: list, start: date, end: dat
     if usage:
         L += ["", "## 用量与费用", "", f"- 请求数 (有用量的): {usage.get('token_calls')}",
               f"- 输入 token: {usage.get('input_tokens_total')}, 输出 token: {usage.get('output_tokens_total')}",
-              f"- token 费用: {usage.get('total_token_cost')} (单价来自环境变量 EVO_TOKEN_*; 联网搜索次数无法从公开接口得到, 未计入)"]
+              f"- token 费用: {usage.get('total_token_cost')} (单价来自环境变量 EVO_TOKEN_*)",
+              f"- 联网搜索: 按每次请求至少 1 次估算 {usage.get('web_search_actions')} 次 (实际次数从公开接口拿不到, 这是下限)",
+              f"- 合计 (下限): {usage.get('total_cost')}"]
     (out / "summary.md").write_text("\n".join(L) + "\n", encoding="utf-8")
     print(f"\n报告: {out / 'summary.md'} | 明细: items.csv ({len(item_rows)} 条), websites.csv ({len(site_rows)} 家)")
 
@@ -225,11 +236,18 @@ def main():
     ap.add_argument("--workers", type=int, default=4, help="并发请求数 (默认 4)")
     ap.add_argument("--timeout", type=int, default=300, help="单个请求超时秒数 (联网搜索较慢, 默认 300)")
     ap.add_argument("--preflight", action="store_true", help="先确认 provider 开着联网搜索")
+    ap.add_argument("--llm-options", default=json.dumps(DEFAULT_LLM_OPTIONS),
+                    help='传给 chat_result 的额外参数 (JSON), 用来开启联网搜索工具; 默认 \'{"tools": [{"type": "web_search"}]}\'')
+    ap.add_argument("--no-web-search-tool", action="store_true", help="不传联网搜索工具 (模型自带搜索时用)")
     ap.add_argument("--dry-run", action="store_true", help="只把提示词写到 out/prompts.jsonl, 不调用模型")
     ap.add_argument("--report-only", action="store_true", help="不调用模型, 只根据 out/results.jsonl 重新出报告")
     a = ap.parse_args()
 
     sources = [s.strip() for s in a.sources.split(",") if s.strip()]
+    try:
+        llm_options = {} if a.no_web_search_tool else json.loads(a.llm_options)
+    except ValueError:
+        sys.exit("--llm-options 不是合法的 JSON")
     bad = [s for s in sources if s not in SOURCES]
     if bad:
         sys.exit(f"未知数据源: {bad}; 可选: {list(SOURCES)}")
@@ -268,7 +286,8 @@ def main():
     tracker = llm.UsageTracker()
 
     if a.preflight:
-        ok, detail = preflight(llm, a.provider, a.timeout)
+        print(f"调用参数: {json.dumps(llm_options, ensure_ascii=False) or '(无)'}")
+        ok, detail = preflight(llm, a.provider, a.timeout, llm_options)
         print(f"预检 (联网搜索): {'通过' if ok else '没通过'} - {detail}")
         if not ok:
             sys.exit("这个 provider 看起来没开联网搜索 (或搜索结果不新); 换一个 provider 再试, 或去掉 --preflight 强行运行")
@@ -279,7 +298,7 @@ def main():
                 for ob in obligors if (ob["id"], WEBSITE_TASK) not in store.done]
         if jobs:
             print(f"\n第 1 步: 查官网 ({len(jobs)} 个请求)")
-            run_jobs(jobs, llm, a.provider, store, tracker, a.workers, a.timeout)
+            run_jobs(jobs, llm, a.provider, store, tracker, a.workers, a.timeout, llm_options)
         for ob in obligors:
             got = (store.done.get((ob["id"], WEBSITE_TASK)) or {}).get("checked") or {}
             if not ob.get("website") and got.get("valid"):
@@ -295,7 +314,7 @@ def main():
                          lambda data, ob=ob, s=s: check_source_items(data, ob, s, start, end)))
     if jobs:
         print(f"\n第 2 步: 各数据源 ({len(jobs)} 个请求)")
-        run_jobs(jobs, llm, a.provider, store, tracker, a.workers, a.timeout)
+        run_jobs(jobs, llm, a.provider, store, tracker, a.workers, a.timeout, llm_options)
 
     usage = tracker.snapshot()
     (a.out / "usage.json").write_text(json.dumps(usage, indent=2, ensure_ascii=False), encoding="utf-8")

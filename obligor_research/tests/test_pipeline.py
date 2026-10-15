@@ -33,7 +33,7 @@ def main():
         assert "还有 2 个请求没成功" in s1, s1  # Acme CourtListener 坏 JSON + Beta DOJ 出错
         s2 = run(out)
         assert "各数据源 (2 个请求)" in s2, s2      # 续跑只重试这 2 个
-        assert "还有" not in s2
+        assert "还有" not in s2, s2
 
         rows = list(csv.DictReader(open(out / "items.csv", encoding="utf-8-sig")))
         acme = {r["title"]: r for r in rows if r["source"] == "usaspending"}
@@ -50,6 +50,15 @@ def main():
         summary = (out / "summary.md").read_text(encoding="utf-8")
         assert "| USAspending.gov | 1/2 | 1 | 1 | 1 | 1 |" in summary, summary
         assert "找到官网: 2/2" in summary
+        assert "联网搜索: 按每次请求至少 1 次估算" in summary
+
+        # 不带联网搜索工具时, 假 llm 拒绝 -> 预检不通过, 程序退出
+        bad = Path(tempfile.mkdtemp())
+        env = {**os.environ, "FAKE_LLM_STATE": str(bad / "state.json")}
+        p = subprocess.run([sys.executable, str(ROOT / "run.py"), "--obligors", str(ROOT / "obligors.example.csv"),
+                            "--out", str(bad), "--llm-root", str(FAKE), "--no-web-search-tool", "--preflight"],
+                           capture_output=True, text=True, env=env)
+        assert p.returncode != 0 and "没开联网搜索" in p.stderr + p.stdout, p.stdout + p.stderr
 
         dry = Path(tempfile.mkdtemp())
         s3 = subprocess.run([sys.executable, str(ROOT / "run.py"), "--obligors", str(ROOT / "obligors.example.csv"),

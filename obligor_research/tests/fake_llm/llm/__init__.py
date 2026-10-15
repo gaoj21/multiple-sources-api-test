@@ -38,24 +38,28 @@ class UsageTracker:
         self.calls += 1; self.inp += r.usage.input_tokens; self.out += r.usage.output_tokens
         return True
 
+    def add_web_search(self, actions=1):
+        self.searches = getattr(self, "searches", 0) + actions
+
     def snapshot(self):
-        return {"token_calls": self.calls, "input_tokens_total": self.inp, "output_tokens_total": self.out, "total_token_cost": 0.0}
+        return {"token_calls": self.calls, "input_tokens_total": self.inp, "output_tokens_total": self.out,
+                "total_token_cost": 0.0, "web_search_actions": getattr(self, "searches", 0), "total_cost": 0.0}
 
 
 STATE = os.environ.get("FAKE_LLM_STATE", "/tmp/fake_llm_state.json")
 
 
 def _count(key):
-    try:
-        d = json.load(open(STATE))
-    except Exception:
-        d = {}
-    d[key] = d.get(key, 0) + 1
-    json.dump(d, open(STATE, "w"))
-    return d[key]
+    """每个场景单独一个计数文件, 并发线程之间不会互相覆盖。"""
+    path = f"{STATE}.{key}"
+    with open(path, "a") as f:
+        f.write("x")
+    return os.path.getsize(path)
 
 
 def chat_result(provider, messages, **options):
+    if not options.get("tools") and os.environ.get("FAKE_LLM_REQUIRE_TOOLS", "1") == "1":
+        raise ProviderError("web search tool not enabled")  # 模拟: 不带工具就搜不了
     user = messages[-1]["content"]
     company = user.split('"')[1]
     u = LLMUsage(1000, 200, 1200)

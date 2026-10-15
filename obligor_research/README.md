@@ -22,7 +22,9 @@ python obligor_research/run.py --obligors obligors.csv --llm-root /path/to/repo
 
 | 参数 | 说明 |
 |---|---|
-| `--provider` | 用哪个 provider（要开着联网搜索）；不填就用配置里的 default，或环境变量 `LLM_PROVIDER` |
+| `--provider` | 用哪个 provider；不填就用配置里的 default，或环境变量 `LLM_PROVIDER` |
+| `--llm-options` | 每次调用额外传给 `chat_result` 的参数（JSON），用来开启联网搜索工具。默认 `{"tools": [{"type": "web_search"}]}` |
+| `--no-web-search-tool` | 不传联网搜索工具（模型自带搜索时用） |
 | `--preflight` | 先问一个只有联网搜索才答得出的问题（justice.gov 最近两周的新闻稿），确认搜索真的开着 |
 | `--days` / `--end` | 时间窗，默认今天往前 365 天 |
 | `--sources` | 只跑部分数据源，逗号分隔 |
@@ -30,6 +32,23 @@ python obligor_research/run.py --obligors obligors.csv --llm-root /path/to/repo
 | `--workers` | 并发数，默认 4 |
 | `--dry-run` | 不调用模型，只把提示词写到 `out/prompts.jsonl`，可以先检查 |
 | `--report-only` | 不调用模型，按已有结果重新出报告 |
+
+## 联网搜索工具
+
+每次调用 `chat_result` 都会带上联网搜索工具，默认是：
+
+```python
+chat_result(provider, messages, temperature=0, timeout=300, tools=[{"type": "web_search"}])
+```
+
+`llm` 包会把这些额外参数原样转给服务商（和 `providers.json` 里的 `params` 合并），所以不需要改 `llm` 包。如果那台机器要求别的写法，用 `--llm-options` 改，例如：
+
+```bash
+--llm-options '{"tools": [{"type": "web_search_preview"}]}'
+--llm-options '{"web_search_options": {}}'
+```
+
+跑之前先用 `--preflight` 确认搜索真的生效，没生效会直接停下。
 
 ## 查哪些数据源
 
@@ -62,7 +81,7 @@ D&B、Orbis、Quartr、LexisNexis 是付费数据，在登录墙后面，联网�
 请求数 = obligor 数 × (数据源数 + 1)。55 家 × 12 = **660 个请求**。
 
 - 费用按那台机器的 `EVO_TOKEN_*` 单价计算。
-- 联网搜索本身的次数从公开接口拿不到，所以 `usage.json` 里只有 token 费用。
+- 联网搜索的实际次数从公开接口拿不到。程序按每次请求至少 1 次计入 `UsageTracker.add_web_search()`，单价用 `EVO_WEB_SEARCH_PRICE_PER_1K`，所以报告里的搜索费用是**下限**。
 
 ## 注意
 
@@ -76,4 +95,4 @@ D&B、Orbis、Quartr、LexisNexis 是付费数据，在登录墙后面，联网�
 python obligor_research/tests/test_pipeline.py
 ```
 
-用假的 `llm` 包（`tests/fake_llm/`，公开接口和 contract 一致）把整个流程跑一遍，不联网、不花钱。覆盖：各类校验标记、去重、坏 JSON 和调用出错后的断点续跑、官网结果、报告统计、演练模式。
+用假的 `llm` 包（`tests/fake_llm/`，公开接口和 contract 一致）把整个流程跑一遍，不联网、不花钱。覆盖：各类校验标记、去重、坏 JSON 和调用出错后的断点续跑、官网结果、报告统计、演练模式，以及不带联网搜索工具时预检会拦下。
