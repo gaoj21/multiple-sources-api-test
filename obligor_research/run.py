@@ -165,6 +165,18 @@ def run_jobs(jobs, llm, provider, store, tracker, workers, timeout, llm_options)
         list(pool.map(one, jobs))
 
 
+def missing_module_hint(text: str) -> str:
+    """服务商适配器缺少依赖时, 给出换 Python 环境的提示 (不点名服务商, 遵守 contract)。"""
+    import re
+    m = re.search(r"requires ([A-Za-z_][\w.]+)|No module named '([\w.]+)'", text or "")
+    if not m:
+        return ""
+    mod = m.group(1) or m.group(2)
+    return (f"提示: 当前 Python ({sys.executable}) 里缺少模块 {mod}。这是 llm 包里服务商适配器需要的 SDK, "
+            f"不是本程序的问题。请改用装了它的 Python 环境运行 (例如项目的 .venv/bin/python), "
+            f"可以先用  <那个python> -c \"import {mod}\"  确认能导入。")
+
+
 def preflight(llm, provider, timeout, llm_options):
     """问一个只有联网搜索才答得出的问题, 确认 provider 开着联网搜索。"""
     since = date.today() - timedelta(days=14)
@@ -315,6 +327,7 @@ def main():
         print(f"演练模式: {n} 个请求的提示词已写到 {a.out / 'prompts.jsonl'}")
         return
 
+    print(f"Python: {sys.executable}")
     loaded = load_env_files(a.env_file)
     print(f".env: {', '.join(loaded) if loaded else '没找到 (只用当前环境变量)'}")
     if a.llm_root:
@@ -329,6 +342,8 @@ def main():
         print(f"调用参数: {json.dumps(llm_options, ensure_ascii=False) or '(无)'}")
         ok, detail = preflight(llm, a.provider, a.timeout, llm_options)
         print(f"预检 (联网搜索): {'通过' if ok else '没通过'} - {detail}")
+        if not ok and missing_module_hint(detail):
+            sys.exit(missing_module_hint(detail))
         if not ok:
             sys.exit("这个 provider 看起来没开联网搜索 (或搜索结果不新); 换一个 provider 再试, 或去掉 --preflight 强行运行")
 

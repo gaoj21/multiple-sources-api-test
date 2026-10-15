@@ -53,6 +53,7 @@ def main(argv=None):
     ap.add_argument("--timeout", type=int, default=300)
     ap.add_argument("--skip-control", action="store_true", help="跳过第 7 项对照调用 (省 1 次调用)")
     a = ap.parse_args(argv)
+    print(f"Python: {sys.executable}")
     loaded = runner.load_env_files(a.env_file)
     print(f".env: {', '.join(loaded) if loaded else '没找到 (只用当前环境变量)'}")
     if a.llm_root:
@@ -71,13 +72,23 @@ def main(argv=None):
     # 1. provider
     try:
         listed = llm.list_providers() if hasattr(llm, "list_providers") else {}
-        # contract 里 list_providers() 返回 {名字: {available, missing_env, ...}}; 也兼容列表形式
+        # contract 里 list_providers() 返回 {名字: {available, missing_env, default, ...}}; 也兼容列表形式
         provs = listed if isinstance(listed, dict) else {p.get("name"): p for p in listed}
         name = a.provider or (llm.default_provider() if hasattr(llm, "default_provider") else None)
-        info = provs.get(name, {})
-        ok = (not provs) or info.get("available", False)
-        record(1, "provider 可用", "通过" if ok else "失败",
-               f"{name}; 缺少环境变量: {info.get('missing_env') or '无'}" if provs else "list_providers 不可用, 跳过检查")
+        if not name:  # default_provider() 可能返回空: 用 list_providers 里标为 default 的, 或唯一的那个
+            name = next((n for n, i in provs.items() if i.get("default")), None)
+            if not name and len(provs) == 1:
+                name = next(iter(provs))
+        overview = ", ".join(f"{n}({'可用' if i.get('available') else '不可用'})" for n, i in provs.items()) or "无"
+        if not provs:
+            record(1, "provider 可用", "提示", "list_providers 不可用或为空, 跳过检查")
+        elif name not in provs:
+            record(1, "provider 可用", "失败", f"没有默认 provider; 已配置: {overview}。用 --provider 指定一个")
+        else:
+            info = provs[name]
+            record(1, "provider 可用", "通过" if info.get("available") else "失败",
+                   f"{name}; 缺少环境变量: {info.get('missing_env') or '无'}; 已配置: {overview}")
+            a.provider = a.provider or name
     except Exception as e:
         record(1, "provider 可用", "失败", f"{type(e).__name__}: {e}")
 
@@ -149,6 +160,9 @@ def main(argv=None):
             verdict = "带不带工具都答不出 -> 这个 provider 现在搜不了, 检查工具写法或换 provider"
         record(7, "对照: 不带联网搜索工具", "提示", f"{verdict} - {d_ctrl}")
 
+    hint = runner.missing_module_hint(" ".join(str(r[3]) for r in results))
+    if hint:
+        print("\n" + hint)
     failed = [r for r in results if r[2] == "失败"]
     print("\n" + ("全部关键检查通过" if not failed else f"{len(failed)} 项关键检查没通过: {[r[1] for r in failed]}"))
     return 1 if failed else 0

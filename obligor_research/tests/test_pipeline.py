@@ -106,6 +106,13 @@ def main():
         assert (os.environ["A1"], os.environ["A2"], os.environ["A3"]) == ("q v", "x", "process")
         assert "A4" not in os.environ
         shutil.rmtree(code.parent, ignore_errors=True)
+
+        # 冒烟测试: default_provider() 为空时从 list_providers 找到默认 provider; 缺 SDK 时给出换 Python 的提示
+        env3 = {**os.environ, "FAKE_LLM_STATE": str(out / "st3"), "FAKE_LLM_MISSING_SDK": "1"}
+        sm = subprocess.run([sys.executable, str(HERE / "test_live_websearch.py"), "--llm-root", str(FAKE), "--skip-control"],
+                            capture_output=True, text=True, env=env3)
+        assert "[通过] 1. provider 可用: fakechain" in sm.stdout, sm.stdout
+        assert "缺少模块 fakechain.core.model.model" in sm.stdout and sm.returncode == 1, sm.stdout
         print("全部通过")
     finally:
         shutil.rmtree(out, ignore_errors=True)

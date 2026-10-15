@@ -57,7 +57,17 @@ def _count(key):
     return os.path.getsize(path)
 
 
+def list_providers():
+    return {"fakechain": {"available": True, "missing_env": [], "default": True}}
+
+
+def default_provider():
+    return None  # 模拟: default_provider() 返回空, 要从 list_providers 里找
+
+
 def chat_result(provider, messages, **options):
+    if os.environ.get("FAKE_LLM_MISSING_SDK") == "1":
+        raise ProviderError("Fake provider requires fakechain.core.model.model")  # 模拟: 缺 SDK
     if os.environ.get("FAKE_LLM_NEEDS_KEY") == "1" and not os.environ.get("FAKE_LLM_KEY"):
         raise ProviderError("LLM provider 'fake' needs FAKE_LLM_KEY in the environment")  # 模拟: .env 没读到
     if not options.get("tools") and os.environ.get("FAKE_LLM_REQUIRE_TOOLS", "1") == "1":
