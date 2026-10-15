@@ -9,6 +9,7 @@
 """
 import argparse
 import concurrent.futures
+import os
 import csv
 import json
 import sys
@@ -134,30 +135,69 @@ def web_search_count(res):
     return None  # 开启联网搜索工具; 写法按那台机器的要求用 --llm-options 改
 
 
-def call_model(llm, provider, messages, timeout, llm_options):
-    """一个请求失败只影响它自己 (batch_result 里一个失败会让整批报错, 所以不用它)。
+HEARTBEAT = 30      # 等待中每隔多少秒打印一次进度
+ABANDONED = []      # 超时后放弃等待的请求 (后台线程可能还在跑)
 
-    llm_options 原样作为关键字参数传给 chat_result, llm 包会把它转给服务商 (用来开启联网搜索工具)。
+
+def call_model(llm, provider, messages, timeout, llm_options, label=""):
+    """调用一次模型, 由程序自己计时, 超过 timeout 秒就放弃等待 (不依赖适配器是否遵守 timeout)。
+
+    一个请求失败只影响它自己 (batch_result 里一个失败会让整批报错, 所以不用它)。
+    llm_options 原样作为关键字参数传给 chat_result, llm 包会把它转给服务商。
+    注意: 放弃等待只是本程序不再等, 服务端已经开始处理的请求无法从这边取消, 可能仍会计费。
     """
     t0 = time.time()
+    ex = concurrent.futures.ThreadPoolExecutor(max_workers=1)
+    fut = ex.submit(lambda: llm.chat_result(provider, messages, temperature=0, timeout=timeout, **llm_options))
     try:
-        res = llm.chat_result(provider, messages, temperature=0, timeout=timeout, **llm_options)
+        while True:
+            left = timeout - (time.time() - t0)
+            if left <= 0:
+                ABANDONED.append(label)
+                return {"status": "error", "timed_out": True, "seconds": round(time.time() - t0, 1),
+                        "error": f"超时: 等了 {time.time() - t0:.0f}s 仍未返回, 已放弃等待 (服务端可能仍在处理并计费)"}, None
+            try:
+                res = fut.result(timeout=min(HEARTBEAT, left))
+                break
+            except concurrent.futures.TimeoutError:
+                if time.time() - t0 < timeout:
+                    print(f"      ... {label or '请求'} 还在等待, 已等 {time.time() - t0:.0f}s (上限 {timeout}s)", flush=True)
         return {"status": "ok", "content": res.content, "usage": res.usage.as_dict() if res.usage else None,
                 "model": res.model, "web_search_calls": web_search_count(res), "seconds": round(time.time() - t0, 1)}, res
     except llm.ProviderError as e:
         return {"status": "error", "error": f"ProviderError: {e}", "seconds": round(time.time() - t0, 1)}, None
     except Exception as e:  # 网络等其他错误, 记下来, 下次续跑会重试
         return {"status": "error", "error": f"{type(e).__name__}: {e}", "seconds": round(time.time() - t0, 1)}, None
+    finally:
+        ex.shutdown(wait=False, cancel_futures=True)
 
 
-def run_jobs(jobs, llm, provider, store, tracker, workers, timeout, llm_options):
+def cost_line(tracker) -> str:
+    snap = tracker.snapshot()
+    return (f"累计: {snap.get('token_calls')} 次有用量, 输入 {snap.get('input_tokens_total')} / 输出 "
+            f"{snap.get('output_tokens_total')} token, 搜索 {snap.get('web_search_actions')} 次, 费用约 ${snap.get('total_cost')}")
+
+
+def budget_reason(tracker, budget) -> str | None:
+    """超过费用或次数上限时返回原因, 否则 None。"""
+    if budget.get("max_calls") is not None and budget["started"] >= budget["max_calls"]:
+        return f"已发出 {budget['started']} 个请求, 达到 --max-calls {budget['max_calls']}"
+    if budget.get("max_cost") is not None:
+        cost = tracker.snapshot().get("total_cost") or 0
+        if cost >= budget["max_cost"]:
+            return f"费用约 ${cost}, 达到 --max-cost ${budget['max_cost']}"
+    return None
+
+
+def run_jobs(jobs, llm, provider, store, tracker, workers, timeout, llm_options, budget):
+    """并发跑一批请求; 每发一个新请求前检查费用和次数上限, 超了就不再发, 返回停止原因。"""
     total, done_n = len(jobs), 0
     lock = threading.Lock()
 
     def one(job):
         nonlocal done_n
         ob, task, messages, post = job
-        rec, res = call_model(llm, provider, messages, timeout, llm_options)
+        rec, res = call_model(llm, provider, messages, timeout, llm_options, label=f"{ob['name'][:30]} / {task}")
         if res is not None:
             if not tracker.add(res):
                 rec["usage_missing"] = True  # 服务商没报用量, 不当作免费
@@ -179,13 +219,29 @@ def run_jobs(jobs, llm, provider, store, tracker, workers, timeout, llm_options)
         store.write(rec)
         with lock:
             done_n += 1
-            mark = {"ok": "ok", "bad_json": "JSON 解析失败", "error": "出错"}[rec["status"]]
+            mark = {"ok": "ok", "bad_json": "JSON 解析失败", "error": "超时" if rec.get("timed_out") else "出错"}[rec["status"]]
             n = rec.get("web_search_calls")
-            searches = f", 搜索 {n} 次" if n is not None else ""
-            print(f"  [{done_n}/{total}] {ob['name'][:40]:40} {task:16} {mark} ({rec.get('seconds')}s{searches})", flush=True)
+            u = rec.get("usage") or {}
+            this = f"输入 {u.get('input_tokens', '?')} / 输出 {u.get('output_tokens', '?')} token" + (f", 搜索 {n} 次" if n is not None else "")
+            print(f"  [{done_n}/{total}] {ob['name'][:40]:40} {task:16} {mark} ({rec.get('seconds')}s; {this})\n"
+                  f"           {cost_line(tracker)}", flush=True)
 
+    stopped = None
     with concurrent.futures.ThreadPoolExecutor(max_workers=workers) as pool:
-        list(pool.map(one, jobs))
+        running = set()
+        for job in jobs:
+            while len(running) >= workers:
+                finished, _ = concurrent.futures.wait(running, return_when=concurrent.futures.FIRST_COMPLETED)
+                running -= finished
+            stopped = budget_reason(tracker, budget)
+            if stopped:
+                break
+            budget["started"] += 1
+            running.add(pool.submit(one, job))
+        concurrent.futures.wait(running)
+    if stopped:
+        print(f"\n已停止发送新请求: {stopped}", flush=True)
+    return stopped
 
 
 def missing_module_hint(text: str) -> str:
@@ -206,7 +262,7 @@ def preflight(llm, provider, timeout, llm_options, show_raw=False):
     msgs = [{"role": "system", "content": "Use web search. Reply with JSON only."},
             {"role": "user", "content": "Search justice.gov for the most recent US Department of Justice press release "
              f"published on or after {since.isoformat()}. Return JSON: {{\"title\": ..., \"date\": \"YYYY-MM-DD\", \"url\": ...}}"}]
-    rec, _ = call_model(llm, provider, msgs, timeout, llm_options)
+    rec, _ = call_model(llm, provider, msgs, timeout, llm_options, label="预检")
     if show_raw:
         print(f"    --- 预检原始回答 (参数 {json.dumps(llm_options)}) ---\n    {(rec.get('content') or rec.get('error') or '')[:1500]}")
     if rec["status"] != "ok":
@@ -344,7 +400,10 @@ def main():
     ap.add_argument("--no-website", action="store_true", help="不查公司官网")
     ap.add_argument("--limit", type=int, help="只跑前 N 家 obligor (先小规模试)")
     ap.add_argument("--workers", type=int, default=4, help="并发请求数 (默认 4)")
-    ap.add_argument("--timeout", type=int, default=300, help="单个请求超时秒数 (联网搜索较慢, 默认 300)")
+    ap.add_argument("--timeout", type=int, default=180,
+                    help="单个请求最多等多少秒, 由程序自己计时, 超过就放弃等待 (默认 180)")
+    ap.add_argument("--max-cost", type=float, help="费用上限 (美元, 按 EVO_* 单价估算); 超过后不再发新请求")
+    ap.add_argument("--max-calls", type=int, help="本次运行最多发多少个请求; 超过后不再发新请求")
     ap.add_argument("--preflight", action="store_true", help="先确认 provider 开着联网搜索")
     ap.add_argument("--llm-options", default=json.dumps(DEFAULT_LLM_OPTIONS),
                     help='传给 chat_result 的额外参数 (JSON); 默认不传 (适配器自动开启联网搜索)。'
@@ -398,6 +457,9 @@ def main():
     except ImportError:
         sys.exit("找不到 llm 包: 把 llm/ 放在 obligor_research/ 下, 或用 --llm-root 指定包含 llm/ 的目录")
     tracker = llm.UsageTracker()
+    budget = {"max_cost": a.max_cost, "max_calls": a.max_calls, "started": 0}
+    print(f"单个请求最多等 {a.timeout}s | 费用上限: {('$' + str(a.max_cost)) if a.max_cost is not None else '不限'} | "
+          f"请求数上限: {a.max_calls if a.max_calls is not None else '不限'}")
 
     if a.preflight:
         print(f"调用参数: {json.dumps(llm_options, ensure_ascii=False) if llm_options else '(无, 由适配器自动开启联网搜索)'}")
@@ -414,7 +476,7 @@ def main():
                 for ob in obligors if (ob["id"], WEBSITE_TASK) not in store.done]
         if jobs:
             print(f"\n第 1 步: 查官网 ({len(jobs)} 个请求)")
-            run_jobs(jobs, llm, a.provider, store, tracker, a.workers, a.timeout, llm_options)
+            run_jobs(jobs, llm, a.provider, store, tracker, a.workers, a.timeout, llm_options, budget)
         for ob in obligors:
             got = (store.done.get((ob["id"], WEBSITE_TASK)) or {}).get("checked") or {}
             if not ob.get("website") and got.get("valid"):
@@ -428,16 +490,21 @@ def main():
                 continue
             jobs.append((ob, s, source_messages(ob, s, start, end),
                          lambda data, ob=ob, s=s: check_source_items(data, ob, s, start, end)))
-    if jobs:
+    if jobs and not budget_reason(tracker, budget):
         print(f"\n第 2 步: 各数据源 ({len(jobs)} 个请求)")
-        run_jobs(jobs, llm, a.provider, store, tracker, a.workers, a.timeout, llm_options)
+        run_jobs(jobs, llm, a.provider, store, tracker, a.workers, a.timeout, llm_options, budget)
 
     usage = tracker.snapshot()
     (a.out / "usage.json").write_text(json.dumps(usage, indent=2, ensure_ascii=False), encoding="utf-8")
     build_report(a.out, obligors, sources, start, end, usage)
     left = len(obligors) * (len(sources) + (0 if a.no_website else 1)) - len(Store(a.out).done)
     if left:
-        print(f"还有 {left} 个请求没成功 (出错或 JSON 解析失败), 再运行一次同样的命令会只重试这些")
+        print(f"还有 {left} 个请求没完成 (出错、超时、JSON 解析失败或因上限没发), 再运行一次同样的命令会只跑这些")
+    print(cost_line(tracker))
+    if ABANDONED:
+        # 被放弃的请求后台线程可能还在跑; 正常退出会等它们, 程序会像卡住一样, 所以强制退出
+        print(f"有 {len(ABANDONED)} 个请求超时被放弃 (服务端可能仍在处理并计费), 结果已保存, 强制退出。", flush=True)
+        os._exit(0)
 
 
 if __name__ == "__main__":

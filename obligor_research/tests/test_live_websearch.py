@@ -1,6 +1,7 @@
 """联网冒烟测试: 在有真实 llm 包的机器上, 用 GPT 联网搜索做几次调用, 确认整条链路能用。
 
-会产生真实费用 (约 8~10 次调用)。测试公司用 Lockheed Martin: 政府合同和诉讼都很多, 结果好判断。
+会产生真实费用 (约 6~8 次调用)。每次调用最多等 --timeout 秒 (默认 180), 等待时每 30 秒打印进度;
+费用超过 --max-cost (默认 $1) 就跳过剩下的调用; 每次调用后打印本次和累计的用量与费用。测试公司用 Lockheed Martin: 政府合同和诉讼都很多, 结果好判断。
 
     python obligor_research/tests/test_live_websearch.py                # llm/ 放在 obligor_research/ 下
     python obligor_research/tests/test_live_websearch.py --provider xxx \\
@@ -51,7 +52,8 @@ def main(argv=None):
     ap.add_argument("--env-file", type=Path, help="指定 .env 文件; 默认依次找 obligor_research/.env 和上一级 (code/.env)")
     ap.add_argument("--provider", default=None)
     ap.add_argument("--llm-options", default=json.dumps(runner.DEFAULT_LLM_OPTIONS))
-    ap.add_argument("--timeout", type=int, default=300)
+    ap.add_argument("--timeout", type=int, default=180, help="单次调用最多等多少秒, 超过就放弃等待 (默认 180)")
+    ap.add_argument("--max-cost", type=float, default=1.0, help="费用上限 (美元, 默认 1.0); 超过后跳过剩下的调用")
     ap.add_argument("--skip-control", action="store_true", help="跳过第 7 项对照调用 (省 1 次调用)")
     ap.add_argument("--show-raw", action="store_true", help="打印每次调用模型的原始回答 (排查搜索是否真的发生)")
     a = ap.parse_args(argv)
@@ -98,14 +100,25 @@ def main(argv=None):
     usage_missing = 0
     search_counts = []  # 每次调用的实际搜索次数 (适配器报告的)
 
-    def call(messages, options):
+    def over_budget():
+        cost = tracker.snapshot().get("total_cost") or 0
+        return cost >= a.max_cost
+
+    def call(messages, options, label=""):
         nonlocal usage_missing
-        rec, res = runner.call_model(llm, a.provider, messages, a.timeout, options)
+        if over_budget():
+            print(f"    跳过 {label}: 费用已达上限 ${a.max_cost}")
+            return {"status": "error", "error": "skipped: over budget"}
+        rec, res = runner.call_model(llm, a.provider, messages, a.timeout, options, label=label)
         if res is not None and not tracker.add(res):
             usage_missing += 1
         n = runner.web_search_count(res) if res is not None else None
         search_counts.append(n)
-        print(f"    (本次调用搜索 {n if n is not None else '?'} 次)")
+        if res is not None:
+            tracker.add_web_search(n if n is not None else 1)
+        u = rec.get("usage") or {}
+        print(f"    ({label}: {rec.get('seconds')}s, 输入 {u.get('input_tokens', '?')} / 输出 {u.get('output_tokens', '?')} token, "
+              f"搜索 {n if n is not None else '?'} 次 | {runner.cost_line(tracker)})", flush=True)
         if a.show_raw:
             u = res.usage.as_dict() if res is not None and res.usage else None
             print(f"    --- 原始回答 (用量 {u}) ---\n    {(rec.get('content') or rec.get('error') or '')[:1500]}")
@@ -116,7 +129,7 @@ def main(argv=None):
     record(2, f"联网搜索生效 (参数 {json.dumps(opts) if opts else '无, 适配器自动开启'})", "通过" if ok_search else "失败", detail)
 
     # 3. 官网
-    rec = call(website_messages(COMPANY), opts)
+    rec = call(website_messages(COMPANY), opts, label="官网")
     site = check_website(parse_json(rec.get("content", "")) or {}) if rec["status"] == "ok" else {}
     got = domain_of(site.get("website") or "")
     record(3, "找到官网", "通过" if got.endswith(EXPECTED_SITE) else "失败",
@@ -127,7 +140,7 @@ def main(argv=None):
     start = end - timedelta(days=365)
     valid_items = []
     for src in ("usaspending", "courtlistener"):
-        rec = call(source_messages(COMPANY, src, start, end), opts)
+        rec = call(source_messages(COMPANY, src, start, end), opts, label=src)
         if rec["status"] != "ok":
             print(f"    {src}: 调用失败 {rec.get('error')}")
             continue
@@ -180,6 +193,11 @@ def main(argv=None):
         print("\n" + hint)
     failed = [r for r in results if r[2] == "失败"]
     print("\n" + ("全部关键检查通过" if not failed else f"{len(failed)} 项关键检查没通过: {[r[1] for r in failed]}"))
+    print(runner.cost_line(tracker) + " (不含预检和对照调用)")
+    if runner.ABANDONED:
+        print(f"有 {len(runner.ABANDONED)} 次调用超时被放弃: {runner.ABANDONED} (服务端可能仍在处理并计费), 强制退出。", flush=True)
+        import os
+        os._exit(1)
     return 1 if failed else 0
 
 

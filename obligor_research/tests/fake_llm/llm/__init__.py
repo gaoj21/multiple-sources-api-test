@@ -43,7 +43,8 @@ class UsageTracker:
 
     def snapshot(self):
         return {"token_calls": self.calls, "input_tokens_total": self.inp, "output_tokens_total": self.out,
-                "total_token_cost": 0.0, "web_search_actions": getattr(self, "searches", 0), "total_cost": 0.0}
+                "total_token_cost": round(self.calls * 0.01, 4), "web_search_actions": getattr(self, "searches", 0),
+                "total_cost": round(self.calls * 0.01 + getattr(self, "searches", 0) * 0.01, 4)}  # 测试用: 每次请求/搜索各 $0.01
 
 
 STATE = os.environ.get("FAKE_LLM_STATE", "/tmp/fake_llm_state.json")
@@ -74,6 +75,10 @@ def chat_result(provider, messages, **options):
 
 
 def _chat(provider, messages, **options):
+    import time
+    key = os.environ.get("FAKE_LLM_SLEEP_TASK")
+    if key and key in messages[-1]["content"]:
+        time.sleep(float(os.environ.get("FAKE_LLM_SLEEP", "5")))   # 模拟一直不返回的请求
     if os.environ.get("FAKE_LLM_MISSING_SDK") == "1":
         raise ProviderError("Fake provider requires fakechain.core.model.model")  # 模拟: 缺 SDK
     if os.environ.get("FAKE_LLM_NEEDS_KEY") == "1" and not os.environ.get("FAKE_LLM_KEY"):

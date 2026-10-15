@@ -30,7 +30,7 @@ def main():
     try:
         s1 = run(out, "--preflight")
         assert "预检 (联网搜索): 通过" in s1
-        assert "还有 2 个请求没成功" in s1, s1  # Acme CourtListener 坏 JSON + Beta DOJ 出错
+        assert "还有 2 个请求没完成" in s1, s1  # Acme CourtListener 坏 JSON + Beta DOJ 出错
         s2 = run(out)
         assert "各数据源 (2 个请求)" in s2, s2      # 续跑只重试这 2 个
         assert "还有" not in s2, s2
@@ -121,6 +121,35 @@ def main():
                             capture_output=True, text=True, env=env3)
         assert "[通过] 1. provider 可用: fakechain" in sm.stdout, sm.stdout
         assert "缺少模块 fakechain.core.model.model" in sm.stdout and sm.returncode == 1, sm.stdout
+        # 卡住的请求: 超时被放弃, 其余照常跑, 进程不会卡住, 等待中有进度提示
+        hang = Path(tempfile.mkdtemp())
+        env4 = {**os.environ, "FAKE_LLM_STATE": str(hang / "st"), "FAKE_LLM_SLEEP_TASK": "official website", "FAKE_LLM_SLEEP": "8"}
+        import time as _t
+        t0 = _t.time()
+        h = subprocess.run([sys.executable, str(ROOT / "run.py"), "--obligors", str(ROOT / "obligors.example.csv"),
+                            "--out", str(hang), "--llm-root", str(FAKE), "--sources", "doj", "--timeout", "3",
+                            "--end", "2026-10-15"], capture_output=True, text=True, env=env4, timeout=60)
+        assert _t.time() - t0 < 30, "进程卡住了"
+        assert h.stdout.count("超时 (") == 2 and "强制退出" in h.stdout, h.stdout + h.stderr
+        assert "doj              ok" in h.stdout                      # 其余请求照常完成
+
+        # 次数上限: --max-calls 3 -> 只发 3 个请求就停
+        cap = Path(tempfile.mkdtemp())
+        c = subprocess.run([sys.executable, str(ROOT / "run.py"), "--obligors", str(ROOT / "obligors.example.csv"),
+                            "--out", str(cap), "--llm-root", str(FAKE), "--sources", "usaspending,doj", "--max-calls", "3",
+                            "--workers", "1", "--end", "2026-10-15"],
+                           capture_output=True, text=True, env={**os.environ, "FAKE_LLM_STATE": str(cap / "st")})
+        assert "已停止发送新请求" in c.stdout and len((cap / "results.jsonl").read_text().splitlines()) == 3, c.stdout
+        assert "累计:" in c.stdout
+
+        # 费用上限: 假 llm 每次请求和每次搜索各算 $0.01 -> --max-cost 0.05 时很快停下
+        mc = Path(tempfile.mkdtemp())
+        m = subprocess.run([sys.executable, str(ROOT / "run.py"), "--obligors", str(ROOT / "obligors.example.csv"),
+                            "--out", str(mc), "--llm-root", str(FAKE), "--sources", "usaspending,doj", "--max-cost", "0.05",
+                            "--workers", "1", "--end", "2026-10-15"],
+                           capture_output=True, text=True, env={**os.environ, "FAKE_LLM_STATE": str(mc / "st")})
+        assert "达到 --max-cost $0.05" in m.stdout, m.stdout
+        assert len((mc / "results.jsonl").read_text().splitlines()) < 6
         print("全部通过")
     finally:
         shutil.rmtree(out, ignore_errors=True)
